@@ -1,6 +1,8 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 
+import ProjectCreate from 'src/store/project_create'
+
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state';
 
@@ -9,6 +11,10 @@ import Vuex from 'vuex';
  * directly export the Store instantiation
  */
 
+export enum MODULES {
+  PROJECT_CREATE = 'project_create'
+}
+
 export interface StateInterface {
   // Define your own store structure, using submodules if needed
   // example: ExampleStateInterface;
@@ -16,12 +22,13 @@ export interface StateInterface {
   example: unknown;
 }
 
-export default store(function ({ Vue }) {
+export default store(function({ Vue }) {
   Vue.use(Vuex);
 
   const Store = new Vuex.Store<StateInterface>({
+  
     modules: {
-      // example
+      [MODULES.PROJECT_CREATE]:ProjectCreate
     },
 
     // enable strict mode (adds overhead!)
