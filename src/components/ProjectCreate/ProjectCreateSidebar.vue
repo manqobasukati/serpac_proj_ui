@@ -28,10 +28,7 @@ export default Vue.extend({
   name: 'ProjectCreateSidebar',
   data() {
     return {
-      isActive: false,
-      section_navigation:module_definition['main'].modules.find(val => {
-        return val.name === 'project_create';
-      })
+      isActive: false
     };
   },
   filters: {
@@ -43,11 +40,14 @@ export default Vue.extend({
     },
     changeNavigation(module: ModuleDefinition) {
       const set_active_section_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_ACTIVE_SECTION}`;
+      const set_previous_section = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_PREVIOUS_SECTION}`;
+      const previous_section = this.get_active_section;
 
       this.$store
         .dispatch(set_active_section_action, module.name)
         .then(() => {
           void this.$router.push({ path: `${module.link as string}` });
+          void this.$store.dispatch(set_previous_section, previous_section);
         })
         .catch(e => {
           console.log('Error');
@@ -61,11 +61,11 @@ export default Vue.extend({
         return state.active_section;
       }
     }),
-    // section_navigation() {
-    //   return module_definition['main'].modules.find(val => {
-    //     return val.name === 'project_create';
-    //   }) as ModuleDefinition;
-    // }
+    section_navigation() {
+      return module_definition['main'].modules.find(val => {
+        return val.name === 'project_create';
+      }) as ModuleDefinition;
+    }
   }
 });
 </script>
