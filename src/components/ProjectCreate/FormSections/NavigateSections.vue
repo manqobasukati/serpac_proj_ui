@@ -35,7 +35,7 @@ export default Vue.extend({
   },
   methods: {
     navigatePreviousSection() {
-      const modules = module_definition['main'].modules.find(val => {
+      const modules = module_definition['public'].modules.find(val => {
         return val.name === 'project_create';
       });
 
@@ -58,7 +58,7 @@ export default Vue.extend({
       }
     },
     navigateNextSection() {
-      const modules = module_definition['main'].modules.find(val => {
+      const modules = module_definition['public'].modules.find(val => {
         return val.name === 'project_create';
       });
 
@@ -81,7 +81,7 @@ export default Vue.extend({
       }
     },
     getPreviousSection(): string {
-      const sections = module_definition['main'].modules
+      const sections = module_definition['public'].modules
         .find(val => {
           return val.name === 'project_create';
         })
@@ -100,7 +100,7 @@ export default Vue.extend({
       return (this.get_active_section as string) || '';
     },
     getNextSection(): string {
-      const sections = module_definition['main'].modules
+      const sections = module_definition['public'].modules
         .find(val => {
           return val.name === 'project_create';
         })

@@ -1,7 +1,8 @@
 <template>
-  <q-layout view="Hh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
+      
         <q-toolbar-title>
           {{ project_name | removeUnderscore | capitaliseWords }}
         </q-toolbar-title>
@@ -26,6 +27,12 @@ export default Vue.extend({
   name: 'HomeLayout',
   data() {
     return {
+      drawer: false,
+      miniState: true,
+      left: false,
+      navigationItems: module_definition['public'].modules.map(() => {
+        return;
+      }),
       project_name: module_definition['public'].name
     };
   },
