@@ -50,7 +50,7 @@ export default Vue.extend({
           void this.$store.dispatch(set_previous_section, previous_section);
         })
         .catch(e => {
-          console.log('Error');
+          console.log(e);
         });
     }
   },

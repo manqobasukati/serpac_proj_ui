@@ -1,9 +1,8 @@
-export const  lookup: { [name: string]: string } = {
+export const lookup: { [name: string]: string } = {
   section_1: 'project_description',
   section_2: 'project_value',
-  section_3:'expected_jobs'
+  section_3: 'expected_jobs'
 };
-
 
 export const FormData = {
   id: '',
@@ -43,8 +42,9 @@ export const FormData = {
       model: '100000',
       type: 'input',
       label: 'What is the project'
-    },
-
+    }
+  },
+  project_funding: {
     funding_status: {
       model: 'Yes',
       type: 'select',
@@ -66,12 +66,12 @@ export const FormData = {
   expected_jobs: {
     permanent_jobs: {
       type: 'input',
-      lable: 'Permanent jobs',
+      label: 'Permanent jobs',
       model: 100
     },
     temporal_jobs: {
       type: 'input',
-      lable: 'Temporay jobs',
+      label: 'Temporay jobs',
       model: 60
     }
   }

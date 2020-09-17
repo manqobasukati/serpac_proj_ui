@@ -18,7 +18,7 @@ export const SectionDescriptions: { [name: string]: SectionDescription } = {
     header: 'Section 3 - Provide project funding information'
   },
   section_4: {
-    header: 'Section 5 - Provide Jobs information'
+    header: 'Section 4 - Provide Jobs information'
   },
   section_5: {
     header: 'Section 5 - Provide project timeline info'

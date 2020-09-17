@@ -10,6 +10,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
     link: '/home',
     name: 'serpac_project_management',
     modules: [
+      
       {
         link: '/home/project-create/',
         name: 'project_create',
