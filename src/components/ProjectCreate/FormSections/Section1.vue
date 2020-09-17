@@ -29,7 +29,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { FORM_FUNCTIONS } from 'src/core/helpers/form_generator';
 
 import SectionHeader from './SectionHeader.vue';
 import NavigateSections from './NavigateSections.vue';
@@ -39,9 +38,6 @@ export default Vue.extend({
   components: {
     SectionHeader,
     NavigateSections
-  },
-  methods: {
-    ...FORM_FUNCTIONS
   }
 });
 </script>
