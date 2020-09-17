@@ -13,6 +13,10 @@
               :label="data.label"
             />
           </div>
+          <div v-if="data.type === 'radio'">
+            
+          </div>
+
         </div>
       </q-card-section>
     </q-card>

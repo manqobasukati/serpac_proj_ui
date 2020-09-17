@@ -1,4 +1,3 @@
-import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { FormData } from 'src/mixins/FormData';
 
 import Vue from 'vue';

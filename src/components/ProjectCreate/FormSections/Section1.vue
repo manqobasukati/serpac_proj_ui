@@ -5,22 +5,7 @@
     <div class="row">
       <div class="col"></div>
       <div class="col-6 q-ml-lg">
-        <q-card class="q-mt-lg" square>
-          <q-card-section>
-            <div v-for="(data, key) in formData.project_description" :key="key">
-              <div v-if="data.type === 'input'">
-                <q-input :label="data.label" v-model="data.model" />
-              </div>
-              <div v-if="data.type === 'select'">
-                <q-select
-                  v-model="data.model"
-                  :options="data.options"
-                  :label="data.label"
-                />
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
+          <form-render FormSection="project_description" />
       </div>
       <div class="col"></div>
     </div>
@@ -36,14 +21,15 @@ import Vue from 'vue';
 import SectionHeader from './SectionHeader.vue';
 import NavigateSections from './NavigateSections.vue';
 import SaveButton from './SaveButton.vue';
+import FormRender from './FormRender.vue'
 
 import { SectionsMixin } from 'src/mixins/SectionsMixin';
 
 export default Vue.extend({
   name: 'Section1',
   mixins: [SectionsMixin],
-
   components: {
+    FormRender,
     SectionHeader,
     NavigateSections,
     SaveButton

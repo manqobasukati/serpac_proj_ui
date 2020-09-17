@@ -1,3 +1,10 @@
+export const  lookup: { [name: string]: string } = {
+  section_1: 'project_description',
+  section_2: 'project_value',
+  section_3:'expected_jobs'
+};
+
+
 export const FormData = {
   id: '',
   project_created: new Date(),
@@ -32,9 +39,40 @@ export const FormData = {
     }
   },
   project_value: {
-    total_inv_value: '10000',
-    funding_status: true,
-    percentage_of_funding: '80%',
-    project_scope: 'local'
+    total_inv_value: {
+      model: '100000',
+      type: 'input',
+      label: 'What is the project'
+    },
+
+    funding_status: {
+      model: 'Yes',
+      type: 'select',
+      options: ['Yes', 'No'],
+      label: 'What is the project'
+    },
+    percentage_of_funding: {
+      model: '80',
+      type: 'input',
+      label: 'What is the project'
+    },
+    project_scope: {
+      model: 'Local',
+      type: 'select',
+      label: 'Is this local or FDI',
+      options: ['Local', 'Foreign-Direct Investment']
+    }
+  },
+  expected_jobs: {
+    permanent_jobs: {
+      type: 'input',
+      lable: 'Permanent jobs',
+      model: 100
+    },
+    temporal_jobs: {
+      type: 'input',
+      lable: 'Temporay jobs',
+      model: 60
+    }
   }
 };
