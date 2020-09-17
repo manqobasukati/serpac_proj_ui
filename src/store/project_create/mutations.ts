@@ -1,6 +1,6 @@
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { MutationTree } from 'vuex';
-import { FormDataInterface, ProjectCreateInterface } from './state';
+import {  ProjectCreateInterface } from './state';
 
 export enum PROJECT_CREATE_MUTATIONS {
   SET_ACTIVE_SECTION = 'set_active_section',

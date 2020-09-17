@@ -7,26 +7,18 @@
       <div class="col-6 q-ml-lg">
         <q-card class="q-mt-lg" square>
           <q-card-section>
-          
-
-            <div v-for="(data, key) in formData.description" :key="key">
+            <div v-for="(data, key) in formData.project_description" :key="key">
               <div v-if="data.type === 'input'">
                 <q-input :label="data.label" v-model="data.model" />
               </div>
+              <div v-if="data.type === 'select'">
+                <q-select
+                  v-model="data.model"
+                  :options="data.options"
+                  :label="data.label"
+                />
+              </div>
             </div>
-          </q-card-section>
-        </q-card>
-
-        <q-card class="q-mt-lg" square>
-          <q-card-section>
-            <q-input
-              label="Is it a totally new project or extension.."
-              v-model="formData.project_description.project_existense"
-            />
-            <q-input
-              label="Name of company investing"
-              v-model="formData.project_description.name_of_investor"
-            />
           </q-card-section>
         </q-card>
       </div>
