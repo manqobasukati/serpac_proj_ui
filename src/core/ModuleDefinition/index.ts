@@ -6,7 +6,7 @@ export interface ModuleDefinition {
 }
 
 export const module_definition: { [name: string]: ModuleDefinition } = {
-  main: {
+  public: {
     link: '/home',
     name: 'serpac_project_management',
     modules: [

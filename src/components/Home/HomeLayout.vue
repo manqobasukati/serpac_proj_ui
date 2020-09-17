@@ -26,7 +26,7 @@ export default Vue.extend({
   name: 'HomeLayout',
   data() {
     return {
-      project_name: module_definition['main'].name
+      project_name: module_definition['public'].name
     };
   },
   filters: {

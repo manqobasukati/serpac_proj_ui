@@ -62,7 +62,7 @@ export default Vue.extend({
       }
     }),
     section_navigation() {
-      return module_definition['main'].modules.find(val => {
+      return module_definition['public'].modules.find(val => {
         return val.name === 'project_create';
       }) as ModuleDefinition;
     }
