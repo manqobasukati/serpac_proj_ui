@@ -32,7 +32,31 @@ const routes: RouteConfig[] = [
             component: () =>
               import('components/ProjectCreate/FormSections/Section2.vue')
           },
-         
+          {
+            path: '/home/project-create/section-3',
+            component: () =>
+              import('components/ProjectCreate/FormSections/Section3.vue')
+          },
+          {
+            path: '/home/project-create/section-4',
+            component: () =>
+              import('components/ProjectCreate/FormSections/Section4.vue')
+          },
+          {
+            path: '/home/project-create/section-5',
+            component: () =>
+              import('components/ProjectCreate/FormSections/Section5.vue')
+          },
+          {
+            path: '/home/project-create/section-6',
+            component: () =>
+              import('components/ProjectCreate/FormSections/Section6.vue')
+          },
+          {
+            path: '/home/project-create/section-7',
+            component: () =>
+              import('components/ProjectCreate/FormSections/Section7.vue')
+          }
         ]
       }
     ]
