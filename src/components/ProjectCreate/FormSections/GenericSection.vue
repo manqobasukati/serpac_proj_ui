@@ -5,7 +5,24 @@
     <div class="row">
       <div class="col"></div>
       <div class="col-6 q-ml-lg">
-        <form-render :FormSection="lookUp[get_active_section]" />
+        <form-render
+          v-if="get_active_section !== 'info_section'"
+          :FormSection="lookUp[get_active_section]"
+        />
+        <q-card
+          v-if="get_active_section === 'info_section'"
+          class="q-pa-md"
+          square
+        >
+          <q-card-section>
+            <div>
+              This form wizzard enables you to create and submit projects.
+              <ul>
+                <li>By clicking save a new project will be created.</li>
+              </ul>
+              </div>  
+           </q-card-section>
+        </q-card>
       </div>
       <div class="col"></div>
     </div>
@@ -28,8 +45,6 @@ import { SectionsMixin } from 'src/mixins/SectionsMixin';
 import { MODULES } from 'src/store';
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import { lookup } from 'src/mixins/FormData';
-
-
 
 export default Vue.extend({
   name: 'Section1',

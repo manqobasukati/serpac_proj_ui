@@ -9,9 +9,9 @@ export const lookup: { [name: string]: string } = {
 };
 
 export const FormData = {
-  id: '',
+  _id: '' as string | null,
   project_created: new Date(),
-  project_submitted: null,
+  project_submitted: null as null | Date,
   project_description: {
     description: {
       model: 'My project info',
@@ -94,7 +94,7 @@ export const FormData = {
           },
           {
             type: 'input',
-            label: 'start_date',
+            label: 'end_date',
             model: '2020/09/17'
           }
         ]
@@ -106,12 +106,12 @@ export const FormData = {
         nested: [
           {
             type: 'input',
-            label: 'Start date',
+            label: 'start_date',
             model: '2020/09/17'
           },
           {
             type: 'input',
-            label: 'Start date',
+            label: 'end_date',
             model: '2020/09/17'
           }
         ]

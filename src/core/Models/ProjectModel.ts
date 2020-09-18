@@ -10,7 +10,7 @@ export interface Issues {
 }
 
 export interface ProjectModel {
-  _id: string | null;
+  _id?: string | null;
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
@@ -22,7 +22,7 @@ export interface ProjectModel {
   };
   project_value: {
     total_inv_value: string;
-    funding_status: boolean;
+    funding_status: string;
     percentage_of_funding: string;
     project_scope: string;
   };
