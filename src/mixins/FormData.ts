@@ -1,7 +1,11 @@
 export const lookup: { [name: string]: string } = {
   section_1: 'project_description',
   section_2: 'project_value',
-  section_3: 'expected_jobs'
+  section_3: 'project_funding',
+  section_4: 'expected_jobs',
+  section_5: 'project_timelines',
+  section_6: 'opportunities',
+  section_7: 'key_enablers'
 };
 
 export const FormData = {
@@ -74,5 +78,82 @@ export const FormData = {
       label: 'Temporay jobs',
       model: 60
     }
+  },
+
+  project_timelines: {
+    key_phases: [
+      {
+        type: 'input',
+        label: 'Phase name',
+        model: 'My phase',
+        nested: [
+          {
+            type: 'input',
+            label: 'start_date',
+            model: '2020/09/17'
+          },
+          {
+            type: 'input',
+            label: 'start_date',
+            model: '2020/09/17'
+          }
+        ]
+      },
+      {
+        type: 'input',
+        label: 'Phase name',
+        model: 'My phase',
+        nested: [
+          {
+            type: 'input',
+            label: 'Start date',
+            model: '2020/09/17'
+          },
+          {
+            type: 'input',
+            label: 'Start date',
+            model: '2020/09/17'
+          }
+        ]
+      }
+    ]
+  },
+
+  opportunities: {
+    project_skills: {
+      model: [],
+      type: 'multiple-select',
+      label: 'Skills needed',
+      options: ['Local', 'Foreign-Direct Investment']
+    },
+    local_sourced_inputs:{
+      model: [],
+      type: 'multiple-select',
+      label: 'Locally sourced inputs',
+      options: ['Maize', 'Food']
+    },
+    external_sourced_inputs:{
+      model: [],
+      type: 'multiple-select',
+      label: 'Externaly sourced inputs',
+      options: ['Electricity']
+    }
+  },
+
+  key_enablers:{
+     key_enablers:[
+       {
+         type:'input',
+         label:'Issue 1',
+         model:'Lack of water',
+         nested:[
+           {
+             type:'select',
+             model:'SWSC',
+             options:['SWSC','EMS','SWAZI-MET']
+           }
+         ]
+       }
+     ]
   }
 };

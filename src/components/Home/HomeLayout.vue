@@ -2,7 +2,6 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-      
         <q-toolbar-title>
           {{ project_name | removeUnderscore | capitaliseWords }}
         </q-toolbar-title>

@@ -10,7 +10,7 @@ export interface Issues {
 }
 
 export interface ProjectModel {
-  id: string | null;
+  _id: string | null;
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
@@ -28,7 +28,7 @@ export interface ProjectModel {
   };
   expected_jobs: {
     permanent_jobs: number;
-    temporal_jonbs: number;
+    temporal_jobs: number;
   };
   project_timelines: {
     phases: ProjectPhase[];

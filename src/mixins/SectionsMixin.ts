@@ -9,6 +9,11 @@ export const SectionsMixin = Vue.extend({
       formData: FormData
     };
   },
+  methods:{
+    saveForm(){
+       console.log('SaveForm')
+    }
+  },
   created() {
     console.log('Mixin Created', this.message);
   },
