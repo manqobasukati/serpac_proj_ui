@@ -9,59 +9,59 @@ export const lookup: { [name: string]: string } = {
 };
 
 export const FormData = {
-  _id: '' as string | null,
+  // _id: '' as string | null,
   project_created: new Date(),
   project_submitted: null as null | Date,
   project_description: {
     description: {
-      model: 'My project info',
+      model: '',
       type: 'input',
       label: 'What is the project'
     },
     project_location: {
       label: 'My location',
       type: 'input',
-      model: 'Siphocosini Umphakasti'
+      model: ''
     },
     economy_sector: {
       label: 'Economic sector',
       type: 'select',
       options: ['Energy', 'Agriculture', 'Telecommunicatins'],
-      model: 'Energy'
+      model: ''
     },
     project_existense: {
       label: 'Project existence',
       type: 'select',
       options: ['New', 'Old'],
-      model: 'New'
+      model: ''
     },
     name_of_investor: {
       label: 'Name of investor',
-      model: 'Manqoba Sukati',
+      model: '',
       type: 'input'
     }
   },
   project_value: {
     total_inv_value: {
-      model: '100000',
+      model: '',
       type: 'input',
       label: 'What is the project'
     }
   },
   project_funding: {
     funding_status: {
-      model: 'Yes',
+      model: '',
       type: 'select',
       options: ['Yes', 'No'],
-      label: 'What is the project'
+      label: 'Funding status'
     },
     percentage_of_funding: {
-      model: '80',
+      model: '',
       type: 'input',
       label: 'What is the project'
     },
     project_scope: {
-      model: 'Local',
+      model: '',
       type: 'select',
       label: 'Is this local or FDI',
       options: ['Local', 'Foreign-Direct Investment']
@@ -71,12 +71,12 @@ export const FormData = {
     permanent_jobs: {
       type: 'input',
       label: 'Permanent jobs',
-      model: 100
+      model: 0
     },
     temporal_jobs: {
       type: 'input',
       label: 'Temporay jobs',
-      model: 60
+      model: 0
     }
   },
 

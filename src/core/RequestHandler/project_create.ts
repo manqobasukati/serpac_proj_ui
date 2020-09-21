@@ -14,7 +14,6 @@ export function project_create(data: ProjectModel): Promise<any> {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
-      console.log('Data',data);
       return data.payload as Promise<any>;
     })
     .catch(error => {

@@ -8,6 +8,15 @@ const routes: RouteConfig[] = [
     component: () => import('components/Home/HomeLayout.vue'),
     children: [
       {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('components/Home/Admin/Admin.vue')
+      },
+      {
+        path: '/admin/all-projects',
+        component: () => import('components/Home/Admin/AllProjects.vue')
+      },
+      {
         path: '/public',
         name: 'public',
         component: () => import('components/Home/Public/Public.vue')

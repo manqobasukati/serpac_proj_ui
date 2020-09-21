@@ -8,14 +8,19 @@ export interface ModuleDefinition {
 
 export const module_definition: { [name: string]: ModuleDefinition } = {
   admin: {
+    link: '/admin',
     name: 'admin',
     modules: [
       {
         name: 'all_projects',
+        link: '/admin/all-projects',
+        icon: 'folder',
         modules: []
       },
       {
         name: 'users',
+        link: '/admin/user',
+        icon: 'group',
         modules: []
       }
     ]

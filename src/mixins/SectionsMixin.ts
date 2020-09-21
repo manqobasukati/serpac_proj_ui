@@ -2,7 +2,6 @@ import {
   map_form_model,
   map_model_form
 } from 'src/core/helpers/map_model_form';
-import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { project_create } from 'src/core/RequestHandler/project_create';
 import { FormData } from 'src/mixins/FormData';
 
@@ -16,17 +15,24 @@ export const SectionsMixin = Vue.extend({
     };
   },
   methods: {
+    onInput() {
+      // const request = JSON.parse(JSON.stringify(map_model_form(this.formData)));
+      // //this.formData = JSON.parse(JSON.stringify(map_form_model(request)));
+      // console.log('Input request', request);
+    },
     saveForm() {
-      const request = map_model_form(this.formData);
+      const request = JSON.parse(JSON.stringify(map_model_form(this.formData)));
+      console.log('Save request', request);
 
-      project_create(request)
-        .then(val => {
-          console.log(val.payload);
-          this.formData = map_form_model(val.payload) as any;
-        })
-        .catch(val => {
-          console.log(val);
-        });
+      // if (request._id === null) {
+      //   delete request._id;
+      // }
+
+      // const data = await project_create(request);
+
+      // this.formData = JSON.parse(JSON.stringify(map_form_model(request)));
+
+      // console.log('Form', this.formData);
     }
   },
   created() {

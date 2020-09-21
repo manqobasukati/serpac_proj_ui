@@ -1,6 +1,8 @@
 import { ProjectModel } from '../Models/ProjectModel';
 
-export function map_form_model(model: ProjectModel) {
+export function map_form_model(_model: ProjectModel) {
+  const model = JSON.parse(JSON.stringify(_model));
+ 
   const project_description = {
     description: {
       model: model.project_description.description,
@@ -33,9 +35,9 @@ export function map_form_model(model: ProjectModel) {
 
   const project_value = {
     total_inv_value: {
-      model: '100000',
+      model: model.project_value.total_inv_value,
       type: 'input',
-      label: model.project_value.total_inv_value
+      label: 'What is the project'
     }
   };
 
@@ -73,7 +75,7 @@ export function map_form_model(model: ProjectModel) {
   };
 
   const project_timelines = {
-    key_phases: model.project_timelines.phases.map(val => {
+    key_phases: model.project_timelines.phases.map((val: any) => {
       return {
         type: 'input',
         label: 'Phase name',
@@ -148,9 +150,10 @@ export function map_form_model(model: ProjectModel) {
   return form_data;
 }
 
-export function map_model_form(form: any): ProjectModel {
+export function map_model_form(my_form: any) {
+  const form = JSON.parse(JSON.stringify(my_form));
   return {
-    // _id: null,
+    _id: form._id || null,
     project_created: new Date(),
     project_submitted: null,
     project_description: {

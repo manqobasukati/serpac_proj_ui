@@ -4,7 +4,7 @@
       <q-card-section>
         <div v-for="(data, key) in formData[FormSection]" :key="key">
           <div v-if="data.type === 'input'" class="q-mb-sm">
-            <q-input :label="data.label" v-model="data.model" />
+            <q-input :label="data.label" v-model="data.model" @input="onInput()"/>
           </div>
 
           <div v-if="data.type === 'select'" class="q-mb-sm">
