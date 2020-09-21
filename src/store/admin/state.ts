@@ -1,10 +1,10 @@
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
-export interface AllProjectsInterface {
+export interface AdminInterface {
   projects: ProjectModel[] | null;
 }
 
-const state: AllProjectsInterface = {
+const state: AdminInterface = {
   projects: null as null | ProjectModel[]
 };
 

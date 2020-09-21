@@ -1,23 +1,24 @@
+import { get_projects } from 'src/core/RequestHandler/admin';
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
-import { PROJECT_CREATE_MUTATIONS } from './mutations';
-import { AllProjectsInterface } from './state';
+import { ADMIN_MUTATIONS } from './mutations';
+import { AdminInterface } from './state';
 
-export enum PROJECT_CREATE_ACTIONS {
-  SET_ACTIVE_SECTION = 'set_active_section',
-  SET_PREVIOUS_SECTION = 'set_previous_section'
+export enum ADMIN_ACTIONS {
+  ALL_PROJECTS = 'all_projects'
 }
 
-const actions: ActionTree<AllProjectsInterface, StateInterface> = {
-  [PROJECT_CREATE_ACTIONS.SET_ACTIVE_SECTION](context, payload) {
+const actions: ActionTree<AdminInterface, StateInterface> = {
+  [ADMIN_ACTIONS.ALL_PROJECTS](context, payload) {
     // your code
-
-    context.commit(PROJECT_CREATE_MUTATIONS.SET_ACTIVE_SECTION, payload);
-  },
-  [PROJECT_CREATE_ACTIONS.SET_PREVIOUS_SECTION](context, payload) {
-    // your code
-
-    context.commit(PROJECT_CREATE_MUTATIONS.SET_PREVIOUS_SECTION, payload);
+    get_projects()
+      .then(val => {
+        console.log('Get projects', val);
+        context.commit(ADMIN_MUTATIONS.ALL_PROJECTS, val);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 };
 

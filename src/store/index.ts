@@ -1,7 +1,8 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 
-import ProjectCreate from 'src/store/project_create'
+import ProjectCreate from 'src/store/project_create';
+import Admin from 'src/store/admin';
 
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state';
@@ -12,7 +13,8 @@ import ProjectCreate from 'src/store/project_create'
  */
 
 export enum MODULES {
-  PROJECT_CREATE = 'project_create'
+  PROJECT_CREATE = 'project_create',
+  ADMIN = 'admin'
 }
 
 export interface StateInterface {
@@ -26,9 +28,9 @@ export default store(function({ Vue }) {
   Vue.use(Vuex);
 
   const Store = new Vuex.Store<StateInterface>({
-  
     modules: {
-      [MODULES.PROJECT_CREATE]:ProjectCreate
+      [MODULES.PROJECT_CREATE]: ProjectCreate,
+      [MODULES.ADMIN]: Admin
     },
 
     // enable strict mode (adds overhead!)

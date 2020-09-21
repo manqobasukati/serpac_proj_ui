@@ -17,6 +17,10 @@ const routes: RouteConfig[] = [
         component: () => import('components/Home/Admin/AllProjects.vue')
       },
       {
+        path: '/admin/all-projects/:projectId',
+        component: () => import('components/Home/Admin/ViewProject.vue')
+      },
+      {
         path: '/public',
         name: 'public',
         component: () => import('components/Home/Public/Public.vue')

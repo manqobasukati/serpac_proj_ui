@@ -23,18 +23,18 @@ export default Vue.extend({
   name: 'SaveButton',
   mixins: [SectionsMixin],
   methods: {
-    MySave() {
+   async MySave() {
       const request = map_model_form(this.$data.formData);
 
-      // if (request._id === null) {
-      //   delete request._id;
-      // }
+      if (request._id === null) {
+        delete request._id;
+      }
 
-      // const data = await project_create(request);
+      const data = await project_create(request);
 
       this.$data.formData = map_form_model(request);
 
-      console.log('data', map_form_model(request), this.$data.formData);
+   
     }
   }
 });

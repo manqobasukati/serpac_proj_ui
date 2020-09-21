@@ -1,35 +1,19 @@
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { MutationTree } from 'vuex';
-import {  ProjectCreateInterface } from './state';
+import { AdminInterface } from './state';
 
-export enum PROJECT_CREATE_MUTATIONS {
-  SET_ACTIVE_SECTION = 'set_active_section',
-  SET_PREVIOUS_SECTION = 'set_previous_section',
-  UPDATE_FORM_DATA = 'update_form_data'
+export enum ADMIN_MUTATIONS {
+  ALL_PROJECTS = 'all_projects'
 }
 
-const mutation: MutationTree<ProjectCreateInterface> = {
-  [PROJECT_CREATE_MUTATIONS.SET_ACTIVE_SECTION](
-    state: ProjectCreateInterface,
+const mutation: MutationTree<AdminInterface> = {
+  [ADMIN_MUTATIONS.ALL_PROJECTS](
+    state: AdminInterface,
     payload
   ) {
     // your code
 
-    state.active_section = payload as string;
-  },
-  [PROJECT_CREATE_MUTATIONS.SET_PREVIOUS_SECTION](
-    state: ProjectCreateInterface,
-    payload
-  ) {
-    // your code
-    state.previous_section = payload as string;
-  },
-
-  [PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA](
-    state: ProjectCreateInterface,
-    payload
-  ) {
-    state.form_data = payload as ProjectModel;
+    state.projects = payload ;
   }
 };
 

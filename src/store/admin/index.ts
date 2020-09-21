@@ -1,10 +1,10 @@
 import { Module } from 'vuex';
 import { StateInterface } from '../index';
-import state, { ProjectCreateInterface } from './state';
+import state, { AdminInterface } from './state';
 import actions from './actions';
 import mutations from './mutations';
 
-const ProjectCreate: Module<ProjectCreateInterface, StateInterface> = {
+const Admin: Module<AdminInterface, StateInterface> = {
   namespaced: true,
   actions,
   // getters,
@@ -12,4 +12,4 @@ const ProjectCreate: Module<ProjectCreateInterface, StateInterface> = {
   state
 };
 
-export default ProjectCreate;
+export default Admin;
