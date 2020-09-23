@@ -118,7 +118,7 @@ export function map_form_model(_model: ProjectModel) {
   };
 
   const key_enablers = {
-    key_enablers: model.key_enablers.map(val => {
+    key_enablers: model.key_enablers.map((val:any) => {
       return {
         type: 'input',
         label: 'Issue',

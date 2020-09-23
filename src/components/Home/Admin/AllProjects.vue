@@ -3,15 +3,19 @@
     <div class="row q-mt-sm">
       <div class="col"></div>
       <div class="col-8">
-        <q-card>
+        <q-card flat>
           <q-card-section>
             <div class="row">
               <div class="col"></div>
-              <div class="col">Search here</div>
+              <div class="col-8">
+                <q-input outlined label="Enter search criteria here" />
+              </div>
               <div class="col">
-                <q-btn class="bg-primary text-white" @click="searchProjects()"
-                  >Search</q-btn
-                >
+                <q-btn
+                  class="bg-primary text-white q-ml-lg"
+                  @click="searchProjects()"
+                  label="Search"
+                />
               </div>
             </div>
           </q-card-section>
@@ -21,30 +25,34 @@
     </div>
 
     <div v-if="get_projects">
-      <div class="row q-mt-sm">
-        <div
-          class="col-4 q-ma-sm"
+      <q-scroll-area
+        style="height:80vh"
+        ><div
+          class="row q-mt-sm"
           v-for="(project, key) in get_projects"
           :key="key"
         >
-          <q-card>
-            <q-card-section>
-              <div class="text-h6">
-                {{ project.project_description.description.substring(0, 15) }}
-              </div>
-              <div class="text-subtitle1">
-                {{ project.project_description.name_of_investor }}
-              </div>
-            </q-card-section>
+          <div class="col"></div>
+          <div class="col-6">
+            <q-card square>
+              <q-card-section>
+                <div class="text-h6">
+                  {{ project.project_description.description.substring(0, 15) }}
+                </div>
+                <div class="text-subtitle1">
+                  {{ project.project_description.name_of_investor }}
+                </div>
+              </q-card-section>
 
-            <q-card-actions>
-              <q-space />
+              <q-card-actions>
+                <q-space />
 
-              <q-btn @click="viewProject(project)" label="View" dense />
-            </q-card-actions>
-          </q-card>
-        </div>
-      </div>
+                <q-btn @click="viewProject(project)" label="View" dense />
+              </q-card-actions>
+            </q-card>
+          </div>
+          <div class="col"></div></div
+      ></q-scroll-area>
     </div>
   </div>
 </template>
