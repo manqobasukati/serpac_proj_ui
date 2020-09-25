@@ -6,7 +6,21 @@
           {{ project_name | removeUnderscore | capitaliseWords }}
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-space />
+
+        <q-separator dark vertical />
+
+        <q-btn-dropdown auto-close stretch flat label="Admin">
+          <q-list>
+            <q-item to="/admin-sign-up" clickable>
+              <q-item-section>Sign Up</q-item-section>
+            </q-item>
+
+            <q-item to="/admin-sign-in" clickable>
+              <q-item-section>Sign In</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
@@ -35,6 +49,7 @@ export default Vue.extend({
       project_name: module_definition['public'].name
     };
   },
+  
   filters: {
     ...FILTERS
   }

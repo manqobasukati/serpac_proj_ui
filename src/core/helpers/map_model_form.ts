@@ -17,7 +17,7 @@ export function map_form_model(_model: ProjectModel) {
     economy_sector: {
       label: 'Economic sector',
       type: 'select',
-      options: ['Energy', 'Agriculture', 'Telecommunicatins'],
+      options: ['Energy', 'Agriculture', 'Telecommunications'],
       model: model.project_description.economy_sector
     },
     project_existense: {

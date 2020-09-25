@@ -2,15 +2,45 @@ import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [
   {
+    path: '/landing-page',
+    name: 'landingPage',
+    component: () => import('components/Home/LandingPage/LandingPage.vue')
+  },
+  {
     path: '/',
-    name: 'home',
-    redirect: '/public',
+    redirect: '/home',
     component: () => import('components/Home/HomeLayout.vue'),
     children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: () =>
+          import('components/Home/LandingPage/LandingPageContent.vue')
+      },
+      {
+        path: '/public-sign-up',
+        name: 'PublicSignUp',
+        component: () => import('components/Accounts/PublicSignUp.vue')
+      },
+      {
+        path: '/public-sign-in',
+        name: 'PublicSignIn',
+        component: () => import('components/Accounts/PublicSignIn.vue')
+      },
       {
         path: '/admin',
         name: 'admin',
         component: () => import('components/Home/Admin/Admin.vue')
+      },
+      {
+        path: '/admin-sign-up',
+        name: 'AdminSignUp',
+        component: () => import('components/Accounts/AdminSignUp.vue')
+      },
+      {
+        path: '/admin-sign-in',
+        name: 'AdminSignIn',
+        component: () => import('components/Accounts/AdminSignIn.vue')
       },
       {
         path: '/admin/all-projects',
