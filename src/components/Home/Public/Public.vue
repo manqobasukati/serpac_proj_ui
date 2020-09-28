@@ -22,6 +22,8 @@
 <script lang="ts">
 import { FILTERS } from 'src/core/helpers/filters';
 import { ModuleDefinition, module_definition } from 'src/core/ModuleDefinition';
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'Public',
@@ -33,9 +35,18 @@ export default Vue.extend({
 
   methods: {
     change_navigation(module: ModuleDefinition) {
-      if (module.link) {
-        void this.$router.push({ path: `${module.link}` });
-      }
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_ACTIVE_SUBMODULE}`;
+
+      this.$store
+        .dispatch(action, module.name)
+        .then(() => {
+          if (module.link) {
+            void this.$router.push({ path: `${module.link}` });
+          }
+        })
+        .catch(val => {
+          console.error(val);
+        });
     }
   },
   filters: {

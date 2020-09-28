@@ -60,7 +60,22 @@ const routes: RouteConfig[] = [
         component: () => import('components/ProjectCreate/ProjectCreate.vue'),
         children: [
           {
-            path: '/public/project-create/:section',
+            path: '/public/project/:section',
+            component: () =>
+              import('components/ProjectCreate/FormSections/GenericSection.vue')
+          }
+        ]
+      },
+      {
+        path: '/public/my-projects',
+        component: () => import('components/MyProjects/MyProjects.vue')
+      },
+      {
+        path: '/public/my-projects/:projectId',
+        component: () => import('components/ProjectCreate/ProjectCreate.vue'),
+        children: [
+          {
+            path: '/public/my-projects/:projectId/:section',
             component: () =>
               import('components/ProjectCreate/FormSections/GenericSection.vue')
           }

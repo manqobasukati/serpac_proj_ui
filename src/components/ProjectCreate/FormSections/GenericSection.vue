@@ -20,8 +20,8 @@
               <ul>
                 <li>By clicking save a new project will be created.</li>
               </ul>
-              </div>  
-           </q-card-section>
+            </div>
+          </q-card-section>
         </q-card>
       </div>
       <div class="col"></div>

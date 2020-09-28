@@ -59,12 +59,37 @@ export default Vue.extend({
     ...mapState(MODULES.PROJECT_CREATE, {
       get_active_section(state: ProjectCreateInterface) {
         return state.active_section;
+      },
+      get_active_submodule(state: ProjectCreateInterface) {
+        return state.active_submodule;
+      },
+      get_selected_project(state:ProjectCreateInterface){
+        return state.selected_project;
       }
     }),
     section_navigation() {
-      return module_definition['public'].modules.find(val => {
-        return val.name === 'project_create';
-      }) as ModuleDefinition;
+      // if (this.$route.params) {
+      //   return module_definition['public'].modules.find(val => {
+      //     return val.name === 'my_projects';
+      //   }) as ModuleDefinition;
+      // }
+      // return module_definition['public'].modules.find(val => {
+      //   return val.name === 'project_create';
+      // }) as ModuleDefinition;
+
+      
+      if (
+        this.get_active_submodule ===
+        module_definition['public'].modules[1].name
+      ) {
+        return module_definition['public'].modules.find(val => {
+          return val.name === 'my_projects';
+        }) as ModuleDefinition;
+      } else {
+        return module_definition['public'].modules.find(val => {
+          return val.name === 'project_create';
+        }) as ModuleDefinition;
+      }
     }
   }
 });

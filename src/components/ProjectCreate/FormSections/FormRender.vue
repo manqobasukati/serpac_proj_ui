@@ -1,10 +1,10 @@
 <template>
   <div>
-    <q-card class="q-mt-lg" square>
+    <q-card class="q-mt-lg" v-if="form_data" square>
       <q-card-section>
-        <div v-for="(data, key) in formData[FormSection]" :key="key">
+        <div v-for="(data, key) in form_data[FormSection]" :key="key">
           <div v-if="data.type === 'input'" class="q-mb-sm">
-            <q-input :label="data.label" v-model="data.model" @input="onInput()"/>
+            <q-input :label="data.label" v-model="data.model" @input="updateFormData()" />
           </div>
 
           <div v-if="data.type === 'select'" class="q-mb-sm">
@@ -76,11 +76,35 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 import { SectionsMixin } from 'src/mixins/SectionsMixin';
+import { MODULES } from 'src/store';
+import { ProjectCreateInterface } from 'src/store/project_create/state';
+import { FormData } from 'src/mixins/FormData';
+import { PROJECT_CREATE_MUTATIONS } from 'src/store/project_create/mutations';
 
 export default Vue.extend({
   name: 'FormRender',
   props: ['FormSection'],
-  mixins: [SectionsMixin]
+  data() {
+    return {
+      form_data:JSON.parse(JSON.stringify(FormData))
+    };
+  },
+  methods: {
+    updateFormData() {
+      const mutaion = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA}`;
+      this.$store.commit(mutaion, this.form_data);
+    }
+  },
+  computed: {
+    ...mapState(MODULES.PROJECT_CREATE, {
+      formData(state: ProjectCreateInterface): unknown {
+        //const data = JSON.parse(JSON.stringify(state.form_data));
+        this.form_data = JSON.stringify(JSON.stringify(state.form_data))
+        return JSON.stringify(JSON.stringify(state.form_data));
+      }
+    })
+  }
 });
 </script>
