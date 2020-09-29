@@ -25,8 +25,7 @@
     </div>
 
     <div v-if="get_projects">
-      <q-scroll-area
-        style="height:80vh"
+      <q-scroll-area style="height:80vh"
         ><div
           class="row q-mt-sm"
           v-for="(project, key) in get_projects"
@@ -37,10 +36,10 @@
             <q-card square>
               <q-card-section>
                 <div class="text-h6">
-                  {{ project.project_description.description.substring(0, 15) }}
+                  {{ project.project_description }}
                 </div>
                 <div class="text-subtitle1">
-                  {{ project.project_description.name_of_investor }}
+                  {{ project.project_description }}
                 </div>
               </q-card-section>
 

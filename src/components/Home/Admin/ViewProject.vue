@@ -2,7 +2,7 @@
   <div class="q-ma-sm">
     <div class="row">
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project meta
@@ -35,7 +35,7 @@
         </q-card>
       </div>
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project Description
@@ -76,7 +76,7 @@
         </q-card>
       </div>
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project Value
@@ -119,7 +119,7 @@
     </div>
     <div class="row">
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project Expected Jobs
@@ -144,7 +144,7 @@
         </q-card>
       </div>
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project Timelines
@@ -174,7 +174,7 @@
         </q-card>
       </div>
       <div class="col q-ma-sm">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Project Opportunities
@@ -224,7 +224,7 @@
     </div>
     <div class="row">
       <div class="col q-ma-s">
-        <q-card>
+        <q-card style="min-height:260px">
           <q-card-section>
             <div class="text-h6">
               Key Enablers
