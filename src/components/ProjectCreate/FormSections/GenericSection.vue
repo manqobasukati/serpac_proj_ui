@@ -28,7 +28,13 @@
       </div>
       <div class="col"></div>
     </div>
-    <save-button />
+    <div class="row q-mt-sm " style="text-align:right">
+      <div class="col"></div>
+      <div class="col-6">
+        <q-btn flat color="primary" @click="MySave()" label="Save" />
+      </div>
+      <div class="col"></div>
+    </div>
 
     <navigate-sections />
   </div>
@@ -47,35 +53,47 @@ import { SectionsMixin } from 'src/mixins/SectionsMixin';
 import { MODULES } from 'src/store';
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import { lookup, FormData } from 'src/mixins/FormData';
-import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { project_create } from 'src/core/RequestHandler/project_create';
+import {
+  map_form_model,
+  map_model_form
+} from 'src/core/helpers/map_model_form';
 
 export default Vue.extend({
   name: 'Section1',
   mixins: [SectionsMixin],
   data() {
     return {
-       form: FormData,
+      form: FormData,
       lookUp: lookup
     };
   },
   components: {
     FormRender,
     SectionHeader,
-    NavigateSections,
-    SaveButton
+    NavigateSections
   },
   methods: {
     hyphen_to_underscore(word: string) {
       return word.split('-').join('_');
     },
     formUpdate(data: any) {
-      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATE_STATE}`;
-      this.$store.dispatch(action, data).then((val)=>{
-        this.form = this.$store.state.project_create.form_data;
-        //console.log('Form',this.form)
-      }).catch((e)=>{
-        console.log('Data')
-      })
+      this.form = data;
+    },
+    MySave() {
+      const request = map_model_form(this.form);
+
+      if (request._id === null) {
+        delete request._id;
+      }
+
+      project_create(request)
+        .then(val => {
+          this.form = map_form_model(val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   },
 
@@ -88,4 +106,3 @@ export default Vue.extend({
   }
 });
 </script>
-e
