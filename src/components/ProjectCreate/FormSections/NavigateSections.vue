@@ -52,7 +52,10 @@ export default Vue.extend({
         void this.$store
           .dispatch(set_active_section_action, module?.name)
           .then(() => {
-            void this.$router.push({ path: `${module?.link as string}` });
+            void this.$router.push({
+              path: `${module?.link as string}`,
+              query: { projectId: this.$route.query.projectId }
+            });
             void this.$store.dispatch(set_previous_section, previous_section);
           });
       }
@@ -75,7 +78,10 @@ export default Vue.extend({
         void this.$store
           .dispatch(set_active_section_action, module?.name)
           .then(() => {
-            void this.$router.push({ path: `${module?.link as string}` });
+            void this.$router.push({
+              path: `${module?.link as string}`,
+              query: { projectId: this.$route.query.projectId }
+            });
             void this.$store.dispatch(set_previous_section, previous_section);
           });
       }
@@ -112,9 +118,8 @@ export default Vue.extend({
         this.get_active_section as string
       ) as number;
 
-     //console.log(sections, index);
+      //console.log(sections, index);
       if (sections && index >= 0) {
-       
         return sections[index + 1] || '';
       }
 

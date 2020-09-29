@@ -15,12 +15,10 @@
                 <q-card square>
                   <q-card-section>
                     <div class="text-h6">
-                      {{
-                        project.project_description.description.substring(0, 15)
-                      }}
+                      {{ project.project_description }}
                     </div>
                     <div class="text-subtitle1">
-                      {{ project.project_description.name_of_investor }}
+                      {{ project.project_description }}
                     </div>
                   </q-card-section>
 
@@ -63,7 +61,10 @@ export default Vue.extend({
         .then(() => {
           void this.$router.push({
             path: `/public/project/info-section`,
-            params: { projectId: project._id as string }
+            query: { projectId: project._id as string },
+            params: {
+              projectId: project._id as string
+            }
           });
         })
         .catch(() => {
@@ -85,7 +86,6 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_projects(state: AdminInterface) {
-        console.log('Projects this', state.projects);
         return state.projects;
       }
     })

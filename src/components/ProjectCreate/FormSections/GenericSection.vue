@@ -23,12 +23,23 @@
                 <li>By clicking save a new project will be created.</li>
               </ul>
             </div>
+            <q-btn
+              class="q-ml-lg"
+              v-if="!old_project"
+              color="primary"
+              @click="createProject()"
+              label="Create new project"
+            ></q-btn>
           </q-card-section>
         </q-card>
       </div>
       <div class="col"></div>
     </div>
-    <div class="row q-mt-sm " style="text-align:right">
+    <div
+      class="row q-mt-sm "
+      style="text-align:right"
+      v-if="get_active_section !== 'info_section'"
+    >
       <div class="col"></div>
       <div class="col-6">
         <q-btn flat color="primary" @click="MySave()" label="Save" />
@@ -53,7 +64,10 @@ import { SectionsMixin } from 'src/mixins/SectionsMixin';
 import { MODULES } from 'src/store';
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import { lookup, FormData } from 'src/mixins/FormData';
-import { project_create } from 'src/core/RequestHandler/project_create';
+import {
+  get_project,
+  project_create
+} from 'src/core/RequestHandler/project_create';
 import {
   map_form_model,
   map_model_form
@@ -65,8 +79,35 @@ export default Vue.extend({
   data() {
     return {
       form: FormData,
-      lookUp: lookup
+      lookUp: lookup,
+      old_project: this.$route.query.projectId
     };
+  },
+  mounted() {
+    if (this.old_project) {
+      console.log('We have company');
+      get_project(this.$route.query.projectId as string)
+        .then(data => {
+          this.form = map_form_model(data[0]);
+          console.log('Data baba', data);
+        })
+        .catch(val => {
+          console.error(val);
+        });
+    }
+  },
+  watch: {
+    old_project() {
+      console.log('We have company from watcher');
+      get_project(this.$route.query.projectId as string)
+        .then(data => {
+          this.form = map_form_model(data[0]);
+          console.log('Data baba', data);
+        })
+        .catch(val => {
+          console.error(val);
+        });
+    }
   },
   components: {
     FormRender,
@@ -80,6 +121,28 @@ export default Vue.extend({
     formUpdate(data: any) {
       this.form = data;
     },
+    createProject() {
+      const request = map_model_form(this.form);
+
+      if (request._id === null) {
+        delete request._id;
+      }
+      project_create(request)
+        .then(val => {
+          this.form = map_form_model(val);
+          this.$q.notify({
+            message: 'Successfully created new project, please proceed',
+            color: 'primary'
+          });
+          void this.$router.push({
+            path: '/public/project/section-1',
+            query: { projectId: val._id }
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     MySave() {
       const request = map_model_form(this.form);
 
@@ -90,6 +153,7 @@ export default Vue.extend({
       project_create(request)
         .then(val => {
           this.form = map_form_model(val);
+          this.$q.notify({ message: 'updated project', color: 'primary' });
         })
         .catch(e => {
           console.log(e);

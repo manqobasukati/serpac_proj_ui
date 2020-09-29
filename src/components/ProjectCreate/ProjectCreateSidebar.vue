@@ -46,7 +46,10 @@ export default Vue.extend({
       this.$store
         .dispatch(set_active_section_action, module.name)
         .then(() => {
-          void this.$router.push({ path: `${module.link as string}` });
+          void this.$router.push({
+            path: `${module.link as string}`,
+            query: { projectId: this.$route.query.projectId }
+          });
           void this.$store.dispatch(set_previous_section, previous_section);
         })
         .catch(e => {
@@ -63,7 +66,7 @@ export default Vue.extend({
       get_active_submodule(state: ProjectCreateInterface) {
         return state.active_submodule;
       },
-      get_selected_project(state:ProjectCreateInterface){
+      get_selected_project(state: ProjectCreateInterface) {
         return state.selected_project;
       }
     }),
@@ -77,7 +80,6 @@ export default Vue.extend({
       //   return val.name === 'project_create';
       // }) as ModuleDefinition;
 
-      
       if (
         this.get_active_submodule ===
         module_definition['public'].modules[1].name
