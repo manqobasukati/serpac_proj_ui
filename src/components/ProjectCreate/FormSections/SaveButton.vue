@@ -28,33 +28,31 @@ export default Vue.extend({
   name: 'SaveButton',
   methods: {
     MySave() {
-     
+      console.log('Form D', this.formData);
+
       const request = map_model_form(this.formData);
 
       if (request._id === null) {
         delete request._id;
       }
 
-      console.log('FormWhat',this.formData );
+    
 
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATA}`;
       this.$store
-        .dispatch(action, this.formData)
+        .dispatch(action, request)
         .then(val => {
-          console.log('Done here'); 
+          console.log('Done here', val);
         })
         .catch(e => {
           console.error(e);
         });
     }
   },
-
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       formData(state: ProjectCreateInterface): unknown {
-        const data = JSON.parse(JSON.stringify(state.form_data));
-        console.log('State data',data)
-        return data;
+        return state.form_data;
       }
     })
   }

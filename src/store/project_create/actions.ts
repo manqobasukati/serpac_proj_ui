@@ -10,7 +10,8 @@ export enum PROJECT_CREATE_ACTIONS {
   SET_PREVIOUS_SECTION = 'set_previous_section',
   SET_SELECTED_PROJECT = 'set_selected_project',
   SET_ACTIVE_SUBMODULE = 'set_active_submodule',
-  UPDATE_FORM_DATA = 'update_form_data'
+  UPDATE_FORM_DATA = 'update_form_data',
+  UPDATE_FORM_DATE_STATE = 'update_form_data_state'
 }
 
 const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
@@ -33,7 +34,7 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
   [PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATA](context, payload) {
     project_create(payload)
       .then(val => {
-        console.log(val);
+        console.log('From server',val);
         context.commit(
           PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA,
           map_form_model(val)
@@ -42,7 +43,13 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
       .catch(e => {
         console.log(e);
       });
+  },
+  [PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATE_STATE](context, payload){
+   
+    context.commit(PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA, payload);
   }
+
+
 };
 
 export default actions;

@@ -1,5 +1,7 @@
 <template>
-  <div class="text-h6">{{ sectionInfo.header || 'No header' }}</div>
+  <div>
+    <div v-if="sectionInfo" class="text-h6">{{ sectionInfo.header || 'No header' }}</div>
+  </div>
 </template>
 
 <script lang="ts">

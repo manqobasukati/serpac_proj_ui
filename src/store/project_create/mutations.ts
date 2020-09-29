@@ -50,8 +50,12 @@ const mutation: MutationTree<ProjectCreateInterface> = {
     state: ProjectCreateInterface,
     payload
   ) {
-    console.log('Are you muatatin');
-    state.form_data = payload;
+  
+    try {
+      state.form_data = JSON.parse(JSON.stringify(payload));
+    } catch (e) {
+      console.log('Catch', e);
+    }
   }
 };
 

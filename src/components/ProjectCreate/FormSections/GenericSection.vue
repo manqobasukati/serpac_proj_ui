@@ -7,7 +7,9 @@
       <div class="col-6 q-ml-lg">
         <form-render
           v-if="get_active_section !== 'info_section'"
+          :formD="form"
           :FormSection="lookUp[get_active_section]"
+          @updateFormData="formUpdate"
         />
         <q-card
           v-if="get_active_section === 'info_section'"
@@ -44,13 +46,15 @@ import FormRender from './FormRender.vue';
 import { SectionsMixin } from 'src/mixins/SectionsMixin';
 import { MODULES } from 'src/store';
 import { ProjectCreateInterface } from 'src/store/project_create/state';
-import { lookup } from 'src/mixins/FormData';
+import { lookup, FormData } from 'src/mixins/FormData';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 
 export default Vue.extend({
   name: 'Section1',
   mixins: [SectionsMixin],
   data() {
     return {
+       form: FormData,
       lookUp: lookup
     };
   },
@@ -63,6 +67,15 @@ export default Vue.extend({
   methods: {
     hyphen_to_underscore(word: string) {
       return word.split('-').join('_');
+    },
+    formUpdate(data: any) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATE_STATE}`;
+      this.$store.dispatch(action, data).then((val)=>{
+        this.form = this.$store.state.project_create.form_data;
+        //console.log('Form',this.form)
+      }).catch((e)=>{
+        console.log('Data')
+      })
     }
   },
 

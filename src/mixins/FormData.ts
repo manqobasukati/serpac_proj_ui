@@ -45,7 +45,7 @@ export const FormData = {
     total_inv_value: {
       model: '',
       type: 'input',
-      label: 'What is the project'
+      label: 'Total inv value'
     }
   },
   project_funding: {
@@ -58,7 +58,7 @@ export const FormData = {
     percentage_of_funding: {
       model: '',
       type: 'input',
-      label: 'What is the project'
+      label: 'Percentage of funding'
     },
     project_scope: {
       model: '',
