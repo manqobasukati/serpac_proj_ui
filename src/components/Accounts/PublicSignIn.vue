@@ -51,6 +51,7 @@ export default Vue.extend({
   name: 'PubliSignIn',
   data() {
     return {
+      login_message: '',
       organization_data: {
         name: '',
         email: '',
@@ -59,11 +60,11 @@ export default Vue.extend({
     };
   },
   methods: {
-    sign_in() {
+    async sign_in() {
       const logged_in_user = {
         username: '',
         token: '',
-        user_id:''
+        access: []
       };
 
       const request = {
@@ -71,23 +72,18 @@ export default Vue.extend({
         username: this.organization_data.email
       };
 
-      login(request)
-        .then(val => {
-          console.log('Val', val);
-          logged_in_user.username = val.username;
-          logged_in_user.token = val.token;
-          logged_in_user.user_id = val.user_id;
+      const response = await login(request);
+      if (response.message === 'Hi, here is your access token!') {
+        logged_in_user.username = response.payload.username;
+        logged_in_user.token = response.payload.token;
 
-          localStorage.setItem('serpac_tool_username', logged_in_user.username);
-          localStorage.setItem('serpac_tool_token', logged_in_user.token);
-          localStorage.setItem('serpac_tool_user_id',logged_in_user.user_id)
-
-          
-          void this.$router.push({ path: '/public' });
-        })
-        .catch(val => {
-          console.log('Val here', val);
-        });
+        localStorage.setItem('serpac_tool_username', logged_in_user.username);
+        localStorage.setItem('serpac_tool_token', logged_in_user.token);
+        localStorage.setItem('serpac_tool_user_id','1');
+        void this.$router.push({ path: '/public' });
+      } else {
+        this.login_message = response.message;
+      }
     }
   }
 });

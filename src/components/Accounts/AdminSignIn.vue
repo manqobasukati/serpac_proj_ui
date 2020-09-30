@@ -33,6 +33,9 @@
               type="password"
               class="q-mb-md"
             />
+            <div v-if="login_message" class="text-subtitle2 text-red">
+              {{ login_message }}
+            </div>
           </q-card-section>
           <q-card-actions align="right">
             <q-btn class="text-primary" @click="sign_in()" flat>Sign In</q-btn>
@@ -46,6 +49,7 @@
 
 <script lang="ts">
 import { login } from 'src/core/RequestHandler/user_management';
+import { log } from 'util';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'AdminSignIn',
@@ -54,14 +58,16 @@ export default Vue.extend({
       user_data: {
         email: '',
         password: ''
-      }
+      },
+      login_message: ''
     };
   },
   methods: {
-    sign_in() {
+    async sign_in() {
       const logged_in_user = {
         username: '',
-        token: ''
+        token: '',
+        access: []
       };
 
       const request = {
@@ -69,19 +75,17 @@ export default Vue.extend({
         username: this.user_data.email
       };
 
-      login(request)
-        .then(val => {
-          logged_in_user.username = val.username;
-          logged_in_user.token = val.token;
+      const response = await login(request);
+      if (response.message === 'Hi, here is your access token!') {
+        logged_in_user.username = response.payload.username;
+        logged_in_user.token = response.payload.token;
 
-          localStorage.setItem('serpac_tool_username', logged_in_user.username);
-          localStorage.setItem('serpac_tool_token', logged_in_user.token);
-
-          void this.$router.push({ path: '/admin' });
-        })
-        .catch(val => {
-          console.log(val);
-        });
+        localStorage.setItem('serpac_tool_username', logged_in_user.username);
+        localStorage.setItem('serpac_tool_token', logged_in_user.token);
+        void this.$router.push({ path: '/admin' });
+      } else {
+        this.login_message = response.message;
+      }
     }
   }
 });

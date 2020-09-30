@@ -7,10 +7,18 @@
         </q-toolbar-title>
 
         <q-space />
-
+        <q-separator dark vertical />
+        <q-btn
+          v-if="showLogout"
+          @click="logout()"
+          auto-close
+          stretch
+          flat
+          label="logout"
+        />
         <q-separator dark vertical />
 
-        <q-btn-dropdown auto-close stretch flat label="Admin">
+        <q-btn-dropdown auto-close v-if="showAdmin" stretch flat label="Admin">
           <q-list>
             <q-item to="/admin-sign-up" clickable>
               <q-item-section>Sign Up</q-item-section>
@@ -49,7 +57,29 @@ export default Vue.extend({
       project_name: module_definition['public'].name
     };
   },
-  
+  methods: {
+    logout() {
+      localStorage.removeItem('serpac_tool_username');
+      localStorage.removeItem('serpac_tool_token');
+      localStorage.removeItem('serpac_tool_user_id');
+      void this.$router.push({ path: '/' });
+    }
+  },
+  computed: {
+    showLogout() {
+      const paths = [
+        '/home',
+        '/public-sign-up',
+        '/public-sign-in',
+        '/admin-sign-in',
+        '/admin-sign-up'
+      ];
+      return !paths.includes(this.$route.path);
+    },
+    showAdmin() {
+      return this.$route.path === '/home';
+    }
+  },
   filters: {
     ...FILTERS
   }

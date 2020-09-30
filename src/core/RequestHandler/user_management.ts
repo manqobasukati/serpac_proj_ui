@@ -34,10 +34,9 @@ export function login(data: UserModel) {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
-      return data.payload as Promise<any>;
+      return data as Promise<any>;
     })
     .catch(error => {
-      console.error('Error:', error);
       return error as Promise<any>;
     });
 }
