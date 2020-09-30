@@ -28,7 +28,7 @@
               v-if="!old_project"
               color="primary"
               @click="createProject()"
-              label="Create new project"
+              :label="old_project"
             ></q-btn>
           </q-card-section>
         </q-card>
@@ -120,7 +120,7 @@ export default Vue.extend({
           console.error(val);
         });
 
-      //this.old_project = this.$route.query.projectId;
+      this.old_project = this.$route.query.projectId;
     }
   },
   components: {
@@ -161,12 +161,13 @@ export default Vue.extend({
             path: '/public/project/section-1',
             query: { projectId: val._id }
           });
+
+          this.old_project = this.$route.query.projectId;
+          console.log('Old', this.$route.query);
         })
         .catch(e => {
           console.log(e);
         });
-
-      this.old_project = this.$route.query.projectId;
     },
     MySave() {
       const request = map_model_form(this.form);
