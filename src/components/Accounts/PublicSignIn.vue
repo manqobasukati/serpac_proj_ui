@@ -18,11 +18,22 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <q-input filled label="Organization Email" class="q-mb-md" />
-            <q-input filled label="Organization Password" class="q-mb-md" />
+            <q-input
+              filled
+              label="Organization Email"
+              v-model="organization_data.email"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Organization Password"
+              type="password"
+              v-model="organization_data.password"
+              class="q-mb-md"
+            />
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn class="text-primary" flat>Sign In</q-btn>
+            <q-btn class="text-primary" @click="sign_in()" flat>Sign In</q-btn>
           </q-card-actions>
         </q-card>
       </div>
@@ -32,8 +43,50 @@
 </template>
 
 <script lang="ts">
+import { login } from 'src/core/RequestHandler/user_management';
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'PubliSignIn'
+  name: 'PubliSignIn',
+  data() {
+    return {
+      organization_data: {
+        name: '',
+        email: '',
+        password: ''
+      }
+    };
+  },
+  methods: {
+    sign_in() {
+      const logged_in_user = {
+        username: '',
+        token: '',
+        user_id:''
+      };
+
+      const request = {
+        ...this.organization_data,
+        username: this.organization_data.email
+      };
+
+      login(request)
+        .then(val => {
+          console.log('Val', val);
+          logged_in_user.username = val.username;
+          logged_in_user.token = val.token;
+          logged_in_user.user_id = val.user_id;
+
+          localStorage.setItem('serpac_tool_username', logged_in_user.username);
+          localStorage.setItem('serpac_tool_token', logged_in_user.token);
+          localStorage.setItem('serpac_tool_user_id',logged_in_user.user_id)
+
+          
+          void this.$router.push({ path: '/public' });
+        })
+        .catch(val => {
+          console.log('Val here', val);
+        });
+    }
+  }
 });
 </script>

@@ -94,16 +94,9 @@ import { FormData } from 'src/mixins/FormData';
 export default Vue.extend({
   name: 'FormRender',
   props: ['FormSection', 'formD'],
-  data() {
-    return {
-      form: FormData
-    };
-  },
   methods: {
     updateFormData() {
       this.$emit('updateFormData', this.formD);
-
-      // }
     }
   }
 });

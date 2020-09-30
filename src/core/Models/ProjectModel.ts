@@ -39,4 +39,5 @@ export interface ProjectModel {
     external_sourced_inputs: string[];
   };
   key_enablers: Issues[];
+  users?:string[]
 }

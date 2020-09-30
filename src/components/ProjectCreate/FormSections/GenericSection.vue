@@ -72,6 +72,7 @@ import {
   map_form_model,
   map_model_form
 } from 'src/core/helpers/map_model_form';
+import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'Section1',
@@ -122,12 +123,21 @@ export default Vue.extend({
       this.form = data;
     },
     createProject() {
-      const request = map_model_form(this.form);
+      //get logged in user
+      const user_id = localStorage.getItem('serpac_tool_user_id');
+
+      let intermediate_req = map_model_form(this.form);
+
+      //add loggend in user details
+      const request = {
+        ...intermediate_req,
+        users: [user_id]
+      };
 
       if (request._id === null) {
         delete request._id;
       }
-      project_create(request)
+      project_create(request as ProjectModel)
         .then(val => {
           this.form = map_form_model(val);
           this.$q.notify({
@@ -150,8 +160,11 @@ export default Vue.extend({
         delete request._id;
       }
 
+      
+
       project_create(request)
         .then(val => {
+          console.log(val);
           this.form = map_form_model(val);
           this.$q.notify({ message: 'updated project', color: 'primary' });
         })

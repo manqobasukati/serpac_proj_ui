@@ -7,7 +7,8 @@ export enum PROJECT_CREATE_MUTATIONS {
   SET_PREVIOUS_SECTION = 'set_previous_section',
   UPDATE_FORM_DATA = 'update_form_data',
   SET_SELECTED_PROJECT = 'set_selected_project',
-  SET_ACTIVE_SUBMODULE = 'set_active_submodule'
+  SET_ACTIVE_SUBMODULE = 'set_active_submodule',
+  CURRENT_USER_PROJECTS = 'current_user_projects'
 }
 
 const mutation: MutationTree<ProjectCreateInterface> = {
@@ -45,6 +46,9 @@ const mutation: MutationTree<ProjectCreateInterface> = {
     payload
   ) {
     state.active_submodule = payload;
+  },
+  [PROJECT_CREATE_MUTATIONS.CURRENT_USER_PROJECTS](state:ProjectCreateInterface, payload){
+    state.current_user_projects = payload;
   },
   [PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA](
     state: ProjectCreateInterface,

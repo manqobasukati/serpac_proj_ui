@@ -18,13 +18,34 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <q-input filled label="Firstname" class="q-mb-md" />
-             <q-input filled label="Surname" class="q-mb-md" />
-            <q-input filled label="Email" class="q-mb-md" />
-            <q-input filled label="Password" class="q-mb-md" />
+            <q-input
+              filled
+              label="Firstname"
+              v-model="user_data.firstname"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Surname"
+              v-model="user_data.surname"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Email"
+              v-model="user_data.email"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Password"
+              type="password"
+              v-model="user_data.password"
+              class="q-mb-md"
+            />
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn class="text-primary" flat>Sign Up</q-btn>
+            <q-btn class="text-primary" @click="sign_up()" flat>Sign Up</q-btn>
           </q-card-actions>
         </q-card>
       </div>
@@ -35,7 +56,36 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
+import { create_user } from '../../core/RequestHandler/user_management';
 export default Vue.extend({
-  name: 'AdminSignUp'
+  name: 'AdminSignUp',
+  data() {
+    return {
+      user_data: {
+        firstname: '',
+        surname: '',
+        email: '',
+        password: ''
+      }
+    };
+  },
+  methods: {
+    sign_up() {
+      const request = {
+        ...this.user_data,
+        username: this.user_data.email,
+        access:['0']
+      };
+
+      create_user(request)
+        .then(val => {
+          console.log(val);
+        })
+        .catch(val => {
+          console.log(val);
+        });
+    }
+  }
 });
 </script>

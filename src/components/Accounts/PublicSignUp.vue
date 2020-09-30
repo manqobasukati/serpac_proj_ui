@@ -18,12 +18,27 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <q-input filled label="Organization Name" class="q-mb-md" />
-            <q-input filled label="Organization Email" class="q-mb-md" />
-            <q-input filled label="Organization Password" class="q-mb-md" />
+            <q-input
+              filled
+              label="Organization Name"
+              v-model="organization_data.name"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Organization Email"
+              v-model="organization_data.email"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Organization Password"
+              v-model="organization_data.password"
+              class="q-mb-md"
+            />
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn class="text-primary" flat>Sign Up</q-btn>
+            <q-btn class="text-primary" @click="sign_up()" flat>Sign Up</q-btn>
           </q-card-actions>
         </q-card>
       </div>
@@ -33,8 +48,35 @@
 </template>
 
 <script lang="ts">
+import { create_user } from 'src/core/RequestHandler/user_management';
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'PublicSignUp'
+  name: 'PublicSignUp',
+  data() {
+    return {
+      organization_data: {
+        name: '',
+        email: '',
+        password: ''
+      }
+    };
+  },
+  methods: {
+    sign_up() {
+      const request = {
+        ...this.organization_data,
+        username: this.organization_data.email,
+        access: ['0']
+      };
+
+      create_user(request)
+        .then(val => {
+          console.log(val);
+        })
+        .catch(val => {
+          console.log(val);
+        });
+    }
+  }
 });
 </script>

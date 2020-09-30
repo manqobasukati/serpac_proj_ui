@@ -10,6 +10,7 @@ export interface ProjectCreateInterface {
   form_data: any | null;
   selected_project: ProjectModel | null;
   active_submodule: string | null;
+  current_user_projects: ProjectModel[] | null
 }
 
 const state: ProjectCreateInterface = {
@@ -17,7 +18,8 @@ const state: ProjectCreateInterface = {
   previous_section: null as null | string,
   form_data: JSON.parse(JSON.stringify(FormData)),
   selected_project: null as null | ProjectModel,
-  active_submodule: null as null | string
+  active_submodule: null as null | string,
+  current_user_projects: null as null | ProjectModel[]
 };
 
 export default state;
