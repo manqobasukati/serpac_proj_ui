@@ -71,7 +71,6 @@ import { mapState } from 'vuex';
 
 import SectionHeader from './SectionHeader.vue';
 import NavigateSections from './NavigateSections.vue';
-import SaveButton from './SaveButton.vue';
 import FormRender from './FormRender.vue';
 
 import { SectionsMixin } from 'src/mixins/SectionsMixin';
@@ -104,7 +103,6 @@ export default Vue.extend({
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
-          console.log('Data baba', data);
         })
         .catch(val => {
           console.error(val);
@@ -113,7 +111,6 @@ export default Vue.extend({
   },
   watch: {
     old_project() {
-      console.log('We have company from watcher');
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
@@ -122,6 +119,8 @@ export default Vue.extend({
         .catch(val => {
           console.error(val);
         });
+
+      //this.old_project = this.$route.query.projectId;
     }
   },
   components: {
@@ -166,6 +165,8 @@ export default Vue.extend({
         .catch(e => {
           console.log(e);
         });
+
+      this.old_project = this.$route.query.projectId;
     },
     MySave() {
       const request = map_model_form(this.form);
@@ -174,7 +175,7 @@ export default Vue.extend({
         delete request._id;
       }
 
-      if(this.get_active_section === 'section_7'){
+      if (this.get_active_section === 'section_7') {
         request.project_submitted = new Date();
       }
 

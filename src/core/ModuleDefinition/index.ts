@@ -30,7 +30,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
     name: 'serpac_project_management',
     modules: [
       {
-        link: '/public/project-create/',
+        link: '/public/project/section-info',
         name: 'project_create',
         icon: 'create_new_folder',
         state: ['active_section:string'],
