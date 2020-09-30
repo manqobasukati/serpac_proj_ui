@@ -20,12 +20,14 @@
           <q-card-section>
             <q-input
               filled
+              name="email"
               label="Email"
               v-model="user_data.email"
               class="q-mb-md"
             />
             <q-input
               filled
+              name="password"
               label="Password"
               v-model="user_data.password"
               type="password"
@@ -69,12 +71,13 @@ export default Vue.extend({
 
       login(request)
         .then(val => {
-         
           logged_in_user.username = val.username;
           logged_in_user.token = val.token;
 
           localStorage.setItem('serpac_tool_username', logged_in_user.username);
           localStorage.setItem('serpac_tool_token', logged_in_user.token);
+
+          void this.$router.push({ path: '/admin' });
         })
         .catch(val => {
           console.log(val);

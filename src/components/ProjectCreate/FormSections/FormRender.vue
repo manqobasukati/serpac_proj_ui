@@ -31,6 +31,30 @@
               @input="updateFormData()"
             />
           </div>
+          <div v-if="data.type === 'date'" class="q-mb-sm">
+            <q-input filled v-model="data.model" mask="date" :rules="['date']">
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy
+                    ref="qDateProxy"
+                    transition-show="scale"
+                    transition-hide="scale"
+                  >
+                    <q-date v-model="data.model">
+                      <div class="row items-center justify-end">
+                        <q-btn
+                          v-close-popup
+                          label="Close"
+                          color="primary"
+                          flat
+                        />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
           <div v-if="Array.isArray(data)">
             <div v-for="(array_data, key) in data" :key="key">
               <div class="row" v-if="array_data.nested">
@@ -76,6 +100,36 @@
                       :label="nested.label"
                       @input="updateFormData()"
                     />
+                  </div>
+
+                  <div v-if="nested.type === 'date'" class="q-mb-sm">
+                    <q-input
+                      
+                      v-model="nested.model"
+                      mask="date"
+                      :rules="['date']"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="event" class="cursor-pointer">
+                          <q-popup-proxy
+                            ref="qDateProxy"
+                            transition-show="scale"
+                            transition-hide="scale"
+                          >
+                            <q-date v-model="nested.model">
+                              <div class="row items-center justify-end">
+                                <q-btn
+                                  v-close-popup
+                                  label="Close"
+                                  color="primary"
+                                  flat
+                                />
+                              </div>
+                            </q-date>
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
                   </div>
                 </div>
               </div>

@@ -155,7 +155,7 @@ export function map_model_form(my_form: any) {
   return {
     _id: form._id || null,
     project_created: new Date(),
-    project_submitted: null,
+    project_submitted: null as null | Date,
     project_description: {
       description: form?.project_description?.description.model,
       project_location: form.project_description.project_location.model,

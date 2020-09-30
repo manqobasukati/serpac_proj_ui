@@ -2,7 +2,8 @@
   <div>
     <div class="row">
       <div class="col"></div>
-      <div class="col-6">
+      <div class="col-10">
+        <div style="text-align:center" class="text-h5 q-mt-sm">My Projects</div>
         <div v-if="get_projects">
           <q-scroll-area style="height:80vh"
             ><div
@@ -11,14 +12,31 @@
               :key="key"
             >
               <div class="col"></div>
-              <div class="col-6">
+              <div v-if="project" class="col-6">
                 <q-card square>
                   <q-card-section>
-                    <div class="text-h6">
-                      {{ project.project_description }}
+                    <div v-if="project.project_description" class="text-h6">
+                      {{ project.project_description.description }}
                     </div>
-                    <div class="text-subtitle1">
-                      {{ project.project_description }}
+                    <div class="pair">
+                      <div
+                        class="text-subtitle1"
+                        v-if="project.project_description"
+                      >
+                        Project location -
+                        <span class="text-grey">{{
+                          project.project_description.project_location
+                        }}</span>
+                      </div>
+                      <div
+                        class="text-subtitle1"
+                        v-if="project.project_description"
+                      >
+                        Name of investor -
+                        <span class="text-grey">{{
+                          project.project_description.name_of_investor
+                        }}</span>
+                      </div>
                     </div>
                   </q-card-section>
 
@@ -86,7 +104,9 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_projects(state: AdminInterface) {
-        return state.projects;
+        return state.projects?.filter(val => {
+          return val.project_description !== undefined;
+        });
       }
     })
   }

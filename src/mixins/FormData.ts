@@ -88,12 +88,12 @@ export const FormData = {
         model: 'My phase',
         nested: [
           {
-            type: 'input',
+            type: 'date',
             label: 'start_date',
             model: '2020/09/17'
           },
           {
-            type: 'input',
+            type: 'date',
             label: 'end_date',
             model: '2020/09/17'
           }
@@ -105,12 +105,12 @@ export const FormData = {
         model: 'My phase',
         nested: [
           {
-            type: 'input',
+            type: 'date',
             label: 'start_date',
             model: '2020/09/17'
           },
           {
-            type: 'input',
+            type: 'date',
             label: 'end_date',
             model: '2020/09/17'
           }

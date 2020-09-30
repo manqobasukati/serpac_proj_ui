@@ -38,11 +38,25 @@
     <div
       class="row q-mt-sm "
       style="text-align:right"
-      v-if="get_active_section !== 'info_section'"
+      v-if="
+        get_active_section !== 'info_section' &&
+          get_active_section !== 'section_7'
+      "
     >
       <div class="col"></div>
       <div class="col-6">
         <q-btn flat color="primary" @click="MySave()" label="Save" />
+      </div>
+      <div class="col"></div>
+    </div>
+    <div
+      class="row q-mt-sm "
+      style="text-align:right"
+      v-if="get_active_section === 'section_7'"
+    >
+      <div class="col"></div>
+      <div class="col-6">
+        <q-btn flat color="primary" @click="MySave()" label="Save and Submit" />
       </div>
       <div class="col"></div>
     </div>
@@ -160,7 +174,9 @@ export default Vue.extend({
         delete request._id;
       }
 
-      
+      if(this.get_active_section === 'section_7'){
+        request.project_submitted = new Date();
+      }
 
       project_create(request)
         .then(val => {

@@ -21,11 +21,13 @@
             <q-input
               filled
               label="Organization Email"
+              name="email"
               v-model="organization_data.email"
               class="q-mb-md"
             />
             <q-input
               filled
+              name="password"
               label="Organization Password"
               type="password"
               v-model="organization_data.password"

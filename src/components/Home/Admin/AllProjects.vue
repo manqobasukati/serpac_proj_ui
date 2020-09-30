@@ -27,19 +27,36 @@
     <div v-if="get_projects">
       <q-scroll-area style="height:80vh"
         ><div
-          class="row q-mt-sm"
+          class="row q-mt-sm q-ml-lg"
           v-for="(project, key) in get_projects"
           :key="key"
         >
           <div class="col"></div>
-          <div class="col-6">
+          <div v-if="project" class="col-6">
             <q-card square>
               <q-card-section>
-                <div class="text-h6">
-                  {{ project.project_description }}
+                <div v-if="project.project_description" class="text-h6">
+                  {{ project.project_description.description }}
                 </div>
-                <div class="text-subtitle1">
-                  {{ project.project_description }}
+                <div class="pair">
+                  <div
+                    class="text-subtitle1"
+                    v-if="project.project_description"
+                  >
+                    Project location -
+                    <span class="text-grey">{{
+                      project.project_description.project_location
+                    }}</span>
+                  </div>
+                  <div
+                    class="text-subtitle1"
+                    v-if="project.project_description"
+                  >
+                    Name of investor -
+                    <span class="text-grey">{{
+                      project.project_description.name_of_investor
+                    }}</span>
+                  </div>
                 </div>
               </q-card-section>
 
@@ -90,7 +107,9 @@ export default Vue.extend({
     ...mapState(MODULES.ADMIN, {
       get_projects(state: AdminInterface) {
         console.log('projects', state.projects);
-        return state.projects;
+        return state.projects?.filter(val => {
+          return val.project_description !== undefined && val.project_submitted;
+        });
       }
     })
   }
