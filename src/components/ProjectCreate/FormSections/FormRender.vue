@@ -104,7 +104,6 @@
 
                   <div v-if="nested.type === 'date'" class="q-mb-sm">
                     <q-input
-                      
                       v-model="nested.model"
                       mask="date"
                       :rules="['date']"
@@ -143,7 +142,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { FormData } from 'src/mixins/FormData';
 
 export default Vue.extend({
   name: 'FormRender',

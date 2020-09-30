@@ -37,7 +37,7 @@ export function map_form_model(_model: ProjectModel) {
     total_inv_value: {
       model: model.project_value.total_inv_value,
       type: 'input',
-      label: 'What is the project'
+      label: 'Total investment value.'
     }
   };
 
@@ -46,12 +46,12 @@ export function map_form_model(_model: ProjectModel) {
       model: model.project_value.funding_status,
       type: 'select',
       options: ['Yes', 'No'],
-      label: 'What is the project'
+      label: 'Funding status'
     },
     percentage_of_funding: {
       model: model.project_value.percentage_of_funding,
       type: 'input',
-      label: 'What is the project'
+      label: 'Percentage of funding'
     },
     project_scope: {
       model: model.project_value.project_scope,
@@ -69,7 +69,7 @@ export function map_form_model(_model: ProjectModel) {
     },
     temporal_jobs: {
       type: 'input',
-      label: 'Temporay jobs',
+      label: 'Temporary jobs',
       model: model.expected_jobs.temporal_jobs
     }
   };
@@ -82,12 +82,12 @@ export function map_form_model(_model: ProjectModel) {
         model: val.name,
         nested: [
           {
-            type: 'input',
+            type: 'date',
             label: 'start_date',
             model: val.start_date
           },
           {
-            type: 'input',
+            type: 'date',
             label: 'end_date',
             model: val.end_date
           }

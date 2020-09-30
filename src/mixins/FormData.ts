@@ -45,7 +45,7 @@ export const FormData = {
     total_inv_value: {
       model: '',
       type: 'input',
-      label: 'Total inv value'
+      label: 'Total investment value'
     }
   },
   project_funding: {
@@ -85,7 +85,7 @@ export const FormData = {
       {
         type: 'input',
         label: 'Phase name',
-        model: 'My phase',
+        model: '',
         nested: [
           {
             type: 'date',
@@ -102,7 +102,7 @@ export const FormData = {
       {
         type: 'input',
         label: 'Phase name',
-        model: 'My phase',
+        model: '',
         nested: [
           {
             type: 'date',

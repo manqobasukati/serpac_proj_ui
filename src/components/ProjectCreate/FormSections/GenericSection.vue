@@ -28,7 +28,7 @@
               v-if="!old_project"
               color="primary"
               @click="createProject()"
-              :label="old_project"
+              label="Create new project"
             ></q-btn>
           </q-card-section>
         </q-card>
@@ -103,6 +103,18 @@ export default Vue.extend({
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
+        })
+        .catch(val => {
+          console.error(val);
+        });
+    }
+  },
+  created() {
+    if (this.old_project) {
+      get_project(this.$route.query.projectId as string)
+        .then(data => {
+          this.form = map_form_model(data[0]);
+          console.log(this.form);
         })
         .catch(val => {
           console.error(val);
