@@ -80,9 +80,13 @@ export default Vue.extend({
         logged_in_user.username = response.payload.username;
         logged_in_user.token = response.payload.token;
 
-        localStorage.setItem('serpac_tool_username', logged_in_user.username);
-        localStorage.setItem('serpac_tool_token', logged_in_user.token);
-        void this.$router.push({ path: '/admin' });
+        if (response.payload.access.includes('admin')) {
+          localStorage.setItem('serpac_tool_username', logged_in_user.username);
+          localStorage.setItem('serpac_tool_token', logged_in_user.token);
+          void this.$router.push({ path: '/admin' });
+        } else {
+          this.login_message = 'Unautorised entry';
+        }
       } else {
         this.login_message = response.message;
       }

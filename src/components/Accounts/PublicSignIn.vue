@@ -80,6 +80,8 @@ export default Vue.extend({
         logged_in_user.token = response.payload.token;
         logged_in_user.user_id = response.payload._id;
 
+      
+
         localStorage.setItem('serpac_tool_username', logged_in_user.username);
         localStorage.setItem('serpac_tool_token', logged_in_user.token);
         localStorage.setItem('serpac_tool_user_id', logged_in_user.user_id);
