@@ -1,5 +1,8 @@
 import { map_form_model } from 'src/core/helpers/map_model_form';
-import { project_create } from 'src/core/RequestHandler/project_create';
+import {
+  get_user_projects,
+  project_create
+} from 'src/core/RequestHandler/project_create';
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
 import { PROJECT_CREATE_MUTATIONS } from './mutations';
@@ -11,7 +14,8 @@ export enum PROJECT_CREATE_ACTIONS {
   SET_SELECTED_PROJECT = 'set_selected_project',
   SET_ACTIVE_SUBMODULE = 'set_active_submodule',
   UPDATE_FORM_DATA = 'update_form_data',
-  UPDATE_FORM_DATE_STATE = 'update_form_data_state'
+  UPDATE_FORM_DATE_STATE = 'update_form_data_state',
+  CURRENT_USER_PROJECTS = 'current_user_projects'
 }
 
 const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
@@ -34,7 +38,7 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
   [PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATA](context, payload) {
     project_create(payload)
       .then(val => {
-        console.log('From server',val);
+        console.log('From server', val);
         context.commit(
           PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA,
           map_form_model(val)
@@ -44,12 +48,20 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
         console.log(e);
       });
   },
-  [PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATE_STATE](context, payload){
-   
+  [PROJECT_CREATE_ACTIONS.UPDATE_FORM_DATE_STATE](context, payload) {
     context.commit(PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA, payload);
+  },
+
+  [PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS](context, payload) {
+    get_user_projects(payload)
+      .then(val => {
+        console.log('Values', val)
+        context.commit(PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS, val);
+      })
+      .catch(e => {
+        console.error(e);
+      });
   }
-
-
 };
 
 export default actions;

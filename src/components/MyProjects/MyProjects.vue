@@ -4,11 +4,11 @@
       <div class="col"></div>
       <div class="col-10">
         <div style="text-align:center" class="text-h5 q-mt-sm">My Projects</div>
-        <div v-if="get_projects">
+        <div v-if="get_current_projects">
           <q-scroll-area style="height:80vh"
             ><div
               class="row q-mt-sm"
-              v-for="(project, key) in get_projects"
+              v-for="(project, key) in get_current_projects"
               :key="key"
             >
               <div class="col"></div>
@@ -62,15 +62,21 @@ import { MODULES } from 'src/store';
 import { ADMIN_ACTIONS } from 'src/store/admin/actions';
 import { AdminInterface } from 'src/store/admin/state';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { ProjectCreateInterface } from 'src/store/project_create/state';
 import Vue from 'vue';
 import { mapState } from 'vuex';
 
 export default Vue.extend({
   name: 'MyProjects',
   mounted() {
-    this.triggerProjectSearch();
+    this.current_user_projects();
   },
   methods: {
+    current_user_projects() {
+      const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
+      const user_id = localStorage.getItem('serpac_tool_user_id');
+      void this.$store.dispatch(get_projects_action, user_id);
+    },
     viewProject(project: ProjectModel) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_SELECTED_PROJECT}`;
 
@@ -101,12 +107,12 @@ export default Vue.extend({
         });
     }
   },
+
   computed: {
-    ...mapState(MODULES.ADMIN, {
-      get_projects(state: AdminInterface) {
-        return state.projects?.filter(val => {
-          return val.project_description !== undefined;
-        });
+    ...mapState(MODULES.PROJECT_CREATE, {
+      get_current_projects(state: ProjectCreateInterface) {
+        console.log('This', state.current_user_projects);
+        return state.current_user_projects;
       }
     })
   }

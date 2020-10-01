@@ -41,6 +41,12 @@ export default Vue.extend({
         .dispatch(action, module.name)
         .then(() => {
           if (module.link) {
+            if (module.link === '/public/my-projects') {
+            
+              const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
+              const user_id = localStorage.getItem('serpac_tool_user_id');
+              void this.$store.dispatch(get_projects_action, user_id);
+            }
             void this.$router.push({ path: `${module.link}` });
           }
         })

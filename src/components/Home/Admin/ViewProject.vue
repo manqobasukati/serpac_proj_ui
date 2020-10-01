@@ -61,7 +61,7 @@
                 Project Existence
               </div>
               <div class="textsubtitle2 text-grey">
-                {{ get_project.project_description.project_existense }}
+                {{ get_project.project_description }}
               </div>
             </div>
             <div class="pair">

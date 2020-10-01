@@ -47,14 +47,16 @@ const mutation: MutationTree<ProjectCreateInterface> = {
   ) {
     state.active_submodule = payload;
   },
-  [PROJECT_CREATE_MUTATIONS.CURRENT_USER_PROJECTS](state:ProjectCreateInterface, payload){
+  [PROJECT_CREATE_MUTATIONS.CURRENT_USER_PROJECTS](
+    state: ProjectCreateInterface,
+    payload
+  ) {
     state.current_user_projects = payload;
   },
   [PROJECT_CREATE_MUTATIONS.UPDATE_FORM_DATA](
     state: ProjectCreateInterface,
     payload
   ) {
-  
     try {
       state.form_data = JSON.parse(JSON.stringify(payload));
     } catch (e) {

@@ -106,7 +106,14 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_projects(state: AdminInterface) {
-        console.log('projects', state.projects);
+        console.log(
+          'projects',
+          state.projects?.filter(val => {
+            return (
+              !!val.project_submitted
+            );
+          })
+        );
         return state.projects?.filter(val => {
           return val.project_description !== undefined && val.project_submitted;
         });

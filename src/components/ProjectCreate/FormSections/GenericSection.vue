@@ -156,7 +156,7 @@ export default Vue.extend({
       //add loggend in user details
       const request = {
         ...intermediate_req,
-        users: [user_id]
+        project_owners: [user_id]
       };
 
       if (request._id === null) {
@@ -175,7 +175,7 @@ export default Vue.extend({
           });
 
           this.old_project = this.$route.query.projectId;
-          console.log('Old', this.$route.query);
+          console.log('From server', val);
         })
         .catch(e => {
           console.log(e);

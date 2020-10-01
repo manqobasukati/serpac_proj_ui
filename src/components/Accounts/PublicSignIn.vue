@@ -64,6 +64,7 @@ export default Vue.extend({
       const logged_in_user = {
         username: '',
         token: '',
+        user_id: '',
         access: []
       };
 
@@ -74,12 +75,14 @@ export default Vue.extend({
 
       const response = await login(request);
       if (response.message === 'Hi, here is your access token!') {
+        console.log(response);
         logged_in_user.username = response.payload.username;
         logged_in_user.token = response.payload.token;
+        logged_in_user.user_id = response.payload._id;
 
         localStorage.setItem('serpac_tool_username', logged_in_user.username);
         localStorage.setItem('serpac_tool_token', logged_in_user.token);
-        localStorage.setItem('serpac_tool_user_id','1');
+        localStorage.setItem('serpac_tool_user_id', logged_in_user.user_id);
         void this.$router.push({ path: '/public' });
       } else {
         this.login_message = response.message;
