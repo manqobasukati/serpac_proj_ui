@@ -9,9 +9,11 @@ import routes from './routes';
  * directly export the Router instantiation
  */
 
-export default route<Store<StateInterface>>(function ({ Vue }) {
+export default route<Store<StateInterface>>(function({ Vue }) {
   Vue.use(VueRouter);
-
+  function isAuthenticated() {
+    return localStorage.getItem('serpac_tool_token');
+  }
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
@@ -23,5 +25,16 @@ export default route<Store<StateInterface>>(function ({ Vue }) {
     base: process.env.VUE_ROUTER_BASE
   });
 
+  Router.beforeEach((to, from, next) => {
+    if (
+      !['/admin-sign-in', '/public-sign-in','/home'].includes(to.path) &&
+      !isAuthenticated()
+    ) {
+      next({ path: '/home' });
+    } else {
+      next();
+    }
+  });
+
   return Router;
-})
+});
