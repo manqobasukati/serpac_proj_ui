@@ -4,7 +4,7 @@
       class="tw-inline-flex tw-items-center tw-justify-center tw-px-3 tw-pt-1 tw-pb-4 tw-w-full tw-bg-white tw-shadow"
     >
       <div
-        class="tw-inline-flex tw-flex-col tw-space-y-6 tw-items-center tw-justify-center tw-w-full tw-self-start"
+        class="tw-inline-flex tw-flex-col tw-space-y-3 tw-items-center tw-justify-center tw-w-full tw-self-start"
       >
         <p class="tw-self-start tw-text-2xl">
           {{ project.project_description.description }}
@@ -15,20 +15,20 @@
         <div
           class="tw-inline-flex  tw-items-center tw-justify-center tw-self-start"
         >
-          <div class="tw-w-48">
+          <div class="tw-w-3/4">
             <div
-              class="tw-flex tw-tems-center tw-justify-center tw-pl-2 tw-pr-2 tw-py-2 tw-w-3/4 tw-bg-red-200 tw-rounded-full"
+              class="tw-flex tw-tems-center tw-justify-center  tw-py-2 tw-w-3/4 tw-bg-red-200 tw-rounded-full"
             >
-              <p class="tw-text-sm  tw-mr-1">
+              <p class="tw-text-xs  tw-mr-1">
                 {{ project.project_description.project_location }}
               </p>
             </div>
           </div>
           <div class="tw-w-48">
             <div
-              class="tw-flex tw-tems-center tw-justify-center tw-pl-2 tw-pr-2 tw-py-2 tw-w-3/4 tw-bg-green-200 tw-rounded-full"
+              class="tw-flex tw-items-center tw-justify-center  tw-py-2 tw-w-3/4 tw-bg-green-200 tw-rounded-full"
             >
-              <p class="tw-text-sm tw-mr-1">
+              <p class="tw-text-xs tw-mr-1">
                 {{ project.project_description.economy_sector }}
               </p>
             </div>
