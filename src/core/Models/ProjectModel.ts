@@ -14,6 +14,7 @@ export interface ProjectModel {
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
+    title:string;
     description:string;
     project_location: string;
     economy_sector: string;
