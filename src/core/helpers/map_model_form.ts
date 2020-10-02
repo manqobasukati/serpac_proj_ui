@@ -2,10 +2,16 @@ import { ProjectModel } from '../Models/ProjectModel';
 
 export function map_form_model(_model: ProjectModel) {
   const model = JSON.parse(JSON.stringify(_model));
- 
+
   const project_description = {
+    title: {
+      model: model.project_description.title,
+      type: 'input',
+      label: 'What is the project'
+    },
     description: {
       model: model.project_description.description,
+      meta: 'textarea',
       type: 'input',
       label: 'What is the project'
     },
@@ -118,7 +124,7 @@ export function map_form_model(_model: ProjectModel) {
   };
 
   const key_enablers = {
-    key_enablers: model.key_enablers.map((val:any) => {
+    key_enablers: model.key_enablers.map((val: any) => {
       return {
         type: 'input',
         label: 'Issue',
@@ -157,6 +163,7 @@ export function map_model_form(my_form: any) {
     project_created: new Date(),
     project_submitted: null as null | Date,
     project_description: {
+      title: form?.project_description?.title.model,
       description: form?.project_description?.description.model,
       project_location: form.project_description.project_location.model,
       economy_sector: form.project_description.economy_sector.model,

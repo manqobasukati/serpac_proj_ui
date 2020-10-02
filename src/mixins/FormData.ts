@@ -22,7 +22,6 @@ export const FormData = {
     project_location: {
       label: 'My location',
       type: 'input',
-
       model: ''
     },
     economy_sector: {
