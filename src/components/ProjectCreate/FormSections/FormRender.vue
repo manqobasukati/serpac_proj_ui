@@ -5,6 +5,14 @@
         <div v-for="(data, key) in formD[FormSection]" :key="key">
           <div v-if="data.type === 'input'" class="q-mb-sm">
             <q-input
+              v-if="data.meta"
+              :label="data.label"
+              v-model="data.model"
+              :type="data.meta"
+              @input="updateFormData()"
+            />
+            <q-input
+              v-else
               :label="data.label"
               v-model="data.model"
               @input="updateFormData()"

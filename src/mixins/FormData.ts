@@ -13,14 +13,16 @@ export const FormData = {
   project_created: new Date(),
   project_submitted: null as null | Date,
   project_description: {
-    description: {
+    title: {
       model: '',
       type: 'input',
-      label: 'What is the project'
+      label: 'The name of your project'
     },
+
     project_location: {
       label: 'My location',
       type: 'input',
+
       model: ''
     },
     economy_sector: {
@@ -39,6 +41,12 @@ export const FormData = {
       label: 'Name of investor',
       model: '',
       type: 'input'
+    },
+    description: {
+      model: '',
+      type: 'input',
+      meta: 'textarea',
+      label: 'Please describe project in more detail'
     }
   },
   project_value: {
@@ -126,13 +134,13 @@ export const FormData = {
       label: 'Skills needed',
       options: ['Local', 'Foreign-Direct Investment']
     },
-    local_sourced_inputs:{
+    local_sourced_inputs: {
       model: [],
       type: 'multiple-select',
       label: 'Locally sourced inputs',
       options: ['Maize', 'Food']
     },
-    external_sourced_inputs:{
+    external_sourced_inputs: {
       model: [],
       type: 'multiple-select',
       label: 'Externaly sourced inputs',
@@ -140,20 +148,20 @@ export const FormData = {
     }
   },
 
-  key_enablers:{
-     key_enablers:[
-       {
-         type:'input',
-         label:'Issue 1',
-         model:'Lack of water',
-         nested:[
-           {
-             type:'select',
-             model:'SWSC',
-             options:['SWSC','EMS','SWAZI-MET']
-           }
-         ]
-       }
-     ]
+  key_enablers: {
+    key_enablers: [
+      {
+        type: 'input',
+        label: 'Issue 1',
+        model: 'Lack of water',
+        nested: [
+          {
+            type: 'select',
+            model: 'SWSC',
+            options: ['SWSC', 'EMS', 'SWAZI-MET']
+          }
+        ]
+      }
+    ]
   }
 };

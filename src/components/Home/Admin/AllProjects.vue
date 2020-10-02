@@ -30,46 +30,15 @@
 
     <div v-if="get_projects">
       <q-scroll-area style="height:80vh"
-        ><div
-          class="row q-mt-sm q-ml-lg"
+        >
+        <div
+          class="row q-mt-sm tw-ml-12"
           v-for="(project, key) in get_projects"
           :key="key"
         >
           <div class="col"></div>
-          <div v-if="project" class="col-6">
-            <q-card square>
-              <q-card-section>
-                <div v-if="project.project_description" class="text-h6">
-                  {{ project.project_description.description }}
-                </div>
-                <div class="pair">
-                  <div
-                    class="text-subtitle1"
-                    v-if="project.project_description"
-                  >
-                    Project location -
-                    <span class="text-grey">{{
-                      project.project_description.project_location
-                    }}</span>
-                  </div>
-                  <div
-                    class="text-subtitle1"
-                    v-if="project.project_description"
-                  >
-                    Name of investor -
-                    <span class="text-grey">{{
-                      project.project_description.name_of_investor
-                    }}</span>
-                  </div>
-                </div>
-              </q-card-section>
-
-              <q-card-actions>
-                <q-space />
-
-                <q-btn @click="viewProject(project)" label="View" dense />
-              </q-card-actions>
-            </q-card>
+          <div class="col-5">
+            <project-card :project="project" />
           </div>
           <div class="col"></div></div
       ></q-scroll-area>
@@ -86,8 +55,13 @@ import { AdminInterface } from 'src/store/admin/state';
 import { ADMIN_ACTIONS } from 'src/store/admin/actions';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
+import ProjectCard from './ProjectCard.vue';
+
 export default Vue.extend({
   name: 'AllProjects',
+  components: {
+    ProjectCard
+  },
   methods: {
     viewProject(project: ProjectModel) {
       void this.$router.push({
