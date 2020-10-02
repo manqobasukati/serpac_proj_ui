@@ -8,7 +8,11 @@
             <div class="row">
               <div class="col"></div>
               <div class="col-8">
-                <q-input outlined label="Enter search criteria here" />
+                <q-input
+                  outlined
+                  class="tw-text-sm"
+                  label="Enter search criteria here"
+                />
               </div>
               <div class="col">
                 <q-btn
@@ -109,9 +113,7 @@ export default Vue.extend({
         console.log(
           'projects',
           state.projects?.filter(val => {
-            return (
-              !!val.project_submitted
-            );
+            return !!val.project_submitted;
           })
         );
         return state.projects?.filter(val => {
