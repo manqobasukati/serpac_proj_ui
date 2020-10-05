@@ -99,7 +99,7 @@ export default Vue.extend({
   },
   mounted() {
     if (this.old_project) {
-      console.log('We have company');
+     
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
