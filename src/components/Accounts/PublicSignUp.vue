@@ -82,7 +82,7 @@ export default Vue.extend({
         create_user(request)
           .then(val => {
             //Navigate to login
-            console.log('Sikhiphani');
+           
             void this.$router.push({ path: '/public-sign-in' });
             this.$q.loading.hide();
           })
