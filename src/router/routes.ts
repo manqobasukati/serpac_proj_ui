@@ -12,6 +12,10 @@ const routes: RouteConfig[] = [
     component: () => import('components/Home/HomeLayout.vue'),
     children: [
       {
+        path: '/admin/users',
+        component: () => import('components/Home/Users/Users.vue')
+      },
+      {
         path: '/home',
         name: 'home',
         component: () =>

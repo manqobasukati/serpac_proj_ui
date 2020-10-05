@@ -21,7 +21,6 @@ export function create_user(data: UserModel) {
     });
 }
 
-
 export function login(data: UserModel) {
   const url = `${config.server_url}/access`;
 
@@ -41,3 +40,20 @@ export function login(data: UserModel) {
     });
 }
 
+export function get_users(): Promise<UserModel[] | any> {
+  const url = `${config.server_url}/user`;
+
+  return fetch(url, {
+    method: 'GET', // or 'PUT'test
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      return data.payload as Promise<UserModel[]>;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
