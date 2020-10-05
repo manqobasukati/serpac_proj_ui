@@ -75,7 +75,7 @@ export default Vue.extend({
       const request = {
         ...this.user_data,
         username: this.user_data.email,
-        access:['public']
+        access:['admin']
       };
 
       create_user(request)

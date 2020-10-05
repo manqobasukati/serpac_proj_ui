@@ -27,7 +27,12 @@ export default route<Store<StateInterface>>(function({ Vue }) {
 
   Router.beforeEach((to, from, next) => {
     if (
-      !['/admin-sign-in', '/public-sign-in', '/home'].includes(to.path) &&
+      ![
+        '/admin-sign-in',
+        '/public-sign-in',
+        '/home',
+        '/admin-sign-up'
+      ].includes(to.path) &&
       !isAuthenticated()
     ) {
       next({ path: '/home' });
