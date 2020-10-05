@@ -33,7 +33,7 @@
               type="password"
               class="q-mb-md"
             />
-            <div v-if="login_message" class="text-subtitle2 text-red">
+            <div v-if="login_message" class="text-subtitle2 text-red q-ml-lg">
               {{ login_message }}
             </div>
           </q-card-section>
@@ -48,6 +48,7 @@
 </template>
 
 <script lang="ts">
+import { user_form_validate } from 'src/core/helpers/form_validation';
 import { login } from 'src/core/RequestHandler/user_management';
 import { log } from 'util';
 import Vue from 'vue';
@@ -74,23 +75,31 @@ export default Vue.extend({
         ...this.user_data,
         username: this.user_data.email
       };
-      this.$q.loading.show();
-      const response = await login(request);
-      if (response.message === 'Hi, here is your access token!') {
-        logged_in_user.username = response.payload.username;
-        logged_in_user.token = response.payload.token;
 
-        if (response.payload.access.includes('admin')) {
-          localStorage.setItem('serpac_tool_username', logged_in_user.username);
-          localStorage.setItem('serpac_tool_token', logged_in_user.token);
-          this.$q.loading.hide();
-          void this.$router.push({ path: '/admin' });
+      this.login_message = user_form_validate(request, 'admin_sign_in');
+
+      if (!this.login_message) {
+        this.$q.loading.show();
+        const response = await login(request);
+        if (response.message === 'Hi, here is your access token!') {
+          logged_in_user.username = response.payload.username;
+          logged_in_user.token = response.payload.token;
+
+          if (response.payload.access.includes('admin')) {
+            localStorage.setItem(
+              'serpac_tool_username',
+              logged_in_user.username
+            );
+            localStorage.setItem('serpac_tool_token', logged_in_user.token);
+            this.$q.loading.hide();
+            void this.$router.push({ path: '/admin' });
+          } else {
+            this.$q.loading.hide();
+            this.login_message = 'Unautorised entry';
+          }
         } else {
-          this.$q.loading.hide();
-          this.login_message = 'Unautorised entry';
+          this.login_message = response.message;
         }
-      } else {
-        this.login_message = response.message;
       }
     }
   }

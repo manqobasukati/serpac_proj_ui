@@ -44,6 +44,9 @@
               class="q-mb-md"
             />
           </q-card-section>
+          <div v-if="sign_up_message" class="text-subtitle2 text-red q-ml-lg">
+            {{ sign_up_message }}
+          </div>
           <q-card-actions align="right">
             <q-btn class="text-primary" @click="sign_up()" flat>Sign Up</q-btn>
           </q-card-actions>
@@ -58,10 +61,12 @@
 import Vue from 'vue';
 
 import { create_user } from '../../core/RequestHandler/user_management';
+import { user_form_validate } from '../../core/helpers/form_validation';
 export default Vue.extend({
   name: 'AdminSignUp',
   data() {
     return {
+      sign_up_message: '',
       user_data: {
         firstname: '',
         surname: '',
@@ -75,16 +80,20 @@ export default Vue.extend({
       const request = {
         ...this.user_data,
         username: this.user_data.email,
-        access:['admin']
+        access: ['admin']
       };
 
-      create_user(request)
-        .then(val => {
-          console.log(val);
-        })
-        .catch(val => {
-          console.log(val);
-        });
+      this.sign_up_message = user_form_validate(request, 'admin_sign_up');
+
+      if (!this.sign_up_message) {
+        create_user(request)
+          .then(val => {
+            console.log(val);
+          })
+          .catch(val => {
+            console.log(val);
+          });
+      }
     }
   }
 });

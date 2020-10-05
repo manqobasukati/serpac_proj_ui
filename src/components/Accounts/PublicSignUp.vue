@@ -33,10 +33,14 @@
             <q-input
               filled
               label="Organization Password"
+              type="password"
               v-model="organization_data.password"
               class="q-mb-md"
             />
           </q-card-section>
+          <div v-if="sign_up_message" class="text-subtitle2 text-red q-ml-lg">
+            {{ sign_up_message }}
+          </div>
           <q-card-actions align="right">
             <q-btn class="text-primary" @click="sign_up()" flat>Sign Up</q-btn>
           </q-card-actions>
@@ -48,12 +52,14 @@
 </template>
 
 <script lang="ts">
+import { user_form_validate } from 'src/core/helpers/form_validation';
 import { create_user } from 'src/core/RequestHandler/user_management';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'PublicSignUp',
   data() {
     return {
+      sign_up_message: '',
       organization_data: {
         name: '',
         email: '',
@@ -69,13 +75,18 @@ export default Vue.extend({
         access: ['public']
       };
 
-      create_user(request)
-        .then(val => {
-          console.log(val);
-        })
-        .catch(val => {
-          console.log(val);
-        });
+      this.sign_up_message = user_form_validate(request, 'public_sign_up');
+      
+
+      if (this.sign_up_message) {
+        create_user(request)
+          .then(val => {
+            console.log(val);
+          })
+          .catch(val => {
+            console.log(val);
+          });
+      }
     }
   }
 });

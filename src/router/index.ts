@@ -31,7 +31,8 @@ export default route<Store<StateInterface>>(function({ Vue }) {
         '/admin-sign-in',
         '/public-sign-in',
         '/home',
-        '/admin-sign-up'
+        '/admin-sign-up',
+        '/public-sign-up'
       ].includes(to.path) &&
       !isAuthenticated()
     ) {
