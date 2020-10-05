@@ -74,7 +74,7 @@ export default Vue.extend({
         ...this.user_data,
         username: this.user_data.email
       };
-
+      this.$q.loading.show();
       const response = await login(request);
       if (response.message === 'Hi, here is your access token!') {
         logged_in_user.username = response.payload.username;
@@ -83,8 +83,10 @@ export default Vue.extend({
         if (response.payload.access.includes('admin')) {
           localStorage.setItem('serpac_tool_username', logged_in_user.username);
           localStorage.setItem('serpac_tool_token', logged_in_user.token);
+          this.$q.loading.hide();
           void this.$router.push({ path: '/admin' });
         } else {
+          this.$q.loading.hide();
           this.login_message = 'Unautorised entry';
         }
       } else {

@@ -73,20 +73,20 @@ export default Vue.extend({
         username: this.organization_data.email
       };
 
+      this.$q.loading.show();
       const response = await login(request);
       if (response.message === 'Hi, here is your access token!') {
-        console.log(response);
         logged_in_user.username = response.payload.username;
         logged_in_user.token = response.payload.token;
         logged_in_user.user_id = response.payload._id;
 
-      
-
         localStorage.setItem('serpac_tool_username', logged_in_user.username);
         localStorage.setItem('serpac_tool_token', logged_in_user.token);
         localStorage.setItem('serpac_tool_user_id', logged_in_user.user_id);
+        this.$q.loading.hide();
         void this.$router.push({ path: '/public' });
       } else {
+        this.$q.loading.hide();
         this.login_message = response.message;
       }
     }

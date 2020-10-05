@@ -93,7 +93,8 @@ module.exports = configure(function (ctx) {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
       config: {
-        notify:{}
+        notify:{},
+        loading:{}
       },
 
       // Possible values for "importStrategy":
@@ -109,7 +110,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ['Notify','Loading']
     },
 
     // animations: 'all', // --- includes all animations
