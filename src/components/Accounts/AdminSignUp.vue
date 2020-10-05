@@ -86,9 +86,11 @@ export default Vue.extend({
       this.sign_up_message = user_form_validate(request, 'admin_sign_up');
 
       if (!this.sign_up_message) {
+         this.$q.loading.show();
         create_user(request)
           .then(val => {
-            console.log(val);
+            void this.$router.push({ path: '/admin-sign-in' });
+            this.$q.loading.hide();
           })
           .catch(val => {
             console.log(val);

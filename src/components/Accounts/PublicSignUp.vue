@@ -76,12 +76,15 @@ export default Vue.extend({
       };
 
       this.sign_up_message = user_form_validate(request, 'public_sign_up');
-      
 
-      if (this.sign_up_message) {
+      if (!this.sign_up_message) {
+        this.$q.loading.show();
         create_user(request)
           .then(val => {
-            console.log(val);
+            //Navigate to login
+            console.log('Sikhiphani');
+            void this.$router.push({ path: '/public-sign-in' });
+            this.$q.loading.hide();
           })
           .catch(val => {
             console.log(val);
