@@ -14,7 +14,7 @@
             >
               <q-item-section>
                 <q-item-label>
-                  {{ user.name }}
+                  {{ user.user }}
                 </q-item-label>
               </q-item-section>
             </q-item>
