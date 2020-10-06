@@ -16,7 +16,7 @@ export const FormData = {
     title: {
       model: '',
       type: 'input',
-      label: 'The name of your project',
+      label: 'The name of your project'
     },
     project_location: {
       label: 'My location',
@@ -122,7 +122,12 @@ export const FormData = {
           }
         ]
       }
-    ]
+    ],
+    add_phase: {
+      type: 'button',
+      label: 'add phase',
+      method:'add_phase()'
+    }
   },
 
   opportunities: {

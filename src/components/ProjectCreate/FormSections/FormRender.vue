@@ -39,6 +39,11 @@
               @input="updateFormData()"
             />
           </div>
+          <div v-if="data.type === 'button'" style="align:right" class="q-mb-sm row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <q-btn  @click="add_phase()"  round icon="add"  />
+          </div>
           <div v-if="data.type === 'date'" class="q-mb-sm">
             <q-input filled v-model="data.model" mask="date" :rules="['date']">
               <template v-slot:append>
@@ -157,6 +162,27 @@ export default Vue.extend({
   methods: {
     updateFormData() {
       this.$emit('updateFormData', this.formD);
+    },
+    add_phase() {
+      const phase = {
+        type: 'input',
+        label: 'Phase name',
+        model: '',
+        nested: [
+          {
+            type: 'date',
+            label: 'start_date',
+            model: '2020/09/17'
+          },
+          {
+            type: 'date',
+            label: 'end_date',
+            model: '2020/09/17'
+          }
+        ]
+      };
+
+      this.$emit('add_phase', phase);
     }
   }
 });

@@ -10,6 +10,7 @@
           :formD="form"
           :FormSection="lookUp[get_active_section]"
           @updateFormData="formUpdate"
+          @add_phase="add_phase"
         />
         <q-card
           v-if="get_active_section === 'info_section'"
@@ -99,7 +100,6 @@ export default Vue.extend({
   },
   mounted() {
     if (this.old_project) {
-     
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
@@ -146,6 +146,9 @@ export default Vue.extend({
     },
     formUpdate(data: any) {
       this.form = data;
+    },
+    add_phase(phase: any) {
+      this.form.project_timelines.key_phases.push(phase);
     },
     createProject() {
       //get logged in user

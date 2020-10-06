@@ -99,7 +99,12 @@ export function map_form_model(_model: ProjectModel) {
           }
         ]
       };
-    })
+    }),
+    add_phase: {
+      type: 'button',
+      label: 'add phase',
+      method: 'add_phase()'
+    }
   };
 
   const opportunities = {
