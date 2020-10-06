@@ -8,7 +8,8 @@ export enum PROJECT_CREATE_MUTATIONS {
   UPDATE_FORM_DATA = 'update_form_data',
   SET_SELECTED_PROJECT = 'set_selected_project',
   SET_ACTIVE_SUBMODULE = 'set_active_submodule',
-  CURRENT_USER_PROJECTS = 'current_user_projects'
+  CURRENT_USER_PROJECTS = 'current_user_projects',
+  REMOVE_PROJECT = 'remove_project'
 }
 
 const mutation: MutationTree<ProjectCreateInterface> = {
@@ -62,6 +63,21 @@ const mutation: MutationTree<ProjectCreateInterface> = {
     } catch (e) {
       console.log('Catch', e);
     }
+  },
+
+  [PROJECT_CREATE_MUTATIONS.REMOVE_PROJECT](
+    state: ProjectCreateInterface,
+    payload
+  ) {
+    const index = state.current_user_projects?.findIndex(val => {
+      return (val._id = payload);
+    });
+
+    state.current_user_projects?.forEach(val => {
+      if (val._id === payload) {
+        state.current_user_projects?.splice(index as number, 1);
+      }
+    });
   }
 };
 

@@ -1,7 +1,8 @@
 import { map_form_model } from 'src/core/helpers/map_model_form';
 import {
   get_user_projects,
-  project_create
+  project_create,
+  remove_project
 } from 'src/core/RequestHandler/project_create';
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
@@ -15,7 +16,8 @@ export enum PROJECT_CREATE_ACTIONS {
   SET_ACTIVE_SUBMODULE = 'set_active_submodule',
   UPDATE_FORM_DATA = 'update_form_data',
   UPDATE_FORM_DATE_STATE = 'update_form_data_state',
-  CURRENT_USER_PROJECTS = 'current_user_projects'
+  CURRENT_USER_PROJECTS = 'current_user_projects',
+  REMOVE_PROJECT = 'remove_project'
 }
 
 const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
@@ -55,12 +57,19 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
   [PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS](context, payload) {
     get_user_projects(payload)
       .then(val => {
-       
         context.commit(PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS, val);
       })
       .catch(e => {
         console.error(e);
       });
+  },
+
+  [PROJECT_CREATE_ACTIONS.REMOVE_PROJECT](context, payload) {
+    remove_project(payload._id)
+      .then(val => {
+        context.commit(PROJECT_CREATE_MUTATIONS.REMOVE_PROJECT, val);
+      })
+      .catch(e => console.error(e));
   }
 };
 

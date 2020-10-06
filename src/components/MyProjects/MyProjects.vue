@@ -42,8 +42,18 @@
 
                   <q-card-actions>
                     <q-space />
-
-                    <q-btn @click="viewProject(project)" label="View" dense />
+                    <q-btn
+                      @click="DeleteProject(project)"
+                      label="Delete"
+                      flat
+                      color="primary"
+                    />
+                    <q-btn
+                      @click="viewProject(project)"
+                      label="View"
+                      flat
+                      color="primary"
+                    />
                   </q-card-actions>
                 </q-card>
               </div>
@@ -93,6 +103,17 @@ export default Vue.extend({
         })
         .catch(() => {
           console.log('If anything happens');
+        });
+    },
+    DeleteProject(project: ProjectModel) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.REMOVE_PROJECT}`;
+      this.$store
+        .dispatch(action, project)
+        .then(() => {
+          this.$q.notify({ message: 'Deleted project' });
+        })
+        .catch(e => {
+          console.error(e);
         });
     },
     triggerProjectSearch() {

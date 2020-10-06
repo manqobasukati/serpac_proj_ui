@@ -30,7 +30,7 @@ export function get_user_projects(data: string) {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
-      console.log('Getting called')
+      console.log('Getting called');
       return data.payload as Promise<any>;
     })
     .catch(error => {
@@ -51,6 +51,25 @@ export function project_create(data: ProjectModel): Promise<any> {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
+      return data.payload as Promise<any>;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      return error as Promise<any>;
+    });
+}
+
+export function remove_project(data: string) {
+  const url = `${config.server_url}/project?_id=${data}`;
+  return fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      console.log('Getting called');
       return data.payload as Promise<any>;
     })
     .catch(error => {
