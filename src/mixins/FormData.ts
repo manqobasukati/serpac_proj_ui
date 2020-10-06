@@ -16,7 +16,7 @@ export const FormData = {
     title: {
       model: '',
       type: 'input',
-      label: 'The name of your project'
+      label: 'Project Title'
     },
     project_location: {
       label: 'My location',

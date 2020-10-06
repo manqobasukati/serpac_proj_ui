@@ -32,6 +32,12 @@
             />
             <q-input
               filled
+              label="Organization name"
+              v-model="user_data.name"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
               label="Email"
               v-model="user_data.email"
               class="q-mb-md"
@@ -69,6 +75,7 @@ export default Vue.extend({
       sign_up_message: '',
       user_data: {
         firstname: '',
+        name:'',
         surname: '',
         email: '',
         password: ''
@@ -80,13 +87,17 @@ export default Vue.extend({
       const request = {
         ...this.user_data,
         username: this.user_data.email,
-        access: ['admin']
+        access: ['admin'],
+        meta: {
+          firstname: this.user_data.firstname,
+          lastname: this.user_data.surname
+        }
       };
 
       this.sign_up_message = user_form_validate(request, 'admin_sign_up');
 
       if (!this.sign_up_message) {
-         this.$q.loading.show();
+        this.$q.loading.show();
         create_user(request)
           .then(val => {
             void this.$router.push({ path: '/admin-sign-in' });

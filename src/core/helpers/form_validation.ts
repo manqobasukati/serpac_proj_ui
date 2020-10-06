@@ -2,8 +2,8 @@ export function user_form_validate(data: any, scenario: string): string {
   let message = '';
   const missing_properties: string[] = [];
   const scenarios: { [name: string]: string[] } = {
-    admin_sign_up: ['firstname', 'surname', 'password', 'email'],
-    public_sign_up: ['name', 'email', 'password'],
+    admin_sign_up: ['firstname', 'surname', 'password' ,'email'],
+    public_sign_up: ['name', 'email', 'password','lastname','firstname'],
     admin_sign_in: ['email', 'password'],
     public_sign_in: ['email', 'password']
   };

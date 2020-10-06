@@ -20,7 +20,19 @@
           <q-card-section>
             <q-input
               filled
-              label="Organization Name"
+              label="Firstname"
+              v-model="organization_data.firstname"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Lastname"
+              v-model="organization_data.lastname"
+              class="q-mb-md"
+            />
+            <q-input
+              filled
+              label="Organization name"
               v-model="organization_data.name"
               class="q-mb-md"
             />
@@ -62,6 +74,8 @@ export default Vue.extend({
       sign_up_message: '',
       organization_data: {
         name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: ''
       }
@@ -72,7 +86,11 @@ export default Vue.extend({
       const request = {
         ...this.organization_data,
         username: this.organization_data.email,
-        access: ['public']
+        access: ['public'],
+        meta:{
+          firstname:this.organization_data.firstname,
+          lastname:this.organization_data.lastname
+        }
       };
 
       this.sign_up_message = user_form_validate(request, 'public_sign_up');
@@ -82,7 +100,7 @@ export default Vue.extend({
         create_user(request)
           .then(val => {
             //Navigate to login
-           
+
             void this.$router.push({ path: '/public-sign-in' });
             this.$q.loading.hide();
           })
