@@ -4,31 +4,7 @@
       <data-point-filter />
     </div>
     <div class="col">
-      <div class="row">
-        <highlights-bar />
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="tw-py-3 ">
-            <stacked-graph />
-          </div>
-        </div>
-        <div class="col">
-          <div class="tw-py-3 tw-ml-3 tw-mr-6">
-            <content-component />
-          </div>
-        </div>
-        <div class="col">
-          <div class="tw-py-3 tw-mr-6">
-            <content-component />
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <table-results class="tw-mr-6" :TableData="projects" />
-        </div>
-      </div>
+      <router-view > </router-view>
     </div>
   </div>
 </template>
@@ -37,21 +13,14 @@
 import Vue from 'vue';
 
 import DataPointFilter from './DataPointFilter.vue';
-import HighlightsBar from './HighlightsBar.vue';
-import TableResults from './TableResults/TableResults.vue';
-import StackedGraph from './StackedGraph/StackedGraph.vue';
-import ContentComponent from './ContentComponent.vue';
+
 import { get_projects } from 'src/core/RequestHandler/admin';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'Reports',
   components: {
-    DataPointFilter,
-    HighlightsBar,
-    ContentComponent,
-    TableResults,
-    StackedGraph
+    DataPointFilter
   },
   mounted() {
     get_projects()
