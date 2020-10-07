@@ -1,7 +1,7 @@
 <template>
   <div class="tw-h-full">
     <div
-      class="tw-w-64 tw-h-full tw-mt-8 tw-mb-2 tw-ml-5 tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg"
+      class="tw-w-64 tw-h-full tw-mb-2 tw-ml-5 tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg"
     >
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-lg tw-font-medium tw-px-4 tw-py-5">Data Points</div>
