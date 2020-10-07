@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+  .proj-form-input {
+    @apply tw-flex tw-items-center tw-h-full tw-justify-start tw-pl-2 tw-pt-1 tw-pb-2 tw-w-full tw-bg-gray-100 tw-border tw-rounded tw-border-gray-200 tw-w-full tw-text-xs tw-font-medium tw-text-gray-500;
+  }
+}

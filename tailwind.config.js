@@ -5,7 +5,11 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {}
+    extend: {
+      borderRadius:{
+        'xlg':'14px'
+      }
+    }
   },
   prefix: 'tw-',
   variants: {},

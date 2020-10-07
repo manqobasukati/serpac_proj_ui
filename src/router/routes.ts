@@ -16,6 +16,10 @@ const routes: RouteConfig[] = [
         component: () => import('components/Home/Users/Users.vue')
       },
       {
+        path: '/admin/reports',
+        component: () => import('components/Home/Admin/Reports/Reports.vue')
+      },
+      {
         path: '/home',
         name: 'home',
         component: () =>

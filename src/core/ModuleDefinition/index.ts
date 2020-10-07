@@ -18,6 +18,12 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
         modules: []
       },
       {
+        name: 'Reports',
+        icon: 'analytics',
+        link: '/admin/reports',
+        modules: []
+      },
+      {
         name: 'users',
         link: '/admin/user',
         icon: 'group',
@@ -126,6 +132,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
           }
         ]
       },
+
       {
         name: 'users',
         icon: 'group',
