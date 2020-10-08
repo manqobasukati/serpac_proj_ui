@@ -1,4 +1,5 @@
 import { ProjectModel } from '../Models/ProjectModel';
+import Tinkhundla from './../../mixins/Tinkhundla';
 
 export function map_form_model(_model: ProjectModel) {
   const model = JSON.parse(JSON.stringify(_model));
@@ -9,16 +10,14 @@ export function map_form_model(_model: ProjectModel) {
       type: 'input',
       label: 'What is the project'
     },
-    description: {
-      model: model.project_description.description,
-      meta: 'textarea',
-      type: 'input',
-      label: 'What is the project'
-    },
+
     project_location: {
       label: 'My location',
-      type: 'input',
-      model: model.project_description.project_location
+      options: Tinkhundla.map((val: any) => {
+        return val?.name as string;
+      }),
+      type: 'select',
+      model: model.project_description.project_location.properties?.inkhundla
     },
     economy_sector: {
       label: 'Economic sector',
@@ -36,6 +35,12 @@ export function map_form_model(_model: ProjectModel) {
       label: 'Name of investor',
       model: model.project_description.name_of_investor,
       type: 'input'
+    },
+    description: {
+      model: model.project_description.description,
+      meta: 'textarea',
+      type: 'input',
+      label: 'What is the project'
     }
   };
 
@@ -112,7 +117,7 @@ export function map_form_model(_model: ProjectModel) {
       model: model.opportunities.project_skills,
       type: 'multiple-select',
       label: 'Skills needed',
-      options: ['Local', 'Foreign-Direct Investment']
+      options: ['Labour', 'Nothing']
     },
     local_sourced_inputs: {
       model: model.opportunities.local_sourced_inputs,
@@ -163,14 +168,21 @@ export function map_form_model(_model: ProjectModel) {
 
 export function map_model_form(my_form: any) {
   const form = JSON.parse(JSON.stringify(my_form));
-  return {
+
+ 
+  const obj = {
     _id: form._id || null,
     project_created: new Date(),
     project_submitted: null as null | Date,
     project_description: {
       title: form?.project_description?.title.model,
       description: form?.project_description?.description.model,
-      project_location: form.project_description.project_location.model,
+      project_location: {
+        type: 'Point',
+        properties: {
+          inkhundla: form.project_description.project_location.model
+        }
+      },
       economy_sector: form.project_description.economy_sector.model,
       project_existense: form.project_description.project_existense.model,
       name_of_investor: form.project_description.name_of_investor.model
@@ -203,4 +215,6 @@ export function map_model_form(my_form: any) {
       return { name: val.model, stake_holder: val.nested[0].model };
     })
   };
+
+  return obj;
 }

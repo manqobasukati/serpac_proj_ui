@@ -4,6 +4,7 @@
       class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
       <div class="tw-pt-10">
+        here
         <canvas ref="scatterChart"></canvas>
       </div>
     </div>
@@ -13,9 +14,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import Chart from 'chart.js';
+import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'LineChart',
+  props: ['projects'],
   mounted() {
     this.createChart();
   },
@@ -27,20 +30,12 @@ export default Vue.extend({
           datasets: [
             {
               label: 'Scatter Dataset',
-              data: [
-                {
-                  x: -10,
-                  y: 0
-                },
-                {
-                  x: 0,
-                  y: 10
-                },
-                {
-                  x: 10,
-                  y: 5
-                }
-              ]
+              data: this.projects.map((val: ProjectModel) => {
+                return {
+                  x: val?.project_description?.project_location?.coordinates[0],
+                  y: val?.project_description?.project_location?.coordinates[1]
+                };
+              })
             }
           ]
         },

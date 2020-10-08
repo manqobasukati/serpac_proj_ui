@@ -114,7 +114,6 @@ export default Vue.extend({
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
-          console.log(this.form);
         })
         .catch(val => {
           console.error(val);
@@ -126,7 +125,6 @@ export default Vue.extend({
       get_project(this.$route.query.projectId as string)
         .then(data => {
           this.form = map_form_model(data[0]);
-          console.log('Data baba', data);
         })
         .catch(val => {
           console.error(val);
@@ -185,8 +183,9 @@ export default Vue.extend({
         });
     },
     MySave() {
+      console.log('FORM BEFORE', this.form);
       const request = map_model_form(this.form);
-
+      console.log('REQUEST', request);
       if (request._id === null) {
         delete request._id;
       }
@@ -197,8 +196,8 @@ export default Vue.extend({
 
       project_create(request)
         .then(val => {
-          console.log(val);
           this.form = map_form_model(val);
+          console.log('Val',val)
           this.$q.notify({ message: 'updated project', color: 'primary' });
         })
         .catch(e => {

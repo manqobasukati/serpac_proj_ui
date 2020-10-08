@@ -1,3 +1,4 @@
+import Tinkhundla from './Tinkhundla';
 export const lookup: { [name: string]: string } = {
   section_1: 'project_description',
   section_2: 'project_value',
@@ -20,13 +21,16 @@ export const FormData = {
     },
     project_location: {
       label: 'My location',
-      type: 'input',
+      options: Tinkhundla.map((val: any) => {
+        return val.name as string;
+      }),
+      type: 'select',
       model: ''
     },
     economy_sector: {
       label: 'Economic sector',
       type: 'select',
-      options: ['Energy', 'Agriculture', 'Telecommunicatins'],
+      options: ['Energy', 'Agriculture', 'ICT'],
       model: ''
     },
     project_existense: {
@@ -126,7 +130,7 @@ export const FormData = {
     add_phase: {
       type: 'button',
       label: 'add phase',
-      method:'add_phase()'
+      method: 'add_phase()'
     }
   },
 
@@ -135,7 +139,7 @@ export const FormData = {
       model: [],
       type: 'multiple-select',
       label: 'Skills needed',
-      options: ['Local', 'Foreign-Direct Investment']
+      options: ['Labour', 'Nothing']
     },
     local_sourced_inputs: {
       model: [],

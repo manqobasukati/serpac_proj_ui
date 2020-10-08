@@ -16,7 +16,7 @@
       </div>
       <div class="col">
         <div class="tw-py-3 tw-mr-6">
-          <scatter-chart />
+          <scatter-chart :projects="projects" />
         </div>
       </div>
     </div>

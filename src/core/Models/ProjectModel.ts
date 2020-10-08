@@ -14,9 +14,16 @@ export interface ProjectModel {
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
-    title:string;
-    description:string;
-    project_location: string;
+    title: string;
+    description: string;
+    project_location: {
+      type: string;
+      coordinates?: [number, number];
+      properties: {
+        inkhundla?: string;
+        region?: string;
+      };
+    };
     economy_sector: string;
     project_existense: string;
     name_of_investor: string;
@@ -40,5 +47,5 @@ export interface ProjectModel {
     external_sourced_inputs: string[];
   };
   key_enablers: Issues[];
-  users?:string[]
+  users?: string[];
 }
