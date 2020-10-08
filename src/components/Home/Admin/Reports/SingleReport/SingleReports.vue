@@ -73,7 +73,7 @@
               >
             </div>
             <div class="tw-text-md tw-m-2">
-              Project Submitted
+              Project 
               <span
                 class="tw-rounded-xlg tw-font-light tw-bg-blue-200 tw-p-1"
                 >{{ project.project_submitted || 'To be placed' }}</span

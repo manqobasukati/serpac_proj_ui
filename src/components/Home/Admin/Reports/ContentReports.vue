@@ -11,18 +11,18 @@
       </div>
       <div class="col">
         <div class="tw-py-3 tw-ml-3 tw-mr-6">
-          <content-component />
+          <line-chart />
         </div>
       </div>
       <div class="col">
         <div class="tw-py-3 tw-mr-6">
-          <content-component />
+          <scatter-chart />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <table-results :TableData="projects" class="tw-mr-6"  />
+        <table-results :TableData="projects" class="tw-mr-6" />
       </div>
     </div>
   </div>
@@ -34,16 +34,19 @@ import Vue from 'vue';
 import TableResults from './TableResults/TableResults.vue';
 import ContentComponent from './ContentComponent.vue';
 import StackedGraph from './StackedGraph/StackedGraph.vue';
+import LineChart from './LineChart/LineChart.vue';
 import HighlightsBar from './HighlightsBar.vue';
+import ScatterChart from './ScatterChart/ScatterChart.vue';
 
 export default Vue.extend({
   name: 'ContentReports',
-  props:['projects'],
+  props: ['projects'],
   components: {
     TableResults,
-    ContentComponent,
     StackedGraph,
-    HighlightsBar
+    HighlightsBar,
+    LineChart,
+    ScatterChart
   }
 });
 </script>
