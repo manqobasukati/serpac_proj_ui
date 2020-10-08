@@ -10,6 +10,7 @@
       :data="TableData"
       :columns="columns"
       row-key="name"
+      :pagination="initialPagination"
     />
   </div>
 </template>
@@ -19,11 +20,20 @@ import Vue from 'vue';
 import { TableStructure } from './TableStructure';
 export default Vue.extend({
   name: 'TableResults',
-  props:['TableData'],
-  data(){
-    return{
-      columns:TableStructure
-    }
+  props: ['TableData'],
+  mounted() {
+    console.log('TBData', this.TableData);
+  },
+  data() {
+    return {
+      initialPagination: {
+        sortBy: 'desc',
+        descending: false,
+        page: 1,
+        rowsPerPage: 10
+      },
+      columns: TableStructure
+    };
   }
 });
 </script>

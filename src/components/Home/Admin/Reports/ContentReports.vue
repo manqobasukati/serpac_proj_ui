@@ -22,7 +22,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <table-results class="tw-mr-6"  />
+        <table-results :TableData="projects" class="tw-mr-6"  />
       </div>
     </div>
   </div>
@@ -38,6 +38,7 @@ import HighlightsBar from './HighlightsBar.vue';
 
 export default Vue.extend({
   name: 'ContentReports',
+  props:['projects'],
   components: {
     TableResults,
     ContentComponent,

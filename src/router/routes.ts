@@ -17,7 +17,7 @@ const routes: RouteConfig[] = [
       },
       {
         path: '/admin/reports',
-        redirect: '/admin/reports/all',
+      
         component: () => import('components/Home/Admin/Reports/Reports.vue'),
         children: [
           {

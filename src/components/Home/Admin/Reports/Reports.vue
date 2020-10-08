@@ -4,7 +4,8 @@
       <data-point-filter />
     </div>
     <div class="col">
-      <router-view > </router-view>
+      <router-view :name="ContentReports" :projects="projects" />
+      <content-reports v-if="false" />
     </div>
   </div>
 </template>
@@ -13,6 +14,7 @@
 import Vue from 'vue';
 
 import DataPointFilter from './DataPointFilter.vue';
+import ContentReports from './ContentReports.vue';
 
 import { get_projects } from 'src/core/RequestHandler/admin';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
@@ -20,7 +22,8 @@ import { ProjectModel } from 'src/core/Models/ProjectModel';
 export default Vue.extend({
   name: 'Reports',
   components: {
-    DataPointFilter
+    DataPointFilter,
+    ContentReports
   },
   mounted() {
     get_projects()
