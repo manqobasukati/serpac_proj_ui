@@ -39,6 +39,7 @@ export default Vue.extend({
   },
   data() {
     return {
+     
       projects: null as null | ProjectModel[]
     };
   }

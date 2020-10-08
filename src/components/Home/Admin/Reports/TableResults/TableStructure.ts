@@ -2,6 +2,19 @@ import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export const TableStructure = [
   {
+    name: 'id',
+    required: true,
+    label: 'ID',
+    align: 'left',
+    field: (row: ProjectModel) => {
+      return row._id;
+    },
+    format: (val: string) => {
+       
+      return `${val}`;
+    }
+  },
+  {
     name: 'title',
     required: true,
     label: 'Title',
@@ -10,7 +23,7 @@ export const TableStructure = [
       return row.project_description.title;
     },
     format: (val: string) => {
-      console.log('Val here', val);
+      
       return `${val}`;
     }
   },

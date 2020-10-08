@@ -17,19 +17,22 @@ const routes: RouteConfig[] = [
       },
       {
         path: '/admin/reports',
-      
+        redirect: '/admin/reports/all',
         component: () => import('components/Home/Admin/Reports/Reports.vue'),
         children: [
           {
             path: '/admin/reports/all',
-            name:'content_reports',
+            name: 'content_reports',
             component: () =>
               import('components/Home/Admin/Reports/ContentReports.vue')
           },
           {
             path: '/admin/reports/:projectId',
+            props: true,
             component: () =>
-            import('components/Home/Admin/Reports/SingleReport/SingleReports.vue')
+              import(
+                'components/Home/Admin/Reports/SingleReport/SingleReports.vue'
+              )
           }
         ]
       },

@@ -6,5 +6,8 @@
 
   .proj-form-input {
     @apply tw-flex tw-items-center tw-h-full tw-justify-start tw-pl-2 tw-pt-1 tw-pb-2 tw-w-full tw-bg-gray-100 tw-border tw-rounded-lg tw-border-gray-200 tw-w-full tw-text-xs tw-font-medium tw-text-gray-500;
+  },
+  .proj-display-component-title{
+    @apply tw-text-lg tw-font-light tw-flex tw-justify-center tw-mt-3
   }
 }

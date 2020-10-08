@@ -9,23 +9,31 @@
       dense
       :data="TableData"
       :columns="columns"
-      row-key="name"
+      row-key="id"
+      selection="single"
+      :selected.sync="selected"
       :pagination="initialPagination"
     />
   </div>
 </template>
 
 <script lang="ts">
+import { ProjectModel } from 'src/core/Models/ProjectModel';
 import Vue from 'vue';
 import { TableStructure } from './TableStructure';
 export default Vue.extend({
   name: 'TableResults',
   props: ['TableData'],
-  mounted() {
-    console.log('TBData', this.TableData);
+
+  watch: {
+    selected() {
+      const item = this.selected[0] as ProjectModel;
+      void this.$router.push({ path: `/admin/reports/${item._id as string}` });
+    }
   },
   data() {
     return {
+      selected: [],
       initialPagination: {
         sortBy: 'desc',
         descending: false,

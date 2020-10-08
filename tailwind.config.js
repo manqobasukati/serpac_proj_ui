@@ -13,6 +13,9 @@ module.exports = {
       height: {
         lg: '400px'
       },
+      width:{
+        xlg:'20rem'
+      }
     }
   },
   prefix: 'tw-',
