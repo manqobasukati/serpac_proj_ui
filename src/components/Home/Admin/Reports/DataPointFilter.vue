@@ -126,40 +126,47 @@
               v-model="filterData.local_sourced_inputs"
               :options="localSourcedInputsOptions"
               type="text"
-              outlined
-              input-class="proj-form-input"
+              borderless
+              class="proj-form-input tw-h-12 "
               label="locally sourced inputs"
               dense
-              
             />
           </div>
           <div class="tw-w-full">
-           <q-select
+            <q-select
               multiple
               use-chips
               v-model="filterData.external_sourced_inputs"
               :options="externallySourcedInputsOptions"
-              outlined
+              borderless
+              class="proj-form-input tw-h-12 "
               type="text"
-              input-class="proj-form-input"
               label="externally sourced inputs"
               dense
-             
             />
           </div>
           <div class="tw-w-full">
-           <q-select
+            <q-select
               multiple
               use-chips
               v-model="filterData.project_skills"
               :options="projectSkillsOptions"
-              outlined
               type="text"
-              input-class="proj-form-input"
+              borderless
+              class="proj-form-input tw-h-12 "
               label="project skills"
               dense
-             
             />
+          </div>
+
+          <div class="tw-w-full">
+            <div class="tw-w-56 tw-mt-3">
+              <div
+                class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-bg-blue-300 tw-rounded-lg tw-shadow-sm"
+              >
+                <p class="tw-text-xs">Search</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -174,12 +181,12 @@ export default Vue.extend({
   data() {
     return {
       localSourcedInputsOptions: ['labor', 'time'],
-      externallySourcedInputsOptions:['electricity'],
-      projectSkillsOptions:['Needed'],
+      externallySourcedInputsOptions: ['electricity'],
+      projectSkillsOptions: ['Needed'],
       filterData: {
-        external_sourced_inputs:[],
+        external_sourced_inputs: [],
         local_sourced_inputs: [],
-        project_skills:[]
+        project_skills: []
       }
     };
   }
