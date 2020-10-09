@@ -28,7 +28,14 @@ export default Vue.extend({
   watch: {
     selected() {
       const item = this.selected[0] as ProjectModel;
-      void this.$router.push({ path: `/admin/reports/${item._id as string}` });
+      this.$q.loading.show();
+      this.$router
+        .push({ path: `/admin/reports/${item._id as string}` })
+        .then(val => {})
+        .catch(e => {
+          console.error(e);
+        });
+      this.$q.loading.hide();
     }
   },
   data() {
