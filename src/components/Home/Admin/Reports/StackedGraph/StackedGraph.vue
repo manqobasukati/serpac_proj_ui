@@ -4,7 +4,7 @@
       class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
       <div class="tw-pt-10">
-        <canvas  ref="stackedChart"></canvas>
+        <canvas ref="stackedChart"></canvas>
       </div>
     </div>
   </div>
@@ -14,21 +14,31 @@
 import Vue from 'vue';
 import Chart from 'chart.js';
 
+import {
+  createLabelArray,
+  createDataArray
+} from '../../../../../core/handlers/graph';
+
 export default Vue.extend({
   name: 'StackedGraph',
   mounted() {
     this.createChart();
   },
+  props: ['projects'],
   methods: {
     createChart() {
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'horizontalBar',
         data: {
-          labels: ['Energy', 'Agriculture', 'ICT', 'Arts', 'Mining', 'Services'],
+          labels: createLabelArray(this.projects).economic_sectors,
           datasets: [
             {
               label: 'Projects by sector',
-              data: [12, 19, 3, 5, 2,8],
+              data: createDataArray(
+                createLabelArray(this.projects).economic_sectors,
+                'economy_sector',
+                this.projects
+              ) as number[],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -52,6 +62,13 @@ export default Vue.extend({
         options: {
           scales: {
             yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ],
+            xAxes: [
               {
                 ticks: {
                   beginAtZero: true

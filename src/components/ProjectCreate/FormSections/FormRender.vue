@@ -161,6 +161,7 @@ export default Vue.extend({
   props: ['FormSection', 'formD'],
   methods: {
     updateFormData() {
+    
       this.$emit('updateFormData', this.formD);
     },
     add_phase() {

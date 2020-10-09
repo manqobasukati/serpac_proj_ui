@@ -16,6 +16,8 @@ import Vue from 'vue';
 import Chart from 'chart.js';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
+import Tinkhundla from '../../../../../mixins/Tinkhundla';
+
 export default Vue.extend({
   name: 'LineChart',
   props: ['projects'],
@@ -30,10 +32,16 @@ export default Vue.extend({
           datasets: [
             {
               label: 'Scatter Dataset',
-              data: this.projects.map((val: ProjectModel) => {
+              // data: this.projects.map((val: ProjectModel) => {
+              //   return {
+              //     x: val?.project_description?.project_location?.coordinates[0],
+              //     y: val?.project_description?.project_location?.coordinates[1]
+              //   };
+              // })
+              data: Tinkhundla.map(val => {
                 return {
-                  x: val?.project_description?.project_location?.coordinates[0],
-                  y: val?.project_description?.project_location?.coordinates[1]
+                  x: val.center.geometry.coordinates[0],
+                  y: val.center.geometry.coordinates[1]
                 };
               })
             }

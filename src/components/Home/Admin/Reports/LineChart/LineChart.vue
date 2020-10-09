@@ -13,29 +13,24 @@
 <script lang="ts">
 import Vue from 'vue';
 import Chart from 'chart.js';
+import { createLabelArray } from 'src/core/handlers/graph';
 
 export default Vue.extend({
   name: 'LineChart',
   mounted() {
     this.createChart();
   },
+  props: ['projects'],
   methods: {
     createChart() {
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'line',
         data: {
-          labels: [
-            'Energy',
-            'Agriculture',
-            'ICT',
-            'Arts',
-            'Mining',
-            'Services'
-          ],
+          labels: createLabelArray(this.projects).months_of_the_year,
           datasets: [
             {
-              label: 'Projects by sector',
-              data: [12, 19, 3, 5, 2, 8],
+              label: 'Projects created over time',
+              data: [3, 14, 5, 2, 4, 4, 6, 8, 3, 6, 10,2],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

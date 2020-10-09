@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col">
         <div class="tw-py-3 ">
-          <stacked-graph />
+          <stacked-graph :projects="projects"/>
         </div>
       </div>
       <div class="col">
