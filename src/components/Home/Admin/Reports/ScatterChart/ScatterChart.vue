@@ -48,15 +48,14 @@ export default Vue.extend({
         .geoMercator()
         .scale(2900)
         //-31.1367, 26.3054
-        .center([26.316667,-31.133333])
-     
-        .translate([width / 20, height/0.8 ]);
+        .center([26.316667, -31.133333])
+        .translate([width / 20, height / 0.8]);
 
       // https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson
       // http://192.168.8.105:8000/inkhundla.json
       //http://192.168.8.105:8000/eswatini_region_layer.json
       void d3
-        .json('http://0.0.0.0:8000/regions.json')
+        .json('http://0.0.0.0:8000/ink.json')
         .then(val => {
           this.ready(val, projection);
         })
@@ -75,7 +74,7 @@ export default Vue.extend({
         .attr('d', d3.geoPath().projection(projection))
         // set the color of each country
         .style('stroke', 'black')
-        .attr('fill', 'rgba(255, 99, 132, 0)');
+        .attr('fill', 'rgba(255, 99, 132, 0.2)');
     },
     createChart() {
       this.chart = new Chart(this.$refs.scatterChart as HTMLCanvasElement, {
