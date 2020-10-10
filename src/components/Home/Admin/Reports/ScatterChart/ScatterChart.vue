@@ -6,6 +6,12 @@
       <div class="tw-pt-10">
         here
         <svg id="my_dataviz" width="400" height="300"></svg>
+        <canvas
+          ref="scatterChart"
+          v-if="false"
+          width="400"
+          height="300"
+        ></canvas>
       </div>
     </div>
   </div>
@@ -15,7 +21,7 @@
 import Vue from 'vue';
 import Chart from 'chart.js';
 import * as d3 from 'd3';
-import { schemeBlues, queue } from 'd3';
+import { schemeBlues } from 'd3';
 
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
@@ -28,6 +34,7 @@ export default Vue.extend({
   props: ['projects'],
   mounted() {
     this.loadSvg();
+    // this.createChart();
   },
   methods: {
     loadSvg() {
@@ -39,41 +46,25 @@ export default Vue.extend({
       const path = d3.geoPath();
       const projection = d3
         .geoMercator()
-        .scale(70)
-        .center([0, 20])
-        .translate([width / 2, height / 2]);
+        .scale(2900)
+        //-31.1367, 26.3054
+        .center([26.316667,-31.133333])
+     
+        .translate([width / 20, height/0.8 ]);
 
-      // // Data and color scale
-      //const data = d3.map();
-      const colorScale = d3
-        .scaleThreshold()
-        .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-        .range(schemeBlues[7]);
-
-      // // Load external data and boot
-      let json;
-
-
+      // https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson
+      // http://192.168.8.105:8000/inkhundla.json
+      //http://192.168.8.105:8000/eswatini_region_layer.json
       void d3
-        .json('http://192.168.2.11:8000/inkhundla.json')
+        .json('http://0.0.0.0:8000/regions.json')
         .then(val => {
-          console.log('Features', val);
-          json = val;
-          this.ready(json, projection);
+          this.ready(val, projection);
         })
         .catch(e => {
           console.log('Error', e);
         });
-
-      // void d3
-      //   .csv(
-      //     'https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv'
-      //   )
-      //   .then(val => {});
     },
     ready(topo: any, projection: any) {
-      // Draw the map
-      console.log('Nothin', topo);
       this.svg
         .append('g')
         .selectAll('path')
@@ -83,9 +74,8 @@ export default Vue.extend({
         // draw each country
         .attr('d', d3.geoPath().projection(projection))
         // set the color of each country
-        .attr('fill', 'rgba(255, 99, 132, 0.2)');
-
-      console.log('Top', topo);
+        .style('stroke', 'black')
+        .attr('fill', 'rgba(255, 99, 132, 0)');
     },
     createChart() {
       this.chart = new Chart(this.$refs.scatterChart as HTMLCanvasElement, {
@@ -101,9 +91,20 @@ export default Vue.extend({
               //   };
               // })
               data: Tinkhundla.map(val => {
+                console.log(val.center.geometry.coordinates[1]);
+                function mercator(x, y) {
+                  return [x, Math.log(Math.tan(Math.PI / 4 + y / 2))];
+                }
+
                 return {
-                  x: val.center.geometry.coordinates[0],
-                  y: val.center.geometry.coordinates[1]
+                  x: mercator(
+                    val.center.geometry.coordinates[0],
+                    val.center.geometry.coordinates[1]
+                  )[0],
+                  y: mercator(
+                    val.center.geometry.coordinates[0],
+                    val.center.geometry.coordinates[1]
+                  )[1]
                 };
               })
             }
