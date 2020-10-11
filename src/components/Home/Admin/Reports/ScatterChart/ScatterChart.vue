@@ -19,7 +19,12 @@ import Tinkhundla from '../../../../../mixins/Tinkhundla';
 
 import region from './../../../.././../core/geojson/eswatini_region_layer.json';
 
-import { transformGeojson } from './../../../../../core/handlers/map';
+import {
+  transformGeojson,
+  convertToRange,
+  getMin,
+  getMax
+} from './../../../../../core/handlers/map';
 
 export default Vue.extend({
   name: 'LineChart',
@@ -35,8 +40,9 @@ export default Vue.extend({
       void d3
         .json('http://0.0.0.0:8000/regions_na.json')
         .then(val => {
-          console.log('PROJECTS', this.projects);
-          transformGeojson(val, this.projects);
+        
+          val = transformGeojson(val, this.projects);
+        
           this.ready(val);
         })
         .catch(e => {
@@ -45,6 +51,11 @@ export default Vue.extend({
     },
     ready(topo: any, projection_?: any) {
       let center = geoCentroid(topo);
+
+      const min = getMin(topo.features, 'number_of_projects');
+      const max = getMax(topo.features, 'number_of_projects');
+
+      console.log(min, max);
 
       const width = this.svg.attr('width');
       const height = this.svg.attr('height');
@@ -84,7 +95,12 @@ export default Vue.extend({
         .attr('d', d3.geoPath().projection(projection))
         // set the color of each country
         .style('stroke', 'rgba(255, 99, 132, 1)')
-        .attr('fill', 'rgba(255, 99, 132, 0.2)');
+        .attr('fill', (d: any) => {
+          const v = d.properties.number_of_projects;
+          const opacity = convertToRange(v, [0, max], [0, 1]);
+          
+          return `rgba(255, 99, 132,${opacity})`;
+        });
     },
     createChart() {
       this.chart = new Chart(this.$refs.scatterChart as HTMLCanvasElement, {
