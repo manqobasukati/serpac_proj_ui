@@ -7,7 +7,9 @@ interface PropertiesObject {
 
 export function transformGeojson(geojson: any, projects: ProjectModel[]) {
   geojson.features.forEach((val: any) => {
-    //val = addProperty(val, 'number_of_projects');
+    let region = '';
+    let inkhundla = '';
+
     let present = 0;
     projects.forEach(v => {
       if (v.project_description.project_location.coordinates?.length === 2) {
@@ -21,6 +23,16 @@ export function transformGeojson(geojson: any, projects: ProjectModel[]) {
           polygon(val.geometry.coordinates)
         );
 
+        region = v.project_description.project_location.properties[
+          'region'
+        ] as string;
+
+        if (geojson.features.length > 4) {
+          inkhundla = v.project_description.project_location.properties[
+            'inkhundla'
+          ] as string;
+        }
+
         if (contains) {
           present = present + 1;
         }
@@ -28,6 +40,11 @@ export function transformGeojson(geojson: any, projects: ProjectModel[]) {
     });
 
     val = setProperty(val, 'number_of_projects', present);
+    val = setProperty(val, 'region', region);
+
+    if (geojson.features.length > 4) {
+      val = setProperty(val, 'inkhundla', inkhundla);
+    }
   });
 
   return geojson as unknown;
@@ -92,7 +109,7 @@ export function getMin(array: any, property: string) {
     }
   });
 
-  console.log(min)
+  console.log(min);
 
   return min;
 }

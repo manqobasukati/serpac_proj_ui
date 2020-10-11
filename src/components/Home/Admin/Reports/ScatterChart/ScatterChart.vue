@@ -2,7 +2,19 @@
   <div
     class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
   >
-    <svg id="my_dataviz" class="tw-ml-10 tw-p-1" width="400" height="400"></svg>
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-flex tw-flex-row tw-mt-3">
+     
+        <toggle-button class="tw-ml-32" />
+      </div>
+      <svg
+        id="my_dataviz"
+        class="tw-ml-10 -tw-mt-10"
+        width="400"
+
+        height="350"
+      ></svg>
+    </div>
   </div>
 </template>
 
@@ -26,9 +38,14 @@ import {
   getMax
 } from './../../../../../core/handlers/map';
 
+import ToggleButton from './ToggleButton.vue';
+
 export default Vue.extend({
   name: 'LineChart',
   props: ['projects'],
+  components: {
+    ToggleButton
+  },
   mounted() {
     this.loadSvg();
     // this.createChart();
@@ -38,11 +55,10 @@ export default Vue.extend({
       this.svg = d3.select('svg');
 
       void d3
-        .json('http://0.0.0.0:8000/regions_na.json')
+        .json('http://0.0.0.0:8000/inkhundla_na.json')
         .then(val => {
-        
           val = transformGeojson(val, this.projects);
-        
+          console.log(val);
           this.ready(val);
         })
         .catch(e => {
@@ -70,8 +86,8 @@ export default Vue.extend({
       let path = d3.geoPath().projection(projection);
       const bounds = path.bounds(topo);
 
-      let hscale = (scale * width) / (bounds[1][0] - bounds[0][0]);
-      let vscale = (scale * height) / (bounds[1][1] - bounds[0][1]);
+      let hscale = (scale * width * 0.9) / (bounds[1][0] - bounds[0][0]);
+      let vscale = (scale * height * 0.9) / (bounds[1][1] - bounds[0][1]);
       scale = hscale < vscale ? hscale : vscale;
       offset = [
         width - (bounds[0][0] + bounds[1][0]) / 2,
@@ -98,46 +114,15 @@ export default Vue.extend({
         .attr('fill', (d: any) => {
           const v = d.properties.number_of_projects;
           const opacity = convertToRange(v, [0, max], [0, 1]);
-          
+
           return `rgba(255, 99, 132,${opacity})`;
         });
-    },
-    createChart() {
-      this.chart = new Chart(this.$refs.scatterChart as HTMLCanvasElement, {
-        type: 'scatter',
-        data: {
-          datasets: [
-            {
-              label: 'Scatter Dataset',
-
-              data: Tinkhundla.map(val => {
-                return {
-                  x: val.center.geometry.coordinates[0],
-
-                  y: val.center.geometry.coordinates[1]
-                };
-              })
-            }
-          ]
-        },
-        options: {
-          scales: {
-            xAxes: [
-              {
-                type: 'linear',
-                position: 'bottom'
-              }
-            ]
-          }
-        }
-      });
     }
   },
   data() {
     return {
-      currentRef: null as null | HTMLCanvasElement,
-      chart: null as null | Chart,
-      svg: null as null | any
+      svg: null as null | any,
+      toggleLayer: null as null | any
     };
   }
 });
