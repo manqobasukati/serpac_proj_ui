@@ -18,8 +18,11 @@ import { createLabelArray } from 'src/core/handlers/graph';
 export default Vue.extend({
   name: 'LineChart',
   mounted() {
+    //if (this.projects) {
     this.createChart();
+    //}
   },
+
   props: ['projects'],
   methods: {
     createChart() {
@@ -30,7 +33,7 @@ export default Vue.extend({
           datasets: [
             {
               label: 'Projects created over time',
-              data: [3, 14, 5, 2, 4, 4, 6, 8, 3, 6, 10,2],
+              data: [3, 14, 5, 2, 4, 4, 6, 8, 3, 6, 10, 2],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

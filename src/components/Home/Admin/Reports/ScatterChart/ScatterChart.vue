@@ -47,6 +47,18 @@ export default Vue.extend({
   components: {
     ToggleButton
   },
+  watch: {
+    projects() {
+      if (this.projects) {
+        //this.createChart();
+        void Promise.resolve((resolve: any, reject: any) => {
+          resolve(this.projects);
+        }).then(val => {
+          this.loadSvg();
+        });
+      }
+    }
+  },
   mounted() {
     this.loadSvg();
     // this.createChart();
@@ -54,7 +66,6 @@ export default Vue.extend({
   methods: {
     changeMap(data: any) {
       if (data) {
-      
         this.layer = inkhundla_na;
         this.svg.selectAll('*').remove();
         this.loadSvg();
@@ -69,9 +80,11 @@ export default Vue.extend({
 
       let val: unknown = this.layer;
 
-      val = transformGeojson(val, this.projects);
+      if (this.projects) {
+        val = transformGeojson(val, this.projects);
 
-      this.ready(val);
+        this.ready(val);
+      }
     },
     ready(topo: any, projection_?: any) {
       let center = geoCentroid(topo);

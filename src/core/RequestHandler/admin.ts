@@ -1,7 +1,7 @@
 import { AppResponse, config } from './config';
 
-export function get_projects() {
-  const url = `${config.server_url}/project`;
+export function get_projects(data: string) {
+  const url = `${config.server_url}/project?${data}`;
 
   return fetch(url, {
     method: 'GET' // or 'PUT'test

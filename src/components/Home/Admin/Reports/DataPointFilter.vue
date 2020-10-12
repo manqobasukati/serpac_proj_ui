@@ -159,14 +159,13 @@
             />
           </div>
 
-          <div class="tw-w-full">
-            <div class="tw-w-56 tw-mt-3">
-              <div
-                class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-bg-blue-300 tw-rounded-lg tw-shadow-sm"
-              >
-                <p class="tw-text-xs">Search</p>
-              </div>
-            </div>
+          <div class="tw-w-full tw-mt-3">
+            <button
+              @click="onSearchProjects()"
+              class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-bg-blue-300 tw-rounded-lg tw-shadow-sm tw-text-xs"
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>
@@ -175,15 +174,25 @@
 </template>
 
 <script lang="ts">
+import { flatten } from '@turf/turf';
+import { flattenObj, flattenObject, generatParameters } from 'src/core/helpers/request';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'DataPointFilter',
   data() {
     return {
       requestData: {
-        economy_sector: '',
-        investor_name: '',
-        project_existence: ''
+        project_description: {
+          economy_sector: 'Agriculture',
+          investor_name: '',
+          project_existence: ''
+        },
+        project_location:{
+          properties:{
+            inkhundla:'',
+            region:''
+          }
+        }
       },
       localSourcedInputsOptions: ['labor', 'time'],
       externallySourcedInputsOptions: ['electricity'],
@@ -194,6 +203,13 @@ export default Vue.extend({
         project_skills: []
       }
     };
+  },
+  methods: {
+    onSearchProjects() {
+      const val = generatParameters(this.requestData);
+      console.log('Emmit')
+      this.$emit('requestParameters', val);
+    }
   }
 });
 </script>

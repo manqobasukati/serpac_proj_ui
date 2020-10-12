@@ -11,7 +11,7 @@
       </div>
       <div class="col">
         <div class="tw-py-3 tw-ml-3 tw-mr-6">
-          <line-chart />
+          <line-chart :projects="projects"/>
         </div>
       </div>
       <div class="col">

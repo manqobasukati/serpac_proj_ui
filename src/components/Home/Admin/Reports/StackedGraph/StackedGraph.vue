@@ -3,7 +3,7 @@
     <div
       class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
-      <div class="tw-pt-10">
+      <div v-if="projects" class="tw-pt-10">
         <canvas ref="stackedChart"></canvas>
       </div>
     </div>
@@ -21,23 +21,43 @@ import {
 
 export default Vue.extend({
   name: 'StackedGraph',
-  mounted() {
-    this.createChart();
-  },
   props: ['projects'],
+  mounted() {
+    if (this.projects) {
+      console.log('Projects', this.projects);
+      //this.createChart();
+      void Promise.resolve((resolve: any, reject: any) => {
+        resolve(this.projects);
+      }).then(val => {
+        this.createChart(this.projects);
+      });
+    }
+  },
+  watch: {
+    projects() {
+      if (this.projects) {
+        //this.createChart();
+        void Promise.resolve((resolve: any, reject: any) => {
+          resolve(this.projects);
+        }).then(val => {
+          this.createChart(this.projects);
+        });
+      }
+    }
+  },
   methods: {
-    createChart() {
+    createChart(data: any) {
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'horizontalBar',
         data: {
-          labels: createLabelArray(this.projects).economic_sectors,
+          labels: createLabelArray(data).economic_sectors,
           datasets: [
             {
               label: 'Projects by sector',
               data: createDataArray(
-                createLabelArray(this.projects).economic_sectors,
+                createLabelArray(data).economic_sectors,
                 'economy_sector',
-                this.projects
+                data
               ) as number[],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

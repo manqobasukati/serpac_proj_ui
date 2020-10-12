@@ -1,11 +1,36 @@
 <template>
   <div class="row report__page  tw-mt-8">
     <div class="col-2">
-      <data-point-filter />
+      <data-point-filter @requestParameters="getProjects" />
     </div>
     <div class="col">
-      <router-view :name="ContentReports" :projects="projects" />
-      <content-reports v-if="false" />
+      <div>
+        <div class="row">
+          <highlights-bar />
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="tw-py-3 ">
+              <stacked-graph :projects="projects" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="tw-py-3 tw-ml-3 tw-mr-6">
+              <line-chart />
+            </div>
+          </div>
+          <div class="col">
+            <div class="tw-py-3 tw-mr-6">
+              <scatter-chart :projects="projects" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table-results :TableData="projects" class="tw-mr-6" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -14,7 +39,12 @@
 import Vue from 'vue';
 
 import DataPointFilter from './DataPointFilter.vue';
-import ContentReports from './ContentReports.vue';
+import TableResults from './TableResults/TableResults.vue';
+import ContentComponent from './ContentComponent.vue';
+import StackedGraph from './StackedGraph/StackedGraph.vue';
+import LineChart from './LineChart/LineChart.vue';
+import HighlightsBar from './HighlightsBar.vue';
+import ScatterChart from './ScatterChart/ScatterChart.vue';
 
 import { get_projects } from 'src/core/RequestHandler/admin';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
@@ -23,23 +53,40 @@ export default Vue.extend({
   name: 'Reports',
   components: {
     DataPointFilter,
-    ContentReports
+    TableResults,
+    StackedGraph,
+    HighlightsBar,
+    LineChart,
+    ScatterChart
   },
   mounted() {
-    get_projects()
+    this.$q.loading.show();
+    get_projects('')
       .then(val => {
-        console.log(val);
         this.projects = val.filter((val: ProjectModel) => {
           return val.project_description !== undefined;
         });
+        this.$q.loading.hide();
       })
       .catch(e => {
         console.error(e);
       });
   },
+  methods: {
+    getProjects(data: any) {
+      get_projects(data)
+        .then(val => {
+          this.projects = val.filter((val: ProjectModel) => {
+            return val.project_description !== undefined;
+          });
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    }
+  },
   data() {
     return {
-     
       projects: null as null | ProjectModel[]
     };
   }
