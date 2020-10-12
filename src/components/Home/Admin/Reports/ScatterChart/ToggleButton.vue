@@ -6,7 +6,13 @@
         <!-- toggle -->
         <div class="tw-relative">
           <!-- input -->
-          <input id="toogleA" type="checkbox" class="tw-hidden" />
+          <input
+            id="toogleA"
+            v-model="value"
+            type="checkbox"
+            class="tw-hidden"
+            @input="onValueChange()"
+          />
           <!-- line -->
           <div
             class="tw-toggle__line tw-w-10 tw-h-4 tw-bg-gray-400 tw-rounded-full tw-shadow-inner"
@@ -18,7 +24,7 @@
         </div>
         <!-- label -->
         <div class="tw-ml-3 tw-text-gray-700 tw-text-xs tw-font-medium">
-          Inkhundla
+          {{valueLabel}}
         </div>
       </label>
     </div>
@@ -27,7 +33,27 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'ToggleButton'
+  name: 'ToggleButton',
+  data() {
+    return {
+      value: false 
+    };
+  },
+  methods: {
+    onValueChange() {
+    
+      this.$emit('toggleValue',this.value);
+    }
+  },
+  computed:{
+    valueLabel(){
+      if(this.value){
+        return 'Region'
+      }else{
+        return 'Tinkhundla'
+      }
+    }
+  }
 });
 </script>
 
@@ -40,6 +66,6 @@ export default Vue.extend({
 
 input:checked ~ .toggle__dot {
   transform: translateX(100%);
-  background-color: rgba(255, 99, 132,0.3);
+  background-color: rgba(255, 99, 132, 0.3);
 }
 </style>

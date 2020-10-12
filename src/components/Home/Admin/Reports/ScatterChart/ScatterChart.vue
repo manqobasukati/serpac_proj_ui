@@ -4,20 +4,18 @@
   >
     <div class="tw-flex tw-flex-col">
       <div class="tw-flex tw-flex-row tw-mt-3">
-     
-        <toggle-button class="tw-ml-32" />
+        <toggle-button class="tw-ml-32" v-on:toggleValue="changeMap" />
       </div>
       <svg
         id="my_dataviz"
         class="tw-ml-10 -tw-mt-10"
         width="400"
-
         height="350"
       ></svg>
     </div>
   </div>
 </template>
-
+x
 <script lang="ts">
 import Vue from 'vue';
 import Chart from 'chart.js';
@@ -30,6 +28,9 @@ import { ProjectModel } from 'src/core/Models/ProjectModel';
 import Tinkhundla from '../../../../../mixins/Tinkhundla';
 
 import region from './../../../.././../core/geojson/eswatini_region_layer.json';
+
+import region_na from './../../../.././../core/geojson/regions_na.json';
+import inkhundla_na from './../../../.././../core/geojson/inkhundla_na.json';
 
 import {
   transformGeojson,
@@ -51,27 +52,32 @@ export default Vue.extend({
     // this.createChart();
   },
   methods: {
+    changeMap(data: any) {
+      if (data) {
+      
+        this.layer = inkhundla_na;
+        this.svg.selectAll('*').remove();
+        this.loadSvg();
+      } else {
+        this.layer = region_na;
+        this.svg.selectAll('*').remove();
+        this.loadSvg();
+      }
+    },
     loadSvg() {
       this.svg = d3.select('svg');
 
-      void d3
-        .json('http://0.0.0.0:8000/inkhundla_na.json')
-        .then(val => {
-          val = transformGeojson(val, this.projects);
-          console.log(val);
-          this.ready(val);
-        })
-        .catch(e => {
-          console.log('Error', e);
-        });
+      let val: unknown = this.layer;
+
+      val = transformGeojson(val, this.projects);
+
+      this.ready(val);
     },
     ready(topo: any, projection_?: any) {
       let center = geoCentroid(topo);
 
       const min = getMin(topo.features, 'number_of_projects');
       const max = getMax(topo.features, 'number_of_projects');
-
-      console.log(min, max);
 
       const width = this.svg.attr('width');
       const height = this.svg.attr('height');
@@ -122,7 +128,8 @@ export default Vue.extend({
   data() {
     return {
       svg: null as null | any,
-      toggleLayer: null as null | any
+      toggleLayer: null as null | any,
+      layer: region_na
     };
   }
 });

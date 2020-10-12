@@ -180,6 +180,11 @@ export default Vue.extend({
   name: 'DataPointFilter',
   data() {
     return {
+      requestData: {
+        economy_sector: '',
+        investor_name: '',
+        project_existence: ''
+      },
       localSourcedInputsOptions: ['labor', 'time'],
       externallySourcedInputsOptions: ['electricity'],
       projectSkillsOptions: ['Needed'],

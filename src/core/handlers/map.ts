@@ -97,7 +97,6 @@ export function getMax(array: any, property: string) {
     }
   });
 
-  console.log('MAX', max);
   return max;
 }
 
@@ -108,8 +107,6 @@ export function getMin(array: any, property: string) {
       min = character.properties[property];
     }
   });
-
-  console.log(min);
 
   return min;
 }
