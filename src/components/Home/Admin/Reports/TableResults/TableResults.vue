@@ -28,18 +28,18 @@ export default Vue.extend({
   watch: {
     selected() {
       const item = this.selected[0] as ProjectModel;
-      console.log('Item =>',item);
-     // this.$q.loadin g.show();
-
-      this.$router
-        .push({ path: `/admin/reports/${item._id as string}` })
-        .then(val => {
-          console.log(val)
-          this.$q.loading.hide();
-        })
-        .catch(e => {
-          console.error('Error', e);
-        });
+      console.log('Item =>', item);
+      
+      this.$emit('setView', { view: 'single', projectId: item._id });
+      // this.$router
+      //   .push({ path: `/admin/reports/${item._id as string}` })
+      //   .then(val => {
+      //     console.log(val)
+      //     this.$q.loading.hide();
+      //   })
+      //   .catch(e => {
+      //     console.error('Error', e);
+      //   });
     }
   },
   data() {

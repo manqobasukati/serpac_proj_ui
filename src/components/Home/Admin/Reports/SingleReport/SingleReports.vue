@@ -2,9 +2,8 @@
   <div>
     <div class="row ">
       <div class="tw-rounded-full tw-bg-gray-200">
-        <router-link to="/admin/reports/all">
-          <q-icon name="arrow_back" class="tw-text-4xl " />
-        </router-link>
+        <q-icon name="arrow_back" class="tw-text-4xl " @click="setView()" />
+
         <q-tooltip>
           Back to results
         </q-tooltip>
@@ -285,7 +284,6 @@
               <div class="tw-text-md tw-m-2">
                 {{ enabler.name || 'To be place' }}
                 <span
-                 
                   class="tw-rounded-xlg tw-font-light tw-bg-blue-200 tw-p-1"
                   >{{ enabler.stake_holder }}</span
                 >
@@ -305,16 +303,21 @@ import { get_project } from 'src/core/RequestHandler/project_create';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'SingleReports',
+  props: ['projectId'],
   data() {
     return {
       project: null as null | ProjectModel
     };
   },
+  methods: {
+    setView() {
+      this.$emit('setView', { view: 'multiple' });
+    }
+  },
   mounted() {
-    console.log(this.$route.params);
-    get_project(this.$route.params.projectId)
+    console.log('Project ID', this.projectId);
+    get_project(this.projectId)
       .then(val => {
-        console.log(val);
         this.project = val[0];
       })
       .catch(e => {

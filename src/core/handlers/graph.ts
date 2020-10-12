@@ -43,7 +43,7 @@ export function createDataArray(
       for (let i = 0; i <= data.length - 1; i++) {
         if (data[i].project_description.economy_sector === val) {
           my_value = my_value + 1;
-          console.log(my_value);
+        
         }
       }
     }

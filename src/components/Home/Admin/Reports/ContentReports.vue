@@ -6,12 +6,12 @@
     <div class="row">
       <div class="col">
         <div class="tw-py-3 ">
-          <stacked-graph :projects="projects"/>
+          <stacked-graph :projects="projects" />
         </div>
       </div>
       <div class="col">
         <div class="tw-py-3 tw-ml-3 tw-mr-6">
-          <line-chart :projects="projects"/>
+          <line-chart />
         </div>
       </div>
       <div class="col">
@@ -22,7 +22,11 @@
     </div>
     <div class="row">
       <div class="col">
-        <table-results :TableData="projects" class="tw-mr-6" />
+        <table-results
+          :TableData="projects"
+          class="tw-mr-6"
+          @setView="setView"
+        />
       </div>
     </div>
   </div>
