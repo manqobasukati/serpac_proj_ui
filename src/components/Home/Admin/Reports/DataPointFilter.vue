@@ -13,7 +13,8 @@
 
           <div class="tw-w-full">
             <input
-              type="text"
+              type="date"
+              v-model="requestData.project_submitted"
               class="proj-form-input"
               placeholder="Projected submitted"
             />
@@ -28,6 +29,7 @@
           <div class="tw-w-full">
             <input
               type="text"
+              v-model="requestData.project_description.economy_sector"
               class="proj-form-input"
               placeholder="Economy sector"
             />
@@ -35,6 +37,7 @@
           <div class="tw-w-full">
             <input
               type="text"
+              v-model="requestData.project_description.name_of_investor"
               class="proj-form-input"
               placeholder="Investor name"
             />
@@ -42,6 +45,7 @@
           <div class="tw-w-full">
             <input
               type="text"
+              v-model="requestData.project_description.project_existence"
               class="proj-form-input"
               placeholder="Project existence"
             />
@@ -73,6 +77,7 @@
           <div class="tw-w-full">
             <input
               type="text"
+              v-model="requestData.project_value.project_existence"
               class="proj-form-input"
               placeholder="Investment value"
             />
@@ -81,6 +86,7 @@
             <input
               type="text"
               class="proj-form-input"
+              v-model="requestData.project_value.funding_status"
               placeholder="funding status"
             />
           </div>
@@ -88,6 +94,7 @@
             <input
               type="text"
               class="proj-form-input"
+              v-model="requestData.project_value.project_scope"
               placeholder="Project scope"
             />
           </div>
@@ -102,6 +109,7 @@
             <input
               type="text"
               class="proj-form-input"
+              v-model="requestData.expected_jobs.permanent_jobs"
               placeholder="Permanent jobs"
             />
           </div>
@@ -109,6 +117,7 @@
             <input
               type="text"
               class="proj-form-input"
+              v-model="requestData.expected_jobs.temporal_jobs"
               placeholder="Temporary jobs"
             />
           </div>
@@ -123,7 +132,7 @@
             <q-select
               multiple
               use-chips
-              v-model="filterData.local_sourced_inputs"
+              v-model="requestData.opportunities.local_sourced_inputs"
               :options="localSourcedInputsOptions"
               type="text"
               borderless
@@ -136,7 +145,7 @@
             <q-select
               multiple
               use-chips
-              v-model="filterData.external_sourced_inputs"
+              v-model="requestData.opportunities.external_sourced_inputs"
               :options="externallySourcedInputsOptions"
               borderless
               class="proj-form-input tw-h-12 "
@@ -149,7 +158,7 @@
             <q-select
               multiple
               use-chips
-              v-model="filterData.project_skills"
+              v-model="requestData.opportunities.project_skills"
               :options="projectSkillsOptions"
               type="text"
               borderless
@@ -174,24 +183,38 @@
 </template>
 
 <script lang="ts">
-import { flatten } from '@turf/turf';
-import { flattenObj, flattenObject, generatParameters } from 'src/core/helpers/request';
+import { generatParameters } from 'src/core/helpers/request';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'DataPointFilter',
   data() {
     return {
       requestData: {
+        project_submitted: '',
         project_description: {
           economy_sector: 'Agriculture',
-          investor_name: '',
+          name_of_investor: '',
           project_existence: ''
         },
-        project_location:{
-          properties:{
-            inkhundla:'',
-            region:''
+        project_location: {
+          properties: {
+            inkhundla: '',
+            region: ''
           }
+        },
+        project_value: {
+          total_inv_value: '',
+          funding_status: '',
+          project_scope: ''
+        },
+        expected_jobs: {
+          permanent_jobs: 0,
+          temporal_jobs: 0
+        },
+        opportunities: {
+          project_skills: [],
+          local_sourced_inputs: [],
+          external_sourced_inputs: []
         }
       },
       localSourcedInputsOptions: ['labor', 'time'],
@@ -206,8 +229,9 @@ export default Vue.extend({
   },
   methods: {
     onSearchProjects() {
-      const val = generatParameters(this.requestData);
-      console.log('Emmit')
+      console.log(this.requestData)
+       const val = generatParameters(this.requestData);
+     
       this.$emit('requestParameters', val);
     }
   }

@@ -1,5 +1,10 @@
 export function generatParameters(data: any) {
+  if (!data) {
+    console.log(data);
+    return;
+  }
   const flat: { [name: string]: string } = flattenObject(data);
+
   const params: string[] = [];
 
   const int: { [name: string]: string } = Object.entries(flat).reduce(

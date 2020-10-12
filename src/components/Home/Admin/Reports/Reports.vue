@@ -6,7 +6,7 @@
     <div class="col">
       <div>
         <div class="row">
-          <highlights-bar />
+          <highlights-bar :projects="projects" />
         </div>
         <div class="row">
           <div class="col">
@@ -43,7 +43,7 @@ import TableResults from './TableResults/TableResults.vue';
 import ContentComponent from './ContentComponent.vue';
 import StackedGraph from './StackedGraph/StackedGraph.vue';
 import LineChart from './LineChart/LineChart.vue';
-import HighlightsBar from './HighlightsBar.vue';
+import HighlightsBar from './HighlightsBar/HighlightsBar.vue';
 import ScatterChart from './ScatterChart/ScatterChart.vue';
 
 import { get_projects } from 'src/core/RequestHandler/admin';
@@ -74,11 +74,13 @@ export default Vue.extend({
   },
   methods: {
     getProjects(data: any) {
+      this.$q.loading.show();
       get_projects(data)
         .then(val => {
           this.projects = val.filter((val: ProjectModel) => {
             return val.project_description !== undefined;
           });
+          this.$q.loading.hide();
         })
         .catch(e => {
           console.error(e);
