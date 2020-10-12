@@ -12,7 +12,7 @@ export function generatParameters(data: any) {
       if (curr[1] !== '') {
         prev[curr[0]] = curr[1];
       }
-      return prev as unknown;
+      return prev as { [name: string]: string };
     },
     {}
   );

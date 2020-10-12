@@ -3,7 +3,7 @@ import { ProjectModel } from "../Models/ProjectModel";
 export const highlights = [{
         label:'total_projects',
         value:(projects:ProjectModel[])=>{
-            return projects.length as number
+            return projects.length
         }
     }
 ]

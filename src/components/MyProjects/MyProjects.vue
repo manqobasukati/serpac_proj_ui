@@ -25,7 +25,7 @@
                       >
                         Project location -
                         <span class="text-grey">{{
-                          project.project_description.project_location
+                          project.project_submitted
                         }}</span>
                       </div>
                       <div

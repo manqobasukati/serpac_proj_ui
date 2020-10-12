@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="view === 'single'">
+    <div class="col" v-else-if="view === 'single'">
       <single-report @setView="setView" :projectId="projectId" />
     </div>
   </div>

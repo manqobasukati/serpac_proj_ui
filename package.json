@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@turf/nearest-point-to-line": "^6.0.0",
+    "@turf/point-to-line-distance": "^6.0.0",
     "@turf/turf": "^5.1.6",
     "@types/chart.js": "^2.9.25",
     "@types/d3-geo": "^2.0.0",
@@ -20,7 +22,8 @@
     "d3-geo-projection": "^3.0.0",
     "d3-scale-chromatic": "^2.0.0",
     "quasar": "^1.0.0",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "^1.8.10",
+    "turf-point": "^2.0.1"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

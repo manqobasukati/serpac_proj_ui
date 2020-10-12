@@ -315,10 +315,11 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Project ID', this.projectId);
+    this.$q.loading.show();
     get_project(this.projectId)
       .then(val => {
         this.project = val[0];
+        this.$q.loading.hide();
       })
       .catch(e => {
         console.error(e);
