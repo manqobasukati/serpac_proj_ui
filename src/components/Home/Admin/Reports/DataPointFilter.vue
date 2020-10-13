@@ -65,7 +65,15 @@
             />
           </div>
           <div class="tw-w-full">
-            <input type="text" class="proj-form-input" placeholder="Region" />
+            <q-select
+              v-model="requestData.project_location.region"
+              :options="regionOptions"
+              borderless
+              class="proj-form-input tw-h-12 "
+              type="text"
+              label="Regions"
+              dense
+            />
           </div>
         </div>
         <div
@@ -220,6 +228,7 @@ export default Vue.extend({
       localSourcedInputsOptions: ['labor', 'time'],
       externallySourcedInputsOptions: ['electricity'],
       projectSkillsOptions: ['Needed'],
+      regionOptions: ['HhoHho', 'Manzini', 'Lubombo', 'Shiselweni'],
       filterData: {
         external_sourced_inputs: [],
         local_sourced_inputs: [],
@@ -229,9 +238,9 @@ export default Vue.extend({
   },
   methods: {
     onSearchProjects() {
-      console.log(this.requestData)
-       const val = generatParameters(this.requestData);
-     
+      console.log(this.requestData);
+      const val = generatParameters(this.requestData);
+
       this.$emit('requestParameters', val);
     }
   }
