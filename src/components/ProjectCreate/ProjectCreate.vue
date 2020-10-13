@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="row" style="height:95vh">
-      <div class="col-2">
-        <project-create-sidebar />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-py-6">
+        <sections-bar />
       </div>
-      <q-separator vertical />
-
-      <div class="col-9 q-pa-sm q-mt-lg">
-        <router-view />
+      <div class="tw-py-6">
+        <section-one />
       </div>
     </div>
   </div>
@@ -25,11 +23,14 @@ import { MODULES } from 'src/store';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { map_form_model } from 'src/core/helpers/map_model_form';
 
+import SectionsBar from './SectionsBar.vue';
+import SectionOne from './SectionOne.vue';
 export default Vue.extend({
   name: 'UserLayout',
   mixins: [SectionsMixin],
   components: {
-    ProjectCreateSidebar
+    SectionsBar,
+    SectionOne
   },
   data() {
     return {};

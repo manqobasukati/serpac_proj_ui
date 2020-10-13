@@ -20,7 +20,7 @@
       <side-navigation :items="navigation_options" />
 
       <div class="tw-relative tw-ml-64 tw-mt-6 tw-text-lg">
-        Something will come here
+        <router-view />
       </div>
     </div>
   </div>

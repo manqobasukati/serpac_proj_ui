@@ -30,3 +30,14 @@ export const SectionDescriptions: { [name: string]: SectionDescription } = {
     header: 'Section 7 - Provide Key enable information'
   }
 };
+
+export const SimpleSections = [
+  {
+    name: 'Section 1',
+    active: true
+  },
+  {
+    name: 'Section 2',
+    active: false
+  }
+];

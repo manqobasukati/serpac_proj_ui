@@ -9,7 +9,20 @@ const routes: RouteConfig[] = [
   {
     path: '/public',
     name: 'public',
-    component: () => import('components/Home/Public/Public.vue')
+    component: () => import('components/Home/Public/Public.vue'),
+    children: [
+      {
+        path: '/public/project-create',
+        component: () => import('components/ProjectCreate/ProjectCreate.vue'),
+        children: [
+          {
+            path: '/public/project/:section',
+            component: () =>
+              import('components/ProjectCreate/FormSections/GenericSection.vue')
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/',
@@ -80,18 +93,7 @@ const routes: RouteConfig[] = [
         path: '/admin/all-projects/:projectId',
         component: () => import('components/Home/Admin/ViewProject.vue')
       },
-      
-      {
-        path: '/public/project-create',
-        component: () => import('components/ProjectCreate/ProjectCreate.vue'),
-        children: [
-          {
-            path: '/public/project/:section',
-            component: () =>
-              import('components/ProjectCreate/FormSections/GenericSection.vue')
-          }
-        ]
-      },
+
       {
         path: '/public/my-projects',
         component: () => import('components/MyProjects/MyProjects.vue')

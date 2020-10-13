@@ -12,11 +12,14 @@ module.exports = {
         xxlg:'50px'
       },
       height: {
+        
         lg: '400px',
-        md:'250px'
+        md:'250px',
+
       },
       width:{
-        xlg:'20rem'
+        xlg:'20rem',
+        xxlg:'50rem'
       },
       margin:{
         lg:'600px'
