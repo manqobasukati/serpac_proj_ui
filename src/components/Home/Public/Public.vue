@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="q-ma-lg">
+    <div v-if="false" class="q-ma-lg">
       <div class="row" style="height:15vh"></div>
       <div class="row q-pa-lg q-ml-lg justify-center">
         <div
@@ -16,6 +16,13 @@
         </div>
       </div>
     </div>
+    <div class="tw-flex tw-flex-row">
+      <side-navigation :items="navigation_options" />
+
+      <div class="tw-relative tw-ml-64 tw-mt-6 tw-text-lg">
+        Something will come here
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,8 +32,14 @@ import { ModuleDefinition, module_definition } from 'src/core/ModuleDefinition';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import Vue from 'vue';
+
+import SideNavigation from './SideNavigation.vue';
+
 export default Vue.extend({
   name: 'Public',
+  components: {
+    SideNavigation
+  },
   data() {
     return {
       navigation_options: module_definition['public'].modules
@@ -42,7 +55,6 @@ export default Vue.extend({
         .then(() => {
           if (module.link) {
             if (module.link === '/public/my-projects') {
-            
               const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
               const user_id = localStorage.getItem('serpac_tool_user_id');
               void this.$store.dispatch(get_projects_action, user_id);

@@ -7,6 +7,11 @@ const routes: RouteConfig[] = [
     component: () => import('components/Home/LandingPage/LandingPage.vue')
   },
   {
+    path: '/public',
+    name: 'public',
+    component: () => import('components/Home/Public/Public.vue')
+  },
+  {
     path: '/',
     redirect: '/home',
     component: () => import('components/Home/HomeLayout.vue'),
@@ -75,11 +80,7 @@ const routes: RouteConfig[] = [
         path: '/admin/all-projects/:projectId',
         component: () => import('components/Home/Admin/ViewProject.vue')
       },
-      {
-        path: '/public',
-        name: 'public',
-        component: () => import('components/Home/Public/Public.vue')
-      },
+      
       {
         path: '/public/project-create',
         component: () => import('components/ProjectCreate/ProjectCreate.vue'),

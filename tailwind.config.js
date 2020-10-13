@@ -8,7 +8,8 @@ module.exports = {
    
     extend: {
       borderRadius: {
-        xlg: '14px'
+        xlg: '14px',
+        xxlg:'50px'
       },
       height: {
         lg: '400px',
@@ -16,6 +17,9 @@ module.exports = {
       },
       width:{
         xlg:'20rem'
+      },
+      margin:{
+        lg:'600px'
       }
     }
   },

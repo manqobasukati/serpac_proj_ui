@@ -2,6 +2,7 @@ export interface ModuleDefinition {
   name: string;
   state?: string[];
   link?: string;
+  class?:string;
   icon?: string;
   modules: ModuleDefinition[];
 }
@@ -38,7 +39,8 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
       {
         link: '/public/project/section-info',
         name: 'project_create',
-        icon: 'create_new_folder',
+        
+        icon: 'add_circle',
         state: ['active_section:string'],
         modules: [
           {
