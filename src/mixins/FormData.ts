@@ -172,3 +172,41 @@ export const FormData = {
     ]
   }
 };
+
+export const ModelObj: { [name: string]: any} = {
+  _id: '',
+  project_created: new Date(),
+  project_submitted: null as null | Date,
+  project_description: {
+    title: '',
+    description: '',
+    project_location: {
+      type: 'Point',
+      properties: {
+        inkhundla:''
+      }
+    },
+    economy_sector: '',
+    project_existense: '',
+    name_of_investor: ''
+  },
+  project_value: {
+    total_inv_value: '',
+    funding_status: '',
+    percentage_of_funding: '',
+    project_scope: ''
+  },
+  expected_jobs: {
+    permanent_jobs: '',
+    temporal_jobs: ''
+  },
+  project_timelines: {
+    phases: []
+  },
+  opportunities: {
+    project_skills: '',
+    local_sourced_inputs: '',
+    external_sourced_inputs: ''
+  },
+  key_enablers: []
+};

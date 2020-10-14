@@ -35,8 +35,10 @@ export const SimpleSections = [
   {
     name: 'Section 1',
     active: true,
-    info:'This section, captures information describing the project, this gives us a better view of the project'
+    info:
+      'This section, captures information describing the project, this gives us a better view of the project'
   },
+
   {
     name: 'Section 2',
     active: false
@@ -55,10 +57,6 @@ export const SimpleSections = [
   },
   {
     name: 'Section 6',
-    active: false
-  },
-  {
-    name: 'Section 7',
     active: false
   }
 ];

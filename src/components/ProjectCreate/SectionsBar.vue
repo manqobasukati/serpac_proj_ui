@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tw-flex tw-flex-row">
+    <div class="tw-flex tw-flex-row tw-justify-center tw-mr-64">
       <div
         class="w-32 tw-mr-2"
         v-for="(section, key) in sectionData"
@@ -11,7 +11,7 @@
           :class="{ 'tw-bg-pink-200': section.active }"
           class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-py-4 tw-w-full tw-bg-pink-100 tw-rounded-lg"
         >
-          <p class="tw-text-lg tw-font-bold tw-text-red-400">
+          <p class="tw-flex  tw-text-sm tw-font-bold tw-text-red-400">
             {{ section.name }}
           </p>
         </div>

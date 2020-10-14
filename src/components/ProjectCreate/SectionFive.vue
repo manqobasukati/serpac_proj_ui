@@ -1,30 +1,49 @@
 <template>
   <div>
     <div
-      class="tw-w-xxlg tw-h-48 tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
+      class="tw-w-xxlg tw-h-full tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
     >
       <div class="tw-flex tw-flex-col">
-        <div class="tw-text-md tw-font-medium">Project Phases</div>
-        <div class="tw-flex tw-flex-row tw-p-2">
-          <input
+        <div class="tw-text-md tw-font-medium">Opportunities</div>
+        <div class="tw-flex tw-flex-col tw-p-2">
+          <q-select
+            multiple
+            use-chips
             type="text"
-            class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
-            placeholder="Phase name"
+            borderless
+            :options="ProjectSkillsOptions"
+            v-model="FormData.opportunities.project_skills"
+            class="proj-form-input tw-h-10 tw-my-1"
+            label="project skills"
+            dense
           />
-          <input
+          <q-select
+            multiple
+            use-chips
             type="text"
-            class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
-            placeholder="Start date"
+            borderless
+            :options="LocallySourcedInputsOptions"
+            v-model="FormData.opportunities.local_sourced_inputs"
+            class="proj-form-input tw-h-10  tw-my-1"
+            label="Locally sourced inputs"
+            dense
           />
-          <input
+          <q-select
+            multiple
+            use-chips
             type="text"
-            class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
-            placeholder="End data"
+            borderless
+            :options="ExternallySourcedInputsOptions"
+            v-model="FormData.opportunities.external_sourced_inputs"
+            class="proj-form-input tw-h-10  tw-my-1"
+            label="Externally sourced inputs"
+            dense
           />
         </div>
         <div class="tw-flex tw-flex-row tw-justify-end">
           <div class="">
             <button
+              @click="Save()"
               class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
             >
               Save
@@ -38,7 +57,33 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
+import {
+  ExternallySourcedInputsOptions,
+  LocallySourcedInputsOptions,
+  ProjectSkillsOptions
+} from './../../core/Additional/Contstants';
+
 export default Vue.extend({
-  name: 'SectionFive'
+  name: 'SectionSix',
+  data() {
+    return {
+      ExternallySourcedInputsOptions,
+      LocallySourcedInputsOptions,
+      ProjectSkillsOptions,
+      FormData: {
+        opportunities: {
+          project_skills: [],
+          local_sourced_inputs: [],
+          external_sourced_inputs: []
+        }
+      }
+    };
+  },
+  methods: {
+    Save() {
+      this.$emit('updateForm', this.FormData);
+    }
+  }
 });
 </script>
