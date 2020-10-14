@@ -39,7 +39,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
       {
         link: '/public/project/section-info',
         name: 'project_create',
-        
+    
         icon: 'add_circle',
         state: ['active_section:string'],
         modules: [

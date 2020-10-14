@@ -12,17 +12,17 @@ module.exports = {
         xxlg:'50px'
       },
       height: {
-        
+        xxlg:'40rem',
         lg: '400px',
         md:'250px',
 
       },
       width:{
         xlg:'20rem',
-        xxlg:'50rem'
+        xxlg:'56rem'
       },
       margin:{
-        lg:'600px'
+        lg:'30rem'
       }
     }
   },

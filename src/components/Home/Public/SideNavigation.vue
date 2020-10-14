@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="tw-mt-lg">
+      <div v-if="false" class="tw-mt-lg" >
         <div
           class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
         >

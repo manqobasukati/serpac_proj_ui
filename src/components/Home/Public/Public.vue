@@ -19,7 +19,7 @@
     <div class="tw-flex tw-flex-row">
       <side-navigation :items="navigation_options" />
 
-      <div class="tw-relative tw-ml-64 tw-mt-6 tw-text-lg">
+      <div class="tw-flex-1 tw-relative tw-ml-64  tw-text-lg tw-h-screen">
         <router-view />
       </div>
     </div>
