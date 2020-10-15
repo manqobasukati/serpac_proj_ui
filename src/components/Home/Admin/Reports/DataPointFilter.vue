@@ -58,10 +58,14 @@
             Project location
           </div>
           <div class="tw-w-full">
-            <input
+            <q-select
+              v-model="requestData.project_location.inkhundla"
+              :options="inkhundlaOptions"
+              borderless
+              class="proj-form-input tw-h-12 "
               type="text"
-              class="proj-form-input"
-              placeholder="Inkhundla"
+              label="Inkhundla"
+              dense
             />
           </div>
           <div class="tw-w-full">
@@ -191,6 +195,7 @@
 </template>
 
 <script lang="ts">
+import { TinkhundlaOptions } from 'src/core/Additional/Contstants';
 import { generatParameters } from 'src/core/helpers/request';
 import Vue from 'vue';
 export default Vue.extend({
@@ -225,6 +230,7 @@ export default Vue.extend({
           external_sourced_inputs: []
         }
       },
+      inkhundlaOptions: TinkhundlaOptions(),
       localSourcedInputsOptions: ['labor', 'time'],
       externallySourcedInputsOptions: ['electricity'],
       projectSkillsOptions: ['Needed'],
@@ -235,6 +241,9 @@ export default Vue.extend({
         project_skills: []
       }
     };
+  },
+  mounted(){
+    console.log('G =>',TinkhundlaOptions())
   },
   methods: {
     onSearchProjects() {

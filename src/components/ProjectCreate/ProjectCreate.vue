@@ -38,6 +38,10 @@
               v-if="'Section 6' === active_section"
               @updateForm="updateForm"
             />
+             <section-seven
+              v-if="'Section 7' === active_section"
+              @updateForm="updateForm"
+            />
           </div>
           <div class="tw-flex  tw-p-16 tw-bg-gray-100">
             <div class="tw-text-md">Hint box comes here</div>
@@ -65,6 +69,7 @@ import SectionThree from './SectionThree.vue';
 import SectionFour from './SectionFour.vue';
 import SectionFive from './SectionFive.vue';
 import SectionSix from './SectionSix.vue';
+import SectionSeven from './SectionSeven.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
 import { project_create } from 'src/core/RequestHandler/project_create';
@@ -80,7 +85,8 @@ export default Vue.extend({
     SectionThree,
     SectionFour,
     SectionFive,
-    SectionSix
+    SectionSix,
+    SectionSeven
   },
   data() {
     return {
