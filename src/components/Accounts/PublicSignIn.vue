@@ -1,48 +1,32 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-3">
-        <q-card class="q-mt-lg">
-          <q-card-section>
-            <div class="row">
-              <div class="col-3">
-                <img src="~/assets/eseparc_logo.png" height="50" />
-              </div>
-              <q-separator vertical inset />
-              <div class="col">
-                <div class="text-h6 text-primary q-pa-sm">
-                  Organization Login
-                </div>
-              </div>
+  <div class="tw-h-screen tw-bg-gray-200">
+    <div
+      class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-full"
+    >
+      <div
+        class=" tw-shadow-md tw-rounded-lg tw-h-64 tw-w-1/3 tw-bg-white tw-p-2"
+      >
+        <div class="tw-flex tw-flex-col">
+          <div class="tw-flex tw-flex-col">
+            <div class="tw-text-md tw-font-medium">User Details</div>
+            <div class="tw-flex tw-flex-row tw-p-2">
+              <input
+                type="text"
+                class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                placeholder="User name"
+               
+              />
+              <input
+                type="text"
+                class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
+                placeholder="User surname"
+              
+              />
+              
             </div>
-          </q-card-section>
-          <q-card-section>
-            <q-input
-              filled
-              label="Organization Email"
-              name="email"
-              v-model="organization_data.email"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              name="password"
-              label="Organization Password"
-              type="password"
-              v-model="organization_data.password"
-              class="q-mb-md"
-            />
-          </q-card-section>
-          <div v-if="login_message" class="text-subtitle2 text-red q-ml-lg">
-            {{ login_message }}
           </div>
-          <q-card-actions align="right">
-            <q-btn class="text-primary" @click="sign_in()" flat>Sign In</q-btn>
-          </q-card-actions>
-        </q-card>
+        </div>
       </div>
-      <div class="col"></div>
     </div>
   </div>
 </template>

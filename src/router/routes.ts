@@ -7,6 +7,11 @@ const routes: RouteConfig[] = [
     component: () => import('components/Home/LandingPage/LandingPage.vue')
   },
   {
+    path: '/public-sign-in',
+    name: 'PublicSignIn',
+    component: () => import('components/Accounts/PublicSignIn.vue')
+  },
+  {
     path: '/public',
     name: 'public',
     component: () => import('components/Home/Public/Public.vue'),
@@ -27,7 +32,7 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     redirect: '/home',
-    component: () => import('components/Home/HomeLayout.vue'),
+    component: () => import('components/Home/LandingPage/LandingPage.vue'),
     children: [
       {
         path: '/admin/users',
@@ -65,11 +70,7 @@ const routes: RouteConfig[] = [
         name: 'PublicSignUp',
         component: () => import('components/Accounts/PublicSignUp.vue')
       },
-      {
-        path: '/public-sign-in',
-        name: 'PublicSignIn',
-        component: () => import('components/Accounts/PublicSignIn.vue')
-      },
+
       {
         path: '/admin',
         name: 'admin',
