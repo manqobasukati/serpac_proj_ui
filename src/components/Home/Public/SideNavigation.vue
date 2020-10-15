@@ -7,13 +7,14 @@
         <q-icon name="account_circle" size="8rem" color="grey-5" />
       </div>
       <div>
-        <div class="" v-for="(item, key) in items" :key="key">
+        <div v-for="(item, key) in items" :key="key">
           <div
             class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
           >
-            <div style="font-size:17px">
+            <div @click="changeRoute(item.link)" style="font-size:17px">
               {{ item.name | removeUnderscore | capitaliseWords }}
             </div>
+
             <q-icon
               class="tw-p-1 tw-ml-2 tw-mr-1 "
               :name="item.icon"
@@ -21,10 +22,25 @@
             >
             </q-icon>
           </div>
+          <div
+            v-if="item.name === 'my_projects' && show_my_projects"
+            class="tw-flex tw-px-3 tw-bg-gray-100"
+          >
+            <ul class="list-disc">
+              <li
+                @click="viewProject(project)"
+                class="tw-text-blue-400 hover:tw-underline"
+                v-for="(project, key) in get_current_projects"
+                :key="key"
+              >
+                {{ project.project_description.title }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div v-if="false" class="tw-mt-lg" >
+      <div v-if="false" class="tw-mt-lg">
         <div
           class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
         >
@@ -41,13 +57,70 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
+
 import { FILTERS } from 'src/core/helpers/filters';
+import { get_user_projects } from 'src/core/RequestHandler/project_create';
+import { MODULES } from './../../../store/index';
+import { PROJECT_CREATE_ACTIONS } from './../../../store/project_create/actions';
+import { ProjectCreateInterface } from 'src/store/project_create/state';
+import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'SideNavigation',
   props: ['items'],
   mounted() {
-    console.log('Items', this.items);
+    this.current_user_projects();
+  },
+  data() {
+    return {
+      my_projects: [],
+      show_my_projects: false
+    };
+  },
+
+  methods: {
+    viewProject(project: ProjectModel) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_SELECTED_PROJECT}`;
+
+      this.$store
+        .dispatch(action)
+        .then(() => {
+          void this.$router.push({
+            path: `/public/project-create`,
+            query: { projectId: project._id as string },
+            params: {
+              projectId: project._id as string
+            }
+          });
+        })
+        .catch(() => {
+          console.log('If anything happens');
+        });
+    },
+    current_user_projects() {
+      const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
+      const user_id = localStorage.getItem('serpac_tool_user_id');
+      void this.$store.dispatch(get_projects_action, user_id);
+    },
+    changeRoute(link: string) {
+      console.log('Link', link);
+      if (link === '/public/project-create') {
+        void this.$router.push({ path: link });
+      } else if (link === '/public/my-projects') {
+        console.log('here', localStorage.getItem('serpac_tool_user_id'));
+
+        this.show_my_projects = !this.show_my_projects;
+      }
+    }
+  },
+  computed: {
+    ...mapState(MODULES.PROJECT_CREATE, {
+      get_current_projects(state: ProjectCreateInterface) {
+        console.log('This', state.current_user_projects);
+        return state.current_user_projects;
+      }
+    })
   },
   filters: {
     ...FILTERS
