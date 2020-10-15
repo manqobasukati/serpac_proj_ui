@@ -39,9 +39,8 @@ export interface ProjectModel {
     permanent_jobs: number;
     temporal_jobs: number;
   };
-  project_timelines: {
-    phases: ProjectPhase[];
-  };
+  project_timelines:  ProjectPhase[];
+  
   opportunities: {
     project_skills: string[];
     local_sourced_inputs: string[];

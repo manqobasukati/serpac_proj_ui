@@ -18,7 +18,6 @@
             borderless
             dense
             class="proj-form-input tw-h-8 tw-ml-3  tw-text-sm tw-text-gray-300"
-          
             :options="economicSectorOptions"
             v-model="FormData.project_description.economy_sector"
           />
@@ -43,12 +42,21 @@
           />
           <input
             type="text"
-            class="proj-form-input tw-ml-3  tw-text-sm"
-            v-model="FormData.project_description.project_location.properties.inkhundla"
+            class="proj-form-input tw-ml-3 tw-h-8  tw-text-sm"
+            v-model="
+              FormData.project_description.project_location.properties.inkhundla
+            "
             placeholder="Inkhundla"
           />
-          <q-icon name="location_on" color="grey-8" class="tw-p-2" />
+
+          <div class="tw-p-2">
+            <q-icon @click="set_map_active()" name="location_on" color="grey-8" />
+            <q-tooltip>
+              map
+            </q-tooltip>
+          </div>
         </div>
+        
       </div>
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">More</div>
@@ -77,22 +85,35 @@
         </div>
       </div>
     </div>
+    <map-select  @set_map_active="set_map_active" :map_active="map_active" />
+   
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import mapboxgl from 'mapbox-gl';
 
 import {
   EconomicSectors,
   ProjectExistence
 } from './../../core/Additional/Contstants';
 
+import MapSelect from './MapSelect.vue';
+
 export default Vue.extend({
+  components: {
+    MapSelect
+  },
+
   data() {
     return {
+      map_active: false,
       economicSectorOptions: EconomicSectors,
       projectExistenceOptions: ProjectExistence,
+      mapbox: null as null | mapboxgl.Map,
+      mapbox_token:
+        'pk.eyJ1IjoibWFucW9iYTEiLCJhIjoiY2s4dmdhcTE4MDAzeTNocXBzMXh0ajRteiJ9.KDLMyWdvIUck-sK5Q1UW3g',
       FormData: {
         project_description: {
           title: '',
@@ -100,20 +121,24 @@ export default Vue.extend({
           economy_sector: '',
           name_of_investor: '',
           description: '',
-          project_location:{
-            type:'Point',
-            properties:{
-              inkhundla:'SIPHOCOSINI'
+          project_location: {
+            type: 'Point',
+            properties: {
+              inkhundla: 'SIPHOCOSINI'
             }
           }
         }
       }
     };
   },
-  methods:{
-    Save(){
-      this.$emit('updateForm', this.FormData)
-     
+
+  methods: {
+    set_map_active() {
+      this.map_active = !this.map_active;
+    },
+    
+    Save() {
+      this.$emit('updateForm', this.FormData);
     }
   }
 });
