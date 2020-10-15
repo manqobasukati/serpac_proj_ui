@@ -20,8 +20,7 @@ const routes: RouteConfig[] = [
       {
         path: '/admin/reports/all',
         name: 'content_reports',
-        component: () =>
-          import('components/Home/Admin/Reports/Reports.vue')
+        component: () => import('components/Home/Admin/Reports/Reports.vue')
       },
       {
         path: '/admin/reports/:projectId',
@@ -35,6 +34,17 @@ const routes: RouteConfig[] = [
     path: '/public-sign-in',
     name: 'PublicSignIn',
     component: () => import('components/Accounts/PublicSignIn.vue')
+  },
+
+  {
+    path: '/admin-sign-up',
+    name: 'AdminSignUp',
+    component: () => import('components/Accounts/AdminSignUp.vue')
+  },
+  {
+    path: '/admin-sign-in',
+    name: 'AdminSignIn',
+    component: () => import('components/Accounts/AdminSignIn.vue')
   },
   {
     path: '/public',
@@ -69,17 +79,6 @@ const routes: RouteConfig[] = [
         name: 'home',
         component: () =>
           import('components/Home/LandingPage/LandingPageContent.vue')
-      },
-
-      {
-        path: '/admin-sign-up',
-        name: 'AdminSignUp',
-        component: () => import('components/Accounts/AdminSignUp.vue')
-      },
-      {
-        path: '/admin-sign-in',
-        name: 'AdminSignIn',
-        component: () => import('components/Accounts/AdminSignIn.vue')
       },
       {
         path: '/admin/all-projects',

@@ -1,48 +1,51 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-3">
-        <q-card class="q-mt-lg">
-          <q-card-section>
-            <div class="row">
-              <div class="col-3">
-                <img src="~/assets/eseparc_logo.png" height="50" />
+  <div class="tw-h-screen tw-bg-gray-200">
+    <div
+      class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-full"
+    >
+      <div class="tw-w-1/3">
+        <div class="tw-text-2xl tw-font-semibold tw-text-red-300">Sign In</div>
+        <div class=" tw-shadow-md tw-rounded-lg tw-h-md  tw-bg-white tw-p-2">
+          <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-col">
+              <div class="tw-text-md tw-font-medium">User Details</div>
+
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                 v-model="user_data.email"
+                  placeholder="Email"
+                />
               </div>
-              <q-separator vertical inset />
-              <div class="col">
-                <div class="text-h6 text-primary q-pa-sm">
-                  Admin login
-                </div>
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="password"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                   v-model="user_data.password"
+                  placeholder="Password"
+                />
               </div>
             </div>
-          </q-card-section>
-          <q-card-section>
-            <q-input
-              filled
-              name="email"
-              label="Email"
-              v-model="user_data.email"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              name="password"
-              label="Password"
-              v-model="user_data.password"
-              type="password"
-              class="q-mb-md"
-            />
-            <div v-if="login_message" class="text-subtitle2 text-red q-ml-lg">
-              {{ login_message }}
+
+            <div class="tw-flex tw-flex-row tw-justify-start tw-pl-2">
+              <div class="tw-text-red-500" v-if="login_message">
+                {{ login_message }}
+              </div>
             </div>
-          </q-card-section>
-          <q-card-actions align="right">
-            <q-btn class="text-primary" @click="sign_in()" flat>Sign In</q-btn>
-          </q-card-actions>
-        </q-card>
+            <div class="tw-flex tw-flex-row tw-justify-end">
+              <div class="">
+                <button
+                  @click="sign_in()"
+                  class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col"></div>
     </div>
   </div>
 </template>
