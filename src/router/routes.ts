@@ -12,6 +12,26 @@ const routes: RouteConfig[] = [
     component: () => import('components/Accounts/PublicSignUp.vue')
   },
   {
+    path: '/admin',
+    name: 'admin',
+    redirect: '/admin/reports/all',
+    component: () => import('components/Home/Admin/NewAdmin.vue'),
+    children: [
+      {
+        path: '/admin/reports/all',
+        name: 'content_reports',
+        component: () =>
+          import('components/Home/Admin/Reports/Reports.vue')
+      },
+      {
+        path: '/admin/reports/:projectId',
+        props: true,
+        component: () =>
+          import('components/Home/Admin/Reports/SingleReport/SingleReports.vue')
+      }
+    ]
+  },
+  {
     path: '/public-sign-in',
     name: 'PublicSignIn',
     component: () => import('components/Accounts/PublicSignIn.vue')
@@ -43,27 +63,7 @@ const routes: RouteConfig[] = [
         path: '/admin/users',
         component: () => import('components/Home/Users/Users.vue')
       },
-      {
-        path: '/admin/reports',
-        redirect: '/admin/reports/all',
-        component: () => import('components/Home/Admin/Reports/Reports.vue'),
-        children: [
-          {
-            path: '/admin/reports/all',
-            name: 'content_reports',
-            component: () =>
-              import('components/Home/Admin/Reports/ContentReports.vue')
-          },
-          {
-            path: '/admin/reports/:projectId',
-            props: true,
-            component: () =>
-              import(
-                'components/Home/Admin/Reports/SingleReport/SingleReports.vue'
-              )
-          }
-        ]
-      },
+
       {
         path: '/home',
         name: 'home',
@@ -71,11 +71,6 @@ const routes: RouteConfig[] = [
           import('components/Home/LandingPage/LandingPageContent.vue')
       },
 
-      {
-        path: '/admin',
-        name: 'admin',
-        component: () => import('components/Home/Admin/Admin.vue')
-      },
       {
         path: '/admin-sign-up',
         name: 'AdminSignUp',
