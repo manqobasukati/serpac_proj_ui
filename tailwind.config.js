@@ -14,6 +14,7 @@ module.exports = {
       height: {
         xxlg:'40rem',
         lg: '400px',
+        mdlg:'20rem',
         md:'250px',
         xxxlg:'30rem'
 

@@ -2,7 +2,7 @@ export interface ProjectPhase {
   name: string;
   start_date: Date;
   end_date: Date;
- 
+  meta?:{[name:string]:string}
 }
 
 export interface Issues {

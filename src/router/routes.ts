@@ -7,6 +7,11 @@ const routes: RouteConfig[] = [
     component: () => import('components/Home/LandingPage/LandingPage.vue')
   },
   {
+    path: '/public-sign-up',
+    name: 'PublicSignUp',
+    component: () => import('components/Accounts/PublicSignUp.vue')
+  },
+  {
     path: '/public-sign-in',
     name: 'PublicSignIn',
     component: () => import('components/Accounts/PublicSignIn.vue')
@@ -64,11 +69,6 @@ const routes: RouteConfig[] = [
         name: 'home',
         component: () =>
           import('components/Home/LandingPage/LandingPageContent.vue')
-      },
-      {
-        path: '/public-sign-up',
-        name: 'PublicSignUp',
-        component: () => import('components/Accounts/PublicSignUp.vue')
       },
 
       {

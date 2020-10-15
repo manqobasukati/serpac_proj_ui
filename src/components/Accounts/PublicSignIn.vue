@@ -3,26 +3,45 @@
     <div
       class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-full"
     >
-      <div
-        class=" tw-shadow-md tw-rounded-lg tw-h-64 tw-w-1/3 tw-bg-white tw-p-2"
-      >
-        <div class="tw-flex tw-flex-col">
+      <div class="tw-w-1/3">
+        <div class="tw-text-2xl tw-font-semibold tw-text-red-300">Sign In</div>
+        <div class=" tw-shadow-md tw-rounded-lg tw-h-md  tw-bg-white tw-p-2">
           <div class="tw-flex tw-flex-col">
-            <div class="tw-text-md tw-font-medium">User Details</div>
-            <div class="tw-flex tw-flex-row tw-p-2">
-              <input
-                type="text"
-                class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
-                placeholder="User name"
-               
-              />
-              <input
-                type="text"
-                class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
-                placeholder="User surname"
-              
-              />
-              
+            <div class="tw-flex tw-flex-col">
+              <div class="tw-text-md tw-font-medium">User Details</div>
+
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                  v-model="organization_data.email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="password"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                    v-model="organization_data.password"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+
+            <div class="tw-flex tw-flex-row tw-justify-start tw-pl-2">
+              <div class="tw-text-red-500" v-if="login_message">
+               {{login_message}}
+              </div>
+            </div>
+            <div class="tw-flex tw-flex-row tw-justify-end">
+              <div class="">
+                <button
+                  @click="sign_in()"
+                  class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>

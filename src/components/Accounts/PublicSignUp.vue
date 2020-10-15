@@ -1,64 +1,86 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-3">
-        <q-card class="q-mt-lg">
-          <q-card-section>
-            <div class="row">
-              <div class="col-3">
-                <img src="~/assets/eseparc_logo.png" height="50" />
+  <div class="tw-h-screen tw-bg-gray-200">
+    <div
+      class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-full"
+    >
+      <div class="tw-w-1/3">
+        <div class="tw-text-2xl tw-font-semibold tw-text-red-300">Sign Up</div>
+        <div class=" tw-shadow-md tw-rounded-lg tw-h-mdlg  tw-bg-white tw-p-2">
+          <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-col">
+              <div class="tw-text-md tw-font-medium">User Details</div>
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                  placeholder="Name"
+                  v-model="organization_data.firstname"
+                />
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
+                  placeholder="Surname"
+                  v-model="organization_data.lastname"
+                />
               </div>
-              <q-separator vertical inset />
-              <div class="col">
-                <div class="text-h6 text-primary q-pa-sm">
-                  Organization registration
-                </div>
+
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                  placeholder="Email"
+                  v-model="organization_data.email"
+                />
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
+                  v-model="organization_data.phone_number"
+                  placeholder="Phonenumber"
+                />
+              </div>
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="text"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                  placeholder="Organization name"
+                  v-model="organization_data.name"
+                />
               </div>
             </div>
-          </q-card-section>
-          <q-card-section>
-            <q-input
-              filled
-              label="Firstname"
-              v-model="organization_data.firstname"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              label="Lastname"
-              v-model="organization_data.lastname"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              label="Organization name"
-              v-model="organization_data.name"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              label="Organization Email"
-              v-model="organization_data.email"
-              class="q-mb-md"
-            />
-            <q-input
-              filled
-              label="Organization Password"
-              type="password"
-              v-model="organization_data.password"
-              class="q-mb-md"
-            />
-          </q-card-section>
-          <div v-if="sign_up_message" class="text-subtitle2 text-red q-ml-lg">
-            {{ sign_up_message }}
+            <div class="tw-flex tw-flex-col">
+              <div class="tw-text-md tw-font-medium">Password</div>
+              <div class="tw-flex tw-flex-row tw-p-2">
+                <input
+                  type="password"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
+                  placeholder="password"
+                  v-model="organization_data.password"
+                />
+                <input
+                  type="password"
+                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
+                  placeholder="confirm password"
+                />
+              </div>
+            </div>
+            <div class="tw-flex tw-flex-row tw-justify-start tw-pl-2">
+              <div class="tw-text-red-500">
+                {{ sign_up_message }}
+              </div>
+            </div>
+            <div class="tw-flex tw-flex-row tw-justify-end">
+              <div class="">
+                <button
+                  @click="sign_up()"
+                  class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
           </div>
-          <q-card-actions align="right">
-            <q-btn class="text-primary" @click="sign_up()" flat>Sign Up</q-btn>
-          </q-card-actions>
-        </q-card>
+        </div>
       </div>
-      <div class="col"></div>
     </div>
   </div>
 </template>
@@ -77,7 +99,8 @@ export default Vue.extend({
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        phone_number: ''
       }
     };
   },
@@ -87,9 +110,9 @@ export default Vue.extend({
         ...this.organization_data,
         username: this.organization_data.email,
         access: ['public'],
-        meta:{
-          firstname:this.organization_data.firstname,
-          lastname:this.organization_data.lastname
+        meta: {
+          firstname: this.organization_data.firstname,
+          lastname: this.organization_data.lastname
         }
       };
 
