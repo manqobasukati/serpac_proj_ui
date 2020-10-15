@@ -9,11 +9,14 @@
         <div
           class="tw-flex tw-justify-end tw-flex-1 tw-font-medium tw-items-center"
         >
-          <div class="tw-text-md tw-mx-4 tw-text-red-300">Sign In</div>
+          <div class="tw-text-md tw-mx-4 tw-text-red-300">
+            <router-link to="/public-sign-in"> Sign in</router-link>
+         
+          </div>
           <div
             class=" tw-text-md tw-mx-4 tw-text-red-900  tw-p-3 tw-opacity-25 tw-rounded-lg tw-bg-red-300 tw-w-24 tw-text-center"
           >
-            Sign Up
+            <router-link to="/public-sign-up"> Sign Up</router-link>
           </div>
         </div>
       </div>
@@ -37,11 +40,9 @@
         <div
           class="tw-flex tw-flex-col flex-1  tw-justify-center tw-items-center flex-1"
         >
-          
-            <div>
-              <img class="tw-h-xxxlg"  src="~/assets/home_pic.png" />
-            </div>
-         
+          <div>
+            <img class="tw-h-xxxlg" src="~/assets/home_pic.png" />
+          </div>
         </div>
       </div>
       <div class="tw-flex "></div>
