@@ -11,7 +11,7 @@
         >
           <div class="tw-text-md tw-mx-4 tw-text-red-300">
             <router-link to="/public-sign-in"> Sign in</router-link>
-         
+            
           </div>
           <div
             class=" tw-text-md tw-mx-4 tw-text-red-900  tw-p-3 tw-opacity-25 tw-rounded-lg tw-bg-red-300 tw-w-24 tw-text-center"
