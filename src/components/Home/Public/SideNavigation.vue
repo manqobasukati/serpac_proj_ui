@@ -2,53 +2,56 @@
   <div
     class="tw-absolute tw-inset-y-0 tw-left-0 tw-w-56 tw-bg-gray-200  tw-rounded-tr-xxlg tw-rounded-br-xxlg  "
   >
-    <div class="tw-flex tw-flex-col tw-p-8">
+    <div class="tw-flex tw-flex-col tw-h-full tw-p-8">
       <div class="tw-p-3">
         <q-icon name="account_circle" size="8rem" color="grey-5" />
       </div>
-      <div>
-        <div v-for="(item, key) in items" :key="key">
-          <div
-            class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
-          >
-            <div @click="changeRoute(item.link)" style="font-size:17px">
-              {{ item.name | removeUnderscore | capitaliseWords }}
-            </div>
-
-            <q-icon
-              class="tw-p-1 tw-ml-2 tw-mr-1 "
-              :name="item.icon"
-              size="22px"
+      <div class="tw-flex tw-flex-col tw-justify-between tw-flex-1">
+        <div>
+          <div v-for="(item, key) in items" :key="key">
+            <div
+              class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
             >
-            </q-icon>
-          </div>
-          <div
-            v-if="item.name === 'my_projects' && show_my_projects"
-            class="tw-flex tw-px-3 tw-bg-gray-100"
-          >
-            <ul class="list-disc">
-              <li
-                @click="viewProject(project)"
-                class="tw-text-blue-400 hover:tw-underline"
-                v-for="(project, key) in get_current_projects"
-                :key="key"
+              <div @click="changeRoute(item.link)" style="font-size:17px">
+                {{ item.name | removeUnderscore | capitaliseWords }}
+              </div>
+
+              <q-icon
+                class="tw-p-1 tw-ml-2 tw-mr-1 "
+                :name="item.icon"
+                size="22px"
               >
-                {{ project.project_description.title }}
-              </li>
-            </ul>
+              </q-icon>
+            </div>
+            <div
+              v-if="item.name === 'my_projects' && show_my_projects"
+              class="tw-flex tw-px-3 tw-bg-gray-100"
+            >
+              <ul class="list-disc">
+                <li
+                  @click="viewProject(project)"
+                  class="tw-text-blue-400 hover:tw-underline"
+                  v-for="(project, key) in get_current_projects"
+                  :key="key"
+                >
+                  {{ project.project_description.title }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div v-if="false" class="tw-mt-lg">
-        <div
-          class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
-        >
-          <div style="font-size:17px">
-            Settings
+        <div class="">
+          <div
+            @click="logout()"
+            class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
+          >
+            <div style="font-size:17px">
+              logout
+            </div>
+            <q-icon class="tw-p-1 tw-ml-2 tw-mr-1 " name="logout" size="22px">
+            </q-icon>
           </div>
-          <q-icon class="tw-p-1 tw-ml-2 tw-mr-1 " name="settings" size="22px">
-          </q-icon>
         </div>
       </div>
     </div>
@@ -80,6 +83,12 @@ export default Vue.extend({
   },
 
   methods: {
+    logout() {
+      localStorage.removeItem('serpac_tool_username');
+      localStorage.removeItem('serpac_tool_token');
+      localStorage.removeItem('serpac_tool_user_id');
+      void this.$router.push({ path: '/' });
+    },
     viewProject(project: ProjectModel) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_SELECTED_PROJECT}`;
 

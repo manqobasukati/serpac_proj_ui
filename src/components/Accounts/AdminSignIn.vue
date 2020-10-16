@@ -13,6 +13,7 @@
               <div class="tw-flex tw-flex-row tw-p-2">
                 <input
                   type="text"
+                  name="email"
                   class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
                  v-model="user_data.email"
                   placeholder="Email"
@@ -21,6 +22,7 @@
               <div class="tw-flex tw-flex-row tw-p-2">
                 <input
                   type="password"
+                  name="password"
                   class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
                    v-model="user_data.password"
                   placeholder="Password"
@@ -53,7 +55,7 @@
 <script lang="ts">
 import { user_form_validate } from 'src/core/helpers/form_validation';
 import { login } from 'src/core/RequestHandler/user_management';
-import { log } from 'util';
+
 import Vue from 'vue';
 export default Vue.extend({
   name: 'AdminSignIn',
