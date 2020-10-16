@@ -103,7 +103,7 @@ export default Vue.extend({
             name: '',
             start_date: '',
             end_data: '',
-            meta: []
+            meta: [] as [] | any
           }
         ]
       }
@@ -136,7 +136,6 @@ export default Vue.extend({
       });
     },
     Save() {
-      console.log('FormD', this.FormData);
       this.$emit('updateForm', this.FormData);
     }
   }

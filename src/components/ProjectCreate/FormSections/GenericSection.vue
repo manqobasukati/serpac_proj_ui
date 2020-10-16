@@ -163,7 +163,7 @@ export default Vue.extend({
       if (request._id === null) {
         delete request._id;
       }
-      project_create(request as ProjectModel)
+      project_create(request as any)
         .then(val => {
           this.form = map_form_model(val);
           this.$q.notify({
@@ -194,10 +194,10 @@ export default Vue.extend({
         request.project_submitted = new Date();
       }
 
-      project_create(request)
+      project_create(request as any)
         .then(val => {
           this.form = map_form_model(val);
-          console.log('Val',val)
+         
           this.$q.notify({ message: 'updated project', color: 'primary' });
         })
         .catch(e => {
