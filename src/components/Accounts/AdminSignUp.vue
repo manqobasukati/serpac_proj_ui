@@ -124,6 +124,7 @@ export default Vue.extend({
         this.$q.loading.show();
         create_user(request)
           .then(val => {
+          
             void this.$router.push({ path: '/admin-sign-in' });
             this.$q.loading.hide();
           })

@@ -1,32 +1,43 @@
 <template>
   <div>
     <div
-      class="tw-w-xxlg tw-h-56 tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
+      class="tw-w-xxlg tw-h-full tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
     >
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">Project issues</div>
         <div
           v-for="(issue, key) in FormData.key_enablers"
+          class="tw-flex tw-flex-col"
           :key="key"
-          class="tw-flex tw-flex-row tw-p-2"
         >
-          <input
-            type="text"
-            class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
-            placeholder="Issue here"
-            v-model="issue.name"
-          />
-          <q-select
-            use-chips
-            type="text"
-            borderless
-            :options="StakeHoldersOptions"
-            class="proj-form-input tw-h-10  tw-text-sm tw-myx-1"
-            label="Enabler"
-            v-model="issue.stake_holder"
-            dense
-          />
+          <div class="tw-flex tw-flex-row tw-p-2">
+            <input
+              type="text"
+              class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
+              placeholder="Issue here"
+              v-model="issue.name"
+            />
+            <q-select
+              use-chips
+              type="text"
+              borderless
+              :options="StakeHoldersOptions"
+              class="proj-form-input tw-h-10  tw-text-sm tw-myx-1"
+              label="Enabler"
+              v-model="issue.stake_holder"
+              dense
+            />
+          </div>
+          <div class="tw-p-2 tw-ml-10">
+            <textarea
+              type="text"
+              class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
+              placeholder="Add comment about issue"
+              v-model="issue.name"
+            />
+          </div>
         </div>
+
         <div class="tw-flex tw-flex-row tw-justify-end tw-p-2">
           <div
             @click="addPhase"
