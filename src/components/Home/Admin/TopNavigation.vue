@@ -14,7 +14,7 @@
               size="22px"
             >
             </q-icon>
-            <div class="tw-mt-1" style="font-size:17px">
+            <div class="tw-mt-1 tw-text-sm">
               {{ item.name | removeUnderscore }}
             </div>
           </div>

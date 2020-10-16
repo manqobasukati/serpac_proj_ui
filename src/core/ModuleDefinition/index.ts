@@ -19,13 +19,14 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
         modules: []
       },
       {
-        name: 'Reports',
+        name: 'reports',
         icon: 'analytics',
         link: '/admin/reports',
         modules: []
       },
+
       {
-        name: 'users',
+        name: 'work_groups',
         link: '/admin/user',
         icon: 'group',
         modules: []
