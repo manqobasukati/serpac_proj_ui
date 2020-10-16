@@ -33,7 +33,7 @@
               type="text"
               class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
               placeholder="Add comment about issue"
-              v-model="issue.name"
+              :disabled="!issue.name"
             />
           </div>
         </div>
