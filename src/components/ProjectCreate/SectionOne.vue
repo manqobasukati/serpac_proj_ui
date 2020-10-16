@@ -35,13 +35,17 @@
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">Project location</div>
         <div class="tw-flex tw-flex-row tw-p-2">
-          <input
-            type="text"
+          <q-select
+            v-model=" FormData.project_description.project_location.properties.region"
+            :options="['Manzini','HhoHho', 'Shisewleni','Lubombo']"
+             borderless
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm"
             placeholder="Region"
           />
-          <input
+          <q-select
             type="text"
+            borderless
+            :options="inkhundlaOptions"
             class="proj-form-input tw-ml-3 tw-h-8  tw-text-sm"
             v-model="
               FormData.project_description.project_location.properties.inkhundla
@@ -94,6 +98,8 @@
 import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
 
+import { TinkhundlaOptions } from 'src/core/Additional/Contstants';
+
 import {
   EconomicSectors,
   ProjectExistence
@@ -111,6 +117,7 @@ export default Vue.extend({
       map_active: false,
       economicSectorOptions: EconomicSectors,
       projectExistenceOptions: ProjectExistence,
+      inkhundlaOptions:TinkhundlaOptions(),
       mapbox: null as null | mapboxgl.Map,
       mapbox_token:
         'pk.eyJ1IjoibWFucW9iYTEiLCJhIjoiY2s4dmdhcTE4MDAzeTNocXBzMXh0ajRteiJ9.KDLMyWdvIUck-sK5Q1UW3g',
@@ -124,7 +131,8 @@ export default Vue.extend({
           project_location: {
             type: 'Point',
             properties: {
-              inkhundla: 'SIPHOCOSINI'
+              inkhundla: 'SIPHOCOSINI',
+              region:'HhoHho'
             }
           }
         }
