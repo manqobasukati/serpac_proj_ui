@@ -45,7 +45,7 @@ import Vue from 'vue';
 
 import DataPointFilter from './DataPointFilter.vue';
 import TableResults from './TableResults/TableResults.vue';
-import ContentComponent from './ContentComponent.vue';
+
 import StackedGraph from './StackedGraph/StackedGraph.vue';
 import LineChart from './LineChart/LineChart.vue';
 import HighlightsBar from './HighlightsBar/HighlightsBar.vue';

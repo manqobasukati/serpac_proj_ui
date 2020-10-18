@@ -18,7 +18,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: '/public/project-create',
-        component: () => import('components/Public/ProjectCreate/ProjectCreate.vue')
+        component: () => import('components/Public/ProjectManagement/ProjectCreate.vue')
       }
     ]
   },
@@ -61,7 +61,7 @@ const routes: RouteConfig[] = [
   
       {
         path: '/public/my-projects/:projectId',
-        component: () => import('components/Public/ProjectCreate/ProjectCreate.vue')
+        component: () => import('components/Public/ProjectManagement/ProjectCreate.vue')
       }
     ]
   },
