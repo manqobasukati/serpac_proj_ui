@@ -14,11 +14,11 @@ const routes: RouteConfig[] = [
   {
     path: '/public',
     name: 'public',
-    component: () => import('components/Home/Public/Public.vue'),
+    component: () => import('components/Public/Public.vue'),
     children: [
       {
         path: '/public/project-create',
-        component: () => import('components/ProjectCreate/ProjectCreate.vue')
+        component: () => import('components/Public/ProjectCreate/ProjectCreate.vue')
       }
     ]
   },
@@ -26,18 +26,18 @@ const routes: RouteConfig[] = [
     path: '/admin',
     name: 'admin',
 
-    component: () => import('components/Home/Admin/Admin.vue'),
+    component: () => import('components/Admin/Admin.vue'),
     children: [
       {
         path: '/admin/reports/all',
         name: 'content_reports',
-        component: () => import('components/Home/Admin/Reports/Reports.vue')
+        component: () => import('components/Admin/Reports/Reports.vue')
       },
       {
         path: '/admin/reports/:projectId',
         props: true,
         component: () =>
-          import('components/Home/Admin/Reports/SingleReport/SingleReports.vue')
+          import('components/Admin/Reports/SingleReport/SingleReports.vue')
       }
     ]
   },
@@ -58,15 +58,10 @@ const routes: RouteConfig[] = [
 
     component: () => import('components/Home/LandingPage/LandingPage.vue'),
     children: [
-    
-
-      {
-        path: '/public/my-projects',
-        component: () => import('components/MyProjects/MyProjects.vue')
-      },
+  
       {
         path: '/public/my-projects/:projectId',
-        component: () => import('components/ProjectCreate/ProjectCreate.vue')
+        component: () => import('components/Public/ProjectCreate/ProjectCreate.vue')
       }
     ]
   },

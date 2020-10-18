@@ -25,19 +25,17 @@ import { geoCentroid } from 'd3-geo';
 
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
-import Tinkhundla from '../../../../../mixins/Tinkhundla';
+import Tinkhundla from 'src/mixins/Tinkhundla';
 
-import region from './../../../.././../core/geojson/eswatini_region_layer.json';
-
-import region_na from './../../../.././../core/geojson/regions_na.json';
-import inkhundla_na from './../../../.././../core/geojson/inkhundla_na.json';
+import region_na from 'src/core/geojson/regions_na.json';
+import inkhundla_na from 'src/core/geojson/inkhundla_na.json';
 
 import {
   transformGeojson,
   convertToRange,
   getMin,
   getMax
-} from './../../../../../core/handlers/map';
+} from 'src/core/handlers/map';
 
 import ToggleButton from './ToggleButton.vue';
 

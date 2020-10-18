@@ -65,7 +65,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { StakeHoldersOptions } from './../../core/Additional/Contstants';
+import { StakeHoldersOptions } from 'src/core/Additional/Contstants';
 
 export default Vue.extend({
   name: 'SectionSeven',

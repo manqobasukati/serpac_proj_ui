@@ -17,7 +17,7 @@ import Chart from 'chart.js';
 import {
   createLabelArray,
   createDataArray
-} from '../../../../../core/handlers/graph';
+} from 'src/core/handlers/graph';
 
 export default Vue.extend({
   name: 'StackedGraph',

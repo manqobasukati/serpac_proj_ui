@@ -89,7 +89,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { FILTERS } from './../../core/helpers/filters';
+import { FILTERS } from 'src/core/helpers/filters';
 
 export default Vue.extend({
   name: 'SectionFive',

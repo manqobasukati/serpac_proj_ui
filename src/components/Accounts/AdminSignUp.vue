@@ -88,8 +88,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { create_user } from '../../core/RequestHandler/user_management';
-import { user_form_validate } from '../../core/helpers/form_validation';
+import { create_user } from 'src/core/RequestHandler/user_management';
+import { user_form_validate } from 'src/core/helpers/form_validation';
 export default Vue.extend({
   name: 'AdminSignUp',
   data() {

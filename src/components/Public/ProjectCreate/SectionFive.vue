@@ -62,7 +62,7 @@ import {
   ExternallySourcedInputsOptions,
   LocallySourcedInputsOptions,
   ProjectSkillsOptions
-} from './../../core/Additional/Contstants';
+} from 'src/core/Additional/Contstants';
 
 export default Vue.extend({
   name: 'SectionSix',

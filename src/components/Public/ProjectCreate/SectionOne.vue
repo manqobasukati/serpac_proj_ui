@@ -103,7 +103,7 @@ import { TinkhundlaOptions } from 'src/core/Additional/Contstants';
 import {
   EconomicSectors,
   ProjectExistence
-} from './../../core/Additional/Contstants';
+} from 'src/core/Additional/Contstants';
 
 import MapSelect from './MapSelect.vue';
 
