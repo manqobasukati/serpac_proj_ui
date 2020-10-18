@@ -2,20 +2,31 @@ import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [
   {
-    path: '/landing-page',
-    name: 'landingPage',
-    component: () => import('components/Home/LandingPage/LandingPage.vue')
-  },
-  {
     path: '/public-sign-up',
     name: 'PublicSignUp',
     component: () => import('components/Accounts/PublicSignUp.vue')
   },
   {
+    path: '/public-sign-in',
+    name: 'PublicSignIn',
+    component: () => import('components/Accounts/PublicSignIn.vue')
+  },
+  {
+    path: '/public',
+    name: 'public',
+    component: () => import('components/Home/Public/Public.vue'),
+    children: [
+      {
+        path: '/public/project-create',
+        component: () => import('components/ProjectCreate/ProjectCreate.vue')
+      }
+    ]
+  },
+  {
     path: '/admin',
     name: 'admin',
-    redirect: '/admin/reports/all',
-    component: () => import('components/Home/Admin/NewAdmin.vue'),
+
+    component: () => import('components/Home/Admin/Admin.vue'),
     children: [
       {
         path: '/admin/reports/all',
@@ -30,11 +41,6 @@ const routes: RouteConfig[] = [
       }
     ]
   },
-  {
-    path: '/public-sign-in',
-    name: 'PublicSignIn',
-    component: () => import('components/Accounts/PublicSignIn.vue')
-  },
 
   {
     path: '/admin-sign-up',
@@ -46,48 +52,13 @@ const routes: RouteConfig[] = [
     name: 'AdminSignIn',
     component: () => import('components/Accounts/AdminSignIn.vue')
   },
-  {
-    path: '/public',
-    name: 'public',
-    component: () => import('components/Home/Public/Public.vue'),
-    children: [
-      {
-        path: '/public/project-create',
-        component: () => import('components/ProjectCreate/ProjectCreate.vue'),
-        children: [
-          {
-            path: '/public/project/:section',
-            component: () =>
-              import('components/ProjectCreate/FormSections/GenericSection.vue')
-          }
-        ]
-      }
-    ]
-  },
+
   {
     path: '/',
-    redirect: '/home',
+
     component: () => import('components/Home/LandingPage/LandingPage.vue'),
     children: [
-      {
-        path: '/admin/users',
-        component: () => import('components/Home/Users/Users.vue')
-      },
-
-      {
-        path: '/home',
-        name: 'home',
-        component: () =>
-          import('components/Home/LandingPage/LandingPageContent.vue')
-      },
-      {
-        path: '/admin/all-projects',
-        component: () => import('components/Home/Admin/AllProjects.vue')
-      },
-      {
-        path: '/admin/all-projects/:projectId',
-        component: () => import('components/Home/Admin/ViewProject.vue')
-      },
+    
 
       {
         path: '/public/my-projects',
@@ -95,14 +66,7 @@ const routes: RouteConfig[] = [
       },
       {
         path: '/public/my-projects/:projectId',
-        component: () => import('components/ProjectCreate/ProjectCreate.vue'),
-        children: [
-          {
-            path: '/public/my-projects/:projectId/:section',
-            component: () =>
-              import('components/ProjectCreate/FormSections/GenericSection.vue')
-          }
-        ]
+        component: () => import('components/ProjectCreate/ProjectCreate.vue')
       }
     ]
   },
