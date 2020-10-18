@@ -28,6 +28,7 @@ export interface ProjectModel {
     economy_sector: string;
     project_existense: string;
     name_of_investor: string;
+    project_status?:string;
   };
   project_value: {
     total_inv_value: string;
