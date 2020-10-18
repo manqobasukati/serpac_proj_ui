@@ -57,7 +57,6 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 import { FILTERS } from 'src/core/helpers/filters';
 
-import ProjectCreateSidebar from './ProjectCreateSidebar.vue';
 
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import { MODULES } from 'src/store';

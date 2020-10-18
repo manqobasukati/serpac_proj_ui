@@ -37,9 +37,9 @@ export default Vue.extend({
     projects() {
       if (this.projects) {
         //this.createChart();
-        void Promise.resolve((resolve: any, reject: any) => {
+        void Promise.resolve((resolve: any) => {
           resolve(this.projects);
-        }).then(val => {
+        }).then(() => {
           this.createChart(this.projects);
         });
       }

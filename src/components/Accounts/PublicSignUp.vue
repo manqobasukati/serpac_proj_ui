@@ -121,7 +121,7 @@ export default Vue.extend({
       if (!this.sign_up_message) {
         this.$q.loading.show();
         create_user(request)
-          .then(val => {
+          .then(() => {
             //Navigate to login
 
             void this.$router.push({ path: '/public-sign-in' });

@@ -101,7 +101,7 @@ export default Vue.extend({
         surname: '',
         email: '',
         password: '',
-        phone_number:''
+        phone_number: ''
       }
     };
   },
@@ -114,7 +114,7 @@ export default Vue.extend({
         meta: {
           firstname: this.user_data.firstname,
           lastname: this.user_data.surname,
-          phone_number:this.user_data.phone_number
+          phone_number: this.user_data.phone_number
         }
       };
 
@@ -123,8 +123,7 @@ export default Vue.extend({
       if (!this.sign_up_message) {
         this.$q.loading.show();
         create_user(request)
-          .then(val => {
-          
+          .then(() => {
             void this.$router.push({ path: '/admin-sign-in' });
             this.$q.loading.hide();
           })
