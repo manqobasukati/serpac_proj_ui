@@ -1,7 +1,7 @@
 <template>
   <div class="tw-flex tw-flex-row">
     <top-navigation />
-    <div class=" tw-h-full">
+    <div class=" tw-h-full tw-w-full">
       <router-view />
     </div>
   </div>

@@ -52,18 +52,18 @@ export const TableStructure = [
       return `${val}`;
     }
   },
-  {
-    name: 'project_existense',
-    required: true,
-    label: 'Existence',
-    align: 'left',
-    field: (row: ProjectModel) => {
-      return row.project_description.project_existense;
-    },
-    format: (val: string) => {
-      return `${val}`;
-    }
-  },
+  // {
+  //   name: 'project_existense',
+  //   required: true,
+  //   label: 'Existence',
+  //   align: 'left',
+  //   field: (row: ProjectModel) => {
+  //     return row.project_description.project_existense;
+  //   },
+  //   format: (val: string) => {
+  //     return `${val}`;
+  //   }
+  // },
   {
     name: 'total_inv_value',
     required: true,
@@ -136,28 +136,28 @@ export const TableStructure = [
       return `${val.join(',')}`;
     }
   },
-  {
-    name: 'local_sourced_inputs',
-    required: true,
-    label: 'Locally sourced inputs',
-    align: 'left',
-    field: (row: ProjectModel) => {
-      return row.opportunities.local_sourced_inputs;
-    },
-    format: (val: string[]) => {
-      return `${val.join(',')}`;
-    }
-  },
-  {
-    name: 'external_sourced_inputs',
-    required: true,
-    label: 'Externally sourced inputs',
-    align: 'left',
-    field: (row: ProjectModel) => {
-      return row.opportunities.external_sourced_inputs;
-    },
-    format: (val: string[]) => {
-      return `${val.join(',')}`;
-    }
-  }
+  // {
+  //   name: 'local_sourced_inputs',
+  //   required: true,
+  //   label: 'Locally sourced inputs',
+  //   align: 'left',
+  //   field: (row: ProjectModel) => {
+  //     return row.opportunities.local_sourced_inputs;
+  //   },
+  //   format: (val: string[]) => {
+  //     return `${val.join(',')}`;
+  //   }
+  // },
+  // {
+  //   name: 'external_sourced_inputs',
+  //   required: true,
+  //   label: 'Externally sourced inputs',
+  //   align: 'left',
+  //   field: (row: ProjectModel) => {
+  //     return row.opportunities.external_sourced_inputs;
+  //   },
+  //   format: (val: string[]) => {
+  //     return `${val.join(',')}`;
+  //   }
+  // }
 ];

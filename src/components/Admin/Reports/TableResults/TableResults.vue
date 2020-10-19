@@ -28,7 +28,7 @@ export default Vue.extend({
   watch: {
     selected() {
       const item = this.selected[0] as ProjectModel;
-      console.log('Item =>', item);
+    
       
       this.$emit('setView', { view: 'single', projectId: item._id });
       // this.$router

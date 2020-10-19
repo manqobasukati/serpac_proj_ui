@@ -4,7 +4,7 @@
   >
     <div class="tw-flex tw-flex-col">
       <div class="tw-flex tw-flex-row tw-mt-3">
-        <toggle-button class="tw-ml-32" v-on:toggleValue="changeMap" />
+        <toggle-button  class="tw-ml-32" v-on:toggleValue="changeMap" />
       </div>
       <svg
         id="my_dataviz"

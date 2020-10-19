@@ -1,7 +1,7 @@
 <template>
   <div class="" >
     <div
-      class="tw-flex tw-h-full   tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg"
+      class="tw-flex  tw-overflow-y-scroll    tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg data__point_style"
     >
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-lg tw-font-medium tw-px-4 tw-py-5">Data Points</div>
@@ -183,7 +183,7 @@
           <div class="tw-w-full tw-mt-3">
             <button
               @click="onSearchProjects()"
-              class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-bg-blue-300 tw-rounded-lg tw-shadow-sm tw-text-xs"
+              class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-mb-6 tw-bg-blue-300 tw-rounded-lg tw-shadow-sm tw-text-xs"
             >
               Search
             </button>
@@ -255,3 +255,10 @@ export default Vue.extend({
   }
 });
 </script>
+
+
+<style scoped>
+  .data__point_style{
+    height: 88vh;
+  }
+</style>

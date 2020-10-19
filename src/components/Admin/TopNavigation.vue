@@ -1,6 +1,6 @@
 <template>
   <div class="tw-absolute tw-top-0 tw-right-0 tw-w-1/3">
-    <div class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-full ">
+    <div class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-full tw-shadow-md tw-z-100 ">
       <div class="tw-flex tw-flex-1 tw-justify-between">
         <div class="tw-flex tw-inline-row tw-pl-6 ">
           <div

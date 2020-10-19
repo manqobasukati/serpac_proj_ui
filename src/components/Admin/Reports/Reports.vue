@@ -1,12 +1,12 @@
 <template>
-  <div class="tw-flex tw-h-full tw-w-full tw-flex-row report__page tw-pt-12 tw-items-stretch" >
-    <data-point-filter class="tw-ml-5" @requestParameters="getProjects" />
+  <div class="tw-flex tw-h-full tw-w-full tw-flex-row report__page  tw-items-stretch" >
+    <data-point-filter class="tw-ml-5 tw-pt-16" @requestParameters="getProjects" />
 
-    <div v-if="view === 'multiple'" class="tw-flex tw-flex-col  tw-pl-6 tw-justify-self-center tw-flex-1">
-      <div class="">
+    <div v-if="view === 'multiple'" class="tw-flex tw-flex-col  tw-pl-6 tw-justify-self-center tw-flex-1  tw-overflow-y-scroll">
+      <div class="tw-pt-16">
         <highlights-bar :projects="projects" />
       </div>
-      <div class="tw-flex tw-flex-row">
+      <div class="tw-flex tw-flex-row" >
         <div class="tw-flex tw-flex-1">
           <div class="tw-py-3 tw-w-full ">
             <stacked-graph :projects="projects" />
@@ -116,5 +116,9 @@ export default Vue.extend({
 div.report__page {
  
   background-color: #fbfeff;
+}
+
+div.content__page{
+  height: 96vh;
 }
 </style>

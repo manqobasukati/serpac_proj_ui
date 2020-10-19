@@ -1,5 +1,5 @@
 <template>
-  <div id="q-app" class="tw-w-screen tw-h-screen">
+  <div id="q-app" class="tw-w-screen tw-h-screen tw-overflow-hidden">
     <router-view class="tw-h-full tw-w-full"/>
   </div>
 </template>

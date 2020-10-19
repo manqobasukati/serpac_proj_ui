@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
+      class="tw-w-full tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
       <div class="tw-pt-10">
         <canvas ref="stackedChart"></canvas>

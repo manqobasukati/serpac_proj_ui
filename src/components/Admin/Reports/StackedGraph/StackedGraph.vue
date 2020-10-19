@@ -1,11 +1,9 @@
 <template>
-  <div class="tw-min-w-64">
-    <div
-      class="tw-flex tw-justify-center tw-items-center tw-w-full tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
-    >
-      <div v-if="projects" class="tw-w-full tw-h-full tw-py-8">
-        <canvas ref="stackedChart"></canvas>
-      </div>
+  <div
+    class="tw-flex tw-justify-center tw-items-center  tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
+  >
+    <div v-if="projects" class=" tw-h-full tw-py-8">
+      <canvas ref="stackedChart"></canvas>
     </div>
   </div>
 </template>
@@ -14,18 +12,13 @@
 import Vue from 'vue';
 import Chart from 'chart.js';
 
-import {
-  createLabelArray,
-  createDataArray
-} from 'src/core/handlers/graph';
+import { createLabelArray, createDataArray } from 'src/core/handlers/graph';
 
 export default Vue.extend({
   name: 'StackedGraph',
   props: ['projects'],
   mounted() {
     if (this.projects) {
-     
-     
       void Promise.resolve((resolve: any, reject: any) => {
         resolve(this.projects);
       }).then(val => {
