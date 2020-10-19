@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="tw-min-w-64">
     <div
-      class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
+      class="tw-flex tw-justify-center tw-items-center tw-w-full tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
-      <div v-if="projects" class="tw-pt-10">
+      <div v-if="projects" class="tw-w-full tw-h-full tw-py-8">
         <canvas ref="stackedChart"></canvas>
       </div>
     </div>
@@ -25,7 +25,7 @@ export default Vue.extend({
   mounted() {
     if (this.projects) {
      
-      //this.createChart();
+     
       void Promise.resolve((resolve: any, reject: any) => {
         resolve(this.projects);
       }).then(val => {

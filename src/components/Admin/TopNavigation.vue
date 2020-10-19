@@ -1,7 +1,7 @@
 <template>
   <div class="tw-absolute tw-top-0 tw-right-0 tw-w-1/3">
-    <div class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-12 ">
-      <div class="tw-flex tw-flex-1">
+    <div class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-full ">
+      <div class="tw-flex tw-flex-1 tw-justify-between">
         <div class="tw-flex tw-inline-row tw-pl-6 ">
           <div
             v-for="(item, key) in items"
@@ -19,19 +19,18 @@
             </div>
           </div>
         </div>
-        <div class="tw-flex-1">
-          <div class="tw-ml-56 tw-py-3">
-            <q-icon
-              @click="logout()"
-              size="22px"
-              class="tw-p-1 tw-ml-2 tw-mr-1 tw-text-blue-500 "
-              name="logout"
-            >
-            </q-icon>
-            <q-tooltip>
-              Logout
-            </q-tooltip>
-          </div>
+
+        <div class=" tw-py-3">
+          <q-icon
+            @click="logout()"
+            size="22px"
+            class="tw-p-1 tw-ml-2 tw-mr-1 tw-text-blue-500 "
+            name="logout"
+          >
+          </q-icon>
+          <q-tooltip>
+            Logout
+          </q-tooltip>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="tw-h-full">
+  <div class="" >
     <div
-      class="tw-w-64 tw-h-full tw-mb-2 tw-ml-5 tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg"
+      class="tw-flex tw-h-full   tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg"
     >
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-lg tw-font-medium tw-px-4 tw-py-5">Data Points</div>
@@ -242,8 +242,8 @@ export default Vue.extend({
       }
     };
   },
-  mounted(){
-    console.log('G =>',TinkhundlaOptions())
+  mounted() {
+    console.log('G =>', TinkhundlaOptions());
   },
   methods: {
     onSearchProjects() {

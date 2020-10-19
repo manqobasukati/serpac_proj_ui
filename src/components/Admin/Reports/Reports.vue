@@ -1,31 +1,30 @@
 <template>
-  <div class="row report__page  tw-mt-8">
-    <div class="col-2">
-      <data-point-filter @requestParameters="getProjects" />
-    </div>
-    <div v-if="view === 'multiple'" class="col">
-      <div class="row">
+  <div class="tw-flex tw-h-full tw-w-full tw-flex-row report__page tw-pt-12 tw-items-stretch" >
+    <data-point-filter class="tw-ml-5" @requestParameters="getProjects" />
+
+    <div v-if="view === 'multiple'" class="tw-flex tw-flex-col  tw-pl-6 tw-justify-self-center tw-flex-1">
+      <div class="">
         <highlights-bar :projects="projects" />
       </div>
-      <div class="row">
-        <div class="col">
-          <div class="tw-py-3 ">
+      <div class="tw-flex tw-flex-row">
+        <div class="tw-flex tw-flex-1">
+          <div class="tw-py-3 tw-w-full ">
             <stacked-graph :projects="projects" />
           </div>
         </div>
-        <div class="col">
-          <div class="tw-py-3 tw-ml-3 tw-mr-6">
+        <div class="tw-flex tw-flex-1">
+          <div class="tw-py-3 tw-ml-3 tw-mr-6 tw-w-full">
             <line-chart />
           </div>
         </div>
-        <div class="col">
-          <div class="tw-py-3 tw-mr-6">
+        <div class="tw-flex tw-flex-1">
+          <div class="tw-py-3 tw-mr-6 tw-w-full">
             <scatter-chart :projects="projects" />
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
+      <div class="tw-flex ">
+        <div class="">
           <table-results
             :TableData="projects"
             class="tw-mr-6"
@@ -115,7 +114,7 @@ export default Vue.extend({
 
 <style scoped>
 div.report__page {
-  height: 85vh;
+ 
   background-color: #fbfeff;
 }
 </style>

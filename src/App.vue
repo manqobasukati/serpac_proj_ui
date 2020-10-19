@@ -1,6 +1,6 @@
 <template>
-  <div id="q-app">
-    <router-view />
+  <div id="q-app" class="tw-w-screen tw-h-screen">
+    <router-view class="tw-h-full tw-w-full"/>
   </div>
 </template>
 <script lang="ts">
