@@ -10,23 +10,27 @@
             type="text"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.total_inv_value"
+            :disabled="context === 'admin_inbox'"
             placeholder="Total investment value"
           />
           <input
             type="text"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.funding_status"
+            :disabled="context === 'admin_inbox'"
             placeholder="Funding status"
           />
           <input
             type="text"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.percentage_of_funding"
+            :disabled="context === 'admin_inbox'"
             placeholder="Percentage of funding"
           />
           <input
             type="text"
             v-model="FormData.project_value.project_scope"
+            :disabled="context === 'admin_inbox'"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             placeholder="Local or FDI"
           />
@@ -36,6 +40,7 @@
       <div class="tw-flex tw-flex-row tw-justify-end">
         <div class="">
           <button
+            v-if="context !== 'admin_inbox'"
             @click="Save()"
             class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
           >
@@ -51,6 +56,12 @@
 import Vue from 'vue';
 export default Vue.extend({
   name: 'SectionTwo',
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
+  },
+  props: ['context', 'FormD'],
   data() {
     return {
       FormData: {
@@ -63,10 +74,9 @@ export default Vue.extend({
       }
     };
   },
-  methods:{
-    Save(){
-      this.$emit('updateForm', this.FormData)
-     
+  methods: {
+    Save() {
+      this.$emit('updateForm', this.FormData);
     }
   }
 });

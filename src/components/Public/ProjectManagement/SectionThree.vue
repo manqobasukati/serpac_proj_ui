@@ -10,21 +10,24 @@
           class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
           placeholder="Temporal jobs"
           v-model="FormData.expected_jobs.temporal_jobs"
+          :disabled="context === 'admin_inbox'"
         />
         <input
           type="text"
           class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
           placeholder="Permanent jobs"
           v-model="FormData.expected_jobs.permanent_jobs"
+          :disabled="context === 'admin_inbox'"
         />
       </div>
     </div>
-    
+
     <div class="tw-flex tw-flex-row tw-justify-end">
       <div class="">
         <button
           @click="Save()"
-          class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+          v-if="context !== 'admin_inbox'"
+          class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-2 tw-mr-2"
         >
           Save
         </button>
@@ -37,6 +40,12 @@
 import Vue from 'vue';
 export default Vue.extend({
   name: 'SectionFour',
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
+  },
+  props: ['context', 'FormD'],
   data() {
     return {
       FormData: {

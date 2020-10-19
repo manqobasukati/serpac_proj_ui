@@ -2,7 +2,7 @@
   <div
     class="tw-flex tw-justify-center tw-items-center  tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
   >
-    <div v-if="projects" class=" tw-h-full tw-py-8">
+    <div v-if="projects" class="tw-w-full tw-h-full tw-py-8">
       <canvas ref="stackedChart"></canvas>
     </div>
   </div>

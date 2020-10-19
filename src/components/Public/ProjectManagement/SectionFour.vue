@@ -13,18 +13,21 @@
                 v-model="phase.name"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="Phase name"
+                :disabled="context === 'admin_inbox'"
               />
               <input
                 type="date"
                 v-model="phase.start_date"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="Start date"
+                :disabled="context === 'admin_inbox'"
               />
               <input
                 type="date"
                 v-model="phase.end_data"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="End data"
+                :disabled="context === 'admin_inbox'"
               />
             </div>
             <div class="tw-flex tw-flex-col tw-p-3 tw-ml-10">
@@ -56,6 +59,7 @@
                   <input
                     type="text"
                     v-model="single_meta.value"
+                    :disabled="context === 'admin_inbox'"
                     class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                     :placeholder="single_meta.name"
                   />
@@ -76,6 +80,7 @@
           <div class="">
             <button
               @click="Save()"
+              v-if="context !== 'admin_inbox'"
               class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-2 tw-mr-2"
             >
               Save
@@ -93,6 +98,7 @@ import { FILTERS } from 'src/core/helpers/filters';
 
 export default Vue.extend({
   name: 'SectionFive',
+  props: ['context', 'FormD'],
   data() {
     return {
       selectOptions: ['temporal_jobs', 'permanent_jobs', 'total_inv_value'],
@@ -109,6 +115,12 @@ export default Vue.extend({
       }
     };
   },
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
+  },
+
   filters: {
     ...FILTERS
   },

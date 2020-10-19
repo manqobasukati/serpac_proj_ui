@@ -38,9 +38,20 @@ const routes: RouteConfig[] = [
   {
     path: '/admin',
     name: 'admin',
-
     component: () => import('components/Admin/Admin.vue'),
     children: [
+      {
+        path:'/admin/inbox',
+        component:()=> import('components/Admin/Inbox/Inbox.vue'),
+        children:[
+          {
+            path:'/admin/inbox/:projectId',
+            props:true,
+            component:()=> import('components/Admin/Inbox/ProjectView.vue'),
+          }
+        ]
+      },
+
       {
         path: '/admin/reports/all',
         name: 'content_reports',

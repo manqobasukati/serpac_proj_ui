@@ -16,6 +16,7 @@
               class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
               placeholder="Issue here"
               v-model="issue.name"
+              :disabled="context === 'admin_inbox'"
             />
             <q-select
               use-chips
@@ -26,6 +27,7 @@
               label="Enabler"
               v-model="issue.stake_holder"
               dense
+              :disabled="context === 'admin_inbox'"
             />
           </div>
           <div class="tw-p-2 tw-ml-10">
@@ -33,13 +35,14 @@
               type="text"
               class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
               placeholder="Add comment about issue"
-              :disabled="!issue.name"
+              :disabled="!issue.name && context === 'admin_inbox'"
             />
           </div>
         </div>
 
         <div class="tw-flex tw-flex-row tw-justify-end tw-p-2">
           <div
+            v-if="context !== 'admin_inbox'"
             @click="addPhase"
             class="tw-rounded-full tw-shadow tw-px-2 tw-w-8"
           >
@@ -51,6 +54,7 @@
       <div class="tw-flex tw-flex-row tw-justify-end">
         <div class="">
           <button
+            v-if="context !== 'admin_inbox'"
             @click="Save()"
             class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
           >
@@ -69,6 +73,7 @@ import { StakeHoldersOptions } from 'src/core/Additional/Contstants';
 
 export default Vue.extend({
   name: 'SectionSeven',
+  props: ['context', 'FormD'],
   data() {
     return {
       StakeHoldersOptions,
@@ -81,6 +86,11 @@ export default Vue.extend({
         ]
       }
     };
+  },
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
   },
   methods: {
     Save() {

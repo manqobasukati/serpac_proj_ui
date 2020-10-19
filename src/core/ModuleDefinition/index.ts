@@ -13,9 +13,9 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
     name: 'admin',
     modules: [
       {
-        name: 'all_projects',
+        name: 'inbox',
         link: '/admin/all-projects',
-        icon: 'folder',
+        icon: 'inbox',
         modules: []
       },
       {
@@ -26,7 +26,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
       },
 
       {
-        name: 'work_groups',
+        name: 'users',
         link: '/admin/user',
         icon: 'group',
         modules: []

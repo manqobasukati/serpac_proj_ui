@@ -16,6 +16,7 @@
             class="proj-form-input tw-h-10 tw-my-1"
             label="project skills"
             dense
+            :disabled="context === 'admin_inbox'"
           />
           <q-select
             multiple
@@ -26,6 +27,7 @@
             v-model="FormData.opportunities.local_sourced_inputs"
             class="proj-form-input tw-h-10  tw-my-1"
             label="Locally sourced inputs"
+            :disabled="context === 'admin_inbox'"
             dense
           />
           <q-select
@@ -37,6 +39,7 @@
             v-model="FormData.opportunities.external_sourced_inputs"
             class="proj-form-input tw-h-10  tw-my-1"
             label="Externally sourced inputs"
+            :disabled="context === 'admin_inbox'"
             dense
           />
         </div>
@@ -44,7 +47,8 @@
           <div class="">
             <button
               @click="Save()"
-              class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+              v-if="context !== 'admin_inbox'"
+              class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
             >
               Save
             </button>
@@ -66,6 +70,7 @@ import {
 
 export default Vue.extend({
   name: 'SectionSix',
+  props: ['context', 'FormD'],
   data() {
     return {
       ExternallySourcedInputsOptions,
@@ -79,6 +84,11 @@ export default Vue.extend({
         }
       }
     };
+  },
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
   },
   methods: {
     Save() {

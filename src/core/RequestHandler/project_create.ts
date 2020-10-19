@@ -12,6 +12,7 @@ export function get_project(data: string) {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
+      console.log('You are here',data)
       return data.payload as Promise<any>;
     })
     .catch(error => {
