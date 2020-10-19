@@ -96,11 +96,9 @@ export default Vue.extend({
         .dispatch(action)
         .then(() => {
           void this.$router.push({
-            path: `/public/project-create`,
+            path: `/public/project/${project._id as string}`,
             query: { projectId: project._id as string },
-            params: {
-              projectId: project._id as string
-            }
+            
           });
         })
         .catch(() => {
@@ -114,7 +112,7 @@ export default Vue.extend({
     },
     changeRoute(link: string) {
       console.log('Link', link);
-      if (link === '/public/project-create') {
+      if (link === '/public/project') {
         void this.$router.push({ path: link });
       } else if (link === '/public/my-projects') {
         console.log('here', localStorage.getItem('serpac_tool_user_id'));

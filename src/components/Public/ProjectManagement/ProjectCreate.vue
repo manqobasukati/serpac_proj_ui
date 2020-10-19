@@ -13,33 +13,40 @@
               v-if="'Section 1' === active_section"
               class="tw-p-2 "
               @updateForm="updateForm"
+              :FormD="formData"
             />
             <section-two
               v-if="'Section 2' === active_section"
               class="tw-p-2"
               @updateForm="updateForm"
+              :FormD="formData"
             />
             <section-three
               v-if="'Section 3' === active_section"
               class="tw-p-2"
               @updateForm="updateForm"
+              :FormD="formData"
             />
             <section-four
               v-if="'Section 4' === active_section"
               class="tw-p-2"
               @updateForm="updateForm"
+              :FormD="formData"
             />
             <section-five
               v-if="'Section 5' === active_section"
               @updateForm="updateForm"
+              :FormD="formData"
               class="tw-p-2"
             />
             <section-six
               v-if="'Section 6' === active_section"
+              :FormD="FormData"
               @updateForm="updateForm"
             />
-             <section-seven
+            <section-seven
               v-if="'Section 7' === active_section"
+              :FormD="FormData"
               @updateForm="updateForm"
             />
           </div>
@@ -57,7 +64,6 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 import { FILTERS } from 'src/core/helpers/filters';
 
-
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import { MODULES } from 'src/store';
 
@@ -71,7 +77,10 @@ import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
-import { project_create } from 'src/core/RequestHandler/project_create';
+import {
+  get_project,
+  project_create
+} from 'src/core/RequestHandler/project_create';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
@@ -87,6 +96,7 @@ export default Vue.extend({
     SectionSix,
     SectionSeven
   },
+  props: ['projectId'],
   data() {
     return {
       active_section: 'Section 1',
@@ -97,14 +107,16 @@ export default Vue.extend({
     ...FILTERS
   },
   watch: {
-    get_project() {
-      console.log('Log');
-      // if (this.$route.params) {
-      //   const data = this.get_project;
-
-      //   this.$data.formData = map_form_model(data as ProjectModel);
-      //   console.log('Formdata', this.$data.formData);
-      // }
+    projectId() {
+      console.log('Log =>', this.projectId);
+      get_project(this.projectId)
+        .then(val => {
+          console.log('Value', val);
+          this.formData = val[0];
+        })
+        .catch(e => {
+          console.error(e);
+        });
     }
   },
   methods: {
@@ -127,7 +139,6 @@ export default Vue.extend({
 
           project_create(result as ProjectModel)
             .then(val => {
-             
               this.formData = val;
               this.$route.params.projectId = val._id;
               console.log(this.$route.params);

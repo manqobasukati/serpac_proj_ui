@@ -24,12 +24,13 @@ const routes: RouteConfig[] = [
     component: () => import('components/Accounts/PublicSignIn.vue')
   },
   {
-    path: '/public',
+    path: '/public/project',
     name: 'public',
     component: () => import('components/Public/Public.vue'),
     children: [
       {
-        path: '/public/project-create',
+        path: '/public/project/:projectId',
+        props:true,
         component: () =>
           import('components/Public/ProjectManagement/ProjectCreate.vue')
       }
