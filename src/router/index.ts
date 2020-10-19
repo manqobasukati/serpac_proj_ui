@@ -30,13 +30,13 @@ export default route<Store<StateInterface>>(function({ Vue }) {
       ![
         '/admin-sign-in',
         '/public-sign-in',
-        '/home',
+        '/',
         '/admin-sign-up',
         '/public-sign-up'
       ].includes(to.path) &&
       !isAuthenticated()
     ) {
-      next({ path: '/home' });
+      next({ path: '/' });
     } else {
       next();
     }

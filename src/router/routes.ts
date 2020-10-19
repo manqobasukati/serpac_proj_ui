@@ -2,6 +2,18 @@ import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [
   {
+    path: '/',
+
+    component: () => import('components/Home/LandingPage/LandingPage.vue'),
+    children: [
+      {
+        path: '/public/my-projects/:projectId',
+        component: () =>
+          import('components/Public/ProjectManagement/ProjectCreate.vue')
+      }
+    ]
+  },
+  {
     path: '/public-sign-up',
     name: 'PublicSignUp',
     component: () => import('components/Accounts/PublicSignUp.vue')
@@ -18,7 +30,8 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: '/public/project-create',
-        component: () => import('components/Public/ProjectManagement/ProjectCreate.vue')
+        component: () =>
+          import('components/Public/ProjectManagement/ProjectCreate.vue')
       }
     ]
   },
@@ -51,19 +64,6 @@ const routes: RouteConfig[] = [
     path: '/admin-sign-in',
     name: 'AdminSignIn',
     component: () => import('components/Accounts/AdminSignIn.vue')
-  },
-
-  {
-    path: '/',
-
-    component: () => import('components/Home/LandingPage/LandingPage.vue'),
-    children: [
-  
-      {
-        path: '/public/my-projects/:projectId',
-        component: () => import('components/Public/ProjectManagement/ProjectCreate.vue')
-      }
-    ]
   },
 
   // Always leave this as last one,
