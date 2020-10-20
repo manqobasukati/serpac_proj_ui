@@ -1,16 +1,14 @@
 <template>
   <div>
-    <q-dialog :value="map_active">
-      <div class="tw-shadow tw-h-lg tw-w-full tw-bg-white">
-        <div ref="map"></div>
-      </div>
-    </q-dialog>
+    <div class="tw-shadow tw-h-md tw-w-full tw-bg-white">
+      <div ref="mappy" id="map"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl, { PointLike } from 'mapbox-gl';
 
 export default Vue.extend({
   name: 'MapSelect',
@@ -29,29 +27,28 @@ export default Vue.extend({
   },
 
   mounted() {
-    setTimeout(() => {
-      if (this.map_active) {
-        console.log(this.$refs.map);
-        try {
-          this.addMap();
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    }, 3000);
+    console.log(this.$refs.map);
+    try {
+      this.addMap();
+    } catch (e) {
+      console.log(e);
+    }
   },
   methods: {
     clicked() {
       this.$emit('set_map_active');
     },
     addMap() {
+      console.log('Adding me neh');
       mapboxgl.accessToken = this.mapbox_token;
 
       this.mapbox = new mapboxgl.Map({
-        container: this.$refs.map as HTMLElement,
+        container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
+
         center: [31.4629694, -26.5179414],
-        zoom: 7
+        zoom: 7,
+        preserveDrawingBuffer: true
       });
       this.mapbox?.on('click', e => {
         this.position.longitude = e.lngLat.lng;
@@ -61,12 +58,18 @@ export default Vue.extend({
           if (this.marker) {
             this.marker.remove();
           }
-
+          console.log(this.mapbox.getCanvas());
           this.marker = new mapboxgl.Marker()
             .setLngLat([this.position.longitude, this.position.latitude])
-            .addTo(this.mapbox);
+            .addTo(this.mapbox)
+            .setOffset({
+              x: (this.mapbox.getCanvas().width/2)-12,
+              y: -this.mapbox.getCanvas().height-12
+            } as PointLike);
 
-          console.log(this.marker);
+        
+          const coords =  [this.marker.getLngLat().lng,this.marker.getLngLat().lat];
+          this.$emit('coordinates',coords)
         }
       });
 
@@ -80,7 +83,7 @@ export default Vue.extend({
 #map {
   position: absolute;
 
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 25%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="tw-w-xxlg tw-h-lg tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4  "
+      class="tw-w-xxlg tw-h-full tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4  "
     >
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">Project Decription</div>
@@ -11,6 +11,7 @@
             class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
             placeholder="Project title"
             :disabled="context === 'admin_inbox'"
+            @focus="addHint('section_1', 'project_title')"
             v-model="FormData.project_description.title"
           />
           <q-select
@@ -21,6 +22,7 @@
             class="proj-form-input tw-h-8 tw-ml-3  tw-text-sm tw-text-gray-300"
             :options="economicSectorOptions"
             :disabled="context === 'admin_inbox'"
+            @focus="addHint('section_1', 'project_sector')"
             v-model="FormData.project_description.economy_sector"
           />
           <q-select
@@ -60,7 +62,7 @@
             placeholder="Inkhundla"
           />
 
-          <div class="tw-p-2">
+          <div class=" tw-pb-2 tw-px-2">
             <q-icon
               @click="set_map_active()"
               name="location_on"
@@ -72,6 +74,9 @@
           </div>
         </div>
       </div>
+      <div v-if="map_active" class="tw-flex tw-flex-col">
+        <map-select @coordinates="setPosition" />
+      </div>
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">More</div>
         <div class="tw-flex tw-flex-col tw-p-2">
@@ -80,11 +85,13 @@
             v-model="FormData.project_description.name_of_investor"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm"
             :disabled="context === 'admin_inbox'"
+            @focus="addHint('section_1', 'project_investor_name')"
             placeholder="Investor name"
           />
           <textarea
             class="proj-form-input tw-mt-2  tw-text-sm tw-h-20"
             v-model="FormData.project_description.description"
+            @focus="addHint('section_1', 'project_description')"
             placeholder="Please give a concise project description"
             :disabled="context === 'admin_inbox'"
           />
@@ -102,7 +109,6 @@
         </div>
       </div>
     </div>
-    <map-select @set_map_active="set_map_active" :map_active="map_active" />
   </div>
 </template>
 
@@ -118,6 +124,10 @@ import {
 } from 'src/core/Additional/Contstants';
 
 import MapSelect from './MapSelect.vue';
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { hints } from './hints';
+import { HintInterface } from 'src/store/project_create/state';
 
 export default Vue.extend({
   components: {
@@ -129,7 +139,7 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 1', this.FormD)
+    console.log('Section 1', this.FormD);
     this.FormData = this.FormD;
   },
   data() {
@@ -150,9 +160,10 @@ export default Vue.extend({
           description: '',
           project_location: {
             type: 'Point',
+            coordinates: null as null | number[],
             properties: {
-              inkhundla: 'SIPHOCOSINI',
-              region: 'HhoHho'
+              inkhundla: '',
+              region: ''
             }
           }
         }
@@ -161,7 +172,28 @@ export default Vue.extend({
   },
   props: ['context', 'FormD'],
   methods: {
+    addHint(section: string, field_name: string) {
+      console.log('Projects');
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
+
+      const hint = hints[section].find((val: HintInterface) => {
+        return val.field_name === field_name;
+      });
+      this.$store
+        .dispatch(action, hint)
+        .then(val => {
+          console.log('Val', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    setPosition(data: number[]) {
+      this.FormData.project_description.project_location.coordinates = data;
+      console.log(this.FormData);
+    },
     set_map_active() {
+      this.addHint('section_1', 'project_map');
       this.map_active = !this.map_active;
     },
 

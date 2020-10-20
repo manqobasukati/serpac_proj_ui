@@ -17,7 +17,9 @@ export enum PROJECT_CREATE_ACTIONS {
   UPDATE_FORM_DATA = 'update_form_data',
   UPDATE_FORM_DATE_STATE = 'update_form_data_state',
   CURRENT_USER_PROJECTS = 'current_user_projects',
-  REMOVE_PROJECT = 'remove_project'
+  REMOVE_PROJECT = 'remove_project',
+  ADD_HINT = 'add_hint',
+  REMOVE_HINT = 'remove_hint'
 }
 
 const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
@@ -70,6 +72,13 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
         context.commit(PROJECT_CREATE_MUTATIONS.REMOVE_PROJECT, val);
       })
       .catch(e => console.error(e));
+  },
+  [PROJECT_CREATE_ACTIONS.ADD_HINT](context, payload) {
+    context.commit(PROJECT_CREATE_MUTATIONS.ADD_HINT, payload);
+  },
+  [PROJECT_CREATE_ACTIONS.REMOVE_HINT](context, payload) {
+   
+    context.commit(PROJECT_CREATE_MUTATIONS.REMOVE_HINT, payload);
   }
 };
 

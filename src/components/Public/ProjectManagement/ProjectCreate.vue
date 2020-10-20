@@ -50,8 +50,8 @@
               @updateForm="updateForm"
             />
           </div>
-          <div class="tw-flex  tw-p-16 tw-bg-gray-100">
-            <div class="tw-text-md">Hint box comes here</div>
+          <div class="tw-flex  tw-p-2 tw-bg-gray-100">
+            <hint-box />
           </div>
         </div>
       </div>
@@ -75,6 +75,7 @@ import SectionFour from './SectionFour.vue';
 import SectionFive from './SectionFive.vue';
 import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
+import HintBox from './HintBox.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
 import {
@@ -94,7 +95,8 @@ export default Vue.extend({
     SectionFour,
     SectionFive,
     SectionSix,
-    SectionSeven
+    SectionSeven,
+    HintBox
   },
   props: ['projectId'],
   data() {
@@ -128,8 +130,8 @@ export default Vue.extend({
           .catch(e => {
             console.error(e);
           });
-      }else{
-        //assume that project is being created 
+      } else {
+        //assume that project is being created
         this.formData = ModelObj;
       }
     }
@@ -165,7 +167,6 @@ export default Vue.extend({
       } else {
         project_create(this.formData as ProjectModel)
           .then(val => {
-          
             this.formData = val;
             this.$route.params.projectId = val._id;
             console.log(this.$route.params);
