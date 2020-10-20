@@ -2,15 +2,19 @@
   <div>
     <div class="tw-flex tw-flex-row">
       <div class="tw-flex tw-w-1/8 tw-flex-col tw-pt-24 tw-pl-8">
-        <lane
+        <div
           v-for="(group, key) in get_current_projects"
           :key="key"
-          :lane_name="group[0].project_status"
-          :projects="group"
-          :expand="expandedLane === group[0].project_status"
-          @expandLane="setExpandedLane"
-        />
         
+        >
+          <lane
+            v-if="group.length >= 1"
+            :lane_name="group[0].project_status"
+            :projects="group"
+            :expand="expandedLane === group[0].project_status"
+            @expandLane="setExpandedLane"
+          />
+        </div>
       </div>
       <div class="tw-flex tw-w-full tw-pt-24 tw-pl-3">
         <router-view />
@@ -91,6 +95,7 @@ export default Vue.extend({
       get_current_projects(state: ProjectCreateInterface) {
         const arr = ['New Projects', 'Initial scoping', 'Work group assesment'];
 
+        console.log(state.current_user_projects);
         const data = state.current_user_projects?.map(val => {
           return {
             ...val,
@@ -106,7 +111,9 @@ export default Vue.extend({
           }
         });
 
-        console.log('Dat', obj);
+        for (const i in obj) {
+          console.log('Loging', i);
+        }
 
         return obj;
       }
@@ -116,6 +123,7 @@ export default Vue.extend({
     current_user_projects() {
       const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
       const user_id = localStorage.getItem('serpac_tool_user_id');
+
       void this.$store.dispatch(get_projects_action, user_id);
     },
     setExpandedLane(data: string) {

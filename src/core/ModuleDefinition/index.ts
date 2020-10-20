@@ -14,14 +14,14 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
     modules: [
       {
         name: 'inbox',
-        link: '/admin/all-projects',
+        link: '/admin/inbox',
         icon: 'inbox',
         modules: []
       },
       {
         name: 'reports',
         icon: 'analytics',
-        link: '/admin/reports',
+        link: '/admin/reports/all',
         modules: []
       },
 

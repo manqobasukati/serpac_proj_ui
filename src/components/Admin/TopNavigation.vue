@@ -1,11 +1,14 @@
 <template>
   <div class="tw-absolute tw-top-0 tw-right-0 tw-w-1/3">
-    <div class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-full tw-shadow-md tw-z-100 ">
+    <div
+      class="tw-rounded-bl-xxlg tw-bg-gray-200 tw-h-full tw-shadow-md tw-z-100 "
+    >
       <div class="tw-flex tw-flex-1 tw-justify-between">
         <div class="tw-flex tw-inline-row tw-pl-6 ">
           <div
             v-for="(item, key) in items"
             :key="key"
+            @click="changeNavigation(item.link)"
             class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-1  tw-justify-between  tw-font-bold tw-text-blue-500"
           >
             <q-icon
@@ -49,10 +52,14 @@ export default Vue.extend({
       items: module_definition['admin'].modules
     };
   },
+
   filters: {
     ...FILTERS
   },
   methods: {
+    changeNavigation(link: string) {
+      void this.$router.push({ path: link });
+    },
     logout() {
       localStorage.removeItem('serpac_tool_username');
       localStorage.removeItem('serpac_tool_token');
