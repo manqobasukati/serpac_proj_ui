@@ -96,9 +96,7 @@ export default Vue.extend({
         .dispatch(action)
         .then(() => {
           void this.$router.push({
-            path: `/public/project/${project._id as string}`,
-            query: { projectId: project._id as string },
-            
+            path: `/public/project/${project._id as string}`
           });
         })
         .catch(() => {
@@ -124,7 +122,6 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_current_projects(state: ProjectCreateInterface) {
-        console.log('This', state.current_user_projects);
         return state.current_user_projects;
       }
     })

@@ -24,13 +24,18 @@ const routes: RouteConfig[] = [
     component: () => import('components/Accounts/PublicSignIn.vue')
   },
   {
-    path: '/public/project',
-    name: 'public',
+    path: '/public',
+
     component: () => import('components/Public/Public.vue'),
     children: [
       {
+        path: '/public/project',
+        component: () =>
+          import('components/Public/ProjectManagement/ProjectCreate.vue')
+      },
+      {
         path: '/public/project/:projectId',
-        props:true,
+        props: true,
         component: () =>
           import('components/Public/ProjectManagement/ProjectCreate.vue')
       }
@@ -42,13 +47,13 @@ const routes: RouteConfig[] = [
     component: () => import('components/Admin/Admin.vue'),
     children: [
       {
-        path:'/admin/inbox',
-        component:()=> import('components/Admin/Inbox/Inbox.vue'),
-        children:[
+        path: '/admin/inbox',
+        component: () => import('components/Admin/Inbox/Inbox.vue'),
+        children: [
           {
-            path:'/admin/inbox/:projectId',
-            props:true,
-            component:()=> import('components/Admin/Inbox/ProjectView.vue'),
+            path: '/admin/inbox/:projectId',
+            props: true,
+            component: () => import('components/Admin/Inbox/ProjectView.vue')
           }
         ]
       },

@@ -128,6 +128,10 @@ export default Vue.extend({
       this.FormData = this.FormD;
     }
   },
+  mounted() {
+    console.log('Section 1', this.FormD)
+    this.FormData = this.FormD;
+  },
   data() {
     return {
       map_active: false,

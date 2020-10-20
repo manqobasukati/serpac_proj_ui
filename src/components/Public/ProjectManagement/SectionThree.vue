@@ -45,6 +45,10 @@ export default Vue.extend({
       this.FormData = this.FormD;
     }
   },
+  mounted() {
+    console.log('Section 3', this.FormD);
+    this.FormData = this.FormD;
+  },
   props: ['context', 'FormD'],
   data() {
     return {

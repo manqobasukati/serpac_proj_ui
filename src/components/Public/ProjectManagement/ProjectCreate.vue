@@ -106,12 +106,11 @@ export default Vue.extend({
   filters: {
     ...FILTERS
   },
-  watch: {
-    projectId() {
-      console.log('Log =>', this.projectId);
+  mounted() {
+    console.log('Here');
+    if (this.projectId) {
       get_project(this.projectId)
         .then(val => {
-          console.log('Value', val);
           this.formData = val[0];
         })
         .catch(e => {
@@ -119,10 +118,26 @@ export default Vue.extend({
         });
     }
   },
+  watch: {
+    projectId() {
+      if (this.projectId) {
+        get_project(this.projectId)
+          .then(val => {
+            this.formData = val[0];
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      }else{
+        //assume that project is being created 
+        this.formData = ModelObj;
+      }
+    }
+  },
   methods: {
     updateForm(data: any) {
       const key: string = Object.keys(data)[0];
-      console.log(data[key]);
+
       this.formData[key] = data[key];
 
       console.log('Form now', this.formData);
@@ -150,7 +165,7 @@ export default Vue.extend({
       } else {
         project_create(this.formData as ProjectModel)
           .then(val => {
-            console.log('Here', val);
+          
             this.formData = val;
             this.$route.params.projectId = val._id;
             console.log(this.$route.params);
@@ -161,6 +176,7 @@ export default Vue.extend({
       }
     },
     changeActiveSection(data: string) {
+      console.log('This form', this.formData);
       this.active_section = data;
     }
   },

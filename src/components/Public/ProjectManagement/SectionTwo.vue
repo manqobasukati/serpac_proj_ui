@@ -58,8 +58,13 @@ export default Vue.extend({
   name: 'SectionTwo',
   watch: {
     FormD() {
+     
       this.FormData = this.FormD;
     }
+  },
+  mounted(){
+    this.FormData = this.FormD;
+    console.log('Form section two',this.FormD)
   },
   props: ['context', 'FormD'],
   data() {

@@ -120,6 +120,10 @@ export default Vue.extend({
       this.FormData = this.FormD;
     }
   },
+  mounted() {
+    console.log('Section 4', this.FormD);
+    this.FormData = this.FormD;
+  },
 
   filters: {
     ...FILTERS

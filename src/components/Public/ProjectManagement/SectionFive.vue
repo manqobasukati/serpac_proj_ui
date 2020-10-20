@@ -90,6 +90,10 @@ export default Vue.extend({
       this.FormData = this.FormD;
     }
   },
+  mounted() {
+    console.log('Section 5', this.FormD);
+    this.FormData = this.FormD;
+  },
   methods: {
     Save() {
       this.$emit('updateForm', this.FormData);
