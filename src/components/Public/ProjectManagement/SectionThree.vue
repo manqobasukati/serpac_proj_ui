@@ -11,12 +11,14 @@
           placeholder="Temporal jobs"
           v-model="FormData.expected_jobs.temporal_jobs"
           :disabled="context === 'admin_inbox'"
+          @focus="addHint('section_3', 'project_temporal_jobs')"
         />
         <input
           type="text"
           class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
           placeholder="Permanent jobs"
           v-model="FormData.expected_jobs.permanent_jobs"
+          @focus="addHint('section_3', 'project_temporal_jobs')"
           :disabled="context === 'admin_inbox'"
         />
       </div>
@@ -37,7 +39,11 @@
 </template>
 
 <script lang="ts">
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { HintInterface } from 'src/store/project_create/state';
 import Vue from 'vue';
+import { hints } from './hints';
 export default Vue.extend({
   name: 'SectionFour',
   watch: {
@@ -46,7 +52,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 3', this.FormD);
     this.FormData = this.FormD;
   },
   props: ['context', 'FormD'],
@@ -61,6 +66,21 @@ export default Vue.extend({
     };
   },
   methods: {
+    addHint(section: string, field_name: string) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
+
+      const hint = hints[section].find((val: HintInterface) => {
+        return val.field_name === field_name;
+      });
+      this.$store
+        .dispatch(action, hint)
+        .then(val => {
+          console.log('Val', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     Save() {
       this.$emit('updateForm', this.FormData);
     }

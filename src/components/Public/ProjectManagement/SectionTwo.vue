@@ -12,12 +12,14 @@
             v-model="FormData.project_value.total_inv_value"
             :disabled="context === 'admin_inbox'"
             placeholder="Total investment value"
+              @focus="addHint('section_2', 'project_total_inv_value')"
           />
           <input
             type="text"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.funding_status"
             :disabled="context === 'admin_inbox'"
+              @focus="addHint('section_2', 'project_funding_status')"
             placeholder="Funding status"
           />
           <input
@@ -25,6 +27,7 @@
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.percentage_of_funding"
             :disabled="context === 'admin_inbox'"
+              @focus="addHint('section_2', 'project_percentage_of_funding')"
             placeholder="Percentage of funding"
           />
           <input
@@ -32,6 +35,7 @@
             v-model="FormData.project_value.project_scope"
             :disabled="context === 'admin_inbox'"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
+             @focus="addHint('section_2', 'project_scope')"
             placeholder="Local or FDI"
           />
         </div>
@@ -42,7 +46,7 @@
           <button
             v-if="context !== 'admin_inbox'"
             @click="Save()"
-            class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
+            class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
           >
             Save
           </button>
@@ -53,18 +57,21 @@
 </template>
 
 <script lang="ts">
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { HintInterface } from 'src/store/project_create/state';
 import Vue from 'vue';
+import { hints } from './hints';
 export default Vue.extend({
   name: 'SectionTwo',
   watch: {
     FormD() {
-     
       this.FormData = this.FormD;
     }
   },
-  mounted(){
+  mounted() {
     this.FormData = this.FormD;
-    console.log('Form section two',this.FormD)
+    console.log('Form section two', this.FormD);
   },
   props: ['context', 'FormD'],
   data() {
@@ -80,6 +87,22 @@ export default Vue.extend({
     };
   },
   methods: {
+    addHint(section: string, field_name: string) {
+     
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
+
+      const hint = hints[section].find((val: HintInterface) => {
+        return val.field_name === field_name;
+      });
+      this.$store
+        .dispatch(action, hint)
+        .then(val => {
+          console.log('Val', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     Save() {
       this.$emit('updateForm', this.FormData);
     }

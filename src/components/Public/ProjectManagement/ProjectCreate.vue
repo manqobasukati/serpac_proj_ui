@@ -50,8 +50,8 @@
               @updateForm="updateForm"
             />
           </div>
-          <div class="tw-flex  tw-p-16 tw-bg-gray-100">
-            <div class="tw-text-md">Hint box comes here</div>
+          <div class="tw-flex  tw-p-2 tw-bg-gray-100">
+            <hint-box />
           </div>
         </div>
       </div>
@@ -75,13 +75,14 @@ import SectionFour from './SectionFour.vue';
 import SectionFive from './SectionFive.vue';
 import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
+import HintBox from './HintBox.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
 import {
   get_project,
   project_create
 } from 'src/core/RequestHandler/project_create';
-import { ProjectModel } from 'src/core/Models/ProjectModel';
+import { ProjectModel, ProjectStatuses } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'UserLayout',
@@ -94,7 +95,8 @@ export default Vue.extend({
     SectionFour,
     SectionFive,
     SectionSix,
-    SectionSeven
+    SectionSeven,
+    HintBox
   },
   props: ['projectId'],
   data() {
@@ -107,7 +109,7 @@ export default Vue.extend({
     ...FILTERS
   },
   mounted() {
-    console.log('Here');
+   
     if (this.projectId) {
       get_project(this.projectId)
         .then(val => {
@@ -128,8 +130,8 @@ export default Vue.extend({
           .catch(e => {
             console.error(e);
           });
-      }else{
-        //assume that project is being created 
+      } else {
+        //assume that project is being created
         this.formData = ModelObj;
       }
     }
@@ -145,6 +147,7 @@ export default Vue.extend({
       if (!this.$route.params.projectId) {
         const request = {
           ...this.formData,
+          project_status: ProjectStatuses.new_projects,
           _id: null,
           project_created: new Date()
         };
@@ -165,7 +168,6 @@ export default Vue.extend({
       } else {
         project_create(this.formData as ProjectModel)
           .then(val => {
-          
             this.formData = val;
             this.$route.params.projectId = val._id;
             console.log(this.$route.params);

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tw-flex tw-flex-row tw-justify-center tw-mr-64">
+    <div class="tw-flex tw-flex-row tw-justify-center ">
       <div
         class="w-32 tw-mr-2"
         v-for="(section, key) in sectionData"

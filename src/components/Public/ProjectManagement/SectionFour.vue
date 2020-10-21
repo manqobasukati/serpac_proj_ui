@@ -11,6 +11,7 @@
               <input
                 type="text"
                 v-model="phase.name"
+                @focus="addHint('section_4', 'project_phase')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="Phase name"
                 :disabled="context === 'admin_inbox'"
@@ -18,6 +19,7 @@
               <input
                 type="date"
                 v-model="phase.start_date"
+                @focus="addHint('section_4', 'project_start_date')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="Start date"
                 :disabled="context === 'admin_inbox'"
@@ -25,6 +27,7 @@
               <input
                 type="date"
                 v-model="phase.end_data"
+                @focus="addHint('section_4', 'project_phase_milestones')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="End data"
                 :disabled="context === 'admin_inbox'"
@@ -42,6 +45,7 @@
                   :options="selectOptions"
                   type="text"
                   borderless
+                  @focus="addHint('section_4', 'project_phase_milestones')"
                   dense
                   class="proj-form-input  tw-h-10  tw-text-sm tw-m-1"
                   label="Select fields relevent to phase"
@@ -58,6 +62,7 @@
                   </div>
                   <input
                     type="text"
+                    @focus="addHint('section_4', 'project_temporal_jobs')"
                     v-model="single_meta.value"
                     :disabled="context === 'admin_inbox'"
                     class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -95,6 +100,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { FILTERS } from 'src/core/helpers/filters';
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { HintInterface } from 'src/store/project_create/state';
+import { hints } from './hints';
 
 export default Vue.extend({
   name: 'SectionFive',
@@ -129,6 +138,21 @@ export default Vue.extend({
     ...FILTERS
   },
   methods: {
+    addHint(section: string, field_name: string) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
+
+      const hint = hints[section].find((val: HintInterface) => {
+        return val.field_name === field_name;
+      });
+      this.$store
+        .dispatch(action, hint)
+        .then(val => {
+          console.log('Val', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     selectField(phase_name: string) {
       console.log(phase_name, this.selectedFields);
       this.FormData.project_timelines.forEach(val => {

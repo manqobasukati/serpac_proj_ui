@@ -4,13 +4,21 @@ import { FormData } from 'src/mixins/FormData';
 export interface FormDataInterface {
   [section: string]: { [question_number: string]: string };
 }
+
+export interface HintInterface {
+  section:string,
+  field_name:string,
+  description:string
+}
+
 export interface ProjectCreateInterface {
   active_section: string | null;
   previous_section: string | null;
   form_data: any | null;
   selected_project: ProjectModel | null;
   active_submodule: string | null;
-  current_user_projects: ProjectModel[] | null
+  current_user_projects: ProjectModel[] | null,
+  hints:HintInterface[] | null
 }
 
 const state: ProjectCreateInterface = {
@@ -19,7 +27,8 @@ const state: ProjectCreateInterface = {
   form_data: JSON.parse(JSON.stringify(FormData)),
   selected_project: null as null | ProjectModel,
   active_submodule: null as null | string,
-  current_user_projects: null as null | ProjectModel[]
+  current_user_projects: null as null | ProjectModel[],
+  hints: null as null | HintInterface[]
 };
 
 export default state;

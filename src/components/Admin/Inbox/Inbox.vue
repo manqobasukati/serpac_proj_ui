@@ -2,11 +2,7 @@
   <div>
     <div class="tw-flex tw-flex-row">
       <div class="tw-flex tw-w-1/8 tw-flex-col tw-pt-24 tw-pl-8">
-        <div
-          v-for="(group, key) in get_current_projects"
-          :key="key"
-        
-        >
+        <div v-for="(group, key) in get_current_projects" :key="key">
           <lane
             v-if="group.length >= 1"
             :lane_name="group[0].project_status"
@@ -26,6 +22,8 @@
 <script lang="ts">
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { MODULES } from 'src/store';
+import { ADMIN_ACTIONS } from 'src/store/admin/actions';
+import { AdminInterface } from 'src/store/admin/state';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { ProjectCreateInterface } from 'src/store/project_create/state';
 import Vue from 'vue';
@@ -85,46 +83,41 @@ export default Vue.extend({
     };
   },
   mounted() {
-    this.current_user_projects();
+    this.get_projects();
   },
   components: {
     Lane
   },
   computed: {
-    ...mapState(MODULES.PROJECT_CREATE, {
-      get_current_projects(state: ProjectCreateInterface) {
-        const arr = ['New Projects', 'Initial scoping', 'Work group assesment'];
+    ...mapState(MODULES.ADMIN, {
+      get_current_projects(state: AdminInterface) {
+        console.log('Move project')
+        const arr = [
+          'New Projects',
+          'Initial scoping',
+          'Work group assesment',
+          'Facilitating Enablers',
+          'Ready to Launch',
+          'Implementation Ongoing'
+        ];
 
-        console.log(state.current_user_projects);
-        const data = state.current_user_projects?.map(val => {
-          return {
-            ...val,
-            project_status: arr[Math.floor(Math.random() * arr.length)]
-          };
-        });
         let obj: { [name: string]: ProjectModel[] } = {};
         arr.forEach(val => {
-          if (data) {
-            obj[val] = data.filter(v => {
+          if (state.projects) {
+            obj[val] = state.projects.filter(v => {
               return v.project_status === val;
             });
           }
         });
-
-        for (const i in obj) {
-          console.log('Loging', i);
-        }
 
         return obj;
       }
     })
   },
   methods: {
-    current_user_projects() {
-      const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
-      const user_id = localStorage.getItem('serpac_tool_user_id');
-
-      void this.$store.dispatch(get_projects_action, user_id);
+    get_projects() {
+      const get_projects_action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.ALL_PROJECTS}`;
+      void this.$store.dispatch(get_projects_action);
     },
     setExpandedLane(data: string) {
       if (this.expandedLane !== data) {

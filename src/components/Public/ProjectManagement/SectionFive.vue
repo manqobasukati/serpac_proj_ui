@@ -16,6 +16,7 @@
             class="proj-form-input tw-h-10 tw-my-1"
             label="project skills"
             dense
+            @focus="addHint('section_5', 'project_project_skills')"
             :disabled="context === 'admin_inbox'"
           />
           <q-select
@@ -24,9 +25,11 @@
             type="text"
             borderless
             :options="LocallySourcedInputsOptions"
+            @focus="addHint('section_5', 'project_locally_sourced_inputs')"
             v-model="FormData.opportunities.local_sourced_inputs"
             class="proj-form-input tw-h-10  tw-my-1"
             label="Locally sourced inputs"
+           
             :disabled="context === 'admin_inbox'"
             dense
           />
@@ -37,6 +40,7 @@
             borderless
             :options="ExternallySourcedInputsOptions"
             v-model="FormData.opportunities.external_sourced_inputs"
+            @focus="addHint('section_5', 'project_externally_sourced_inputs')"
             class="proj-form-input tw-h-10  tw-my-1"
             label="Externally sourced inputs"
             :disabled="context === 'admin_inbox'"
@@ -67,6 +71,10 @@ import {
   LocallySourcedInputsOptions,
   ProjectSkillsOptions
 } from 'src/core/Additional/Contstants';
+import { MODULES } from 'src/store';
+import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
+import { HintInterface } from 'src/store/project_create/state';
+import { hints } from './hints';
 
 export default Vue.extend({
   name: 'SectionSix',
@@ -91,10 +99,24 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 5', this.FormD);
     this.FormData = this.FormD;
   },
   methods: {
+    addHint(section: string, field_name: string) {
+      const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
+
+      const hint = hints[section].find((val: HintInterface) => {
+        return val.field_name === field_name;
+      });
+      this.$store
+        .dispatch(action, hint)
+        .then(val => {
+          console.log('Val', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     Save() {
       this.$emit('updateForm', this.FormData);
     }

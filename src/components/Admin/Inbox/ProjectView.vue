@@ -1,7 +1,9 @@
 <template>
-  <div class="tw-flex tw-flex-col">
-    <div class="tw-text-lg tw-font-thin">Project Title here</div>
-    <section-bar @selectSection="changeActiveSection" class="tw-mb-4" />
+  <div
+    class="tw-flex tw-flex-col tw-container tw-items-center tw-flex-1 tw-mr-64"
+  >
+    <section-bar @selectSection="changeActiveSection" class="tw-mb-4 " />
+
     <section-one
       v-if="'Section 1' === active_section"
       class="tw-p-2 "
@@ -37,7 +39,25 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
-    <comment-box />
+    <comment-box :project="FormData" />
+    <div class="tw-flex tw-flex-row tw-w-1/3 tw-mt-3">
+      <q-select
+        borderless
+        v-model="project_status"
+        label="Move project to"
+        :options="projectStatusOptions"
+        type="text"
+        class="proj-form-input  tw-h-10  tw-text-sm tw-m-1"
+      />
+      <div class="tw-p-1">
+        <button
+          @click="moveProject"
+          class="tw-bg-red-200 tw-w-16 tw-rounded-md tw-h-10 tw-shadow-lg focus:tw-shadow-sm focus:tw-outline-none"
+        >
+          move
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,6 +73,8 @@ import SectionFour from 'src/components/Public/ProjectManagement/SectionFour.vue
 import SectionFive from 'src/components/Public/ProjectManagement/SectionFive.vue';
 import SectionSix from 'src/components/Public/ProjectManagement/SectionSix.vue';
 import { get_project } from 'src/core/RequestHandler/project_create';
+import { MODULES } from 'src/store';
+import { ADMIN_ACTIONS } from 'src/store/admin/actions';
 
 export default Vue.extend({
   name: 'ProjectView',
@@ -69,7 +91,6 @@ export default Vue.extend({
   },
   watch: {
     projectId() {
-      console.log('Proj id', this.projectId);
       get_project(this.projectId)
         .then(val => {
           console.log('Value', val);
@@ -84,6 +105,15 @@ export default Vue.extend({
   data() {
     return {
       active_section: 'Section 1',
+      project_status: '',
+      projectStatusOptions: [
+        'New Projects',
+        'Initial scoping',
+        'Work group assesment',
+        'Facilitating Enablers',
+        'Ready to Launch',
+        'Implementation Ongoing'
+      ],
       FormData: {
         project_description: {
           title: '',
@@ -105,6 +135,24 @@ export default Vue.extend({
   methods: {
     changeActiveSection(data: string) {
       this.active_section = data;
+    },
+    moveProject() {
+      const action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.UPDATE_PROJECT_STATUS}`;
+      const payload = {
+        ...this.FormData,
+        project_status: this.project_status
+      };
+
+      this.$store
+        .dispatch(action, payload)
+        .then(val => {
+          this.project_status = '';
+          const get_projects_action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.ALL_PROJECTS}`;
+          void this.$store.dispatch(get_projects_action);
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   },
   computed: {

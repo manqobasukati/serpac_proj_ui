@@ -1,8 +1,29 @@
+export enum ProjectStatuses {
+  new_projects = 'New Projects',
+  initial_scoping = 'Initial scoping',
+  work_group_assesment = 'Work group assesment',
+  facilitating_enablers = 'Facilitating Enablers',
+  ready_to_launch =  'Ready to Launch',
+  implementation_ongoing = 'Implementation Ongoing'
+}
+
 export interface ProjectPhase {
   name: string;
   start_date: Date;
   end_date: Date;
   meta?:{[name:string]:string}
+
+}
+
+
+export interface CommentModel {
+  project:string,
+  section: string,
+  created:Date,
+  updated?:Date,
+  comment:string,
+  project_status:string
+  user:string
 }
 
 export interface Issues {
@@ -12,6 +33,7 @@ export interface Issues {
 
 export interface ProjectModel {
   _id?: string | null;
+  project_status?:string,
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
@@ -24,6 +46,7 @@ export interface ProjectModel {
         inkhundla?: string;
         region?: string;
       };
+      
     };
     economy_sector: string;
     project_existense: string;
