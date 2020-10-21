@@ -57,6 +57,10 @@ const routes: RouteConfig[] = [
           }
         ]
       },
+      {
+        path: '/admin/users',
+        component: () => import('components/Admin/Users/Users.vue')
+      },
 
       {
         path: '/admin/reports/all',

@@ -27,7 +27,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
 
       {
         name: 'users',
-        link: '/admin/user',
+        link: '/admin/users',
         icon: 'group',
         modules: []
       }
