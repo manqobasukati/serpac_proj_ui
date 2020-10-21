@@ -5,6 +5,7 @@
         <div v-for="(group, key) in get_current_projects" :key="key">
           <lane
             v-if="group.length >= 1"
+            context="inbox"
             :lane_name="group[0].project_status"
             :projects="group"
             :expand="expandedLane === group[0].project_status"

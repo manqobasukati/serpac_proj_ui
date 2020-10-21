@@ -93,9 +93,7 @@ export default Vue.extend({
     projectId() {
       get_project(this.projectId)
         .then(val => {
-          console.log('Value', val);
           this.FormData = val[0];
-          console.log('FormD', this.FormData);
         })
         .catch(e => {
           console.error(e);

@@ -4,18 +4,23 @@
       <div class="tw-flex tw-justify-between">
         <div class="tw-text-md tw-font-bold">
           {{ lane_name }}
-          <span class="tw-font-thin">{{project_count}}</span>
+          <span class="tw-font-thin">{{ project_count }}</span>
         </div>
         <div>
           <q-icon @click="expandLane" name="expand_more" size="1.2rem"></q-icon>
         </div>
       </div>
       <div v-if="expand">
-        <project
-          v-for="(proj, key) in projects"
-          :key="key"
-          :project="projects[key]"
-        />
+        <div v-if="context === 'inbox'">
+          <project
+            v-for="(proj, key) in projects"
+            :key="key"
+            :project="projects[key]"
+          />
+        </div>
+        <div v-else-if="context === 'users'">
+          <div>Nothing here</div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +36,9 @@ export default Vue.extend({
   },
   //props: ['lane_name', 'projects', 'expand'],
   props: {
+    context: {
+      type: String
+    },
     lane_name: {
       type: String
     },
@@ -43,6 +51,7 @@ export default Vue.extend({
   },
   methods: {
     expandLane() {
+     
       this.$emit('expandLane', this.lane_name);
     }
   },

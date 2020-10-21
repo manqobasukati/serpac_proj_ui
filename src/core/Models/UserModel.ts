@@ -3,4 +3,5 @@ export interface UserModel {
   fisrtname?: string;
   password: string;
   surname?: string;
+  access?:string
 }
