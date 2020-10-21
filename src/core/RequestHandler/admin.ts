@@ -1,13 +1,16 @@
 import { AppResponse, config } from './config';
 
 export function get_projects(data?: string) {
-  const url = `${config.server_url}/project?${data as string}`;
+  
+
+  const url = data ? `${config.server_url}/project?${data}`: `${config.server_url}/project`;
 
   return fetch(url, {
     method: 'GET' // or 'PUT'test
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
+      console.log('Data =>', data)
       return data.payload as Promise<any>;
     })
     .catch(error => {

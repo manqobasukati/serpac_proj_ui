@@ -79,7 +79,8 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
   [PROJECT_CREATE_ACTIONS.REMOVE_HINT](context, payload) {
    
     context.commit(PROJECT_CREATE_MUTATIONS.REMOVE_HINT, payload);
-  }
+  },
+ 
 };
 
 export default actions;

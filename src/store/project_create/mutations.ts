@@ -12,7 +12,8 @@ export enum PROJECT_CREATE_MUTATIONS {
   CURRENT_USER_PROJECTS = 'current_user_projects',
   REMOVE_PROJECT = 'remove_project',
   ADD_HINT = 'add_hint',
-  REMOVE_HINT = 'remove_hint'
+  REMOVE_HINT = 'remove_hint',
+  
 }
 
 const mutation: MutationTree<ProjectCreateInterface> = {
@@ -98,7 +99,9 @@ const mutation: MutationTree<ProjectCreateInterface> = {
     state.hints = state.hints?.filter((val: HintInterface) => {
       return val.field_name !== payload;
     }) as HintInterface[];
-  }
+  },
+
+ 
 };
 
 export default mutation;

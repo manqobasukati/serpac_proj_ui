@@ -82,7 +82,7 @@ import {
   get_project,
   project_create
 } from 'src/core/RequestHandler/project_create';
-import { ProjectModel } from 'src/core/Models/ProjectModel';
+import { ProjectModel, ProjectStatuses } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'UserLayout',
@@ -109,7 +109,7 @@ export default Vue.extend({
     ...FILTERS
   },
   mounted() {
-    console.log('Here');
+   
     if (this.projectId) {
       get_project(this.projectId)
         .then(val => {
@@ -147,6 +147,7 @@ export default Vue.extend({
       if (!this.$route.params.projectId) {
         const request = {
           ...this.formData,
+          project_status: ProjectStatuses.new_projects,
           _id: null,
           project_created: new Date()
         };

@@ -1,3 +1,12 @@
+export enum ProjectStatuses {
+  new_projects = 'New Projects',
+  initial_scoping = 'Initial scoping',
+  work_group_assesment = 'Work group assesment',
+  facilitating_enablers = 'Facilitating Enablers',
+  ready_to_launch =  'Ready to Launch',
+  implementation_ongoing = 'Implementation Ongoing'
+}
+
 export interface ProjectPhase {
   name: string;
   start_date: Date;
@@ -24,6 +33,7 @@ export interface Issues {
 
 export interface ProjectModel {
   _id?: string | null;
+  project_status?:string,
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
