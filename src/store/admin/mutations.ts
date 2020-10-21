@@ -24,7 +24,7 @@ const mutation: MutationTree<AdminInterface> = {
       }
     }
 
-    console.log('Project after', state.projects);
+  
   },
   [ADMIN_MUTATIONS.CREATE_COMMENT](state: AdminInterface, payload) {
     state.project_comments?.push(payload);
