@@ -3,6 +3,18 @@ export interface ProjectPhase {
   start_date: Date;
   end_date: Date;
   meta?:{[name:string]:string}
+
+}
+
+
+export interface Comment {
+  project:string,
+  section: string,
+  created:Date,
+  updated:Date,
+  commnet:string,
+  project_status:string
+  user:string
 }
 
 export interface Issues {
@@ -24,6 +36,7 @@ export interface ProjectModel {
         inkhundla?: string;
         region?: string;
       };
+      
     };
     economy_sector: string;
     project_existense: string;

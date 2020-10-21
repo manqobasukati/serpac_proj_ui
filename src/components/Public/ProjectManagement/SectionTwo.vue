@@ -88,7 +88,7 @@ export default Vue.extend({
   },
   methods: {
     addHint(section: string, field_name: string) {
-      console.log('Projects');
+     
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 
       const hint = hints[section].find((val: HintInterface) => {

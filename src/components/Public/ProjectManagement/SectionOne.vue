@@ -91,7 +91,7 @@
           <textarea
             class="proj-form-input tw-mt-2  tw-text-sm tw-h-20"
             v-model="FormData.project_description.description"
-            @focus="addHint('section_1', 'project_description')"
+            @focus="addHint('section_1', 'project_descr')"
             placeholder="Please give a concise project description"
             :disabled="context === 'admin_inbox'"
           />

@@ -2,11 +2,7 @@
   <div>
     <div class="tw-flex tw-flex-row">
       <div class="tw-flex tw-w-1/8 tw-flex-col tw-pt-24 tw-pl-8">
-        <div
-          v-for="(group, key) in get_current_projects"
-          :key="key"
-        
-        >
+        <div v-for="(group, key) in get_current_projects" :key="key">
           <lane
             v-if="group.length >= 1"
             :lane_name="group[0].project_status"
@@ -93,13 +89,20 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_current_projects(state: ProjectCreateInterface) {
-        const arr = ['New Projects', 'Initial scoping', 'Work group assesment'];
+        const arr = [
+          'New Projects',
+          'Initial scoping',
+          'Work group assesment',
+          'Facilitating Enablers',
+          'Ready to Launch',
+          'Implementation Ongoing'
+        ];
 
         console.log(state.current_user_projects);
         const data = state.current_user_projects?.map(val => {
           return {
             ...val,
-            project_status: arr[Math.floor(Math.random() * arr.length)]
+            project_status: arr[Math.floor(Math.random() * arr.length )]
           };
         });
         let obj: { [name: string]: ProjectModel[] } = {};
@@ -110,10 +113,6 @@ export default Vue.extend({
             });
           }
         });
-
-        for (const i in obj) {
-          console.log('Loging', i);
-        }
 
         return obj;
       }
