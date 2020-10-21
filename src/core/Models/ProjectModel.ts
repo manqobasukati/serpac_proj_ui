@@ -16,12 +16,12 @@ export interface ProjectPhase {
 }
 
 
-export interface Comment {
+export interface CommentModel {
   project:string,
   section: string,
   created:Date,
-  updated:Date,
-  commnet:string,
+  updated?:Date,
+  comment:string,
   project_status:string
   user:string
 }

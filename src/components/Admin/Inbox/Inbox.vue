@@ -91,6 +91,7 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_current_projects(state: AdminInterface) {
+        console.log('Move project')
         const arr = [
           'New Projects',
           'Initial scoping',

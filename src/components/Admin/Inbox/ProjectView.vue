@@ -39,7 +39,7 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
-    <comment-box />
+    <comment-box :project="FormData" />
     <div class="tw-flex tw-flex-row tw-w-1/3 tw-mt-3">
       <q-select
         borderless
@@ -147,6 +147,8 @@ export default Vue.extend({
         .dispatch(action, payload)
         .then(val => {
           this.project_status = '';
+          const get_projects_action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.ALL_PROJECTS}`;
+          void this.$store.dispatch(get_projects_action);
         })
         .catch(e => {
           console.log(e);
