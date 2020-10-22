@@ -65,7 +65,7 @@ export default Vue.extend({
       this.$store
         .dispatch(action, data)
         .then(() => {
-          console.log('Somethin will come here');
+          this.comment = '';
         })
         .catch(e => {
           console.log(e);
@@ -75,9 +75,10 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_comments(state: AdminInterface) {
-      
         return state.project_comments?.filter(val => {
-          return (val.section === this.section) && (val.project ===  this.project._id);
+          return (
+            val.section === this.section && val.project === this.project._id
+          );
         });
       }
     })
