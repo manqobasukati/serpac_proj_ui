@@ -11,16 +11,26 @@
         </div>
       </div>
       <div v-if="expand">
-        <user v-for="(user, key) in projects" :key="key"  />
+        <div v-if="context === 'inbox'">
+          <project
+            v-for="(proj, key) in projects"
+            :key="key"
+            :project="projects[key]"
+          />
+        </div>
+        <div v-if="context === 'users'">
+          <user v-for="(user, key) in projects" :key="key" :user="user" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import Project from './Project.vue';
 import User from 'src/components/Admin/Users/User.vue';
+
 
 export default Vue.extend({
   name: 'Lane',
@@ -28,18 +38,21 @@ export default Vue.extend({
     Project,
     User
   },
-  props: ['lane_name', 'projects', 'expand'],
-  // props: {
-  //   lane_name: {
-  //     type: String
-  //   },
-  //   projects: {
-  //     type: Array
-  //   },
-  //   expand: {
-  //     type: Boolean
-  //   }
-  // },
+
+  props: {
+    lane_name: {
+      type: String as PropType<string>
+    },
+    projects: {
+      type: Array as PropType<any>
+    },
+    expand: {
+      type: Boolean
+    },
+    context:{
+      type:String
+    }
+  },
   methods: {
     expandLane() {
       this.$emit('expandLane', this.lane_name);
@@ -47,8 +60,9 @@ export default Vue.extend({
   },
   computed: {
     project_count() {
-      if (this.projects.length) {
-        return `(${this.projects.length})`;
+      const projects: any[] = this.projects;
+      if (projects) {
+        return `(${projects.length})`;
       }
       return '';
     }

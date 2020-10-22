@@ -40,8 +40,12 @@ export function login(data: UserModel) {
     });
 }
 
-export function get_users(): Promise<UserModel[] | any> {
-  const url = `${config.server_url}/user`;
+export function get_users(data?: string): Promise<UserModel[] | any> {
+  const url = data
+    ? `${config.server_url}/user?_id=${data}`
+    : `${config.server_url}/user`;
+
+  console.log(url);
 
   return fetch(url, {
     method: 'GET', // or 'PUT'test
@@ -55,5 +59,25 @@ export function get_users(): Promise<UserModel[] | any> {
     })
     .catch(error => {
       console.error('Error:', error);
+    });
+}
+
+export function update_user(data: UserModel) {
+  const url = `${config.server_url}/user`;
+
+  return fetch(url, {
+    method: 'PUT', // or 'PUT'test
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      return data.payload as Promise<any>;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      return error as Promise<any>;
     });
 }

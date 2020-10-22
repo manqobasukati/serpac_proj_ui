@@ -17,6 +17,9 @@
         @expandLane="setExpandedLane"
       />
     </div>
+    <div class="tw-flex tw-w-1/2 tw-flex-col tw-pt-40 tw-pl-8">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -24,11 +27,16 @@
 import Vue from 'vue';
 
 import Lane from 'src/components/Admin/Inbox/Lane.vue';
+import UserCard from './UserCard.vue';
 import { get_users } from 'src/core/RequestHandler/user_management';
 import { UserModel } from 'src/core/Models/UserModel';
 
 export default Vue.extend({
   name: 'Users',
+  components: {
+    Lane,
+   
+  },
   data() {
     return {
       expandedLane: '',
@@ -67,17 +75,13 @@ export default Vue.extend({
         });
     },
     setExpandedLane(data: string) {
-      console.log('dat',data, this.expandedLane);
+      console.log('dat', data, this.expandedLane);
       if (this.expandedLane !== data) {
         this.expandedLane = data;
       } else {
         this.expandedLane = '';
       }
     }
-  },
-
-  components: {
-    Lane
   }
 });
 </script>
