@@ -11,11 +11,7 @@
         </div>
       </div>
       <div v-if="expand">
-        <project
-          v-for="(proj, key) in projects"
-          :key="key"
-          :project="projects[key]"
-        />
+        <user v-for="(user, key) in projects" :key="key"  />
       </div>
     </div>
   </div>
@@ -24,10 +20,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import Project from './Project.vue';
+import User from 'src/components/Admin/Users/User.vue';
+
 export default Vue.extend({
   name: 'Lane',
   components: {
-    Project
+    Project,
+    User
   },
   props: ['lane_name', 'projects', 'expand'],
   // props: {
