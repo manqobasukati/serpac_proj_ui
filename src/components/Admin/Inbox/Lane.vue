@@ -11,16 +11,11 @@
         </div>
       </div>
       <div v-if="expand">
-        <div v-if="context === 'inbox'">
-          <project
-            v-for="(proj, key) in projects"
-            :key="key"
-            :project="projects[key]"
-          />
-        </div>
-        <div v-else-if="context === 'users'">
-          <div>Nothing here</div>
-        </div>
+        <project
+          v-for="(proj, key) in projects"
+          :key="key"
+          :project="projects[key]"
+        />
       </div>
     </div>
   </div>
@@ -34,24 +29,20 @@ export default Vue.extend({
   components: {
     Project
   },
-  //props: ['lane_name', 'projects', 'expand'],
-  props: {
-    context: {
-      type: String
-    },
-    lane_name: {
-      type: String
-    },
-    projects: {
-      type: Array
-    },
-    expand: {
-      type: Boolean
-    }
-  },
+  props: ['lane_name', 'projects', 'expand'],
+  // props: {
+  //   lane_name: {
+  //     type: String
+  //   },
+  //   projects: {
+  //     type: Array
+  //   },
+  //   expand: {
+  //     type: Boolean
+  //   }
+  // },
   methods: {
     expandLane() {
-     
       this.$emit('expandLane', this.lane_name);
     }
   },

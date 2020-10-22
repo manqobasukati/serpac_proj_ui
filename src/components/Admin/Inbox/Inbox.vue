@@ -92,7 +92,13 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_current_projects(state: AdminInterface) {
-        console.log('Move project')
+        // state.projects?.forEach(val => {
+        //   console.log(
+        //     'Proj',
+        //     val.project_description.title,
+        //     val.project_status
+        //   );
+        // });
         const arr = [
           'New Projects',
           'Initial scoping',
@@ -110,6 +116,8 @@ export default Vue.extend({
             });
           }
         });
+
+        console.log('Projects here', obj);
 
         return obj;
       }

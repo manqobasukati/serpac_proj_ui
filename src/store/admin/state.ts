@@ -10,7 +10,7 @@ export interface AdminInterface {
 const state: AdminInterface = {
   projects: null as null | ProjectModel[],
   project_comments: null as null | CommentModel[],
-  users:null as null | UserModel[]
+users:null as null | UserModel[]
 };
 
 export default state;

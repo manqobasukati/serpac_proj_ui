@@ -39,7 +39,7 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
-    <comment-box :project="FormData" />
+    <comment-box :project="FormData" :section="active_section" />
     <div class="tw-flex tw-flex-row tw-w-1/3 tw-mt-3">
       <q-select
         borderless
@@ -135,6 +135,7 @@ export default Vue.extend({
       this.active_section = data;
     },
     moveProject() {
+      
       const action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.UPDATE_PROJECT_STATUS}`;
       const payload = {
         ...this.FormData,
@@ -145,8 +146,7 @@ export default Vue.extend({
         .dispatch(action, payload)
         .then(val => {
           this.project_status = '';
-          const get_projects_action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.ALL_PROJECTS}`;
-          void this.$store.dispatch(get_projects_action);
+         
         })
         .catch(e => {
           console.log(e);

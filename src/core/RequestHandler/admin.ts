@@ -1,3 +1,4 @@
+import { CommentModel } from '../Models/ProjectModel';
 import { AppResponse, config } from './config';
 
 export function get_projects(data?: string) {
@@ -19,7 +20,7 @@ export function get_projects(data?: string) {
 }
 
 export function create_comment(data: Comment) {
-  const url = `${config.server_url}/comments`;
+  const url = `${config.server_url}/comment`;
 
   return fetch(url, {
     method: 'POST', // or 'PUT'test
@@ -27,6 +28,22 @@ export function create_comment(data: Comment) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      return data.payload as Promise<any>;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      return error as Promise<any>;
+    });
+}
+
+export function get_comments(data?: CommentModel) {
+  const url = `${config.server_url}/comment`;
+
+  return fetch(url, {
+    method: 'GET' // or 'PUT'test
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
