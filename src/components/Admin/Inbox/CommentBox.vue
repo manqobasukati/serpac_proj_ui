@@ -4,9 +4,12 @@
   >
     <div class="tw-flex tw-flex-col">
       <div class="tw-text-md tw-font-medium">Comments</div>
-      <ul class="tw-list-disc tw-pl-6">
-        <li>Need to get into more detail regarding the project</li>
-        <li>Need to get into more detail regarding the project</li>
+      <ul
+        class="tw-list-disc tw-pl-6"
+        v-for="(comment, key) in get_comments"
+        :key="key"
+      >
+        <li>{{ comment.comment }}</li>
       </ul>
       <div class="tw-flex tw-flex-row tw-p-2">
         <textarea
@@ -45,6 +48,7 @@ export default Vue.extend({
       comment: ''
     };
   },
+
   methods: {
     create_comment() {
       const action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.CREATE_COMMENT}`;
@@ -53,8 +57,11 @@ export default Vue.extend({
         user: localStorage.getItem('serpac_tool_user_id'),
         created: new Date(),
         project_status: this.project.project_status,
-        project: this.project._id
+        project: this.project._id,
+        section: this.section
       };
+
+      console.log(data);
       this.$store
         .dispatch(action, data)
         .then(() => {
@@ -68,8 +75,9 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.ADMIN, {
       get_comments(state: AdminInterface) {
+      
         return state.project_comments?.filter(val => {
-          return val.section === this.section;
+          return (val.section === this.section) && (val.project ===  this.project._id);
         });
       }
     })

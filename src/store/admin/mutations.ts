@@ -5,14 +5,17 @@ import { AdminInterface } from './state';
 export enum ADMIN_MUTATIONS {
   ALL_PROJECTS = 'all_projects',
   UPDATE_PROJECT = 'update_project',
-  CREATE_COMMENT = 'create_comment'
+  CREATE_COMMENT = 'create_comment',
+  SET_COMMENTS = 'set_comments'
 }
 
 const mutation: MutationTree<AdminInterface> = {
   [ADMIN_MUTATIONS.ALL_PROJECTS](state: AdminInterface, payload) {
     // your code
-
+    
     state.projects = payload;
+    
+   
   },
 
   [ADMIN_MUTATIONS.UPDATE_PROJECT](state: AdminInterface, payload) {
@@ -23,11 +26,12 @@ const mutation: MutationTree<AdminInterface> = {
         }
       }
     }
-
-  
   },
   [ADMIN_MUTATIONS.CREATE_COMMENT](state: AdminInterface, payload) {
     state.project_comments?.push(payload);
+  },
+  [ADMIN_MUTATIONS.SET_COMMENTS](state: AdminInterface, payload) {
+    state.project_comments = payload;
   }
 };
 

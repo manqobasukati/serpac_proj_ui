@@ -4,7 +4,7 @@
       <div class="tw-flex tw-justify-between">
         <div class="tw-text-md tw-font-bold">
           {{ lane_name }}
-          <span class="tw-font-thin">{{project_count}}</span>
+          <span class="tw-font-thin">{{ project_count }}</span>
         </div>
         <div>
           <q-icon @click="expandLane" name="expand_more" size="1.2rem"></q-icon>
@@ -29,18 +29,18 @@ export default Vue.extend({
   components: {
     Project
   },
-  //props: ['lane_name', 'projects', 'expand'],
-  props: {
-    lane_name: {
-      type: String
-    },
-    projects: {
-      type: Array
-    },
-    expand: {
-      type: Boolean
-    }
-  },
+  props: ['lane_name', 'projects', 'expand'],
+  // props: {
+  //   lane_name: {
+  //     type: String
+  //   },
+  //   projects: {
+  //     type: Array
+  //   },
+  //   expand: {
+  //     type: Boolean
+  //   }
+  // },
   methods: {
     expandLane() {
       this.$emit('expandLane', this.lane_name);
