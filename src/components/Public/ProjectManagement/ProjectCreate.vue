@@ -41,7 +41,7 @@
             />
             <section-six
               v-if="'Section 6' === active_section"
-              :FormD="FormData"
+              :FormD="formData"
               @updateForm="updateForm"
             />
             <section-seven

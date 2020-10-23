@@ -12,14 +12,14 @@
             v-model="FormData.project_value.total_inv_value"
             :disabled="context === 'admin_inbox'"
             placeholder="Total investment value"
-              @focus="addHint('section_2', 'project_total_inv_value')"
+            @focus="addHint('section_2', 'project_total_inv_value')"
           />
           <input
             type="text"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.funding_status"
             :disabled="context === 'admin_inbox'"
-              @focus="addHint('section_2', 'project_funding_status')"
+            @focus="addHint('section_2', 'project_funding_status')"
             placeholder="Funding status"
           />
           <input
@@ -27,15 +27,17 @@
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.percentage_of_funding"
             :disabled="context === 'admin_inbox'"
-              @focus="addHint('section_2', 'project_percentage_of_funding')"
+            @focus="addHint('section_2', 'project_percentage_of_funding')"
             placeholder="Percentage of funding"
           />
-          <input
-            type="text"
+          <q-select
+            borderless
+            use-chips
+            :options="projectScopeOptions"
             v-model="FormData.project_value.project_scope"
             :disabled="context === 'admin_inbox'"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
-             @focus="addHint('section_2', 'project_scope')"
+            @focus="addHint('section_2', 'project_scope')"
             placeholder="Local or FDI"
           />
         </div>
@@ -57,6 +59,7 @@
 </template>
 
 <script lang="ts">
+import { get_static } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
@@ -71,11 +74,12 @@ export default Vue.extend({
   },
   mounted() {
     this.FormData = this.FormD;
-    console.log('Form section two', this.FormD);
+    this.getOptions()
   },
   props: ['context', 'FormD'],
   data() {
     return {
+      projectScopeOptions: null as null | string[],
       FormData: {
         project_value: {
           total_inv_value: '',
@@ -87,8 +91,17 @@ export default Vue.extend({
     };
   },
   methods: {
+    getOptions() {
+      get_static()
+        .then(val => {
+          this.projectScopeOptions = val['investment_scopes'];
+          console.log(val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     addHint(section: string, field_name: string) {
-     
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 
       const hint = hints[section].find((val: HintInterface) => {

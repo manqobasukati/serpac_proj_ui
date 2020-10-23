@@ -60,14 +60,19 @@ const routes: RouteConfig[] = [
       {
         path: '/admin/users',
         component: () => import('components/Admin/Users/Users.vue'),
-        children:[
+        children: [
           {
-            path:'/admin/users/:userID',
-            component: () => import('components/Admin/Users/UserCard.vue'),
+            path: '/admin/users/:userID',
+            component: () => import('components/Admin/Users/UserCard.vue')
           }
         ]
       },
-      
+
+      {
+        path: '/admin/cms',
+        component: () => import('components/Admin/CMS/CMS.vue')
+      },
+
       {
         path: '/admin/reports/all',
         name: 'content_reports',

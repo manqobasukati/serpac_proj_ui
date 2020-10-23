@@ -29,7 +29,6 @@
             v-model="FormData.opportunities.local_sourced_inputs"
             class="proj-form-input tw-h-10  tw-my-1"
             label="Locally sourced inputs"
-           
             :disabled="context === 'admin_inbox'"
             dense
           />
@@ -66,11 +65,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {
-  ExternallySourcedInputsOptions,
-  LocallySourcedInputsOptions,
-  ProjectSkillsOptions
-} from 'src/core/Additional/Contstants';
+import { get_static } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
@@ -81,9 +76,9 @@ export default Vue.extend({
   props: ['context', 'FormD'],
   data() {
     return {
-      ExternallySourcedInputsOptions,
-      LocallySourcedInputsOptions,
-      ProjectSkillsOptions,
+      ExternallySourcedInputsOptions: null as null | string[],
+      LocallySourcedInputsOptions: null as null | string[],
+      ProjectSkillsOptions: null as null | string[],
       FormData: {
         opportunities: {
           project_skills: [],
@@ -99,9 +94,24 @@ export default Vue.extend({
     }
   },
   mounted() {
+    this.getOptions();
     this.FormData = this.FormD;
   },
   methods: {
+    getOptions() {
+      get_static()
+        .then(val => {
+          this.ProjectSkillsOptions = val['project_skills'];
+          this.LocallySourcedInputsOptions = val['locally_sourced_inputs'];
+          this.ExternallySourcedInputsOptions =
+            val['externally_sourced_inputs'];
+
+          console.log(val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 

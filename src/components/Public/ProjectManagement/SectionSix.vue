@@ -72,7 +72,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { StakeHoldersOptions } from 'src/core/Additional/Contstants';
+import { get_static, StakeHoldersOptions } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { hints } from './hints';
@@ -83,7 +83,8 @@ export default Vue.extend({
   props: ['context', 'FormD'],
   data() {
     return {
-      StakeHoldersOptions,
+      StakeHoldersOptions:null as null | string[],
+      
       FormData: {
         key_enablers: [
           {
@@ -100,10 +101,21 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 6', this.FormD);
+  
     this.FormData = this.FormD;
+    this.getOptions();
   },
   methods: {
+    getOptions() {
+      get_static()
+        .then(val => {
+          this.StakeHoldersOptions = val['enablers'];
+          console.log(val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 

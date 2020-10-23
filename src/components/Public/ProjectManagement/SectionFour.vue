@@ -104,13 +104,14 @@ import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
 import { hints } from './hints';
+import { get_static } from 'src/core/Additional/Contstants';
 
 export default Vue.extend({
   name: 'SectionFive',
   props: ['context', 'FormD'],
   data() {
     return {
-      selectOptions: ['temporal_jobs', 'permanent_jobs', 'total_inv_value'],
+      selectOptions: null as null | string[],
       selectedFields: [],
       FormData: {
         project_timelines: [
@@ -132,12 +133,24 @@ export default Vue.extend({
   mounted() {
     console.log('Section 4', this.FormD);
     this.FormData = this.FormD;
+    this.getOptions()
   },
 
   filters: {
     ...FILTERS
   },
   methods: {
+    getOptions() {
+      get_static()
+        .then(val => {
+          
+          this.selectOptions = val['relevant_fields_phases'];
+          console.log(val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 

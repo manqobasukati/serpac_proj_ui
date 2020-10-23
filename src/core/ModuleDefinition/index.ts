@@ -30,6 +30,12 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
         link: '/admin/users',
         icon: 'group',
         modules: []
+      },
+      {
+        name: 'cms',
+        link: '/admin/cms',
+        icon: 'storage',
+        modules: []
       }
     ]
   },
