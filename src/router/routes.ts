@@ -29,6 +29,10 @@ const routes: RouteConfig[] = [
     component: () => import('components/Public/Public.vue'),
     children: [
       {
+        path: '/public/user/:userID',
+        component: () => import('components/Public/PublicUsers/PublicUsers.vue')
+      },
+      {
         path: '/public/project',
         component: () =>
           import('components/Public/ProjectManagement/ProjectCreate.vue')

@@ -53,6 +53,7 @@
             :options="['admin', 'public']"
             borderless
             v-model="user.access"
+            v-if="user.access.includes('admin')"
             placeholder="access"
             type="text"
             class="proj-form-input tw-h-8 tw-w-full tw-text-sm tw-mr-3 "

@@ -116,6 +116,12 @@ export default Vue.extend({
         console.log('here', localStorage.getItem('serpac_tool_user_id'));
 
         this.show_my_projects = !this.show_my_projects;
+      } else if (link === '/public/user') {
+        void this.$router.push({
+          path: `${link}/${localStorage.getItem(
+            'serpac_tool_user_id'
+          ) as string}`
+        });
       }
     }
   },

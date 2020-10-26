@@ -7,6 +7,8 @@ export interface ModuleDefinition {
   modules: ModuleDefinition[];
 }
 
+
+
 export const module_definition: { [name: string]: ModuleDefinition } = {
   admin: {
     link: '/admin',
@@ -61,6 +63,7 @@ export const module_definition: { [name: string]: ModuleDefinition } = {
       {
         name: 'users',
         icon: 'group',
+        link:'/public/user',
         modules: []
       }
     ]
