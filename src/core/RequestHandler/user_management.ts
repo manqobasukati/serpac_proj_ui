@@ -1,7 +1,7 @@
 import { UserModel } from '../Models/UserModel';
 import { AppResponse, config } from './config';
 
-export function create_user(data: UserModel) {
+export function create_user(data:any) {
   const url = `${config.server_url}/user`;
 
   return fetch(url, {
@@ -21,7 +21,7 @@ export function create_user(data: UserModel) {
     });
 }
 
-export function login(data: UserModel) {
+export function login(data: any) {
   const url = `${config.server_url}/access`;
 
   return fetch(url, {

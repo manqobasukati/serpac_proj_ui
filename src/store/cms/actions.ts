@@ -1,6 +1,8 @@
+import { ActionTree } from 'vuex';
 import { StateInterface } from '..';
 import { CONTENT_MUTATIONS } from './mutations';
 import { CMSInterface } from './state';
+
 
 export enum CONTENT_ACTIONS {
   SET_CONTENT = 'set_content'

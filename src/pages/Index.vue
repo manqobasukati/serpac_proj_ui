@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/OptionsComponent.vue';
 import Vue from 'vue';
 
@@ -18,7 +17,7 @@ export default Vue.extend({
   name: 'PageIndex',
   components: { ExampleComponent },
   data() {
-    const todos: Todo[] = [
+    const todos = [
       {
         id: 1,
         content: 'ct1'
@@ -40,7 +39,7 @@ export default Vue.extend({
         content: 'ct5'
       }
     ];
-    const meta: Meta = {
+    const meta = {
       totalCount: 1200
     };
     return { todos, meta };

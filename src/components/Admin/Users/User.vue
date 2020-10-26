@@ -27,7 +27,7 @@ export default Vue.extend({
   },
   methods: {
     selectUser() {
-      const user = this.user;
+      const user = this.$props.user;
       if (user) {
         void this.$router.push({ path: `/admin/users/${user._id as string}` });
       }

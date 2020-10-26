@@ -5,7 +5,7 @@
     >
       <div class="tw-w-1/3">
         <div class="tw-text-2xl tw-font-semibold tw-text-red-300">Sign In</div>
-        <div class=" tw-shadow-md tw-rounded-lg tw-h-md  tw-bg-white tw-p-2">
+        <div class=" tw-shadow-md tw-rounded-lg tw-h-full  tw-bg-white tw-p-2">
           <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-col">
               <div class="tw-text-md tw-font-medium">User Details</div>
@@ -41,7 +41,7 @@
                   @click="sign_in()"
                   class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
                 >
-                  Save
+                  sign in
                 </button>
               </div>
             </div>
@@ -54,6 +54,7 @@
 
 <script lang="ts">
 import { user_form_validate } from 'src/core/helpers/form_validation';
+import { UserModel } from 'src/core/Models/UserModel';
 import { login } from 'src/core/RequestHandler/user_management';
 
 import Vue from 'vue';
@@ -86,7 +87,7 @@ export default Vue.extend({
       if (!this.login_message) {
         this.$q.loading.show();
         const response = await login(request);
-        console.log('Resp', response);
+     
         if (response.message === 'Hi, here is your access token!') {
           logged_in_user.username = response.payload.username;
           logged_in_user.token = response.payload.token;
