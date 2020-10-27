@@ -62,5 +62,9 @@ export const SimpleSections = [
   {
     name: 'Section 7',
     active: false
+  },
+  {
+    name:'Section 8',
+    active:false
   }
 ];

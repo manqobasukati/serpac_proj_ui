@@ -46,8 +46,12 @@
             />
             <section-seven
               v-if="'Section 7' === active_section"
-              :FormD="FormData"
+              :FormD="formData"
               @updateForm="updateForm"
+            />
+            <section-eight
+              v-if="'Section 8' === active_section"
+              :projectID="formData._id"
             />
           </div>
           <div class="tw-flex  tw-p-2 tw-bg-gray-100">
@@ -75,6 +79,7 @@ import SectionFour from './SectionFour.vue';
 import SectionFive from './SectionFive.vue';
 import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
+import SectionEight from './SectionEight.vue';
 import HintBox from './HintBox.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
@@ -96,7 +101,8 @@ export default Vue.extend({
     SectionFive,
     SectionSix,
     SectionSeven,
-    HintBox
+    HintBox,
+    SectionEight
   },
   props: ['projectId'],
   data() {
@@ -109,7 +115,6 @@ export default Vue.extend({
     ...FILTERS
   },
   mounted() {
-   
     if (this.projectId) {
       get_project(this.projectId)
         .then(val => {

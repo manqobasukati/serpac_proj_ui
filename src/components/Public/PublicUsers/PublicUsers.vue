@@ -1,6 +1,6 @@
 <template>
   <div class="tw-mt-24 tw-w-3/6">
-    <user-card />
+    <user-card  />
   </div>
 </template>
 

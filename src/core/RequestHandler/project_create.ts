@@ -2,7 +2,7 @@ import { ProjectModel } from '../Models/ProjectModel';
 
 import { AppResponse, config } from './config';
 
-export function update_project(data:ProjectModel) {
+export function update_project(data: ProjectModel) {
   const url = `${config.server_url}/project`;
 
   return fetch(url, {
@@ -95,5 +95,29 @@ export function remove_project(data: string) {
     .catch(error => {
       console.error('Error:', error);
       return error as Promise<any>;
+    });
+}
+
+export function upload_files(data: any) {
+  console.log('Data', data)
+  const url = `${config.server_url}/upload`;
+
+  const formData: FormData = new FormData();
+
+  data.forEach((element: any) => {
+    console.log('Element',element);
+    formData.append(`${element.name as string}`, element.url);
+  });
+
+  return fetch(url, {
+    method: 'POST', // or 'PUT'test
+    body: formData
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
     });
 }
