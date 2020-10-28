@@ -4,13 +4,13 @@
   >
     <div class="tw-flex tw-flex-col">
       <div class="tw-text-md tw-font-medium">Comments</div>
-      <ul
-        class="tw-list-disc tw-pl-6"
-        v-for="(comment, key) in get_comments"
+      <div
+        class="tw-list-disc tw-pl-6 tw-pr-10"
+        v-for="(my_comment, key) in get_comments"
         :key="key"
       >
-        <li>{{ comment.comment }}</li>
-      </ul>
+        <comment :comment="my_comment" />
+      </div>
       <div class="tw-flex tw-flex-row tw-p-2">
         <textarea
           type="text"
@@ -34,15 +34,21 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
 import { MODULES } from 'src/store';
 import { ADMIN_ACTIONS } from 'src/store/admin/actions';
 import { AdminInterface } from 'src/store/admin/state';
-import Vue from 'vue';
+
 import { mapState } from 'vuex';
+
+import Comment from './Comment.vue';
 
 export default Vue.extend({
   name: 'CommentBox',
   props: ['section', 'project'],
+  components: {
+    Comment
+  },
   data() {
     return {
       comment: ''

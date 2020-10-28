@@ -3,7 +3,7 @@ export enum ProjectStatuses {
   initial_scoping = 'Initial scoping',
   work_group_assesment = 'Work group assesment',
   facilitating_enablers = 'Facilitating Enablers',
-  ready_to_launch =  'Ready to Launch',
+  ready_to_launch = 'Ready to Launch',
   implementation_ongoing = 'Implementation Ongoing'
 }
 
@@ -11,19 +11,22 @@ export interface ProjectPhase {
   name: string;
   start_date: Date;
   end_date: Date;
-  meta?:{[name:string]:string}
-
+  meta?: { [name: string]: string };
 }
 
-
 export interface CommentModel {
-  project:string,
-  section: string,
-  created:Date,
-  updated?:Date,
-  comment:string,
-  project_status:string
-  user:string
+  project: string;
+  section: string;
+
+  comment: string;
+  reference?: string;
+  project_status: string;
+
+  user: string;
+  resolved?: boolean;
+
+  created: Date;
+  updated: Date;
 }
 
 export interface Issues {
@@ -33,7 +36,7 @@ export interface Issues {
 
 export interface ProjectModel {
   _id?: string | null;
-  project_status?:string,
+  project_status?: string;
   project_created: Date;
   project_submitted: Date | null;
   project_description: {
@@ -46,12 +49,11 @@ export interface ProjectModel {
         inkhundla?: string;
         region?: string;
       };
-      
     };
     economy_sector: string;
     project_existense: string;
     name_of_investor: string;
-    project_status?:string;
+    project_status?: string;
   };
   project_value: {
     total_inv_value: string;
@@ -63,8 +65,8 @@ export interface ProjectModel {
     permanent_jobs: number;
     temporal_jobs: number;
   };
-  project_timelines:  ProjectPhase[];
-  
+  project_timelines: ProjectPhase[];
+
   opportunities: {
     project_skills: string[];
     local_sourced_inputs: string[];

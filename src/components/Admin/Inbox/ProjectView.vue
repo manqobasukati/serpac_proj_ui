@@ -39,6 +39,11 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
+    <section-eight
+      v-if="'Section 8' === active_section"
+      :context="'admin_inbox'"
+      :projectID="FormData._id"
+    />
     <comment-box :project="FormData" :section="active_section" />
     <div class="tw-flex tw-flex-row tw-w-1/3 tw-mt-3">
       <q-select
@@ -72,6 +77,7 @@ import SectionThree from 'src/components/Public/ProjectManagement/SectionThree.v
 import SectionFour from 'src/components/Public/ProjectManagement/SectionFour.vue';
 import SectionFive from 'src/components/Public/ProjectManagement/SectionFive.vue';
 import SectionSix from 'src/components/Public/ProjectManagement/SectionSix.vue';
+import SectionEight from 'src/components/Public/ProjectManagement/SectionEight.vue';
 import { get_project } from 'src/core/RequestHandler/project_create';
 import { MODULES } from 'src/store';
 import { ADMIN_ACTIONS } from 'src/store/admin/actions';
@@ -87,7 +93,8 @@ export default Vue.extend({
     SectionFour,
     SectionFive,
     SectionSix,
-    CommentBox
+    CommentBox,
+    SectionEight
   },
   watch: {
     projectId() {
@@ -135,7 +142,6 @@ export default Vue.extend({
       this.active_section = data;
     },
     moveProject() {
-      
       const action = `${MODULES.ADMIN}/${ADMIN_ACTIONS.UPDATE_PROJECT_STATUS}`;
       const payload = {
         ...this.FormData,
@@ -146,7 +152,6 @@ export default Vue.extend({
         .dispatch(action, payload)
         .then(val => {
           this.project_status = '';
-         
         })
         .catch(e => {
           console.log(e);

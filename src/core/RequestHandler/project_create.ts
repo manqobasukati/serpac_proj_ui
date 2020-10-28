@@ -1,4 +1,5 @@
 import { ProjectModel } from '../Models/ProjectModel';
+import { UploadModel } from '../Models/UploadModel';
 
 import { AppResponse, config } from './config';
 
@@ -98,15 +99,14 @@ export function remove_project(data: string) {
     });
 }
 
-export function upload_files(data: any) {
-  console.log('Data', data)
+export function upload_files(data: any, project: string) {
   const url = `${config.server_url}/upload`;
 
-  const formData: FormData = new FormData();
+  const formData = new FormData();
 
   data.forEach((element: any) => {
-    console.log('Element',element);
     formData.append(`${element.name as string}`, element.url);
+    formData.append('project', project);
   });
 
   return fetch(url, {
@@ -116,6 +116,21 @@ export function upload_files(data: any) {
     .then(response => response.json())
     .then((data: AppResponse) => {
       return data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+export function get_files(project_id: string) {
+  const url = `${config.server_url}/upload?project=${project_id}`;
+  return fetch(url, {
+    method: 'GET' // or 'PUT'test
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      console.log(data);
+      return data.payload as UploadModel[];
     })
     .catch(error => {
       console.error('Error:', error);
