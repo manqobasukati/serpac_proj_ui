@@ -116,11 +116,13 @@ export default Vue.extend({
           this.projectFiles = (val as any[]).map(v => {
             return {
               file_name: v.name,
-              url: `${config.server_url}/assets/${v.url}`
+              url: `${config.server_url}/assets/${v.url as string}`
             };
           });
         })
-        .catch(e => {});
+        .catch(e => {
+          console.log(e);
+        });
     },
     uploadFiles() {
       upload_files(this.files, this.projectID)

@@ -143,11 +143,12 @@ export default Vue.extend({
   },
   methods: {
     updateForm(data: any) {
+      
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
 
-      console.log('Form now', this.formData);
+      
 
       if (!this.$route.params.projectId) {
         const request = {

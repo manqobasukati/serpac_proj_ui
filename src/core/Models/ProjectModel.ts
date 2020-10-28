@@ -55,6 +55,7 @@ export interface ProjectModel {
     name_of_investor: string;
     project_status?: string;
   };
+  project_extras:string[];
   project_value: {
     total_inv_value: string;
     funding_status: string;

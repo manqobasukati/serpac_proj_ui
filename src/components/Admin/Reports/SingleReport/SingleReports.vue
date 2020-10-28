@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row ">
+    <div class="row tw-m-12">
       <div class="tw-rounded-full tw-bg-gray-200">
         <q-icon name="arrow_back" class="tw-text-4xl " @click="setView()" />
 
@@ -293,28 +293,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="tw-flex tw-flex-col tw-mt-6 tw-w-full tw-pr-20">
-        <div class="tw-text-lg  tw-font-light">
-          Additional comments about project
-        </div>
-        <textarea
-          type="text"
-          class="proj-form-input tw-w-full tw-h-48  tw-text-sm tw-mx-1"
-          placeholder="Additional notes about project"
-        />
-        <div class="tw-flex tw-flex-row tw-justify-end">
-          <div class="">
-            <button
-              @click="Save()"
-              class="tw-bg-pink-100  tw-w-full  tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mt-6 tw-mr-6"
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+   
   </div>
 </template>
 

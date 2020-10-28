@@ -9,10 +9,12 @@
         </div>
         <div class="tw-flex tw-flex-col tw-p-2">
           <textarea
+            v-model="comment_1"
             class="proj-form-input tw-mt-2  tw-text-sm tw-h-20"
             placeholder="Comment 1 "
           />
           <textarea
+            v-model="comment_2"
             class="proj-form-input tw-mt-2  tw-text-sm tw-h-20"
             placeholder="Comment 2"
           />
@@ -20,7 +22,7 @@
         <div class="tw-flex tw-flex-row tw-justify-end">
           <div class="">
             <button
-              @click="sign_up()"
+              @click="save()"
               class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md tw-p-1 tw-p-2 tw-mr-2"
             >
               Save
@@ -35,6 +37,32 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'SectionSeven'
+  name: 'SectionSeven',
+  props: ['FormD'],
+  watch: {
+    FormD() {
+      this.FormData = this.FormD;
+    }
+  },
+  data() {
+    return {
+      comment_1: '',
+      comment_2: '',
+      FormData: {
+        project_extras: null as null | string[]
+      }
+    };
+  },
+  methods: {
+    save() {
+      const comments = [this.comment_1, this.comment_2].filter(val => {
+        return val !== '';
+      });
+
+      this.FormData.project_extras = comments;
+
+      this.$emit('updateForm', this.FormData);
+    }
+  }
 });
 </script>
