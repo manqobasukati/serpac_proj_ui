@@ -116,7 +116,7 @@
 import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
 
-import { TinkhundlaOptions } from 'src/core/Additional/Contstants';
+import { get_static, TinkhundlaOptions } from 'src/core/Additional/Contstants';
 
 import {
   EconomicSectors,
@@ -139,7 +139,16 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 1', this.FormD);
+    get_static()
+      .then(val => {
+        this.economicSectorOptions = val['economic_sectors'];
+        this.projectExistenceOptions = val['project_existence'];
+
+       
+      })
+      .catch(e => {
+        console.log(e);
+      });
     this.FormData = this.FormD;
   },
   data() {

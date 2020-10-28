@@ -21,7 +21,7 @@ export const ProjectSkillsOptions = () => {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
-      console.log('You are not here', data);
+     
       return data.payload['project_skills'] as Promise<any>;
     })
     .catch(error => {
@@ -37,7 +37,7 @@ export const ExternallySourcedInputsOptions = ['Elecricity', 'Systems'];
 export const StakeHoldersOptions = ['SWSC', 'EPTC', 'REPS'];
 
 export function TinkhundlaOptions() {
-  console.log(Tinkhundla);
+  
   return Tinkhundla.map(val => {
     return val.name;
   });
@@ -66,7 +66,7 @@ export function get_static(field?: string) {
 export function put_static(data: { [name: string]: string[] }) {
   const url = `${config.server_url}/content`;
 
-  console.log('The data', data);
+ 
   return fetch(url, {
     method: 'PUT',
     headers: {
