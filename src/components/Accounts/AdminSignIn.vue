@@ -15,18 +15,28 @@
                   type="text"
                   name="email"
                   class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
-                 v-model="user_data.email"
+                  v-model="user_data.email"
                   placeholder="Email"
                 />
               </div>
               <div class="tw-flex tw-flex-row tw-p-2">
-                <input
-                  type="password"
+                <q-input
+                  borderless
                   name="password"
+                  :type="isPwd ? 'password' : 'text'"
                   class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
-                   v-model="user_data.password"
+                  v-model="user_data.password"
                   placeholder="Password"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      size="xs"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </q-input>
               </div>
             </div>
 
@@ -62,6 +72,7 @@ export default Vue.extend({
   name: 'AdminSignIn',
   data() {
     return {
+      isPwd: true,
       user_data: {
         email: '',
         password: ''
@@ -87,7 +98,7 @@ export default Vue.extend({
       if (!this.login_message) {
         this.$q.loading.show();
         const response = await login(request);
-     
+
         if (response.message === 'Hi, here is your access token!') {
           logged_in_user.username = response.payload.username;
           logged_in_user.token = response.payload.token;
@@ -98,7 +109,7 @@ export default Vue.extend({
               logged_in_user.username
             );
 
-            localStorage.setItem('serpac_tool_user_id',response.payload._id)
+            localStorage.setItem('serpac_tool_user_id', response.payload._id);
 
             localStorage.setItem('serpac_tool_token', logged_in_user.token);
             this.$q.loading.hide();

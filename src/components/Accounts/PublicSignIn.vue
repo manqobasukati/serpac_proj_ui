@@ -19,18 +19,29 @@
                 />
               </div>
               <div class="tw-flex tw-flex-row tw-p-2">
-                <input
-                  type="password"
+                <q-input
+                  borderless
+                  name="password"
+                  :type="isPwd ? 'password' : 'text'"
                   class="proj-form-input tw-w-full tw-h-8 tw-text-sm"
-                    v-model="organization_data.password"
+                  v-model="organization_data.password"
                   placeholder="Password"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      size="xs"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </q-input>
               </div>
             </div>
 
             <div class="tw-flex tw-flex-row tw-justify-start tw-pl-2">
               <div class="tw-text-red-500" v-if="login_message">
-               {{login_message}}
+                {{ login_message }}
               </div>
             </div>
             <div class="tw-flex tw-flex-row tw-justify-end">
@@ -58,6 +69,7 @@ export default Vue.extend({
   name: 'PubliSignIn',
   data() {
     return {
+      isPwd: true,
       login_message: '',
       organization_data: {
         name: '',
