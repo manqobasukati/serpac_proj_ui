@@ -1,5 +1,6 @@
 export const config = {
-  server_url: 'https://eserparc.herokuapp.com'
+  server_url: 'https://eserparc.herokuapp.com',
+  phepha_url: 'http://portal.ndma.org.sz:4000'
   //server_url: 'http://10.0.0.240:4000'
 };
 

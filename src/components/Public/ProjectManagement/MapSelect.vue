@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="tw-shadow tw-h-md tw-w-full tw-bg-white">
-      <div ref="mappy" id="map"></div>
+    <div class="tw-shadow tw-h-md tw-w-full tw-bg-white tw-relative">
+      <div ref="mappy" id="map" class="tw-min-width-64"></div>
     </div>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default Vue.extend({
 #map {
   position: absolute;
 
-  width: 50%;
-  height: 25%;
+  width: 100%;
+  height: 100%;
 }
 </style>

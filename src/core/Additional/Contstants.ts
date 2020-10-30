@@ -1,5 +1,6 @@
 import { AppResponse, config } from '../RequestHandler/config';
 import Tinkhundla from './../../mixins/Tinkhundla';
+import inkhundla_na from 'src/core/geojson/inkhundla_na.json';
 
 export const EconomicSectors = [
   'Energy',
@@ -21,7 +22,6 @@ export const ProjectSkillsOptions = () => {
   })
     .then(response => response.json())
     .then((data: AppResponse) => {
-     
       return data.payload['project_skills'] as Promise<any>;
     })
     .catch(error => {
@@ -36,8 +36,11 @@ export const ExternallySourcedInputsOptions = ['Elecricity', 'Systems'];
 
 export const StakeHoldersOptions = ['SWSC', 'EPTC', 'REPS'];
 
+export function TinkhundlaPolygons() {
+  return inkhundla_na;
+}
+
 export function TinkhundlaOptions() {
-  
   return Tinkhundla.map(val => {
     return val.name;
   });
@@ -66,7 +69,6 @@ export function get_static(field?: string) {
 export function put_static(data: { [name: string]: string[] }) {
   const url = `${config.server_url}/content`;
 
- 
   return fetch(url, {
     method: 'PUT',
     headers: {

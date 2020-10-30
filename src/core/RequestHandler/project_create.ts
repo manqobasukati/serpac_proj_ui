@@ -136,3 +136,22 @@ export function get_files(project_id: string) {
       console.error('Error:', error);
     });
 }
+
+export function get_inkhundla(data: { [name: string]: number }) {
+  const url = `${config.phepha_url}/inkhundla/determine`;
+
+  return fetch(url, {
+    method: 'POST', // or 'PUT'test
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then((data: AppResponse) => {
+      return data.payload as Promise<any>;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}

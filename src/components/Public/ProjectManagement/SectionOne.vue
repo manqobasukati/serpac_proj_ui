@@ -115,8 +115,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
+import turf from '@turf/turf';
 
-import { get_static, TinkhundlaOptions } from 'src/core/Additional/Contstants';
+import {
+  get_static,
+  TinkhundlaOptions,
+  TinkhundlaPolygons
+} from 'src/core/Additional/Contstants';
 
 import {
   EconomicSectors,
@@ -128,6 +133,7 @@ import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { hints } from './hints';
 import { HintInterface } from 'src/store/project_create/state';
+import { get_inkhundla } from 'src/core/RequestHandler/project_create';
 
 export default Vue.extend({
   components: {
@@ -143,8 +149,6 @@ export default Vue.extend({
       .then(val => {
         this.economicSectorOptions = val['economic_sectors'];
         this.projectExistenceOptions = val['project_existence'];
-
-       
       })
       .catch(e => {
         console.log(e);
@@ -199,7 +203,24 @@ export default Vue.extend({
     },
     setPosition(data: number[]) {
       this.FormData.project_description.project_location.coordinates = data;
-      console.log(this.FormData);
+      const coordinates = {
+        longitude: data[0],
+        latitude: data[1]
+      };
+
+      get_inkhundla(coordinates)
+        .then(val => {
+          this.FormData.project_description.project_location.properties.inkhundla =
+            val.name;
+          this.FormData.project_description.project_location.properties.region =
+            val.region;
+
+          console.log('Determine', val);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      
     },
     set_map_active() {
       this.addHint('section_1', 'project_map');
