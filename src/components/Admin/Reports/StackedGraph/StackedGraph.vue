@@ -42,8 +42,10 @@ export default Vue.extend({
     createChart(data: any) {
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'horizontalBar',
+
         data: {
           labels: createLabelArray(data).economic_sectors,
+
           datasets: [
             {
               label: 'Projects by sector',
