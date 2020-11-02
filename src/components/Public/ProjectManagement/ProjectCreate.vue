@@ -165,7 +165,8 @@ export default Vue.extend({
             .then(val => {
               this.formData = val;
               this.$route.params.projectId = val._id;
-              console.log(this.$route.params);
+              this.$q.notify({message:'succesfully created project', badgeTextColor:'pink-6'})
+              
             })
             .catch(e => {
               console.log(e);
@@ -176,7 +177,7 @@ export default Vue.extend({
           .then(val => {
             this.formData = val;
             this.$route.params.projectId = val._id;
-            console.log(this.$route.params);
+            this.$q.notify({message:'succesfully saved...', color:'white',textColor:'pink-4'})
           })
           .catch(e => {
             console.log(e);

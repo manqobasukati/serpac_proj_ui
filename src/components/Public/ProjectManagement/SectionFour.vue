@@ -131,9 +131,17 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('Section 4', this.FormD);
+    get_static()
+      .then(val => {
+        this.selectOptions = val['economic_sectors'];
+     
+      })
+      .catch(e => {
+        console.log(e);
+      });
     this.FormData = this.FormD;
-    this.getOptions()
+    this.FormData = this.FormD;
+    this.getOptions();
   },
 
   filters: {
@@ -143,7 +151,6 @@ export default Vue.extend({
     getOptions() {
       get_static()
         .then(val => {
-          
           this.selectOptions = val['relevant_fields_phases'];
           console.log(val);
         })

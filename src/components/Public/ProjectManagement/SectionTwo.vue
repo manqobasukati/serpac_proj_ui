@@ -11,11 +11,13 @@
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.total_inv_value"
             :disabled="context === 'admin_inbox'"
-            placeholder="Total investment value"
+            placeholder="Total investment value ( E )"
             @focus="addHint('section_2', 'project_total_inv_value')"
           />
-          <input
-            type="text"
+          <q-select
+            borderless
+            use-chips
+            :options="fundingStatusOptions"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.funding_status"
             :disabled="context === 'admin_inbox'"
@@ -28,7 +30,7 @@
             v-model="FormData.project_value.percentage_of_funding"
             :disabled="context === 'admin_inbox'"
             @focus="addHint('section_2', 'project_percentage_of_funding')"
-            placeholder="Percentage of funding"
+            placeholder="Percentage of funding ( % )"
           />
           <q-select
             borderless
@@ -59,11 +61,17 @@
 </template>
 
 <script lang="ts">
-import { get_static } from 'src/core/Additional/Contstants';
+import Vue from 'vue';
+
+import {
+  get_static,
+  TinkhundlaOptions,
+  TinkhundlaPolygons
+} from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
-import Vue from 'vue';
+
 import { hints } from './hints';
 export default Vue.extend({
   name: 'SectionTwo',
@@ -74,11 +82,20 @@ export default Vue.extend({
   },
   mounted() {
     this.FormData = this.FormD;
-    this.getOptions()
+    this.getOptions();
+    get_static()
+      .then(val => {
+        this.projectScopeOptions = val['investment_scopes'];
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    this.FormData = this.FormD;
   },
   props: ['context', 'FormD'],
   data() {
     return {
+      fundingStatusOptions: null as null | string[],
       projectScopeOptions: null as null | string[],
       FormData: {
         project_value: {
