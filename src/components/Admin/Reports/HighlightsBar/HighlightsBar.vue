@@ -4,7 +4,7 @@
       <div
         v-for="(high, key) in Highlights"
         :key="key"
-        class=" tw-inline-flex tw-w-1/2 tw-flex-col tw-items-center tw-justify-center tw-px-10 tw-pt-3 tw-pb-1  tw-bg-gray-200 tw-shadow-md tw-rounded-lg tw-mx-2"
+        class=" tw-inline-flex tw-w-3/4 tw-flex-col tw-items-center tw-justify-center tw-px-10 tw-pt-3 tw-pb-1  tw-bg-gray-200 tw-shadow-md tw-rounded-lg tw-mx-2"
       >
         <p class="tw-text-2xl tw-font-thin">{{ high.value(projects) }}</p>
         <p class="tw-text-xl tw-font-light">{{ high.name }}</p>

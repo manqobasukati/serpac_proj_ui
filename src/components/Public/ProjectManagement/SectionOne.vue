@@ -214,13 +214,10 @@ export default Vue.extend({
             val.name;
           this.FormData.project_description.project_location.properties.region =
             val.region;
-
-          console.log('Determine', val);
         })
         .catch(e => {
           console.log(e);
         });
-      
     },
     set_map_active() {
       this.addHint('section_1', 'project_map');
@@ -228,6 +225,7 @@ export default Vue.extend({
     },
 
     Save() {
+      console.log('section_1', this.FormData);
       this.$emit('updateForm', this.FormData);
     }
   }

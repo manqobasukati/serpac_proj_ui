@@ -53,7 +53,7 @@
               v-if="context !== 'admin_inbox'"
               class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
             >
-              Save
+              Save and submit
             </button>
           </div>
         </div>
@@ -78,7 +78,6 @@
 
 <script lang="ts">
 import { config } from 'src/core/RequestHandler/config';
-import { UploadModel } from 'src/core/Models/UploadModel';
 
 import {
   get_files,
@@ -128,6 +127,7 @@ export default Vue.extend({
       upload_files(this.files, this.projectID)
         .then(v => {
           console.log(v);
+          this.$emit('submitForm');
         })
         .catch(e => {
           console.log(e);

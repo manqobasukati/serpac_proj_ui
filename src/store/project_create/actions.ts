@@ -59,7 +59,7 @@ const actions: ActionTree<ProjectCreateInterface, StateInterface> = {
   [PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS](context, payload) {
     get_user_projects(payload)
       .then(val => {
-        context.commit(PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS, val);
+        context.commit(PROJECT_CREATE_MUTATIONS.CURRENT_USER_PROJECTS, val);
       })
       .catch(e => {
         console.error(e);

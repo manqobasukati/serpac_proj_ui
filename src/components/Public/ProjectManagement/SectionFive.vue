@@ -1,61 +1,59 @@
 <template>
-  <div>
-    <div
-      class="tw-w-xxlg tw-h-full tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
-    >
-      <div class="tw-flex tw-flex-col">
-        <div class="tw-text-md tw-font-medium">Opportunities</div>
-        <div class="tw-flex tw-flex-col tw-p-2">
-          <q-select
-            multiple
-            use-chips
-            type="text"
-            borderless
-            :options="ProjectSkillsOptions"
-            v-model="FormData.opportunities.project_skills"
-            class="proj-form-input tw-h-10 tw-my-1"
-            label="project skills"
-            dense
-            @focus="addHint('section_5', 'project_project_skills')"
-            :disabled="context === 'admin_inbox'"
-          />
-          <q-select
-            multiple
-            use-chips
-            type="text"
-            borderless
-            :options="LocallySourcedInputsOptions"
-            @focus="addHint('section_5', 'project_locally_sourced_inputs')"
-            v-model="FormData.opportunities.local_sourced_inputs"
-            class="proj-form-input tw-h-10  tw-my-1"
-            label="Locally sourced inputs"
-            :disabled="context === 'admin_inbox'"
-            dense
-          />
-          <q-select
-            multiple
-            use-chips
-            type="text"
-            borderless
-            :options="ExternallySourcedInputsOptions"
-            v-model="FormData.opportunities.external_sourced_inputs"
-            @focus="addHint('section_5', 'project_externally_sourced_inputs')"
-            class="proj-form-input tw-h-10  tw-my-1"
-            label="Externally sourced inputs"
-            :disabled="context === 'admin_inbox'"
-            dense
-          />
-        </div>
-        <div class="tw-flex tw-flex-row tw-justify-end">
-          <div class="">
-            <button
-              @click="Save()"
-              v-if="context !== 'admin_inbox'"
-              class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
-            >
-              Save
-            </button>
-          </div>
+  <div
+    class="tw-w-xxlg tw-h-64 tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4"
+  >
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-text-md tw-font-medium">Opportunities</div>
+      <div class="tw-flex tw-flex-col tw-p-2">
+        <q-select
+          multiple
+          use-chips
+          type="text"
+          borderless
+          :options="ProjectSkillsOptions"
+          v-model="FormData.opportunities.project_skills"
+          class="proj-form-input tw-h-10 tw-my-1"
+          label="project skills"
+          dense
+          @focus="addHint('section_5', 'project_project_skills')"
+          :disabled="context === 'admin_inbox'"
+        />
+        <q-select
+          multiple
+          use-chips
+          type="text"
+          borderless
+          :options="LocallySourcedInputsOptions"
+          @focus="addHint('section_5', 'project_locally_sourced_inputs')"
+          v-model="FormData.opportunities.local_sourced_inputs"
+          class="proj-form-input tw-h-10  tw-my-1"
+          label="Locally sourced inputs"
+          :disabled="context === 'admin_inbox'"
+          dense
+        />
+        <q-select
+          multiple
+          use-chips
+          type="text"
+          borderless
+          :options="ExternallySourcedInputsOptions"
+          v-model="FormData.opportunities.external_sourced_inputs"
+          @focus="addHint('section_5', 'project_externally_sourced_inputs')"
+          class="proj-form-input tw-h-10  tw-my-1"
+          label="Externally sourced inputs"
+          :disabled="context === 'admin_inbox'"
+          dense
+        />
+      </div>
+      <div class="tw-flex tw-flex-row tw-justify-end">
+        <div class="">
+          <button
+            @click="Save()"
+            v-if="context !== 'admin_inbox'"
+            class="tw-bg-pink-100   tw-text-sm tw-text-red-400  tw-rounded-md  tw-p-2 tw-mr-2"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>

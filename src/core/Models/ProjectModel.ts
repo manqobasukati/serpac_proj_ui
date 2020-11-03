@@ -55,7 +55,7 @@ export interface ProjectModel {
     name_of_investor: string;
     project_status?: string;
   };
-  project_extras:string[];
+  project_extras: string[];
   project_value: {
     total_inv_value: string;
     funding_status: string;
@@ -67,7 +67,7 @@ export interface ProjectModel {
     temporal_jobs: number;
   };
   project_timelines: ProjectPhase[];
-
+  project_owners?: string[];
   opportunities: {
     project_skills: string[];
     local_sourced_inputs: string[];

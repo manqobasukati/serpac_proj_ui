@@ -50,6 +50,7 @@
               @updateForm="updateForm"
             />
             <section-eight
+              @submitForm="submitForm"
               v-if="'Section 8' === active_section"
               :projectID="formData._id"
             />
@@ -60,6 +61,42 @@
         </div>
       </div>
     </div>
+    <q-dialog v-model="create">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Project creation</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          You are about to create a project, the process is seperated into eight
+          sections. Each section captures a unique part of your project, try to
+          answer to the best of your abilities
+
+          <ul class="tw-list-disc tw-pl-6">
+            <li>
+              Should you not understand what a question requires of you, a hint
+              appears on the right pane each and every time you select a field.
+            </li>
+            <li>
+              When you are done filling a section please press the save button.
+            </li>
+            <li>
+              hould you not finish filling details about the project, save and
+              when you return it shall be under
+              <b>My Projects</b>.
+            </li>
+            <li>
+              When you are done filling all the relevant details, On section
+              eight please press the save and submit button.
+            </li>
+          </ul>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -108,7 +145,8 @@ export default Vue.extend({
   data() {
     return {
       active_section: 'Section 1',
-      formData: ModelObj
+      formData: ModelObj,
+      create: false
     };
   },
   filters: {
@@ -123,6 +161,8 @@ export default Vue.extend({
         .catch(e => {
           console.error(e);
         });
+    } else {
+      this.create = !this.create;
     }
   },
   watch: {
@@ -142,42 +182,75 @@ export default Vue.extend({
     }
   },
   methods: {
+    submitForm() {
+      const request = {
+        ...this.formData,
+        project_submitted: new Date()
+      };
+      project_create(request as ProjectModel)
+        .then(val => {
+          this.formData = val;
+          this.$route.params.projectId = val._id;
+          this.$q.notify({
+            message: 'succesfully saved...',
+            color: 'white',
+            textColor: 'pink-4'
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     updateForm(data: any) {
-      
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
 
-      
-
       if (!this.$route.params.projectId) {
-        const request = {
+        const request: Partial<ProjectModel> = {
           ...this.formData,
           project_status: ProjectStatuses.new_projects,
           _id: null,
-          project_created: new Date()
+          project_created: new Date(),
+          project_owners: []
         };
 
         if (!request._id) {
           let { ['_id']: _, ...result } = request;
 
+          const project_owner = localStorage.getItem('serpac_tool_user_id');
+
+          result.project_owners?.push(project_owner as string);
+
           project_create(result as ProjectModel)
             .then(val => {
               this.formData = val;
               this.$route.params.projectId = val._id;
-              this.$q.notify({message:'succesfully created project', badgeTextColor:'pink-6'})
-              
+              console.log('In proejct create', this.formData);
+              this.$q.notify({
+                message: 'succesfully created project',
+                badgeTextColor: 'pink-6'
+              });
             })
             .catch(e => {
               console.log(e);
             });
         }
       } else {
+        const project_owner = localStorage.getItem('serpac_tool_user_id');
+        if (!this.formData.project_owners.includes(project_owner)) {
+          this.formData.project_owners.push(project_owner);
+        }
         project_create(this.formData as ProjectModel)
           .then(val => {
             this.formData = val;
             this.$route.params.projectId = val._id;
-            this.$q.notify({message:'succesfully saved...', color:'white',textColor:'pink-4'})
+            console.log('In proejct create 1', this.formData);
+            this.$q.notify({
+              message: 'succesfully saved...',
+              color: 'white',
+              textColor: 'pink-4'
+            });
           })
           .catch(e => {
             console.log(e);
@@ -198,3 +271,8 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style scoped>
+li {
+}
+</style>

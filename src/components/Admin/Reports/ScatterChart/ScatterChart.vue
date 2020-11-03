@@ -141,22 +141,6 @@ export default Vue.extend({
           const opacity = convertToRange(v, [0, max], [0, 1]);
 
           return `rgba(255, 99, 132,${opacity})`;
-        })
-        .on('mouseover', function(d: MouseEvent, i: Feature) {
-          console.log(i);
-          d3.select(this)
-            .transition()
-            .duration(50)
-            .attr('opacity', '.85');
-          div
-            .transition()
-            .duration(50)
-            .style('opacity', 1);
-
-          div
-            .html(i?.properties.region)
-            .style('left', `${d.x + 10}px`)
-            .style('top', `${d.pageY - 15}px`);
         });
     }
   },

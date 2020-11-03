@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-absolute tw-inset-y-0 tw-left-0 tw-w-56 tw-bg-gray-200  tw-rounded-tr-xxlg tw-rounded-br-xxlg  "
+    class="tw-absolute tw-inset-y-0 tw-left-0 tw-w-56 tw-bg-gray-200     "
   >
     <div class="tw-flex tw-flex-col tw-h-full tw-p-8">
       <div class="tw-p-3">
@@ -104,9 +104,11 @@ export default Vue.extend({
         });
     },
     current_user_projects() {
+   
       const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
       const user_id = localStorage.getItem('serpac_tool_user_id');
       void this.$store.dispatch(get_projects_action, user_id);
+       
     },
     changeRoute(link: string) {
       console.log('Link', link);
@@ -128,6 +130,7 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_current_projects(state: ProjectCreateInterface) {
+        console.log('User projects',state.current_user_projects)
         return state.current_user_projects;
       }
     })

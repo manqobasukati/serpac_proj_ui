@@ -1,5 +1,6 @@
 export interface ContentModel{
     project_skills: string[],
+    funding_status:string[],
     locally_sourced_inputs: string[],
     externally_sourced_inputs:string[],
     investment_scopes:string[],
