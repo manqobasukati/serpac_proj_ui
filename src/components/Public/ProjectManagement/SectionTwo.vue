@@ -16,13 +16,12 @@
           />
           <q-select
             borderless
-            use-chips
             :options="fundingStatusOptions"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             v-model="FormData.project_value.funding_status"
             :disabled="context === 'admin_inbox'"
             @focus="addHint('section_2', 'project_funding_status')"
-            placeholder="Funding status"
+            label="Funding status"
           />
           <input
             type="text"
@@ -34,13 +33,12 @@
           />
           <q-select
             borderless
-            use-chips
             :options="projectScopeOptions"
             v-model="FormData.project_value.project_scope"
             :disabled="context === 'admin_inbox'"
             class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
             @focus="addHint('section_2', 'project_scope')"
-            placeholder="Local or FDI"
+            label="Local or FDI"
           />
         </div>
       </div>
@@ -73,6 +71,7 @@ import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
 
 import { hints } from './hints';
+import { ContentModel } from 'src/core/Models/ContentModel';
 export default Vue.extend({
   name: 'SectionTwo',
   watch: {
@@ -84,8 +83,9 @@ export default Vue.extend({
     this.FormData = this.FormD;
     this.getOptions();
     get_static()
-      .then(val => {
+      .then((val: ContentModel) => {
         this.projectScopeOptions = val['investment_scopes'];
+        this.fundingStatusOptions = val['funding_status'];
       })
       .catch(e => {
         console.log(e);
@@ -111,8 +111,8 @@ export default Vue.extend({
     getOptions() {
       get_static()
         .then(val => {
+          console.log('Scopes', val);
           this.projectScopeOptions = val['investment_scopes'];
-          console.log(val);
         })
         .catch(e => {
           console.log(e);
