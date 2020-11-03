@@ -1,3 +1,4 @@
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export const Highlights = [
@@ -12,7 +13,19 @@ export const Highlights = [
     name: 'Jobs',
     description: 'Total investment value',
     value: (projects: ProjectModel[]) => {
-      return projects.length;
+      let temporal_jobs = 0;
+      let permanent_jobs = 0;
+      projects.forEach(val => {
+        if (val.project_value) {
+          if (Number(val.project_value.total_inv_value)) {
+            temporal_jobs =
+              temporal_jobs + Number(val.expected_jobs.temporal_jobs);
+            permanent_jobs =
+              permanent_jobs + Number(val.expected_jobs.permanent_jobs);
+          }
+        }
+      });
+      return permanent_jobs + temporal_jobs;
     }
   },
   {
@@ -20,7 +33,6 @@ export const Highlights = [
     description: 'Total investment value',
     value: (projects: ProjectModel[]) => {
       let total_value = 0;
-
       projects.forEach(val => {
         if (val.project_value) {
           if (Number(val.project_value.total_inv_value)) {

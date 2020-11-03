@@ -2,9 +2,9 @@
   <div
     class="tw-w-full tw-h-lg tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
   >
-    <div class="tw-flex tw-flex-col">
+    <div ref="document" class="tw-flex tw-flex-col">
       <div class="tw-flex tw-flex-row tw-mt-3">
-        <toggle-button  class="tw-ml-32" v-on:toggleValue="changeMap" />
+        <toggle-button class="tw-ml-32" v-on:toggleValue="changeMap" />
       </div>
       <svg
         id="my_dataviz"
@@ -38,6 +38,7 @@ import {
 } from 'src/core/handlers/map';
 
 import ToggleButton from './ToggleButton.vue';
+import { Feature } from '@turf/turf';
 
 export default Vue.extend({
   name: 'LineChart',
@@ -84,7 +85,14 @@ export default Vue.extend({
         this.ready(val);
       }
     },
+
     ready(topo: any, projection_?: any) {
+      const div = d3
+        .select(this.$refs.document as HTMLElement)
+        .append('div')
+        .attr('class', 'tooltip-donut')
+        .style('opacity', 0);
+
       let center = geoCentroid(topo);
 
       const min = getMin(topo.features, 'number_of_projects');
@@ -133,6 +141,22 @@ export default Vue.extend({
           const opacity = convertToRange(v, [0, max], [0, 1]);
 
           return `rgba(255, 99, 132,${opacity})`;
+        })
+        .on('mouseover', function(d: MouseEvent, i: Feature) {
+          console.log(i);
+          d3.select(this)
+            .transition()
+            .duration(50)
+            .attr('opacity', '.85');
+          div
+            .transition()
+            .duration(50)
+            .style('opacity', 1);
+
+          div
+            .html(i?.properties.region)
+            .style('left', `${d.x + 10}px`)
+            .style('top', `${d.pageY - 15}px`);
         });
     }
   },
@@ -145,3 +169,17 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style scoped>
+div.tooltip-donut {
+  position: absolute;
+  text-align: center;
+  padding: 0.5rem;
+  background: #ffffff;
+  color: #313639;
+  border: 1px solid #313639;
+  border-radius: 8px;
+  pointer-events: none;
+  font-size: 1.3rem;
+}
+</style>
