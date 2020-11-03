@@ -7,5 +7,6 @@ export interface ContentModel{
     economic_sectors:string[],
     project_existence:string[],
     relevant_fields_phases:string[],
-    enablers:string[]
+    enablers:string[],
+    hints:[{[name:string]:string}]
 }

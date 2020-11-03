@@ -130,7 +130,7 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_current_projects(state: ProjectCreateInterface) {
-        console.log('User projects',state.current_user_projects)
+     
         return state.current_user_projects;
       }
     })

@@ -119,6 +119,7 @@ import turf from '@turf/turf';
 
 import {
   get_static,
+  put_static,
   TinkhundlaOptions,
   TinkhundlaPolygons
 } from 'src/core/Additional/Contstants';
@@ -134,6 +135,8 @@ import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { hints } from './hints';
 import { HintInterface } from 'src/store/project_create/state';
 import { get_inkhundla } from 'src/core/RequestHandler/project_create';
+
+import { get_hints } from 'src/core/helpers/hints';
 
 export default Vue.extend({
   components: {
@@ -186,16 +189,22 @@ export default Vue.extend({
   props: ['context', 'FormD'],
   methods: {
     addHint(section: string, field_name: string) {
-      console.log('Projects');
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 
-      const hint = hints[section].find((val: HintInterface) => {
-        return val.field_name === field_name;
-      });
-      this.$store
-        .dispatch(action, hint)
-        .then(val => {
-          console.log('Val', val);
+      get_hints()
+        .then((val: any) => {
+          const hint = val[section].find((v: HintInterface) => {
+            return v.field_name === field_name;
+          });
+
+          this.$store
+            .dispatch(action, hint)
+            .then(val => {
+              console.log('Val 1', val);
+            })
+            .catch(e => {
+              console.log(e);
+            });
         })
         .catch(e => {
           console.log(e);
@@ -225,7 +234,6 @@ export default Vue.extend({
     },
 
     Save() {
-      console.log('section_1', this.FormData);
       this.$emit('updateForm', this.FormData);
     }
   }

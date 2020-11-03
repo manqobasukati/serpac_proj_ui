@@ -66,7 +66,9 @@ export function get_static(field?: string) {
     });
 }
 
-export function put_static(data: { [name: string]: string[] }) {
+export function put_static(data: {
+  [name: string]: string[] | [{ [name: string]: string }];
+}) {
   const url = `${config.server_url}/content`;
 
   return fetch(url, {

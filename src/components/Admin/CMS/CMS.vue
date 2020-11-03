@@ -13,6 +13,7 @@
         @addContent="addContent"
         @editContentLane="editContentCMS"
         @deleteContentLane="deletContentCMS"
+        @editObjectLane="editObjectLane"
       />
     </div>
   </div>
@@ -29,7 +30,9 @@ export default Vue.extend({
   data() {
     return {
       expandedLane: '',
-      contents: null as null | { [name: string]: string[] }
+      contents: null as null | {
+        [name: string]: string[] | [{ [name: string]: string }];
+      }
     };
   },
   components: {
@@ -41,7 +44,7 @@ export default Vue.extend({
   methods: {
     deletContentCMS(data: { [name: string]: string }) {
       if (this.contents) {
-        const index = this.contents[data.lane_name].findIndex(v => {
+        const index = this.contents[data.lane_name].findIndex((v: any) => {
           return v === data.content;
         });
         this.contents[data.lane_name].splice(index, 1);
@@ -59,6 +62,7 @@ export default Vue.extend({
       get_static()
         .then(val => {
           this.contents = val;
+          console.log('This contents =>', this.contents);
         })
         .catch(e => {
           console.log(e);
@@ -67,7 +71,7 @@ export default Vue.extend({
     editContentCMS(data: { [name: string]: string }) {
       console.log('D =>', data);
       if (this.contents) {
-        const index = this.contents[data.lane_name].findIndex(v => {
+        const index = this.contents[data.lane_name].findIndex((v: any) => {
           return v === data.old_content;
         });
 
@@ -83,7 +87,7 @@ export default Vue.extend({
     },
     addContent(data: { [name: string]: string }) {
       if (this.contents) {
-        this.contents[data.content_field].push(data.value);
+        this.contents[data.content_field].push(data.value as any);
         put_static(this.contents)
           .then(val => {
             this.contents = val;
@@ -99,8 +103,28 @@ export default Vue.extend({
       } else {
         this.expandedLane = '';
       }
+    },
 
-      console.log(this.expandedLane);
+    editObjectLane(data: any) {
+      if (this.contents) {
+        const index = this.contents['hints'].findIndex((v: any) => {
+          return v.field_name === data.field_name;
+        });
+
+        console.log('Index', index);
+
+        const hint = this.contents['hints'][index];
+        console.log(hint);
+        this.contents['hints'][index] = hint;
+        console.log('Contents', this.contents);
+        put_static(this.contents)
+          .then(val => {
+            this.contents = val;
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
     }
   }
 });

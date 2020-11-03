@@ -72,19 +72,23 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { get_static, StakeHoldersOptions } from 'src/core/Additional/Contstants';
+import {
+  get_static,
+  StakeHoldersOptions
+} from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { hints } from './hints';
 import { HintInterface } from 'src/store/project_create/state';
+import { get_hints } from 'src/core/helpers/hints';
 
 export default Vue.extend({
   name: 'SectionSeven',
   props: ['context', 'FormD'],
   data() {
     return {
-      StakeHoldersOptions:null as null | string[],
-      
+      StakeHoldersOptions: null as null | string[],
+
       FormData: {
         key_enablers: [
           {
@@ -101,7 +105,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-  
     //this.FormData = this.FormD;
     this.getOptions();
   },
@@ -119,13 +122,20 @@ export default Vue.extend({
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 
-      const hint = hints[section].find((val: HintInterface) => {
-        return val.field_name === field_name;
-      });
-      this.$store
-        .dispatch(action, hint)
-        .then(val => {
-          console.log('Val', val);
+      get_hints()
+        .then((val: any) => {
+          const hint = val[section].find((v: HintInterface) => {
+            return v.field_name === field_name;
+          });
+
+          this.$store
+            .dispatch(action, hint)
+            .then(val => {
+              console.log('Val 1', val);
+            })
+            .catch(e => {
+              console.log(e);
+            });
         })
         .catch(e => {
           console.log(e);

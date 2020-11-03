@@ -12,10 +12,11 @@
           <q-icon @click="expandLane" name="add" size="1.2rem"></q-icon>
         </div>
       </div>
-      <div>
+      <div class="tw-overflow-y-scroll" style="max-height:10rem">
         <content-info
           @editContent="editContentContentLane"
           @deleteContent="deleteContentLane"
+          @editObject="editObject"
           v-for="(c, key) in content"
           :key="key"
           :content="c"
@@ -89,7 +90,7 @@ export default Vue.extend({
       this.$emit('addContent', data);
     },
     deleteContentLane(data: { [name: string]: string }) {
-      console.log('Dele',data)
+      console.log('Dele', data);
       this.$emit('deleteContentLane', data);
     },
     editContentContentLane(data: { [name: string]: string }) {
@@ -100,6 +101,11 @@ export default Vue.extend({
       this.prompt = !this.prompt;
 
       //this.$emit('expandLane', this.lane_name);
+    },
+
+    editObject(data: any) {
+      console.log('You got here');
+      this.$emit('editObjectLane', data);
     }
   },
   filters: {
