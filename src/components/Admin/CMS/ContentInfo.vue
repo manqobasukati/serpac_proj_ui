@@ -34,6 +34,7 @@
             class="proj-form-input focus:tw-outline-none"
             dense
             v-model="new_content"
+            
             autofocus
             @keyup.enter="prompt = false"
           />
@@ -44,7 +45,7 @@
           <q-btn flat label="add" v-close-popup @click="editContent" />
         </q-card-actions>
       </q-card>
-      <q-card v-if="typeof content === 'object'" style="min-width: 350px">
+      <q-card v-if="typeof content === 'object'" style="min-width: 30rem">
         <q-card-section>
           <div class="text-h6">{{ content.field_name }}</div>
         </q-card-section>
@@ -56,6 +57,7 @@
             v-model="content.description"
             autofocus
             @keyup.enter="prompt = false"
+            type="textarea"
           />
         </q-card-section>
 
@@ -98,7 +100,6 @@ export default Vue.extend({
       this.prompt = !this.prompt;
     },
     editObject(content: any) {
-    
       this.$emit('editObject', content);
     },
     editContent() {
