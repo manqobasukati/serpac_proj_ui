@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div class="tw-flex tw-flex-col tw-mt-6">
-      <div class="tw-py-6">
+    <div class="tw-flex tw-flex-col tw-mt-6 ">
+      <div class="tw-py-6 ">
         <sections-bar @selectSection="changeActiveSection" />
+
+        <form-completion-bar   v-if="formData" :formData="formData" />
       </div>
       <div class="tw-py-6">
         <div
@@ -118,6 +120,7 @@ import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
 import SectionEight from './SectionEight.vue';
 import HintBox from './HintBox.vue';
+import FormCompletionBar from './FormCompletionBar.vue';
 
 import { ModelObj } from 'src/mixins/FormData';
 import {
@@ -139,7 +142,8 @@ export default Vue.extend({
     SectionSix,
     SectionSeven,
     HintBox,
-    SectionEight
+    SectionEight,
+    FormCompletionBar
   },
   props: ['projectId'],
   data() {
@@ -271,8 +275,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style scoped>
-li {
-}
-</style>

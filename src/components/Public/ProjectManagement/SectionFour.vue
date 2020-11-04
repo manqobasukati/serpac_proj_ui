@@ -105,6 +105,7 @@ import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
 import { hints } from './hints';
 import { get_static } from 'src/core/Additional/Contstants';
+import { get_hints } from 'src/core/helpers/hints';
 
 export default Vue.extend({
   name: 'SectionFive',
@@ -134,7 +135,6 @@ export default Vue.extend({
     get_static()
       .then(val => {
         this.selectOptions = val['economic_sectors'];
-     
       })
       .catch(e => {
         console.log(e);
@@ -161,13 +161,20 @@ export default Vue.extend({
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
 
-      const hint = hints[section].find((val: HintInterface) => {
-        return val.field_name === field_name;
-      });
-      this.$store
-        .dispatch(action, hint)
-        .then(val => {
-          console.log('Val', val);
+      get_hints()
+        .then((val: any) => {
+          const hint = val[section].find((v: HintInterface) => {
+            return v.field_name === field_name;
+          });
+
+          this.$store
+            .dispatch(action, hint)
+            .then(val => {
+              console.log('Val 1', val);
+            })
+            .catch(e => {
+              console.log(e);
+            });
         })
         .catch(e => {
           console.log(e);
