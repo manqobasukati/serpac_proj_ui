@@ -206,7 +206,7 @@ export default Vue.extend({
         });
     },
     updateForm(data: any) {
-      
+      console.log('section 7 changes', data);
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
@@ -250,7 +250,7 @@ export default Vue.extend({
           .then(val => {
             this.formData = val;
             this.$route.params.projectId = val._id;
-            console.log('In proejct create 1', this.formData);
+            console.log('In proejct create 2', this.formData);
             this.$q.notify({
               message: 'succesfully saved...',
               color: 'white',
@@ -263,7 +263,7 @@ export default Vue.extend({
       }
     },
     changeActiveSection(data: string) {
-      console.log('This form', this.formData);
+     
       this.active_section = data;
     }
   },

@@ -16,7 +16,7 @@
           <textarea
             v-model="comment_2"
             class="proj-form-input tw-mt-2  tw-text-sm tw-h-20"
-            placeholder="Comment 2"
+            placeholder="Comment 1 "
           />
         </div>
         <div class="tw-flex tw-flex-row tw-justify-end">
@@ -42,7 +42,12 @@ export default Vue.extend({
   watch: {
     FormD() {
       this.FormData = this.FormD;
+      this.assignComments();
     }
+  },
+  mounted() {
+    this.FormData = this.FormD;
+    this.assignComments();
   },
   data() {
     return {
@@ -54,6 +59,16 @@ export default Vue.extend({
     };
   },
   methods: {
+    assignComments() {
+      if (this.FormData.project_extras) {
+        this.comment_1 = this.FormData.project_extras[0]
+          ? this.FormData.project_extras[0]
+          : '';
+        this.comment_2 = this.FormData.project_extras[0]
+          ? this.FormData.project_extras[1]
+          : '';
+      }
+    },
     save() {
       const comments = [this.comment_1, this.comment_2].filter(val => {
         return val !== '';
