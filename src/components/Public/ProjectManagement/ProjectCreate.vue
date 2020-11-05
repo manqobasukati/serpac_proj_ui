@@ -4,7 +4,7 @@
       <div class="tw-py-6 ">
         <sections-bar @selectSection="changeActiveSection" />
 
-        <form-completion-bar   v-if="formData" :formData="formData" />
+        <form-completion-bar v-if="formData" :formData="formData" />
       </div>
       <div class="tw-py-6">
         <div
@@ -206,6 +206,7 @@ export default Vue.extend({
         });
     },
     updateForm(data: any) {
+      
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];

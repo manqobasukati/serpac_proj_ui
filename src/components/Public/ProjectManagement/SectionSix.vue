@@ -130,9 +130,6 @@ export default Vue.extend({
 
           this.$store
             .dispatch(action, hint)
-            .then(val => {
-              console.log('Val 1', val);
-            })
             .catch(e => {
               console.log(e);
             });

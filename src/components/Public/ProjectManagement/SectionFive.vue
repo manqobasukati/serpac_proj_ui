@@ -94,6 +94,7 @@ export default Vue.extend({
   },
   mounted() {
     this.getOptions();
+  
     this.FormData = this.FormD;
   },
   methods: {

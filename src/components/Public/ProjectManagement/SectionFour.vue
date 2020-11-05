@@ -140,7 +140,7 @@ export default Vue.extend({
         console.log(e);
       });
     this.FormData = this.FormD;
-    this.FormData = this.FormD;
+   
     this.getOptions();
   },
 

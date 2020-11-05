@@ -173,7 +173,7 @@ export const FormData = {
   }
 };
 
-export const ModelObj: { [name: string]: any} = {
+export const ModelObj: { [name: string]: any } = {
   _id: '',
   project_created: new Date(),
   project_submitted: null as null | Date,
@@ -183,7 +183,7 @@ export const ModelObj: { [name: string]: any} = {
     project_location: {
       type: 'Point',
       properties: {
-        inkhundla:''
+        inkhundla: ''
       }
     },
     economy_sector: '',
@@ -204,9 +204,9 @@ export const ModelObj: { [name: string]: any} = {
     phases: []
   },
   opportunities: {
-    project_skills: '',
-    local_sourced_inputs: '',
-    external_sourced_inputs: ''
+    project_skills: [],
+    local_sourced_inputs: [],
+    external_sourced_inputs: []
   },
   key_enablers: []
 };
