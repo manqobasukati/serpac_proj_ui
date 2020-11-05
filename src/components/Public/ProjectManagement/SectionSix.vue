@@ -35,6 +35,7 @@
           <div class="tw-p-2 tw-ml-10">
             <textarea
               type="text"
+              v-model="issue.comment"
               class="proj-form-input tw-w-full tw-h-10  tw-text-sm tw-mx-1"
               placeholder="Add comment about issue"
               @focus="addHint('section_6', 'project_comment')"
@@ -93,7 +94,8 @@ export default Vue.extend({
         key_enablers: [
           {
             name: '',
-            stakeholder: ''
+            stake_holder: '',
+            comment: ''
           }
         ]
       }
@@ -105,8 +107,8 @@ export default Vue.extend({
     }
   },
   mounted() {
-    //this.FormData = this.FormD;
     this.getOptions();
+    this.FormData = this.FormD;
   },
   methods: {
     getOptions() {
@@ -128,11 +130,9 @@ export default Vue.extend({
             return v.field_name === field_name;
           });
 
-          this.$store
-            .dispatch(action, hint)
-            .catch(e => {
-              console.log(e);
-            });
+          this.$store.dispatch(action, hint).catch(e => {
+            console.log(e);
+          });
         })
         .catch(e => {
           console.log(e);
@@ -144,7 +144,8 @@ export default Vue.extend({
     addPhase() {
       this.FormData.key_enablers.push({
         name: '',
-        stakeholder: ''
+        stake_holder: '',
+        comment: ''
       });
     }
   }
