@@ -1,5 +1,5 @@
 <template>
-  <div class="" >
+  <div class="">
     <div
       class="tw-flex  tw-overflow-y-scroll    tw-bg-gray-200 tw-shadow-xl tw-rounded-xlg data__point_style"
     >
@@ -81,6 +81,7 @@
           </div>
         </div>
         <div
+          v-if="false"
           class="tw-inline-flex tw-flex-col tw-space-y-2 tw-items-center jtw-ustify-center w-56 tw-px-4"
         >
           <div class="tw-mt-3 tw-self-start tw-text-xs tw-font-medium">
@@ -112,6 +113,7 @@
           </div>
         </div>
         <div
+          v-if="false"
           class="tw-inline-flex tw-flex-col tw-space-y-2 tw-items-center jtw-ustify-center w-56 tw-px-4"
         >
           <div class="tw-mt-3 tw-self-start tw-text-xs tw-font-medium">
@@ -135,6 +137,7 @@
           </div>
         </div>
         <div
+         
           class="tw-inline-flex tw-flex-col tw-space-y-2 tw-items-center jtw-ustify-center w-56 tw-px-4"
         >
           <div class="tw-mt-3 tw-self-start tw-text-xs tw-font-medium">
@@ -256,9 +259,8 @@ export default Vue.extend({
 });
 </script>
 
-
 <style scoped>
-  .data__point_style{
-    height: 88vh;
-  }
+.data__point_style {
+  height: 88vh;
+}
 </style>
