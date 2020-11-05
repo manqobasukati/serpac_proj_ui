@@ -114,9 +114,9 @@ export default Vue.extend({
         console.log('Index', index);
 
         const hint = this.contents['hints'][index];
-        console.log(hint);
+      
         this.contents['hints'][index] = hint;
-        console.log('Contents', this.contents);
+        
         put_static(this.contents)
           .then(val => {
             this.contents = val;
