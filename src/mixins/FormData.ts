@@ -200,9 +200,15 @@ export const ModelObj: { [name: string]: any } = {
     permanent_jobs: '',
     temporal_jobs: ''
   },
-  project_timelines: {
-    phases: []
-  },
+  project_timelines: [
+    {
+      name: '',
+      start_date: '',
+      end_data: '',
+      selected_fields: [],
+      meta: []
+    }
+  ],
   opportunities: {
     project_skills: [],
     local_sourced_inputs: [],

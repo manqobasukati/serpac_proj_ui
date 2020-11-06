@@ -41,7 +41,7 @@
                   map-options
                   :disable="!phase.name"
                   v-model="phase.selected_fields"
-                  @add="selectField(phase.name)"
+                  @add="selectField(phase.name, $event)"
                   @remove="removeItem($event, phase.name)"
                   :options="selectOptions"
                   type="text"
@@ -156,23 +156,24 @@ export default Vue.extend({
   },
   methods: {
     removeItem(remove: any, phase_name: any) {
-      console.log('1', remove, phase_name);
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
           if (val.selected_fields.length > 0) {
-          
             val.meta.splice(remove.index, 1);
           }
         }
       });
     },
     asignSelectedFields() {
-      this.FormData.project_timelines.forEach(val => {
-        val['selected_fields'] = [];
-        val.meta.forEach((element: any) => {
-          val.selected_fields.push(element.name);
+      console.log(this.FormData.project_timelines);
+      if (this.FormData.project_timelines) {
+        this.FormData.project_timelines.forEach(val => {
+          val['selected_fields'] = [];
+          val.meta.forEach((element: any) => {
+            val.selected_fields.push(element.name);
+          });
         });
-      });
+      }
     },
     getOptions() {
       get_static()
@@ -200,18 +201,14 @@ export default Vue.extend({
           console.log(e);
         });
     },
-    selectField(phase_name: string) {
-      console.log('phasing', phase_name);
+    selectField(phase_name: string, event: any) {
+      console.log('phasing', phase_name, event);
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
-          if (val.selected_fields.length > 0) {
-            const last = val.selected_fields[val.selected_fields.length - 1];
-            val.meta.push({
-              name: last,
-              value: 0
-            });
-            //this.asignSelectedFields();
-          }
+          val.meta.push({
+            name: event.value,
+            value: 0
+          });
         }
       });
     },
