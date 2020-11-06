@@ -24,7 +24,7 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_hints(state: ProjectCreateInterface) {
-        console.log('Hints', state.hints);
+      
         return state.hints;
       }
     })

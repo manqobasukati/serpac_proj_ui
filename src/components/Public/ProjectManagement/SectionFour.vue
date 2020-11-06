@@ -40,8 +40,9 @@
                   use-chips
                   map-options
                   :disable="!phase.name"
-                  v-model="selectedFields"
-                  @input="selectField(phase.name)"
+                  v-model="phase.selected_fields"
+                  @add="selectField(phase.name)"
+                  @remove="removeItem($event, phase.name)"
                   :options="selectOptions"
                   type="text"
                   borderless
@@ -113,12 +114,14 @@ export default Vue.extend({
   data() {
     return {
       selectOptions: null as null | string[],
+      currentPhase: null as null | any,
       selectedFields: [],
       FormData: {
         project_timelines: [
           {
             name: '',
             start_date: '',
+            selected_fields: [] as [] | any,
             end_data: '',
             meta: [] as [] | any
           }
@@ -129,6 +132,8 @@ export default Vue.extend({
   watch: {
     FormD() {
       this.FormData = this.FormD;
+      this.asignSelectedFields();
+      console.log('watching', this.FormData);
     }
   },
   mounted() {
@@ -139,20 +144,40 @@ export default Vue.extend({
       .catch(e => {
         console.log(e);
       });
-    this.FormData = this.FormD;
-   
+
     this.getOptions();
+    this.FormData = this.FormD;
+    this.asignSelectedFields();
+    console.log('mounted', this.FormData);
   },
 
   filters: {
     ...FILTERS
   },
   methods: {
+    removeItem(remove: any, phase_name: any) {
+      console.log('1', remove, phase_name);
+      this.FormData.project_timelines.forEach(val => {
+        if (val.name === phase_name) {
+          if (val.selected_fields.length > 0) {
+          
+            val.meta.splice(remove.index, 1);
+          }
+        }
+      });
+    },
+    asignSelectedFields() {
+      this.FormData.project_timelines.forEach(val => {
+        val['selected_fields'] = [];
+        val.meta.forEach((element: any) => {
+          val.selected_fields.push(element.name);
+        });
+      });
+    },
     getOptions() {
       get_static()
         .then(val => {
           this.selectOptions = val['relevant_fields_phases'];
-          console.log(val);
         })
         .catch(e => {
           console.log(e);
@@ -167,29 +192,25 @@ export default Vue.extend({
             return v.field_name === field_name;
           });
 
-          this.$store
-            .dispatch(action, hint)
-            .then(val => {
-              console.log('Val 1', val);
-            })
-            .catch(e => {
-              console.log(e);
-            });
+          this.$store.dispatch(action, hint).catch(e => {
+            console.log(e);
+          });
         })
         .catch(e => {
           console.log(e);
         });
     },
     selectField(phase_name: string) {
-      console.log(phase_name, this.selectedFields);
+      console.log('phasing', phase_name);
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
-          if (this.selectedFields.length > 0) {
-            const last = this.selectedFields[this.selectedFields.length - 1];
+          if (val.selected_fields.length > 0) {
+            const last = val.selected_fields[val.selected_fields.length - 1];
             val.meta.push({
               name: last,
               value: 0
             });
+            //this.asignSelectedFields();
           }
         }
       });
@@ -199,6 +220,7 @@ export default Vue.extend({
         name: '',
         start_date: '',
         end_data: '',
+        selected_fields: [],
         meta: []
       });
     },

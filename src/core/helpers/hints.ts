@@ -5,7 +5,7 @@ export function get_hints() {
   return get_static('hints')
     .then(val => {
       hints = val;
-      console.log('val', val);
+     
       const sections: { [name: string]: string[] } = {
         section_1: [],
         section_2: [],
@@ -22,7 +22,7 @@ export function get_hints() {
         });
       }
 
-      console.log('sections', sections)
+    
       return sections ;
     })
     .catch(e => {

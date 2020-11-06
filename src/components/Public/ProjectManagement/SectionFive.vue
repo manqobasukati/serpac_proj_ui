@@ -67,7 +67,7 @@ import { get_static } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
-import { hints } from './hints';
+
 import { get_hints } from 'src/core/helpers/hints';
 
 export default Vue.extend({
@@ -94,7 +94,7 @@ export default Vue.extend({
   },
   mounted() {
     this.getOptions();
-  
+
     this.FormData = this.FormD;
   },
   methods: {
@@ -105,8 +105,6 @@ export default Vue.extend({
           this.LocallySourcedInputsOptions = val['locally_sourced_inputs'];
           this.ExternallySourcedInputsOptions =
             val['externally_sourced_inputs'];
-
-          console.log(val);
         })
         .catch(e => {
           console.log(e);
@@ -121,14 +119,9 @@ export default Vue.extend({
             return v.field_name === field_name;
           });
 
-          this.$store
-            .dispatch(action, hint)
-            .then(val => {
-              console.log('Val 1', val);
-            })
-            .catch(e => {
-              console.log(e);
-            });
+          this.$store.dispatch(action, hint).catch(e => {
+            console.log(e);
+          });
         })
         .catch(e => {
           console.log(e);
