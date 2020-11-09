@@ -6,6 +6,18 @@
       <div class="tw-text-md tw-font-medium">Project documents</div>
       <div v-if="context !== 'admin_inbox'">
         <div
+          v-for="(file, j) in projectFiles"
+          :key="j"
+          class="tw-flex tw-w-5/6 tw-justify-between tw-border tw-rounded-md tw-mt-2 tw-ml-5 tw-p-2"
+        >
+          <div>
+            {{ file.file_name }}
+          </div>
+          <div>
+            <a :href="file.url"><q-icon name="get_app" size="sm"></q-icon></a>
+          </div>
+        </div>
+        <div
           class="tw-flex tw-flex-row tw-p-2"
           v-for="(file, key) in files"
           :key="key"
@@ -59,6 +71,7 @@
         </div>
       </div>
       <div v-else>
+       
         <div
           v-for="(file, key) in projectFiles"
           :key="key"
@@ -99,7 +112,7 @@ export default Vue.extend({
     };
   },
   mounted() {
-    console.log('projectId', this.projectID);
+   
     this.getProjectFiles();
   },
   methods: {
@@ -110,21 +123,26 @@ export default Vue.extend({
       });
     },
     getProjectFiles() {
-      get_files(this.projectID)
+      console.log(this.$route.params)
+      get_files(this.projectID || this.$route.params.projectId)
         .then(val => {
+
           this.projectFiles = (val as any[]).map(v => {
+            
             return {
               file_name: v.name,
               url: `${config.server_url}/assets/${v.url as string}`
             };
           });
+
+          console.log('files',this.projectFiles);
         })
         .catch(e => {
           console.log(e);
         });
     },
     uploadFiles() {
-      upload_files(this.files, this.projectID)
+      upload_files(this.files, this.projectID )
         .then(v => {
           console.log(v);
           this.$emit('submitForm');

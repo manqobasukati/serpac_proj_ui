@@ -1,12 +1,20 @@
 <template>
-  <div class="tw-flex tw-h-full tw-w-full tw-flex-row report__page  tw-items-stretch" >
-    <data-point-filter class="tw-ml-5 tw-pt-16" @requestParameters="getProjects" />
+  <div
+    class="tw-flex tw-h-full tw-w-full tw-flex-row report__page  tw-items-stretch"
+  >
+    <data-point-filter
+      class="tw-ml-5 tw-pt-16"
+      @requestParameters="getProjects"
+    />
 
-    <div v-if="view === 'multiple'" class="tw-flex tw-flex-col  tw-pl-6 tw-justify-self-center tw-flex-1  tw-overflow-y-scroll">
+    <div
+      v-if="view === 'multiple'"
+      class="tw-flex tw-flex-col  tw-pl-6 tw-justify-self-center tw-flex-1  tw-overflow-y-scroll"
+    >
       <div class="tw-pt-16">
         <highlights-bar :projects="projects" />
       </div>
-      <div class="tw-flex tw-flex-row" >
+      <div class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-1">
           <div class="tw-py-3 tw-w-full ">
             <stacked-graph :projects="projects" />
@@ -23,13 +31,16 @@
           </div>
         </div>
       </div>
-      <div class="tw-flex ">
-        <div class="">
+      <div class="tw-flex">
+        <div class="tw-w-3/4">
           <table-results
             :TableData="projects"
             class="tw-mr-6"
             @setView="setView"
           />
+        </div>
+        <div class="tw-py-3 tw-w-full">
+          <other-stacked :projects="projects" />
         </div>
       </div>
     </div>
@@ -46,6 +57,7 @@ import DataPointFilter from './DataPointFilter.vue';
 import TableResults from './TableResults/TableResults.vue';
 
 import StackedGraph from './StackedGraph/StackedGraph.vue';
+import OtherStacked from './OtherStacked/OtherStacked.vue';
 import LineChart from './LineChart/LineChart.vue';
 import HighlightsBar from './HighlightsBar/HighlightsBar.vue';
 import ScatterChart from './ScatterChart/ScatterChart.vue';
@@ -63,7 +75,8 @@ export default Vue.extend({
     HighlightsBar,
     LineChart,
     ScatterChart,
-    SingleReport
+    SingleReport,
+    OtherStacked
   },
   mounted() {
     this.$q.loading.show();
@@ -114,11 +127,10 @@ export default Vue.extend({
 
 <style scoped>
 div.report__page {
- 
   background-color: #fbfeff;
 }
 
-div.content__page{
+div.content__page {
   height: 96vh;
 }
 </style>

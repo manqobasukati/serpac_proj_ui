@@ -1,5 +1,72 @@
 import { ProjectModel } from '../Models/ProjectModel';
 
+export function my_function(projects?: ProjectModel[]) {
+  const labels = createOtherLabelArray(projects).project_statuses;
+
+  const label_value = createOtherDataArray(
+    labels,
+    'project_status',
+    projects as ProjectModel[]
+  );
+
+  const new_label: string[] = [];
+
+  for (let i = 0; i <= labels.length - 1; i++) {
+    for (let j = 0; j <= label_value.length -1; j++) {
+      if (labels.indexOf(labels[i]) === label_value.indexOf(label_value[j])) {
+        new_label[i] = `${labels[i]} (${label_value[j]})`;
+      }
+    }
+  }
+  
+  return new_label;
+}
+
+export function createOtherLabelArray(projects?: ProjectModel[]) {
+  const status: string[] = [];
+
+  if (projects) {
+    projects.forEach((val: ProjectModel) => {
+      if (val.project_status) {
+        if (!status.includes(val.project_status)) {
+          status.push(val.project_status);
+        }
+      }
+    });
+  }
+
+  return {
+    project_statuses: status
+  };
+}
+
+export function createOtherDataArray(
+  labels: string[],
+  data_type: string,
+  data: ProjectModel[]
+) {
+  const values: number[] = [];
+
+  labels.forEach(val => {
+    let my_value = 0;
+    if (data_type === 'project_status') {
+      for (let i = 0; i <= data.length - 1; i++) {
+        if (data[i].project_status) {
+          if (data[i].project_status === val) {
+            my_value = my_value + 1;
+          }
+        }
+      }
+    }
+
+    const i = labels.indexOf(val);
+
+    values[i] = my_value;
+  });
+
+  return values;
+}
+
 export function createLabelArray(projects?: ProjectModel[]) {
   const sectors: string[] = [];
 
@@ -43,7 +110,6 @@ export function createDataArray(
       for (let i = 0; i <= data.length - 1; i++) {
         if (data[i].project_description.economy_sector === val) {
           my_value = my_value + 1;
-        
         }
       }
     }
@@ -52,7 +118,6 @@ export function createDataArray(
 
     values[i] = my_value;
   });
-
 
   return values;
 }

@@ -59,7 +59,7 @@
           </div>
           <div class="tw-w-full">
             <q-select
-              v-model="requestData.project_location.inkhundla"
+              v-model="requestData.project_description.project_location.properties.inkhundla"
               :options="inkhundlaOptions"
               borderless
               class="proj-form-input tw-h-12 "
@@ -70,7 +70,7 @@
           </div>
           <div class="tw-w-full">
             <q-select
-              v-model="requestData.project_location.region"
+              v-model="requestData.project_description.project_location.properties.region"
               :options="regionOptions"
               borderless
               class="proj-form-input tw-h-12 "
@@ -210,14 +210,15 @@ export default Vue.extend({
         project_description: {
           economy_sector: 'Agriculture',
           name_of_investor: '',
-          project_existence: ''
-        },
-        project_location: {
+          project_existence: '',
+          project_location: {
           properties: {
             inkhundla: '',
             region: ''
           }
         },
+        },
+        
         project_value: {
           total_inv_value: '',
           funding_status: '',

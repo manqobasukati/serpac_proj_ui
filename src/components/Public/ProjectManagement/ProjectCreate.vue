@@ -99,6 +99,13 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+
+    <div
+      class="tw-absolute tw-top-0 tw-right-0 tw-h-8  tw-text-gray-500 tw-p-2"
+      v-if="formData.project_status"
+    >
+      {{formData.project_status}}
+    </div>
   </div>
 </template>
 
@@ -231,7 +238,7 @@ export default Vue.extend({
             .then(val => {
               this.formData = val;
               this.$route.params.projectId = val._id;
-             
+
               this.$q.notify({
                 message: 'succesfully created project',
                 badgeTextColor: 'pink-6'
@@ -250,7 +257,7 @@ export default Vue.extend({
           .then(val => {
             this.formData = val;
             this.$route.params.projectId = val._id;
-           
+
             this.$q.notify({
               message: 'succesfully saved...',
               color: 'white',
@@ -263,7 +270,6 @@ export default Vue.extend({
       }
     },
     changeActiveSection(data: string) {
-     
       this.active_section = data;
     }
   },

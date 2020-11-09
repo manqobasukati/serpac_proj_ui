@@ -165,7 +165,7 @@ export default Vue.extend({
       });
     },
     asignSelectedFields() {
-      console.log(this.FormData.project_timelines);
+    
       if (this.FormData.project_timelines) {
         this.FormData.project_timelines.forEach(val => {
           val['selected_fields'] = [];
@@ -202,7 +202,7 @@ export default Vue.extend({
         });
     },
     selectField(phase_name: string, event: any) {
-      console.log('phasing', phase_name, event);
+    
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
           val.meta.push({
