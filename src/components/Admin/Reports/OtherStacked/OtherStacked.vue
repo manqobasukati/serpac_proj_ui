@@ -33,7 +33,7 @@ export default Vue.extend({
   watch: {
     projects() {
       if (this.projects) {
-      
+        this.chart?.destroy();
         void Promise.resolve((resolve: any) => {
           resolve(this.projects);
         }).then(() => {
@@ -44,7 +44,7 @@ export default Vue.extend({
   },
   methods: {
     createChart(data: any) {
-      console.log();
+  
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'horizontalBar',
 
@@ -58,7 +58,7 @@ export default Vue.extend({
                 createOtherLabelArray(data).project_statuses,
                 'project_status',
                 data
-              ) as number[],
+              ),
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

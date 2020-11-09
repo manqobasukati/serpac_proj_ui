@@ -29,7 +29,7 @@ export default Vue.extend({
   watch: {
     projects() {
       if (this.projects) {
-        //this.createChart();
+       this.chart?.destroy();
         void Promise.resolve((resolve: any) => {
           resolve(this.projects);
         }).then(() => {
