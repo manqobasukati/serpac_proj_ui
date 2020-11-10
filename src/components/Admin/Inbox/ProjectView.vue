@@ -151,6 +151,7 @@ export default Vue.extend({
       this.$store
         .dispatch(action, payload)
         .then(val => {
+          console.log(payload);
           this.project_status = '';
         })
         .catch(e => {

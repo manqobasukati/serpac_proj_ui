@@ -23,6 +23,7 @@ const mutation: MutationTree<AdminInterface> = {
       for (let i = 0; i <= state.projects?.length - 1; i++) {
         if (state.projects[i]._id === payload._id) {
           state.projects[i] = payload;
+        
         }
       }
     }

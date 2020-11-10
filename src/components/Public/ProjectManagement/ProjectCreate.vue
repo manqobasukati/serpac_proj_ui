@@ -104,7 +104,7 @@
       class="tw-absolute tw-top-0 tw-right-0 tw-h-8  tw-text-gray-500 tw-p-2"
       v-if="formData.project_status"
     >
-      {{formData.project_status}}
+      {{ percentage_completion(formData.project_status) }}
     </div>
   </div>
 </template>
@@ -271,6 +271,27 @@ export default Vue.extend({
     },
     changeActiveSection(data: string) {
       this.active_section = data;
+    },
+    percentage_completion(project_status: string) {
+    
+      const arr = [
+        'New Projects',
+        'Initial scoping',
+        'Work group assesment',
+        'Facilitating Enablers',
+        'Ready to Launch',
+        'Implementation Ongoing'
+      ];
+
+      const percentage = ((arr.indexOf(project_status) + 1) / arr.length) * 100;
+
+      const stat = project_status
+        ? `${project_status} (${Math.round(percentage)}%)`
+        : 'Not yet submitted';
+
+      console.log(stat)
+
+      return stat;
     }
   },
   computed: {

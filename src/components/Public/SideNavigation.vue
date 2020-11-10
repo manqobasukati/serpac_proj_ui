@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="tw-absolute tw-inset-y-0 tw-left-0 tw-w-56 tw-bg-gray-200     "
-  >
+  <div class="tw-absolute tw-inset-y-0 tw-left-0 tw-w-56 tw-bg-gray-200     ">
     <div class="tw-flex tw-flex-col tw-h-full tw-p-8">
       <div class="tw-p-3">
         <q-icon name="account_circle" size="8rem" color="grey-5" />
@@ -91,32 +89,31 @@ export default Vue.extend({
     },
     viewProject(project: ProjectModel) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.SET_SELECTED_PROJECT}`;
-
+    
       this.$store
         .dispatch(action)
         .then(() => {
-          void this.$router.push({
-            path: `/public/project/${project._id as string}`
-          });
+         
+          void this.$router
+            .push({
+              path: `/public/project/${project._id as string}`
+            })
+            
         })
         .catch(() => {
           console.log('If anything happens');
         });
     },
     current_user_projects() {
-   
       const get_projects_action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.CURRENT_USER_PROJECTS}`;
       const user_id = localStorage.getItem('serpac_tool_user_id');
       void this.$store.dispatch(get_projects_action, user_id);
-       
     },
     changeRoute(link: string) {
-      console.log('Link', link);
+      //
       if (link === '/public/project') {
         void this.$router.push({ path: link });
       } else if (link === '/public/my-projects') {
-        console.log('here', localStorage.getItem('serpac_tool_user_id'));
-
         this.show_my_projects = !this.show_my_projects;
       } else if (link === '/public/user') {
         void this.$router.push({
@@ -130,7 +127,6 @@ export default Vue.extend({
   computed: {
     ...mapState(MODULES.PROJECT_CREATE, {
       get_current_projects(state: ProjectCreateInterface) {
-     
         return state.current_user_projects;
       }
     })

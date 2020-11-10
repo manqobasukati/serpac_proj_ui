@@ -10,8 +10,8 @@
           <q-icon @click="expandLane" name="expand_more" size="1.2rem"></q-icon>
         </div>
       </div>
-      <div v-if="expand">
-        <div v-if="context === 'inbox'">
+      <div v-if="expand" >
+        <div  class="tw-overflow-y-scroll" style="max-height:12rem" v-if="context === 'inbox'">
           <project
             v-for="(proj, key) in projects"
             :key="key"
