@@ -39,6 +39,11 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
+     <section-seven
+      v-if="'Section 7' === active_section"
+      :context="'admin_inbox'"
+      :FormD="FormData"
+    />
     <section-eight
       v-if="'Section 8' === active_section"
       :context="'admin_inbox'"
@@ -77,6 +82,7 @@ import SectionThree from 'src/components/Public/ProjectManagement/SectionThree.v
 import SectionFour from 'src/components/Public/ProjectManagement/SectionFour.vue';
 import SectionFive from 'src/components/Public/ProjectManagement/SectionFive.vue';
 import SectionSix from 'src/components/Public/ProjectManagement/SectionSix.vue';
+import SectionSeven from 'src/components/Public/ProjectManagement/SectionSeven.vue';
 import SectionEight from 'src/components/Public/ProjectManagement/SectionEight.vue';
 import { get_project } from 'src/core/RequestHandler/project_create';
 import { MODULES } from 'src/store';
@@ -94,7 +100,8 @@ export default Vue.extend({
     SectionFive,
     SectionSix,
     CommentBox,
-    SectionEight
+    SectionEight,
+    SectionSeven
   },
   watch: {
     projectId() {

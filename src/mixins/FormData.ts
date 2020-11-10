@@ -177,6 +177,7 @@ export const ModelObj: { [name: string]: any } = {
   _id: '',
   project_created: new Date(),
   project_submitted: null as null | Date,
+  project_extras:[],
   project_description: {
     title: '',
     description: '',

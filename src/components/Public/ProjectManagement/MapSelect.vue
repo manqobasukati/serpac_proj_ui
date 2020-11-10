@@ -39,7 +39,8 @@ export default Vue.extend({
       this.$emit('set_map_active');
     },
     addMap() {
-      console.log('Adding me neh');
+     
+     
       mapboxgl.accessToken = this.mapbox_token;
 
       this.mapbox = new mapboxgl.Map({

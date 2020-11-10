@@ -17,7 +17,8 @@
                 :disabled="context === 'admin_inbox'"
               />
               <input
-             
+                type="date"
+           
                 v-model="phase.start_date"
                 @focus="addHint('section_4', 'project_start_date')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -25,7 +26,7 @@
                 :disabled="context === 'admin_inbox'"
               />
               <input
-               
+                type="date"
                 v-model="phase.end_data"
                 @focus="addHint('section_4', 'project_phase_milestones')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -158,12 +159,11 @@ export default Vue.extend({
     this.getOptions();
     this.FormData = this.FormD;
     this.FormData.project_timelines.forEach(element => {
-      if (element.start_date) {
+      if (element.start_date && element.end_data) {
         element.start_date = new Date(element?.start_date);
-      }
-      if (element.end_data) {
         element.end_data = new Date(element?.end_data);
       }
+      
     });
 
     this.asignSelectedFields();

@@ -47,6 +47,7 @@
               @updateForm="updateForm"
             />
             <section-seven
+              
               v-if="'Section 7' === active_section"
               :FormD="formData"
               @updateForm="updateForm"
@@ -164,6 +165,7 @@ export default Vue.extend({
     ...FILTERS
   },
   mounted() {
+   
     if (this.projectId) {
       get_project(this.projectId)
         .then(val => {
@@ -187,7 +189,7 @@ export default Vue.extend({
             console.error(e);
           });
       } else {
-        //assume that project is being created
+       
         this.formData = ModelObj;
       }
     }
@@ -213,7 +215,7 @@ export default Vue.extend({
         });
     },
     updateForm(data: any) {
-      console.log('section 7 changes', data);
+     
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
