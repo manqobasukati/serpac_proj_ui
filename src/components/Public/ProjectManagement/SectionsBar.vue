@@ -2,7 +2,7 @@
   <div>
     <div class="tw-flex tw-flex-row tw-justify-center ">
       <div
-        class="w-32 tw-mr-2"
+        class="w-42 tw-mr-2"
         v-for="(section, key) in sectionData"
         :key="key"
       >
@@ -11,8 +11,8 @@
           :class="{ 'tw-bg-pink-200': section.active }"
           class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-py-4 tw-w-full tw-bg-pink-100 tw-rounded-lg"
         >
-          <p class="tw-flex  tw-text-sm tw-font-bold tw-text-red-400">
-            {{ section.name }}
+          <p class="tw-flex  tw-text-xs tw-font-bold tw-text-red-400">
+            {{ section.ui_name }}
           </p>
         </div>
       </div>

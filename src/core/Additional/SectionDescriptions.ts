@@ -34,36 +34,44 @@ export const SectionDescriptions: { [name: string]: SectionDescription } = {
 export const SimpleSections = [
   {
     name: 'Section 1',
+    ui_name:'Project Description',
     active: true,
     info:
       'This section, captures information describing the project, this gives us a better view of the project'
   },
 
   {
+    ui_name:'Project Value',
     name: 'Section 2',
     active: false
   },
   {
+    ui_name:'Project funding',
     name: 'Section 3',
     active: false
   },
   {
+    ui_name:'Expected Jobs on Completion',
     name: 'Section 4',
     active: false
   },
   {
+    ui_name:'Project Timelines',
     name: 'Section 5',
     active: false
   },
   {
+    ui_name:'MSME Opportunities',
     name: 'Section 6',
     active: false
   },
   {
+    ui_name:'Key enablers',
     name: 'Section 7',
     active: false
   },
   {
+    ui_name:'Project files',
     name:'Section 8',
     active:false
   }
