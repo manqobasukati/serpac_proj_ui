@@ -46,27 +46,27 @@ export const SimpleSections = [
     active: false
   },
   {
-    ui_name:'Project funding',
+    ui_name:'Expected Jobs on Completion',
     name: 'Section 3',
     active: false
   },
   {
-    ui_name:'Expected Jobs on Completion',
+    ui_name:'Project Timelines',
     name: 'Section 4',
     active: false
   },
   {
-    ui_name:'Project Timelines',
+    ui_name:'MSME Opportunities',
     name: 'Section 5',
     active: false
   },
   {
-    ui_name:'MSME Opportunities',
+    ui_name:'Key enablers',
     name: 'Section 6',
     active: false
   },
   {
-    ui_name:'Key enablers',
+    ui_name:'More information',
     name: 'Section 7',
     active: false
   },
