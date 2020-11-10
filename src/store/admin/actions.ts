@@ -38,11 +38,11 @@ const actions: ActionTree<AdminInterface, StateInterface> = {
   [ADMIN_ACTIONS.UPDATE_PROJECT_STATUS](context, payload) {
     update_project(payload)
       .then(val => {
-        console.log('UPDATE STATUS', val);
-        context.commit(ADMIN_MUTATIONS.UPDATE_PROJECT, val);
-        // const get_projects_action = `${ADMIN_ACTIONS.ALL_PROJECTS}`;
+      
+        context.commit(ADMIN_MUTATIONS.UPDATE_PROJECT_STATUS, val);
+        const get_projects_action = `${ADMIN_ACTIONS.ALL_PROJECTS}`;
 
-        // void context.dispatch(get_projects_action);
+        void context.dispatch(get_projects_action);
       })
       .catch(e => {
         console.log(e);

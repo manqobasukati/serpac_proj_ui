@@ -289,8 +289,6 @@ export default Vue.extend({
         ? `${project_status} (${Math.round(percentage)}%)`
         : 'Not yet submitted';
 
-      console.log(stat)
-
       return stat;
     }
   },

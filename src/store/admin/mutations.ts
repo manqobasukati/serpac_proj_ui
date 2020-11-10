@@ -6,7 +6,8 @@ export enum ADMIN_MUTATIONS {
   ALL_PROJECTS = 'all_projects',
   UPDATE_PROJECT = 'update_project',
   CREATE_COMMENT = 'create_comment',
-  SET_COMMENTS = 'set_comments'
+  SET_COMMENTS = 'set_comments',
+  UPDATE_PROJECT_STATUS = 'update_project_status'
 }
 
 const mutation: MutationTree<AdminInterface> = {
@@ -27,6 +28,14 @@ const mutation: MutationTree<AdminInterface> = {
         }
       }
     }
+  },
+
+  [ADMIN_MUTATIONS.UPDATE_PROJECT_STATUS](state:AdminInterface, payload){
+    state.projects?.forEach((val)=>{
+      if(val._id === payload){
+        val = payload;
+      }
+    })
   },
   [ADMIN_MUTATIONS.CREATE_COMMENT](state: AdminInterface, payload) {
     state.project_comments?.push(payload);

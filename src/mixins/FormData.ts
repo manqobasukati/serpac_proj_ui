@@ -203,8 +203,8 @@ export const ModelObj: { [name: string]: any } = {
   project_timelines: [
     {
       name: '',
-      start_date: '',
-      end_data: '',
+      start_date: null as null | Date,
+      end_data: null as null | Date,
       selected_fields: [],
       meta: []
     }

@@ -17,7 +17,7 @@
                 :disabled="context === 'admin_inbox'"
               />
               <input
-                type="date"
+             
                 v-model="phase.start_date"
                 @focus="addHint('section_4', 'project_start_date')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -25,7 +25,7 @@
                 :disabled="context === 'admin_inbox'"
               />
               <input
-                type="date"
+               
                 v-model="phase.end_data"
                 @focus="addHint('section_4', 'project_phase_milestones')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -120,9 +120,9 @@ export default Vue.extend({
         project_timelines: [
           {
             name: '',
-            start_date: '',
+            start_date: null as null | Date,
             selected_fields: [] as [] | any,
-            end_data: '',
+            end_data: null as null | Date,
             meta: [] as [] | any
           }
         ]
@@ -132,8 +132,18 @@ export default Vue.extend({
   watch: {
     FormD() {
       this.FormData = this.FormD;
+      this.FormData.project_timelines.forEach(element => {
+        if (element.start_date) {
+          element.start_date = new Date(element?.start_date);
+        }
+        if (element.end_data) {
+          element.end_data = new Date(element?.end_data);
+        }
+      });
+
+      console.log(this.FormData.project_timelines)
+
       this.asignSelectedFields();
-      console.log('watching', this.FormData);
     }
   },
   mounted() {
@@ -147,8 +157,16 @@ export default Vue.extend({
 
     this.getOptions();
     this.FormData = this.FormD;
+    this.FormData.project_timelines.forEach(element => {
+      if (element.start_date) {
+        element.start_date = new Date(element?.start_date);
+      }
+      if (element.end_data) {
+        element.end_data = new Date(element?.end_data);
+      }
+    });
+
     this.asignSelectedFields();
-    console.log('mounted', this.FormData);
   },
 
   filters: {
@@ -165,7 +183,6 @@ export default Vue.extend({
       });
     },
     asignSelectedFields() {
-    
       if (this.FormData.project_timelines) {
         this.FormData.project_timelines.forEach(val => {
           val['selected_fields'] = [];
@@ -202,7 +219,6 @@ export default Vue.extend({
         });
     },
     selectField(phase_name: string, event: any) {
-    
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
           val.meta.push({
@@ -215,15 +231,22 @@ export default Vue.extend({
     addPhase() {
       this.FormData.project_timelines.push({
         name: '',
-        start_date: '',
-        end_data: '',
+        start_date: null as null | Date,
+        end_data: null as null | Date,
         selected_fields: [],
         meta: []
       });
     },
     Save() {
+      console.log(this.FormData);
       this.$emit('updateForm', this.FormData);
     }
   }
 });
 </script>
+
+<style scoped>
+input[type='text']:disabled {
+  color: black;
+}
+</style>

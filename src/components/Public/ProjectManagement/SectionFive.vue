@@ -133,3 +133,11 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style scoped>
+input[type="text"]:disabled {
+  color: black;
+}
+
+</style>
+
