@@ -14,7 +14,15 @@
           <div class="tw-w-full">
             <input
               type="date"
-              v-model="requestData.project_submitted"
+              v-model="requestData.project_submited.from"
+              class="proj-form-input"
+              placeholder="Projected submitted"
+            />
+          </div>
+          <div class="tw-w-full">
+            <input
+              type="date"
+              v-model="requestData.project_submited.to"
               class="proj-form-input"
               placeholder="Projected submitted"
             />
@@ -59,7 +67,10 @@
           </div>
           <div class="tw-w-full">
             <q-select
-              v-model="requestData.project_description.project_location.properties.inkhundla"
+              v-model="
+                requestData.project_description.project_location.properties
+                  .inkhundla
+              "
               :options="inkhundlaOptions"
               borderless
               class="proj-form-input tw-h-12 "
@@ -70,7 +81,10 @@
           </div>
           <div class="tw-w-full">
             <q-select
-              v-model="requestData.project_description.project_location.properties.region"
+              v-model="
+                requestData.project_description.project_location.properties
+                  .region
+              "
               :options="regionOptions"
               borderless
               class="proj-form-input tw-h-12 "
@@ -137,7 +151,6 @@
           </div>
         </div>
         <div
-         
           class="tw-inline-flex tw-flex-col tw-space-y-2 tw-items-center jtw-ustify-center w-56 tw-px-4"
         >
           <div class="tw-mt-3 tw-self-start tw-text-xs tw-font-medium">
@@ -206,19 +219,22 @@ export default Vue.extend({
   data() {
     return {
       requestData: {
-        project_submitted: '',
+        project_submited: {
+          to: '',
+          from: ''
+        },
         project_description: {
           economy_sector: 'Agriculture',
           name_of_investor: '',
           project_existence: '',
           project_location: {
-          properties: {
-            inkhundla: '',
-            region: ''
+            properties: {
+              inkhundla: '',
+              region: ''
+            }
           }
         },
-        },
-        
+
         project_value: {
           total_inv_value: '',
           funding_status: '',

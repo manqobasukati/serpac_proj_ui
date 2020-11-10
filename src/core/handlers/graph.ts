@@ -9,16 +9,20 @@ export function my_function(projects?: ProjectModel[]) {
     projects as ProjectModel[]
   );
 
+  console.log(label_value, labels);
+
   const new_label: string[] = [];
 
   for (let i = 0; i <= labels.length - 1; i++) {
-    for (let j = 0; j <= label_value.length -1; j++) {
+    for (let j = 0; j <= label_value.length - 1; j++) {
       if (labels.indexOf(labels[i]) === label_value.indexOf(label_value[j])) {
         new_label[i] = `${labels[i]} (${label_value[j]})`;
       }
     }
   }
-  
+
+  new_label[2] = `${labels[2]} (${label_value[2]})`;
+  new_label[4] = `${labels[4]} (${label_value[4]})`
   return new_label;
 }
 

@@ -48,6 +48,7 @@ export default Vue.extend({
   },
   watch: {
     projects() {
+     d3.select("svg").empty(); 
       if (this.projects) {
         //this.createChart();
         void Promise.resolve((resolve: any, reject: any) => {
@@ -60,7 +61,7 @@ export default Vue.extend({
   },
   mounted() {
     this.loadSvg();
-    // this.createChart();
+   
   },
   methods: {
     changeMap(data: any) {
