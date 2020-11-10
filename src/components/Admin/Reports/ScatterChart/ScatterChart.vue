@@ -55,6 +55,7 @@ export default Vue.extend({
           resolve(this.projects);
         }).then(val => {
           this.loadSvg();
+          //this.changeMap(this.projects)
         });
       }
     }

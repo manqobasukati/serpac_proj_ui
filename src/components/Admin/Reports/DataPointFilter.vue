@@ -35,10 +35,12 @@
             Description
           </div>
           <div class="tw-w-full">
-            <input
+            <q-select
               type="text"
+              borderless
+              class="proj-form-input tw-h-12 "
               v-model="requestData.project_description.economy_sector"
-              class="proj-form-input"
+              :options="economicSectorOptions"
               placeholder="Economy sector"
             />
           </div>
@@ -211,9 +213,15 @@
 </template>
 
 <script lang="ts">
-import { TinkhundlaOptions } from 'src/core/Additional/Contstants';
-import { generatParameters } from 'src/core/helpers/request';
 import Vue from 'vue';
+
+import {
+  TinkhundlaOptions,
+  EconomicSectors,
+  ProjectExistence
+} from 'src/core/Additional/Contstants';
+import { generatParameters } from 'src/core/helpers/request';
+
 export default Vue.extend({
   name: 'DataPointFilter',
   data() {
@@ -254,6 +262,7 @@ export default Vue.extend({
       localSourcedInputsOptions: ['labor', 'time'],
       externallySourcedInputsOptions: ['electricity'],
       projectSkillsOptions: ['Needed'],
+      economicSectorOptions: EconomicSectors,
       regionOptions: ['HhoHho', 'Manzini', 'Lubombo', 'Shiselweni'],
       filterData: {
         external_sourced_inputs: [],
