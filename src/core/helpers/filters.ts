@@ -1,3 +1,5 @@
+import { count } from 'console';
+
 export function removeUnderscore(name: string) {
   return name.split('_').join(' ');
 }
@@ -17,7 +19,14 @@ export function capitaliseWords(name: string) {
   }
 }
 
+export function formMoney(money: number) {
+
+
+  return new Intl.NumberFormat().format(money)
+}
+
 export const FILTERS = {
   removeUnderscore,
-  capitaliseWords
+  capitaliseWords,
+  formMoney
 };

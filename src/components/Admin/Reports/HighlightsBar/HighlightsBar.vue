@@ -6,7 +6,9 @@
         :key="key"
         class=" tw-inline-flex tw-w-3/4 tw-flex-col tw-items-center tw-justify-center tw-px-10 tw-pt-3 tw-pb-1  tw-bg-gray-200 tw-shadow-md tw-rounded-lg tw-mx-2"
       >
-        <p class="tw-text-2xl tw-font-thin">{{ high.value(projects) }}</p>
+        <p class="tw-text-2xl tw-font-thin">
+          {{ high.value(projects) | formMoney }}
+        </p>
         <p class="tw-text-xl tw-font-light">{{ high.name }}</p>
       </div>
     </div>
@@ -14,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import { FILTERS } from 'src/core/helpers/filters';
 import Vue from 'vue';
 
 import { Highlights } from './Highlights';
@@ -26,9 +29,6 @@ export default Vue.extend({
       Highlights
     };
   },
-  mounted() {
-    console.log('gsha', this.projects);
-  },
   watch: {
     projects() {
       if (this.projects) {
@@ -38,6 +38,9 @@ export default Vue.extend({
         });
       }
     }
+  },
+  filters: {
+    ...FILTERS
   }
 });
 </script>
