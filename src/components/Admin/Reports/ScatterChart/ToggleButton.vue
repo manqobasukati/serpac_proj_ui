@@ -36,12 +36,11 @@ export default Vue.extend({
   name: 'ToggleButton',
   data() {
     return {
-      value: false 
+      value: true 
     };
   },
   methods: {
     onValueChange() {
-    
       this.$emit('toggleValue',this.value);
     }
   },

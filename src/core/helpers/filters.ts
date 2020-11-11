@@ -1,4 +1,4 @@
-import { count } from 'console';
+
 
 export function removeUnderscore(name: string) {
   return name.split('_').join(' ');

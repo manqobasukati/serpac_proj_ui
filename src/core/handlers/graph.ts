@@ -21,8 +21,7 @@ export function my_function(projects?: ProjectModel[]) {
     }
   }
 
-  new_label[2] = `${labels[2]} (${label_value[2]})`;
-  new_label[4] = `${labels[4]} (${label_value[4]})`
+
   return new_label;
 }
 

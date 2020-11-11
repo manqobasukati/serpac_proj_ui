@@ -66,6 +66,7 @@ export default Vue.extend({
   },
   methods: {
     changeMap(data: any) {
+      console.log('ChangeMap',data);
       if (data) {
         this.layer = inkhundla_na;
         this.svg.selectAll('*').remove();
