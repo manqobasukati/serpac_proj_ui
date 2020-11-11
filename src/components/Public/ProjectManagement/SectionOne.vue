@@ -244,6 +244,9 @@ export default Vue.extend({
 input[type="text"]:disabled {
   color: black;
 }
+input[type="textarea"]:disabled {
+  color: black;
+}
 
 </style>
 
