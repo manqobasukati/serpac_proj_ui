@@ -7,7 +7,7 @@
         <div class="tw-text-2xl tw-font-semibold tw-text-red-300">Sign Up</div>
         <div class=" tw-shadow-md tw-rounded-lg tw-h-full  tw-bg-white tw-p-2">
           <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-col ">
               <div class="tw-text-md tw-font-medium">User Details</div>
               <div class="tw-flex tw-flex-row tw-p-2">
                 <input
@@ -58,7 +58,12 @@
                 />
                 <input
                   type="password"
-                  class="proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2"
+                  @input="check_password_function()"
+                  v-model="confirm_password"
+                  :class="{
+                    'proj-form-input tw-w-full tw-h-8 tw-text-sm tw-ml-2 hover:tw-outline-black': true,
+                    'tw-outline-red': check_password
+                  }"
                   placeholder="confirm password"
                 />
               </div>
@@ -94,6 +99,8 @@ export default Vue.extend({
   name: 'AdminSignUp',
   data() {
     return {
+      confirm_password: '',
+      check_password: false,
       sign_up_message: '',
       user_data: {
         firstname: '',
@@ -105,7 +112,18 @@ export default Vue.extend({
       }
     };
   },
+
   methods: {
+    check_password_function() {
+      if (this.confirm_password !== this.user_data.password) {
+        console.log('here dude')
+        this.check_password = false;
+        return;
+      }
+        console.log('There dude')
+      this.check_password = true;
+      return;
+    },
     sign_up() {
       const request = {
         ...this.user_data,
