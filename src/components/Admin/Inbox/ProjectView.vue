@@ -39,7 +39,7 @@
       :context="'admin_inbox'"
       :FormD="FormData"
     />
-     <section-seven
+    <section-seven
       v-if="'Section 7' === active_section"
       :context="'admin_inbox'"
       :FormD="FormData"
@@ -144,6 +144,15 @@ export default Vue.extend({
       }
     };
   },
+  mounted() {
+    get_project(this.projectId)
+      .then(val => {
+        this.FormData = val[0];
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  },
   methods: {
     changeActiveSection(data: string) {
       this.active_section = data;
@@ -158,7 +167,6 @@ export default Vue.extend({
       this.$store
         .dispatch(action, payload)
         .then(val => {
-         
           this.project_status = '';
         })
         .catch(e => {
