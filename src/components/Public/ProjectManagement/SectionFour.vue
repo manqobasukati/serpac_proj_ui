@@ -18,7 +18,6 @@
               />
               <input
                 type="date"
-           
                 v-model="phase.start_date"
                 @focus="addHint('section_4', 'project_start_date')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
@@ -27,7 +26,7 @@
               />
               <input
                 type="date"
-                v-model="phase.end_data"
+                v-model="phase.end_date"
                 @focus="addHint('section_4', 'project_phase_milestones')"
                 class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-m-1"
                 placeholder="End data"
@@ -121,9 +120,9 @@ export default Vue.extend({
         project_timelines: [
           {
             name: '',
-            start_date: null as null | Date,
+            start_date: null as null | Date | string,
             selected_fields: [] as [] | any,
-            end_data: null as null | Date,
+            end_date: null as null | Date | string,
             meta: [] as [] | any
           }
         ]
@@ -133,16 +132,7 @@ export default Vue.extend({
   watch: {
     FormD() {
       this.FormData = this.FormD;
-      this.FormData.project_timelines.forEach(element => {
-        if (element.start_date) {
-          element.start_date = new Date(element?.start_date);
-        }
-        if (element.end_data) {
-          element.end_data = new Date(element?.end_data);
-        }
-      });
-
-      console.log(this.FormData.project_timelines)
+      this.updateDateTimelines();
 
       this.asignSelectedFields();
     }
@@ -158,13 +148,7 @@ export default Vue.extend({
 
     this.getOptions();
     this.FormData = this.FormD;
-    this.FormData.project_timelines.forEach(element => {
-      if (element.start_date && element.end_data) {
-        element.start_date = new Date(element?.start_date);
-        element.end_data = new Date(element?.end_data);
-      }
-      
-    });
+    this.updateDateTimelines();
 
     this.asignSelectedFields();
   },
@@ -173,6 +157,17 @@ export default Vue.extend({
     ...FILTERS
   },
   methods: {
+    updateDateTimelines() {
+      this.FormData.project_timelines.forEach(element => {
+      
+        if (element.start_date) {
+          element.start_date = new String(element?.start_date).substr(0, 10);
+        }
+        if (element.end_date) {
+          element.end_date = new String(element?.end_date).substr(0, 10);
+        }
+      });
+    },
     removeItem(remove: any, phase_name: any) {
       this.FormData.project_timelines.forEach(val => {
         if (val.name === phase_name) {
@@ -231,14 +226,13 @@ export default Vue.extend({
     addPhase() {
       this.FormData.project_timelines.push({
         name: '',
-        start_date: null as null | Date,
-        end_data: null as null | Date,
+        start_date: null as null | Date | string,
+        end_date: null as null | Date | string,
         selected_fields: [],
         meta: []
       });
     },
     Save() {
-      console.log(this.FormData);
       this.$emit('updateForm', this.FormData);
     }
   }
