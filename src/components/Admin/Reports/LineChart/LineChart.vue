@@ -3,7 +3,7 @@
     <div
       class="tw-w-full tw-h-lg  tw-bg-gray-200 tw-shadow-md tw-rounded-xlg tw-px-3"
     >
-      <div class="tw-pt-10">
+      <div v-if="projects" class="tw-pt-10">
         <canvas ref="stackedChart"></canvas>
       </div>
     </div>
@@ -13,27 +13,43 @@
 <script lang="ts">
 import Vue from 'vue';
 import Chart from 'chart.js';
-import { createLabelArray } from 'src/core/handlers/graph';
+import { createDateDataArray, createLabelArray } from 'src/core/handlers/graph';
+import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export default Vue.extend({
   name: 'LineChart',
   mounted() {
-    //if (this.projects) {
-    this.createChart();
-    //}
+    if (this.projects) {
+      void Promise.resolve((resolve: any, reject: any) => {
+        resolve(this.projects);
+      }).then(val => {
+        this.createChart(this.projects);
+      });
+    }
   },
-
+  watch: {
+    projects() {
+      if (this.projects) {
+        this.chart?.destroy();
+        void Promise.resolve((resolve: any) => {
+          resolve(this.projects);
+        }).then(() => {
+          this.createChart(this.projects);
+        });
+      }
+    }
+  },
   props: ['projects'],
   methods: {
-    createChart() {
+    createChart(data: ProjectModel[]) {
       this.chart = new Chart(this.$refs.stackedChart as HTMLCanvasElement, {
         type: 'line',
         data: {
-          labels: createLabelArray(this.projects).months_of_the_year,
+          labels: createLabelArray(data).months_of_the_year,
           datasets: [
             {
               label: 'Projects created over time',
-              data: [3, 14, 5, 2, 4, 4, 6, 8, 3, 6, 10, 2],
+              data: createDateDataArray(data),
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

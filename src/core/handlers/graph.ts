@@ -9,8 +9,6 @@ export function my_function(projects?: ProjectModel[]) {
     projects as ProjectModel[]
   );
 
-  console.log(label_value, labels);
-
   const new_label: string[] = [];
 
   for (let i = 0; i <= labels.length - 1; i++) {
@@ -20,7 +18,6 @@ export function my_function(projects?: ProjectModel[]) {
       }
     }
   }
-
 
   return new_label;
 }
@@ -123,4 +120,27 @@ export function createDataArray(
   });
 
   return values;
+}
+
+export function createDateDataArray(projects: ProjectModel[]) {
+  
+  const number_of_projects_per_month: number[] = Array.from(
+    { length: 12 },
+    () => {
+      return 0;
+    }
+  );
+
+  projects?.forEach(element => {
+    if (typeof element.project_submitted !== 'object') {
+      for (let i = 1; i <= 11; i++) {
+        if (new Date(element.project_submitted)?.getMonth() === i) {
+          number_of_projects_per_month[i] = number_of_projects_per_month[i] + 1;
+          console.log(number_of_projects_per_month[i]);
+        }
+      }
+    }
+  });
+
+  return number_of_projects_per_month;
 }

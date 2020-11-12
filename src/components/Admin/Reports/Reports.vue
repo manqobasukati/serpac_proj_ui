@@ -22,7 +22,7 @@
         </div>
         <div class="tw-flex tw-flex-1">
           <div class="tw-py-3 tw-ml-3 tw-mr-6 tw-w-full">
-            <line-chart />
+            <line-chart :projects="projects" />
           </div>
         </div>
         <div class="tw-flex tw-flex-1">

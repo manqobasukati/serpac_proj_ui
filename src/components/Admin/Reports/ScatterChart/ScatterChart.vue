@@ -38,7 +38,6 @@ import {
 } from 'src/core/handlers/map';
 
 import ToggleButton from './ToggleButton.vue';
-import { Feature } from '@turf/turf';
 
 export default Vue.extend({
   name: 'LineChart',

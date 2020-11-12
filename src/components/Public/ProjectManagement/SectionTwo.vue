@@ -155,8 +155,6 @@ input[type="text"]:disabled {
   color: black;
 }
 
-input[type="select"]:disabled{
-  color:black
-}
+
 
 </style>
