@@ -19,7 +19,7 @@ export function capitaliseWords(name: string) {
   }
 }
 
-export function formMoney(money: number) {
+export function formatNumber(money: number) {
 
 
   return new Intl.NumberFormat().format(money)
@@ -28,5 +28,5 @@ export function formMoney(money: number) {
 export const FILTERS = {
   removeUnderscore,
   capitaliseWords,
-  formMoney
+  formMoney: formatNumber
 };

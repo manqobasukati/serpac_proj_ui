@@ -1,4 +1,5 @@
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
+
+import { formatNumber } from 'src/core/helpers/filters';
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 
 export const Highlights = [
@@ -42,7 +43,7 @@ export const Highlights = [
         }
       });
 
-      return total_value;
+      return  `E ${formatNumber(total_value)}`;
     }
   }
 ];

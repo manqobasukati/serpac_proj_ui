@@ -201,7 +201,8 @@
           <div class="tw-w-full tw-mt-3">
             <button
               @click="onSearchProjects()"
-              class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-mb-6 tw-bg-blue-300 tw-rounded-lg tw-shadow-sm tw-text-xs"
+              class="tw-flex tw-items-center tw-justify-start tw-pl-20 tw-pr-24 tw-py-3 tw-w-full tw-mb-6
+               tw-bg-blue-300 tw-rounded-lg tw-shadow-sm tw-text-xs tw-outline-none focus:tw-outline-none"
             >
               Search
             </button>
@@ -217,8 +218,7 @@ import Vue from 'vue';
 
 import {
   TinkhundlaOptions,
-  EconomicSectors,
-  ProjectExistence
+  EconomicSectors
 } from 'src/core/Additional/Contstants';
 import { generatParameters } from 'src/core/helpers/request';
 
