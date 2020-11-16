@@ -46,11 +46,17 @@
               :FormD="formData"
               @updateForm="updateForm"
             />
+
             <section-seven
-              
               v-if="'Section 7' === active_section"
               :FormD="formData"
               @updateForm="updateForm"
+            />
+
+            <section-nine
+              @updateForm="updateForm"
+              :FormD="formData"
+              v-if="'Section 9' === active_section"
             />
             <section-eight
               @submitForm="submitForm"
@@ -127,6 +133,7 @@ import SectionFive from './SectionFive.vue';
 import SectionSix from './SectionSix.vue';
 import SectionSeven from './SectionSeven.vue';
 import SectionEight from './SectionEight.vue';
+import SectionNine from './SectionNine.vue';
 import HintBox from './HintBox.vue';
 import FormCompletionBar from './FormCompletionBar.vue';
 
@@ -151,7 +158,8 @@ export default Vue.extend({
     SectionSeven,
     HintBox,
     SectionEight,
-    FormCompletionBar
+    FormCompletionBar,
+    SectionNine
   },
   props: ['projectId'],
   data() {
@@ -165,7 +173,6 @@ export default Vue.extend({
     ...FILTERS
   },
   mounted() {
-   
     if (this.projectId) {
       get_project(this.projectId)
         .then(val => {
@@ -189,7 +196,6 @@ export default Vue.extend({
             console.error(e);
           });
       } else {
-       
         this.formData = ModelObj;
       }
     }
@@ -215,7 +221,7 @@ export default Vue.extend({
         });
     },
     updateForm(data: any) {
-     
+       console.log('requesting 1',data);
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
@@ -225,10 +231,11 @@ export default Vue.extend({
           ...this.formData,
           project_status: ProjectStatuses.new_projects,
           _id: null,
-          project_created: new Date(),
-          project_owners: []
+          project_created: new Date()
+          //project_owners: []
         };
 
+        console.log('requesting 2', request);
         if (!request._id) {
           let { ['_id']: _, ...result } = request;
 
@@ -275,7 +282,6 @@ export default Vue.extend({
       this.active_section = data;
     },
     percentage_completion(project_status: string) {
-    
       const arr = [
         'New Projects',
         'Initial scoping',

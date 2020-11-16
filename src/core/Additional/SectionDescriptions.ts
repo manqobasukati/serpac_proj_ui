@@ -74,5 +74,10 @@ export const SimpleSections = [
     ui_name:'Project files',
     name:'Section 8',
     active:false
+  },
+  {
+    ui_name:'Collaborators',
+    name:'Section 9',
+    active:false
   }
 ];

@@ -24,7 +24,7 @@ export default Vue.extend({
   methods: {
     get_form_completion() {
       this.completion = form_completeion(this.formData) as number;
-      console.log('Completion', this.completion);
+     
     }
   },
   computed: {

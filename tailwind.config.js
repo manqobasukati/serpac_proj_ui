@@ -5,7 +5,7 @@ module.exports = {
   },
   purge: [],
   theme: {
-   
+
     extend: {
       borderRadius: {
         xlg: '14px',
