@@ -1,5 +1,13 @@
 import { ProjectModel } from '../Models/ProjectModel';
-import { booleanPointInPolygon, polygon, point } from '@turf/turf';
+import {
+  booleanPointInPolygon,
+  polygon,
+  point,
+  center,
+  centroid
+} from '@turf/turf';
+import { config } from '../RequestHandler/config';
+import { geoCentroid } from 'd3-geo';
 
 interface PropertiesObject {
   [key: string]: any;
@@ -7,9 +15,6 @@ interface PropertiesObject {
 
 export function transformGeojson(geojson: any, projects: ProjectModel[]) {
   geojson.features.forEach((val: any) => {
-    let region = '';
-    let inkhundla = '';
-
     let present = 0;
     projects.forEach(v => {
       if (v.project_description.project_location.coordinates?.length === 2) {
@@ -23,33 +28,25 @@ export function transformGeojson(geojson: any, projects: ProjectModel[]) {
           polygon(val.geometry.coordinates)
         );
 
-        region = v.project_description.project_location.properties[
-          'region'
-        ] as string;
+        // region = v.project_description.project_location.properties[
+        //   'region'
+        // ] as string;
 
-        if (geojson.features.length > 4) {
-          inkhundla = v.project_description.project_location.properties[
-            'inkhundla'
-          ] as string;
-        }
+        // if (geojson.features.length > 4) {
+        //   inkhundla = v.project_description.project_location.properties[
+        //     'inkhundla'
+        //   ] as string;
+        // }
 
         if (contains) {
           present = present + 1;
         }
       }
+
+      val = setProperty(val, 'number_of_projects', present);
+      // val = setProperty(val, 'region', region);
     });
-
-    val = setProperty(val, 'number_of_projects', present);
-    val = setProperty(val, 'region', region);
-    region = '';
-
-    if (geojson.features.length > 4) {
-      val = setProperty(val, 'inkhundla', inkhundla);
-      inkhundla = '';
-    }
   });
-
-  console.log('intransformGeoj', geojson);
 
   return geojson as unknown;
 }
@@ -113,4 +110,38 @@ export function getMin(array: any, property: string) {
   });
 
   return min;
+}
+
+export function geoj(geojson: any) {
+  console.log('Geojson', geojson);
+  const geo = Promise.all(
+    geojson.features.map((val: any) => {
+      const post_data = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          longitude: centroid(val.geometry).geometry?.coordinates[0],
+          latitude: centroid(val.geometry).geometry?.coordinates[1]
+        })
+      };
+
+      return fetch(`${config.phepha_url}/inkhundla/determine`, post_data)
+        .then((v: any) => {
+          return v.json().then((v2: any) => {
+            val = setProperty(val, 'region', v2.payload.region);
+            if (geojson.features.length > 4) {
+              val = setProperty(val, 'inkhundla', v2.payload.name);
+            }
+            return val as unknown;
+          }) as unknown;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    })
+  );
+
+  return geojson as unknown;
 }

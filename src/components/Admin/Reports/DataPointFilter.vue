@@ -271,9 +271,7 @@ export default Vue.extend({
       }
     };
   },
-  mounted() {
-    console.log('G =>', TinkhundlaOptions());
-  },
+
   methods: {
     onSearchProjects() {
       console.log(this.requestData);

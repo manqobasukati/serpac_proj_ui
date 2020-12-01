@@ -10,8 +10,6 @@
       :data="TableData"
       :columns="columns"
       row-key="id"
-     
-      
       :pagination="initialPagination"
     />
   </div>

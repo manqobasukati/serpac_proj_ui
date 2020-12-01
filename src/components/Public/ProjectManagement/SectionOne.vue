@@ -4,7 +4,7 @@
       class="tw-w-xxlg tw-h-full tw-bg-white tw-shadow tw-rounded-lg tw-flex tw-flex-col tw-p-4  "
     >
       <div class="tw-flex tw-flex-col">
-        <div class="tw-text-md tw-font-medium">Project Decription</div>
+        <div class="tw-text-md tw-font-medium">Project Description</div>
         <div class="tw-flex tw-flex-row tw-p-2">
           <input
             type="text"

@@ -34,7 +34,8 @@ import {
   transformGeojson,
   convertToRange,
   getMin,
-  getMax
+  getMax,
+  geoj
 } from 'src/core/handlers/map';
 
 import ToggleButton from './ToggleButton.vue';
@@ -59,20 +60,25 @@ export default Vue.extend({
       }
     }
   },
+  created() {
+    console.log('HOD', geoj(region_na));
+  },
   mounted() {
     this.loadSvg();
   },
   methods: {
     changeMap(data: any) {
-      console.log('ChangeMap', data);
+       
       if (data) {
-        this.layer = inkhundla_na;
+        this.layer = geoj(inkhundla_na);
         this.svg.selectAll('*').remove();
         this.loadSvg();
+        this.doc = d3.select(this.$refs.document as HTMLElement).append('div');
       } else {
-        this.layer = region_na;
+        this.layer = geoj(region_na);
         this.svg.selectAll('*').remove();
         this.loadSvg();
+        this.doc = d3.select(this.$refs.document as HTMLElement).append('div');
       }
     },
     loadSvg() {
@@ -81,17 +87,13 @@ export default Vue.extend({
       let val: unknown = this.layer;
 
       if (this.projects) {
-        console.log('projects =>',this.projects)
         val = transformGeojson(val, this.projects);
 
-        console.log('values',val)
         this.ready(val);
       }
     },
 
     ready(topo: any, projection_?: any) {
-    
-
       let center = geoCentroid(topo);
 
       const min = getMin(topo.features, 'number_of_projects');
@@ -147,7 +149,7 @@ export default Vue.extend({
           const name = d.properties.inkhundla || d.properties.region;
           const number = d.properties.number_of_projects;
 
-          console.log({ ...d.properties });
+         
 
           doc
             .attr(
@@ -163,7 +165,8 @@ export default Vue.extend({
     return {
       svg: null as null | any,
       toggleLayer: null as null | any,
-      layer: region_na
+      layer: geoj(region_na),
+      doc:null as null | any,
     };
   }
 });
