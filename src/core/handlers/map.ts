@@ -41,11 +41,15 @@ export function transformGeojson(geojson: any, projects: ProjectModel[]) {
 
     val = setProperty(val, 'number_of_projects', present);
     val = setProperty(val, 'region', region);
+    region = '';
 
     if (geojson.features.length > 4) {
       val = setProperty(val, 'inkhundla', inkhundla);
+      inkhundla = '';
     }
   });
+
+  console.log('intransformGeoj', geojson);
 
   return geojson as unknown;
 }

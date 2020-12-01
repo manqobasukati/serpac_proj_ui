@@ -10,8 +10,8 @@
       :data="TableData"
       :columns="columns"
       row-key="id"
-      selection="single"
-      :selected.sync="selected"
+     
+      
       :pagination="initialPagination"
     />
   </div>

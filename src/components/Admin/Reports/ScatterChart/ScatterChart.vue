@@ -15,7 +15,7 @@
     </div>
   </div>
 </template>
-x
+
 <script lang="ts">
 import Vue from 'vue';
 import Chart from 'chart.js';
@@ -47,7 +47,7 @@ export default Vue.extend({
   },
   watch: {
     projects() {
-     d3.select("svg").empty(); 
+      d3.select('svg').empty();
       if (this.projects) {
         //this.createChart();
         void Promise.resolve((resolve: any, reject: any) => {
@@ -61,11 +61,10 @@ export default Vue.extend({
   },
   mounted() {
     this.loadSvg();
-   
   },
   methods: {
     changeMap(data: any) {
-      console.log('ChangeMap',data);
+      console.log('ChangeMap', data);
       if (data) {
         this.layer = inkhundla_na;
         this.svg.selectAll('*').remove();
@@ -82,18 +81,16 @@ export default Vue.extend({
       let val: unknown = this.layer;
 
       if (this.projects) {
+        console.log('projects =>',this.projects)
         val = transformGeojson(val, this.projects);
 
+        console.log('values',val)
         this.ready(val);
       }
     },
 
     ready(topo: any, projection_?: any) {
-      const div = d3
-        .select(this.$refs.document as HTMLElement)
-        .append('div')
-        .attr('class', 'tooltip-donut')
-        .style('opacity', 0);
+    
 
       let center = geoCentroid(topo);
 
@@ -128,6 +125,8 @@ export default Vue.extend({
         .translate(offset as [number, number]);
       path = path.projection(projection);
 
+      const doc = d3.select(this.$refs.document as HTMLElement).append('div');
+
       this.svg
         .append('g')
         .selectAll('path')
@@ -143,6 +142,20 @@ export default Vue.extend({
           const opacity = convertToRange(v, [0, max], [0, 1]);
 
           return `rgba(255, 99, 132,${opacity})`;
+        })
+        .on('mouseover', function(e: MouseEvent, d: any) {
+          const name = d.properties.inkhundla || d.properties.region;
+          const number = d.properties.number_of_projects;
+
+          console.log({ ...d.properties });
+
+          doc
+            .attr(
+              'style',
+              `border-radius:3px;padding:5px;opacity:50%;position:absolute;background:white;top:${e.y}px;left:${e.x}px;transition:left 250ms 120ms, top 250ms 120ms`
+            )
+
+            .nodes()[0].innerText = `${name as string} : ${number as string}`;
         });
     }
   },
