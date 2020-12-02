@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <q-dialog v-model="create">
+    <q-dialog :value="create" @input="closePop()" persistent>
       <q-card>
         <q-card-section>
           <div class="text-h6">Project creation</div>
@@ -102,7 +102,7 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup />
+          <q-btn flat label="OK" color="primary" @click="closePop()" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -187,13 +187,14 @@ export default Vue.extend({
         .catch(e => {
           console.error(e);
         });
+    
     } else {
-      this.create = !this.create;
+      this.create = true;
     }
   },
   watch: {
     projectId() {
-      console.log('Log', this.projectId);
+    
       if (this.projectId) {
         get_project(this.projectId)
           .then(val => {
@@ -203,12 +204,19 @@ export default Vue.extend({
             console.error(e);
           });
       } else {
-        this.create = !this.create;
+       
+       this.create = true;
+        // console.log('changes here',this.create)
         this.formData = ModelObj;
       }
     }
   },
   methods: {
+    closePop(){
+      console.log('close me')
+      this.create = false;
+      console.log(this.create)
+    },
     submitForm() {
       const request = {
         ...this.formData,
