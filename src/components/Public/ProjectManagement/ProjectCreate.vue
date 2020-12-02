@@ -188,12 +188,12 @@ export default Vue.extend({
           console.error(e);
         });
     } else {
-      
       this.create = !this.create;
     }
   },
   watch: {
     projectId() {
+      console.log('Log', this.projectId);
       if (this.projectId) {
         get_project(this.projectId)
           .then(val => {
@@ -203,6 +203,7 @@ export default Vue.extend({
             console.error(e);
           });
       } else {
+        this.create = !this.create;
         this.formData = ModelObj;
       }
     }
@@ -242,7 +243,6 @@ export default Vue.extend({
           //project_owners: []
         };
 
-        console.log('requesting 2', request);
         if (!request._id) {
           let { ['_id']: _, ...result } = request;
 
