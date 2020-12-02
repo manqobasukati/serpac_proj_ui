@@ -173,11 +173,11 @@ export default Vue.extend({
     ...FILTERS
   },
 
-  updated() {
-    if (this.$route.path.split('/').length > 3) {
-      this.create = !this.create;
-    }
-  },
+  // updated() {
+  //   if (this.$route.path.split('/').length > 3) {
+  //     this.create = !this.create;
+  //   }
+  // },
   mounted() {
     if (this.projectId) {
       get_project(this.projectId)
@@ -188,7 +188,7 @@ export default Vue.extend({
           console.error(e);
         });
     } else {
-      console.error('Logging');
+      
       this.create = !this.create;
     }
   },
