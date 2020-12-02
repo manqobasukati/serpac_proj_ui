@@ -8,9 +8,10 @@
         <div>
           <div v-for="(item, key) in items" :key="key">
             <div
+              @click="changeRoute(item.link)"
               class="tw-flex tw-p-1 tw-flex-row tw-text-lg tw-mt-2 tw-justify-between  tw-font-bold tw-text-blue-500"
             >
-              <div @click="changeRoute(item.link)" style="font-size:17px">
+              <div  style="font-size:17px">
                 {{ item.name | removeUnderscore | capitaliseWords }}
               </div>
 
