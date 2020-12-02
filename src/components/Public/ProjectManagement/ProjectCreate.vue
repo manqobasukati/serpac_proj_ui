@@ -90,7 +90,7 @@
               When you are done filling a section please press the save button.
             </li>
             <li>
-              hould you not finish filling details about the project, save and
+              Should you not finish filling details about the project, save and
               when you return it shall be under
               <b>My Projects</b>.
             </li>
@@ -172,6 +172,12 @@ export default Vue.extend({
   filters: {
     ...FILTERS
   },
+
+  updated() {
+    if (this.$route.path.split('/').length > 3) {
+      this.create = !this.create;
+    }
+  },
   mounted() {
     if (this.projectId) {
       get_project(this.projectId)
@@ -182,6 +188,7 @@ export default Vue.extend({
           console.error(e);
         });
     } else {
+      console.error('Logging');
       this.create = !this.create;
     }
   },
@@ -221,7 +228,7 @@ export default Vue.extend({
         });
     },
     updateForm(data: any) {
-       console.log('requesting 1',data);
+      console.log('requesting 1', data);
       const key: string = Object.keys(data)[0];
 
       this.formData[key] = data[key];
