@@ -173,11 +173,6 @@ export default Vue.extend({
     ...FILTERS
   },
 
-  // updated() {
-  //   if (this.$route.path.split('/').length > 3) {
-  //     this.create = !this.create;
-  //   }
-  // },
   mounted() {
     if (this.projectId) {
       get_project(this.projectId)
