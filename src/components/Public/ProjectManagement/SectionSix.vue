@@ -75,11 +75,10 @@ import Vue from 'vue';
 
 import {
   get_static,
-  StakeHoldersOptions
+ 
 } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
-import { hints } from './hints';
 import { HintInterface } from 'src/store/project_create/state';
 import { get_hints } from 'src/core/helpers/hints';
 

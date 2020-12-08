@@ -62,7 +62,6 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 
 import { FILTERS } from 'src/core/helpers/filters';
-import { get_user_projects } from 'src/core/RequestHandler/project_create';
 import { MODULES } from 'src/store/index';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { ProjectCreateInterface } from 'src/store/project_create/state';

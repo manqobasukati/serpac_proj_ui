@@ -34,8 +34,7 @@ import { UserModel } from 'src/core/Models/UserModel';
 export default Vue.extend({
   name: 'Users',
   components: {
-    Lane,
-   
+    Lane
   },
   data() {
     return {
@@ -43,9 +42,7 @@ export default Vue.extend({
       users: null as null | { [name: string]: UserModel[] }
     };
   },
-  // updated() {
-  //   this.get_users();
-  // },
+
   mounted() {
     this.get_users();
   },
@@ -67,15 +64,12 @@ export default Vue.extend({
             }
           });
           this.users = obj;
-
-          console.log(this.users);
         })
         .catch(e => {
           console.log(e);
         });
     },
     setExpandedLane(data: string) {
-      console.log('dat', data, this.expandedLane);
       if (this.expandedLane !== data) {
         this.expandedLane = data;
       } else {

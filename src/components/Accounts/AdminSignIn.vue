@@ -64,7 +64,6 @@
 
 <script lang="ts">
 import { user_form_validate } from 'src/core/helpers/form_validation';
-import { UserModel } from 'src/core/Models/UserModel';
 import { login } from 'src/core/RequestHandler/user_management';
 
 import Vue from 'vue';

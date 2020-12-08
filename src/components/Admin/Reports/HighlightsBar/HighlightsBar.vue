@@ -33,7 +33,7 @@ export default Vue.extend({
     projects() {
       if (this.projects) {
         console.log('Projects', this.projects);
-        void Promise.resolve((resolve: any, reject: any) => {
+        void Promise.resolve((resolve: any) => {
           resolve(this.projects);
         });
       }

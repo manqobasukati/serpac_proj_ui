@@ -34,11 +34,50 @@ export function form_completeion(data: any) {
   let empty = 0;
 
   for (const key in flat) {
-    
     if (flat[key]) {
       empty = empty + 1;
     }
   }
 
   return (empty / key_count) * 100;
+}
+
+export function createValue(
+  currency: 'Emalangeni' | 'Dollars',
+  amount: number,
+  multiple: 'millions' | 'thousands'
+): number {
+  const currency_options: { [name: string]: number } = {
+    Emalangeni: 1,
+    Dollars: 15
+  };
+
+  const multiple_options: { [name: string]: number } = {
+    thousands: 1000,
+    millions: 1000000
+  };
+
+  return amount * currency_options[currency] * multiple_options[multiple];
+}
+
+export function destructValue(
+  currency: 'Emalangeni' | 'Dollars',
+  amount: number,
+  multiple: 'millions' | 'thousands'
+): number {
+  const currency_options: { [name: string]: number } = {
+    Emalangeni: 1,
+    Dollars: 15
+  };
+
+  const multiple_options: { [name: string]: number } = {
+    thousands: 1000,
+    millions: 1000000
+  };
+
+  const ret = multiple_options[multiple] / currency_options[currency];
+
+
+  
+  return ret / amount;
 }

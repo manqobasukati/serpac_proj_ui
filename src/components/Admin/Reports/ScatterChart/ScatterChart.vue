@@ -20,10 +20,8 @@
 import Vue from 'vue';
 import Chart from 'chart.js';
 import * as d3 from 'd3';
-import { json, schemeBlues } from 'd3';
-import { geoCentroid } from 'd3-geo';
 
-import { ProjectModel } from 'src/core/Models/ProjectModel';
+import { geoCentroid } from 'd3-geo';
 
 import Tinkhundla from 'src/mixins/Tinkhundla';
 
@@ -68,7 +66,6 @@ export default Vue.extend({
   },
   methods: {
     changeMap(data: any) {
-       
       if (data) {
         this.layer = geoj(inkhundla_na);
         this.svg.selectAll('*').remove();
@@ -149,8 +146,6 @@ export default Vue.extend({
           const name = d.properties.inkhundla || d.properties.region;
           const number = d.properties.number_of_projects;
 
-         
-
           doc
             .attr(
               'style',
@@ -166,7 +161,7 @@ export default Vue.extend({
       svg: null as null | any,
       toggleLayer: null as null | any,
       layer: geoj(region_na),
-      doc:null as null | any,
+      doc: null as null | any
     };
   }
 });

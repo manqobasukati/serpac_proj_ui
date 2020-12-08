@@ -117,12 +117,7 @@ import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
 import turf from '@turf/turf';
 
-import {
-  get_static,
-  put_static,
-  TinkhundlaOptions,
-  TinkhundlaPolygons
-} from 'src/core/Additional/Contstants';
+import { get_static, TinkhundlaOptions } from 'src/core/Additional/Contstants';
 
 import {
   EconomicSectors,
@@ -132,7 +127,6 @@ import {
 import MapSelect from './MapSelect.vue';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
-import { hints } from './hints';
 import { HintInterface } from 'src/store/project_create/state';
 import { get_inkhundla } from 'src/core/RequestHandler/project_create';
 
@@ -241,12 +235,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-input[type="text"]:disabled {
+input[type='text']:disabled {
   color: black;
 }
-input[type="textarea"]:disabled {
+input[type='textarea']:disabled {
   color: black;
 }
-
 </style>
-

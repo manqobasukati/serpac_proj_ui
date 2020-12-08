@@ -62,14 +62,14 @@ export default Vue.extend({
       get_static()
         .then(val => {
           this.contents = val;
-          console.log('This contents =>', this.contents);
+        
         })
         .catch(e => {
           console.log(e);
         });
     },
     editContentCMS(data: { [name: string]: string }) {
-      console.log('D =>', data);
+     
       if (this.contents) {
         const index = this.contents[data.lane_name].findIndex((v: any) => {
           return v === data.old_content;
@@ -111,7 +111,7 @@ export default Vue.extend({
           return v.field_name === data.field_name;
         });
 
-        console.log('Index', index);
+       
 
         const hint = this.contents['hints'][index];
       

@@ -1,4 +1,4 @@
-import { ProjectModel } from 'src/core/Models/ProjectModel';
+
 import { MutationTree } from 'vuex';
 import { AdminInterface } from './state';
 

@@ -51,7 +51,6 @@ import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
 import Vue from 'vue';
-import { hints } from './hints';
 export default Vue.extend({
   name: 'SectionFour',
   watch: {

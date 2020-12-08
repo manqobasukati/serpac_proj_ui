@@ -3,15 +3,11 @@ import {
   booleanPointInPolygon,
   polygon,
   point,
-  center,
-  centroid
+  centroid,
+  Feature,
+  FeatureCollection
 } from '@turf/turf';
 import { config } from '../RequestHandler/config';
-import { geoCentroid } from 'd3-geo';
-
-interface PropertiesObject {
-  [key: string]: any;
-}
 
 export function transformGeojson(geojson: any, projects: ProjectModel[]) {
   geojson.features.forEach((val: any) => {
@@ -28,30 +24,19 @@ export function transformGeojson(geojson: any, projects: ProjectModel[]) {
           polygon(val.geometry.coordinates)
         );
 
-        // region = v.project_description.project_location.properties[
-        //   'region'
-        // ] as string;
-
-        // if (geojson.features.length > 4) {
-        //   inkhundla = v.project_description.project_location.properties[
-        //     'inkhundla'
-        //   ] as string;
-        // }
-
         if (contains) {
           present = present + 1;
         }
       }
 
       val = setProperty(val, 'number_of_projects', present);
-      // val = setProperty(val, 'region', region);
     });
   });
 
   return geojson as unknown;
 }
 
-export function addProperty(geojson: any, property: string) {
+export function addProperty(geojson: Feature, property: string) {
   geojson.properties = {
     ...geojson.properties,
     [property]: ''
@@ -113,7 +98,7 @@ export function getMin(array: any, property: string) {
 }
 
 export function geoj(geojson: any) {
-  console.log('Geojson', geojson);
+ 
   const geo = Promise.all(
     geojson.features.map((val: any) => {
       const post_data = {

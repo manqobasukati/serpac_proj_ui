@@ -23,9 +23,9 @@ export default Vue.extend({
   props: ['projects'],
   mounted() {
     if (this.projects) {
-      void Promise.resolve((resolve: any, reject: any) => {
+      void Promise.resolve((resolve: any) => {
         resolve(this.projects);
-      }).then(val => {
+      }).then(() => {
         this.createChart(this.projects);
       });
     }

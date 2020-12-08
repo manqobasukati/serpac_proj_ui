@@ -83,14 +83,13 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import Vue from 'vue';
 import { UserModel } from 'src/core/Models/UserModel';
 import {
   get_users,
   update_user
 } from 'src/core/RequestHandler/user_management';
-import { ADMIN_ACTIONS } from 'src/store/admin/actions';
-import { MODULES } from 'src/store';
+
 import { ProjectModel } from 'src/core/Models/ProjectModel';
 import { get_user_projects } from 'src/core/RequestHandler/project_create';
 

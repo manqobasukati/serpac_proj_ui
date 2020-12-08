@@ -6,14 +6,34 @@
       <div class="tw-flex tw-flex-col">
         <div class="tw-text-md tw-font-medium">Project value</div>
         <div class="tw-flex tw-flex-col tw-p-2">
-          <input
-            type="text"
-            class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
-            v-model="FormData.project_value.total_inv_value"
-            :disabled="context === 'admin_inbox'"
-            placeholder="Total investment value ( E )"
-            @focus="addHint('section_2', 'project_total_inv_value')"
-          />
+          <div class="tw-flex tw-mb-2 tw-justify-evenly">
+            <q-select
+              borderless
+              :options="['Dollars', 'Emalangeni']"
+              class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
+              v-model="value_props.currency"
+              :disabled="context === 'admin_inbox'"
+              @focus="addHint('section_2', 'project_funding_status')"
+              label="currency"
+            />
+            <input
+              type="text"
+              class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
+              v-model="FormData.project_value.total_inv_value"
+              :disabled="context === 'admin_inbox'"
+              placeholder="Total investment value ( E )"
+              @focus="addHint('section_2', 'project_total_inv_value')"
+            />
+            <q-select
+              borderless
+              :options="['thousands', 'millions']"
+              v-model="value_props.multiple"
+              class="proj-form-input tw-w-full tw-h-8  tw-text-sm tw-my-1"
+              :disabled="context === 'admin_inbox'"
+              @focus="addHint('section_2', 'project_funding_status')"
+              label="some"
+            />
+          </div>
           <q-select
             borderless
             :options="fundingStatusOptions"
@@ -61,27 +81,25 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {
-  get_static,
-  TinkhundlaOptions,
-  TinkhundlaPolygons
-} from 'src/core/Additional/Contstants';
+import { get_static } from 'src/core/Additional/Contstants';
 import { MODULES } from 'src/store';
 import { PROJECT_CREATE_ACTIONS } from 'src/store/project_create/actions';
 import { HintInterface } from 'src/store/project_create/state';
 
-import { hints } from './hints';
 import { ContentModel } from 'src/core/Models/ContentModel';
 import { get_hints } from 'src/core/helpers/hints';
+import { createValue, destructValue } from 'src/core/helpers/form_validation';
 export default Vue.extend({
   name: 'SectionTwo',
   watch: {
     FormD() {
       this.FormData = this.FormD;
+      this.destructValue();
     }
   },
   mounted() {
     this.FormData = this.FormD;
+    this.destructValue();
     this.getOptions();
     get_static()
       .then((val: ContentModel) => {
@@ -96,6 +114,10 @@ export default Vue.extend({
   props: ['context', 'FormD'],
   data() {
     return {
+      value_props: {
+        currency: 'Emalangeni',
+        multiple: 'thousands'
+      },
       fundingStatusOptions: null as null | string[],
       projectScopeOptions: null as null | string[],
       FormData: {
@@ -118,6 +140,29 @@ export default Vue.extend({
         .catch(e => {
           console.log(e);
         });
+    },
+    destructValue() {
+      this.FormData.project_value.total_inv_value = destructValue(
+        this.value_props.currency as 'Emalangeni' | 'Dollars',
+        (this.FormData.project_value.total_inv_value as unknown) as number,
+        this.value_props.multiple as 'thousands' | 'millions'
+      ).toString();
+
+      if (
+        this.FormData.project_value.total_inv_value.length >= 5 &&
+        this.FormData.project_value.total_inv_value.length <= 6
+      ) {
+        this.value_props.multiple = 'thousands';
+      } else if (this.FormData.project_value.total_inv_value.length >= 7) {
+        this.value_props.multiple = 'millions';
+      }
+    },
+    createValue() {
+      this.FormData.project_value.total_inv_value = createValue(
+        this.value_props.currency as 'Emalangeni' | 'Dollars',
+        (this.FormData.project_value.total_inv_value as unknown) as number,
+        this.value_props.multiple as 'thousands' | 'millions'
+      ).toString();
     },
     addHint(section: string, field_name: string) {
       const action = `${MODULES.PROJECT_CREATE}/${PROJECT_CREATE_ACTIONS.ADD_HINT}`;
@@ -143,18 +188,16 @@ export default Vue.extend({
         });
     },
     Save() {
+      this.createValue();
+
       this.$emit('updateForm', this.FormData);
     }
   }
 });
 </script>
 
-
 <style scoped>
-input[type="text"]:disabled {
+input[type='text']:disabled {
   color: black;
 }
-
-
-
 </style>

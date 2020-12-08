@@ -3,12 +3,9 @@ import {
   get_comments,
   get_projects
 } from 'src/core/RequestHandler/admin';
-import {
-  project_create,
-  update_project
-} from 'src/core/RequestHandler/project_create';
+import { update_project } from 'src/core/RequestHandler/project_create';
 import { ActionTree } from 'vuex';
-import { MODULES, StateInterface } from '../index';
+import { StateInterface } from '../index';
 import { ADMIN_MUTATIONS } from './mutations';
 import { AdminInterface } from './state';
 
@@ -38,7 +35,6 @@ const actions: ActionTree<AdminInterface, StateInterface> = {
   [ADMIN_ACTIONS.UPDATE_PROJECT_STATUS](context, payload) {
     update_project(payload)
       .then(val => {
-      
         context.commit(ADMIN_MUTATIONS.UPDATE_PROJECT_STATUS, val);
         const get_projects_action = `${ADMIN_ACTIONS.ALL_PROJECTS}`;
 
@@ -57,7 +53,7 @@ const actions: ActionTree<AdminInterface, StateInterface> = {
         console.log(e);
       });
   },
-  [ADMIN_ACTIONS.SET_COMMENTS](context, payload) {
+  [ADMIN_ACTIONS.SET_COMMENTS](context) {
     get_comments()
       .then(val => {
         context.commit(ADMIN_MUTATIONS.SET_COMMENTS, val);
