@@ -77,7 +77,7 @@ export function destructValue(
 
   const ret = multiple_options[multiple] / currency_options[currency];
 
-
+   console.log('In destuct value : ',multiple_options[multiple],amount)
   
-  return ret / amount;
+  return amount / ret;
 }

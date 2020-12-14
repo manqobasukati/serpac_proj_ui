@@ -116,7 +116,7 @@ export default Vue.extend({
     return {
       value_props: {
         currency: 'Emalangeni',
-        multiple: 'thousands'
+        multiple: 'millions'
       },
       fundingStatusOptions: null as null | string[],
       projectScopeOptions: null as null | string[],
@@ -148,14 +148,14 @@ export default Vue.extend({
         this.value_props.multiple as 'thousands' | 'millions'
       ).toString();
 
-      if (
-        this.FormData.project_value.total_inv_value.length >= 5 &&
-        this.FormData.project_value.total_inv_value.length <= 6
-      ) {
-        this.value_props.multiple = 'thousands';
-      } else if (this.FormData.project_value.total_inv_value.length >= 7) {
-        this.value_props.multiple = 'millions';
-      }
+      // if (
+      //   this.FormData.project_value.total_inv_value.length >= 5 &&
+      //   this.FormData.project_value.total_inv_value.length <= 6
+      // ) {
+      //   this.value_props.multiple = 'thousands';
+      // } else if (this.FormData.project_value.total_inv_value.length >= 7) {
+      //   this.value_props.multiple = 'millions';
+      // }
     },
     createValue() {
       this.FormData.project_value.total_inv_value = createValue(
@@ -169,19 +169,13 @@ export default Vue.extend({
 
       get_hints()
         .then((val: any) => {
-          console.log(val);
           const hint = val[section].find((v: HintInterface) => {
             return v.field_name === field_name;
           });
 
-          this.$store
-            .dispatch(action, hint)
-            .then(val => {
-              console.log('Val 1', val);
-            })
-            .catch(e => {
-              console.log(e);
-            });
+          this.$store.dispatch(action, hint).catch(e => {
+            console.log(e);
+          });
         })
         .catch(e => {
           console.log(e);
