@@ -22,11 +22,13 @@
               >
               </q-icon>
             </div>
+
             <div
+
               v-if="item.name === 'my_projects' && show_my_projects"
-              class="tw-flex tw-px-3 tw-bg-gray-100"
+              class="tw-flex tw-px-3 tw-bg-gray-100 "
             >
-              <ul class="list-disc">
+              <ul class="list-disc tw-h-64 tw-overflow-y-auto" style="margin-right:-24px; padding-right:24px">
                 <li
                   @click="viewProject(project)"
                   class="tw-text-blue-400 hover:tw-underline"
