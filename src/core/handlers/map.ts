@@ -4,8 +4,7 @@ import {
   polygon,
   point,
   centroid,
-  Feature,
-  FeatureCollection
+  Feature
 } from '@turf/turf';
 import { config } from '../RequestHandler/config';
 
